@@ -50,7 +50,7 @@ else
     docker create --name=$container $image
     docker start $container
     docker cp $container:/var/www/qtr/profiles/qtr_server $(pwd)/
-    docker cp $container:/var/www/bcl/profiles/qtr_client $(pwd)/
+    docker cp $container:/var/www/qcl/profiles/qtr_client $(pwd)/
     docker stop $container
     docker rm $container
 
@@ -59,6 +59,6 @@ else
     docker create --name=$container --hostname=$hostname --restart=always \
         -v /data/PO_files:/var/www/PO_files \
         -v $(pwd)/qtr_server:/var/www/qtr/profiles/qtr_server \
-        -v $(pwd)/qtr_client:/var/www/bcl/profiles/qtr_client \
+        -v $(pwd)/qtr_client:/var/www/qcl/profiles/qtr_client \
         $ports $image
 fi

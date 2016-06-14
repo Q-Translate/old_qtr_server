@@ -55,8 +55,8 @@ drush site-install --verbose --yes qtr_server \
 ### install qtrClient
 drush --yes pm-enable qtrClient
 drush --yes pm-enable qtrVocabulary
-#drush --yes pm-enable bcl_disqus
-#drush --yes features-revert bcl_disqus
+#drush --yes pm-enable qcl_disqus
+#drush --yes features-revert qcl_disqus
 
 ### install features
 drush --yes pm-enable qtr_qtrServices

@@ -9,8 +9,8 @@
     drush help sql-sync
  */
 
-$aliases['bcl'] = array (
-  'root' => '/var/www/bcl',
+$aliases['qcl'] = array (
+  'root' => '/var/www/qcl',
   'uri' => 'http://example.org',
   'path-aliases' => array (
     '%profile' => 'profiles/qtr_client',
@@ -18,8 +18,8 @@ $aliases['bcl'] = array (
   ),
 );
 
-// $aliases['bcl_dev'] = array (
-//   'parent' => '@bcl',
-//   'root' => '/var/www/bcl_dev',
+// $aliases['qcl_dev'] = array (
+//   'parent' => '@qcl',
+//   'root' => '/var/www/qcl_dev',
 //   'uri' => 'http://dev.example.org',
 // );

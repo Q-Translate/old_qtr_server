@@ -6,11 +6,11 @@ case $1 in
         /etc/init.d/nginx stop
         /etc/init.d/php5-fpm stop
 
-        drush @local_bcl -y dis memcache
+        drush @local_qcl -y dis memcache
         drush @local_qtr -y dis memcache
         /etc/init.d/memcached stop
         for file in $(ls /var/www/qtr*/sites/default/settings.php) \
-                    $(ls /var/www/bcl*/sites/default/settings.php)
+                    $(ls /var/www/qcl*/sites/default/settings.php)
         do
             sed -i $file -e "/comment memcache config/ d"
             sed -i $file \
@@ -39,7 +39,7 @@ case $1 in
             sed -i $file -e "/comment memcache config/ d"
         done
         /etc/init.d/memcached start
-        drush @local_bcl -y en memcache
+        drush @local_qcl -y en memcache
         drush @local_qtr -y en memcache
 
         /etc/init.d/php5-fpm start

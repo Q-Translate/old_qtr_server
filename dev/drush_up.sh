@@ -15,7 +15,7 @@ Disallow: /
 EOF
 done
 
-for dir in /var/www/bcl*
+for dir in /var/www/qcl*
 do
     echo
     echo "===> $dir"

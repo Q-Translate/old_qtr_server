@@ -19464,7 +19464,7 @@ define(function (require, exports, module) {
       sourceMap = JSON.parse(aSourceMap.replace(/^\)\]\}'/, ''));
     }
 
-    // We do late requires because the subclasses require() this file.
+    // We do late requires because the suqclasses require() this file.
     if (sourceMap.sections != null) {
       var indexedSourceMapConsumer = require('./indexed-source-map-consumer');
       return new indexedSourceMapConsumer.IndexedSourceMapConsumer(sourceMap);
@@ -19555,7 +19555,7 @@ define(function (require, exports, module) {
    */
   SourceMapConsumer.prototype._parseMappings =
     function SourceMapConsumer_parseMappings(aStr, aSourceRoot) {
-      throw new Error("Subclasses must implement _parseMappings");
+      throw new Error("Suqclasses must implement _parseMappings");
     };
 
   SourceMapConsumer.GENERATED_ORDER = 1;

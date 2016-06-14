@@ -10,7 +10,7 @@ The parameter 'lng' is the language code (fr/de/it etc.)
     exit 1
 fi
 lng=$1
-container="bcl-$lng"
+container="qcl-$lng"
 
 ### update the configuration of wsproxy and restart it
 rm /data/wsproxy/config/etc/apache2/sites-{available,enabled}/$lng*.conf

@@ -26,12 +26,12 @@ drush @local_qtr --yes php-eval "module_load_include('inc', 'qtrCore', 'admin/co
 for lng in $languages
 do
     drush @local_qtr --yes language-add $lng
-    drush @local_bcl --yes language-add $lng
+    drush @local_qcl --yes language-add $lng
 done
 if [ "$development" != 'true' ]
 then
     drush @local_qtr --yes l10n-update-refresh
     drush @local_qtr --yes l10n-update
-    drush @local_bcl --yes l10n-update-refresh
-    drush @local_bcl --yes l10n-update
+    drush @local_qcl --yes l10n-update-refresh
+    drush @local_qcl --yes l10n-update
 fi

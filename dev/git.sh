@@ -6,7 +6,7 @@
 
 options=${@:-status --short}
 gitrepos="
-    /var/www/bcl*/profiles/qtr_client
+    /var/www/qcl*/profiles/qtr_client
     /var/www/qtr*/profiles/qtr_server
     /usr/local/src/qtr_*
     /var/www/*/profiles/qtr*/modules/contrib/qtrclient

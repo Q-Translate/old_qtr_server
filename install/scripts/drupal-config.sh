@@ -64,7 +64,7 @@ comment memcache config */
 EOF
 
 ### set variable qtr_client
-$drush --yes vset qtr_client "https://$bcl_domain"
+$drush --yes vset qtr_client "https://$qcl_domain"
 
 ### set the directory for uploads
 ### $drush is an alias for 'drush --root=/var/www/qtr'

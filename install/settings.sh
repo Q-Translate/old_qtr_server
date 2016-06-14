@@ -1,15 +1,15 @@
 
 ### Git branches that will be used.
 qtr_git_branch='master'
-bcl_git_branch='master'
+qcl_git_branch='master'
 
 ### Domains of the website.
 qtr_domain='qtr.example.org'
-bcl_domain='l10n.example.org'
+qcl_domain='l10n.example.org'
 
 ### Drupal 'admin' password.
 qtr_admin_passwd='admin'
-bcl_admin_passwd='admin'
+qcl_admin_passwd='admin'
 
 ### Emails from the server are sent through the SMTP
 ### of a GMAIL account. Give the full email
@@ -28,7 +28,7 @@ translation_lng='all'
 ### Mysql passwords. Leave it as 'random'
 ### to generate a new one randomly
 mysql_passwd_root='random'
-mysql_passwd_bcl='random'
+mysql_passwd_qcl='random'
 mysql_passwd_qtr='random'
 mysql_passwd_qtr_data='random'
 

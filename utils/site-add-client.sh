@@ -18,7 +18,7 @@ lng=$1
 ssh_port=${2:-2201}
 
 ### set some variables
-container="bcl-$lng"
+container="qcl-$lng"
 domain="$lng.qtranslator.org"
 admin_passwd=$(mcookie | head -c 10)
 gmail_account="$lng@qtranslator.org"
@@ -60,11 +60,11 @@ docker exec qtr \
 
 # ### setup oauth2 login on qtr_client
 # docker exec -it $container \
-#     drush --yes @bcl \
+#     drush --yes @qcl \
 #       php-script --script-path=/usr/local/src/qtr_client/install/config \
 #       oauth2_login.php "$server_url" "$client_id" "$client_secret" "$skip_ssl"
 # docker exec -it $container \
-#     drush @bcl cc all
+#     drush @qcl cc all
 
 ### save oauth2 variables on settings.sh
 docker exec $container \
@@ -83,7 +83,7 @@ docker exec $container \
         -e "/^gmail_account=/ c gmail_account='$gmail_account'" \
         -e "/^gmail_passwd=/ c gmail_passwd='$gmail_passwd'" \
         -e "/^translation_lng=/ c translation_lng='$lng'"
-docker exec $container dev/clone_rm.sh bcl_dev
+docker exec $container dev/clone_rm.sh qcl_dev
 docker exec $container install/{config.sh,settings.sh}
 
 

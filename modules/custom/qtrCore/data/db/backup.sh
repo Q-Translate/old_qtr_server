@@ -30,10 +30,10 @@ $mysqldump --tables $table_list >> $backup_dir/qtr_data.sql
 sed -i $backup_dir/qtr_data.sql \
     -e 's/CREATE TABLE/CREATE TABLE IF NOT EXISTS/g'
 
-### backup bcl tables
-mysqldump=$(drush @bcl sql-connect | sed -e 's/^mysql/mysqldump/' -e 's/--database=/--databases /')
+### backup qcl tables
+mysqldump=$(drush @qcl sql-connect | sed -e 's/^mysql/mysqldump/' -e 's/--database=/--databases /')
 table_list="users users_roles"
-$mysqldump --tables $table_list > $backup_dir/bcl.sql
+$mysqldump --tables $table_list > $backup_dir/qcl.sql
 
 ### backup qtr tables
 mysqldump=$(drush @qtr sql-connect | sed -e 's/^mysql/mysqldump/' -e 's/--database=/--databases /')

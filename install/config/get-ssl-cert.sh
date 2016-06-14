@@ -1,7 +1,7 @@
 #!/bin/bash
 
 qtr_domain='qtr.example.org'
-bcl_domain='l10n.example.org'
+qcl_domain='l10n.example.org'
 email='info@example.org'
 
 dry_run='--dry-run' ;  [[ $email != info@example.org ]] && dry_run=''
@@ -29,7 +29,7 @@ a2enconf letsencrypt
 
 ### get the ssl cert
 certbot certonly --webroot -w /var/www \
-    -d $qtr_domain -d $bcl_domain -d dev.$qtr_domain \
+    -d $qtr_domain -d $qcl_domain -d dev.$qtr_domain \
     -m $email --agree-tos $dry_run
 
 [[ $dry_run == '--dry-run' ]] && exit 0

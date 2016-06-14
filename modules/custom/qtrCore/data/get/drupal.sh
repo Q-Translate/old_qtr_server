@@ -14,14 +14,14 @@ change_dir Drupal
 ### get the latest translations
 drush @qtr --yes l10n-update-refresh
 drush @qtr --yes l10n-update
-drush @bcl --yes l10n-update-refresh
-drush @bcl --yes l10n-update
+drush @qcl --yes l10n-update-refresh
+drush @qcl --yes l10n-update
 
 ### copy PO files
 po_dir=/var/www/qtr/sites/all/translations
 echo "Getting PO files from $po_dir ..."
 cp $po_dir/*.po .
-po_dir=/var/www/bcl/sites/all/translations
+po_dir=/var/www/qcl/sites/all/translations
 echo "Getting PO files from $po_dir ..."
 cp $po_dir/*.po .
 

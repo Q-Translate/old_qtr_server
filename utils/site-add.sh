@@ -20,7 +20,7 @@ ssh_port=${2:-2201}
 
 ### set some variables
 container="qtr-$lng"
-bcl_domain="$lng.qtranslator.org"
+qcl_domain="$lng.qtranslator.org"
 qtr_domain="qtr-$lng.qtranslator.org"
 admin_passwd=$(mcookie | head -c 10)
 gmail_account="$lng@qtranslator.org"
@@ -52,9 +52,9 @@ docker exec $container dev/drush_up.sh
 docker exec $container \
     sed -i /usr/local/src/qtr_server/install/settings.sh \
         -e "/^domain=/ c domain='$qtr_domain'" \
-        -e "/^bcl_domain=/ c bcl_domain='$bcl_domain'" \
+        -e "/^qcl_domain=/ c qcl_domain='$qcl_domain'" \
         -e "/^admin_passwd=/ c admin_passwd='$admin_passwd'" \
-        -e "/^bcl_admin_passwd=/ c bcl_admin_passwd='$admin_passwd'" \
+        -e "/^qcl_admin_passwd=/ c qcl_admin_passwd='$admin_passwd'" \
         -e "/^gmail_account=/ c gmail_account='$gmail_account'" \
         -e "/^gmail_passwd=/ c gmail_passwd='$gmail_passwd'" \
         -e "/^languages=/ c languages='$languages'" \
@@ -78,7 +78,7 @@ docker exec $container \
 docker exec $container \
     drush @local_qtr --yes cc all
 docker exec $container \
-    drush @local_bcl --yes cc all
+    drush @local_qcl --yes cc all
 
 docker restart $container
 

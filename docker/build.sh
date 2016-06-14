@@ -127,7 +127,7 @@ cat <<EOF > $workdir/config
 image=$project:$git_branch
 container=$project-$git_branch
 hostname=$qtr_domain
-domains="$qtr_domain $bcl_domain dev.$qtr_domain dev.$bcl_domain"
+domains="$qtr_domain $qcl_domain dev.$qtr_domain dev.$qcl_domain"
 dev=$development
 ports="-p 80:80 -p 443:443 -p $sshd_port:$sshd_port"
 EOF
