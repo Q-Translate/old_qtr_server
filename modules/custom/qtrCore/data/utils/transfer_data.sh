@@ -2,7 +2,7 @@
 
 mysql="mysql --defaults-file=/etc/mysql/debian.cnf -B"
 db=qtr_data
-db1=qtranslator_data
+db1=qtranslate_data
 tables=$($mysql -D $db -e "SHOW TABLES" | grep '^qtr_' )
 for table in $tables
 do

@@ -19,8 +19,8 @@ function vote_del($tguid, $uid = NULL) {
   $account = user_load($uid);
 
   // Check access permissions.
-  if (!user_access('qtranslator-vote', $account)
-    and !user_access('qtranslator-admin', $account))
+  if (!user_access('qtranslate-vote', $account)
+    and !user_access('qtranslate-admin', $account))
     {
       $msg = t('No rights for deleting votes!');
       qtr::messages($msg, 'error');

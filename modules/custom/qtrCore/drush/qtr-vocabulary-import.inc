@@ -30,9 +30,9 @@ function _qtr_vocabulary_import_drush_help() {
 /**
  * Callback function for the command 'qtr-vocabulary-import'.
  */
-function drush_qtranslator_qtr_vocabulary_import($name, $lng, $file) {
+function drush_qtranslate_qtr_vocabulary_import($name, $lng, $file) {
   // Check the language.
-  _qtranslator_drush_check_params(NULL, NULL, $lng);
+  _qtranslate_drush_check_params(NULL, NULL, $lng);
 
   // Import the vocabulary.
   qtr::vocabulary_import($name, $lng, $file);

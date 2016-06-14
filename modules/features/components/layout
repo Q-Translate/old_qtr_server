@@ -11,9 +11,9 @@ menu_custom:main-menu
 menu_links:main-menu:<front>
 menu_links:main-menu:qtr/project
 menu_links:main-menu:contact
-menu_links:main-menu:http://info.qtranslator.org/
-menu_links:main-menu:http://info.qtranslator.org/api-examples-js/
-menu_links:main-menu:http://info.qtranslator.org/api/
+menu_links:main-menu:http://info.qtranslate.org/
+menu_links:main-menu:http://info.qtranslate.org/api-examples-js/
+menu_links:main-menu:http://info.qtranslate.org/api/
 dependencies:menu_target
 variable:jquery_update_compression_type
 variable:jquery_update_jquery_cdn

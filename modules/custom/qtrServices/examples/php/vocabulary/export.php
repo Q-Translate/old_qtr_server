@@ -10,9 +10,9 @@ function download($url) {
 print "<br/></br/>";
 
 // Download as a text list (in different formats).
-download('https://qtranslator.org/vocabulary/export/ICT_sq/txt1');
-download('https://qtranslator.org/vocabulary/export/ICT_sq/txt2');
-download('https://qtranslator.org/vocabulary/export/ICT_sq/org');
+download('https://qtranslate.org/vocabulary/export/ICT_sq/txt1');
+download('https://qtranslate.org/vocabulary/export/ICT_sq/txt2');
+download('https://qtranslate.org/vocabulary/export/ICT_sq/org');
 
 // Get in JSON format.
-http_request('https://qtranslator.org/vocabulary/export/ICT_sq');
+http_request('https://qtranslate.org/vocabulary/export/ICT_sq');

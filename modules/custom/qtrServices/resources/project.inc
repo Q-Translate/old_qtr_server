@@ -41,7 +41,7 @@ function _qtrServices_project() {
     'callback' => '_qtrServices_project_import',
     'args' => array($params),
     'access callback' => 'user_access',
-    'access arguments' => array('qtranslator-vote'),
+    'access arguments' => array('qtranslate-vote'),
   );
 
   // Subscribe to a project.
@@ -235,7 +235,7 @@ function _qtrServices_project_import($params) {
   // Check the rights for re-importing an existing project.
   if (qtr::project_exists($origin, $project)) {
     $is_owner = ( qtr::project_owner($origin, $project) == $GLOBALS['user']->uid );
-    $can_reimport = ( $is_owner or user_access('qtranslator-admin') );
+    $can_reimport = ( $is_owner or user_access('qtranslate-admin') );
     if (!$can_reimport) {
       $msg = t("The project '!project' already exists. You can re-import only your own projects.",
              ['!project' => "$origin/$project"]);
@@ -339,7 +339,7 @@ function _qtrServices_project_delete($params) {
 
   // Check the rights for deleting this project.
   $is_owner = ( qtr::project_owner($origin, $project) == $GLOBALS['user']->uid );
-  $can_delete = ( $is_owner or user_access('qtranslator-admin') );
+  $can_delete = ( $is_owner or user_access('qtranslate-admin') );
   if (!$can_delete) {
     $msg = t('You can delete only your own projects.');
     return ['message' => [$msg, 'error']];

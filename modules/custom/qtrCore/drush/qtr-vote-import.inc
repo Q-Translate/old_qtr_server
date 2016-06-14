@@ -45,7 +45,7 @@ translations, then import back the correct translations.
 /**
  * Callback function for the command 'qtr-vote-import'.
  */
-function drush_qtranslator_qtr_vote_import($lng, $path) {
+function drush_qtranslate_qtr_vote_import($lng, $path) {
   global $user;
   if (!$user->uid) {
     drush_log(t('You must specify a user with the option --user.'), 'error');
@@ -53,13 +53,13 @@ function drush_qtranslator_qtr_vote_import($lng, $path) {
   }
 
   // Check that the given language exists.
-  _qtranslator_drush_check_params(NULL, NULL, $lng);
+  _qtranslate_drush_check_params(NULL, NULL, $lng);
 
   // Check user permissions.
-  _drush_qtranslator_qtr_vote_import_check_permissions($lng);
+  _drush_qtranslate_qtr_vote_import_check_permissions($lng);
 
   // Check the path.
-  $path = _drush_qtranslator_qtr_vote_import_check_path($path);
+  $path = _drush_qtranslate_qtr_vote_import_check_path($path);
 
   // Import translations and votes.
   qtr::vote_import($user->uid, $lng, $path);
@@ -69,15 +69,15 @@ function drush_qtranslator_qtr_vote_import($lng, $path) {
 /**
  * Check user permissions.
  */
-function _drush_qtranslator_qtr_vote_import_check_permissions($lng) {
+function _drush_qtranslate_qtr_vote_import_check_permissions($lng) {
   global $user;
 
   // Check user access permissions.
-  if (!user_access('qtranslator-suggest')) {
+  if (!user_access('qtranslate-suggest')) {
     drush_log(t('User "!user" has no rights for contributing translations!', ['!user' => $user->name]), 'error');
     drupal_exit();
   }
-  if (!user_access('qtranslator-vote')) {
+  if (!user_access('qtranslate-vote')) {
     drush_log(t('User "!user" has no rights for submiting votes!', ['!user' => $user->name]), 'error');
     drupal_exit();
   }
@@ -100,7 +100,7 @@ function _drush_qtranslator_qtr_vote_import_check_permissions($lng) {
 /**
  * Check the path.
  */
-function _drush_qtranslator_qtr_vote_import_check_path($path) {
+function _drush_qtranslate_qtr_vote_import_check_path($path) {
   // Check that there is such a file.
   if (!file_exists($path)) {
     drush_log(t('File "!file" does not exist.', ['!file' => $path]), 'error');

@@ -37,9 +37,9 @@ The format 'ediff' is generated with 'pology/poediff'.
 /**
  * Callback function for the command 'qtr-project-diff'.
  */
-function drush_qtranslator_qtr_project_diff($origin, $project, $lng, $file) {
+function drush_qtranslate_qtr_project_diff($origin, $project, $lng, $file) {
   // Check parameters $origin, $project, $lng.
-  _qtranslator_drush_check_params($origin, $project, $lng);
+  _qtranslate_drush_check_params($origin, $project, $lng);
 
   // Get the preferred users.
   $prefer = drush_get_option('prefer', NULL);

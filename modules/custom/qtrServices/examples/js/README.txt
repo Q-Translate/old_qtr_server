@@ -1,3 +1,3 @@
 
-For javascript examples see: http://info.qtranslator.org/api-examples-js/
+For javascript examples see: http://info.qtranslate.org/api-examples-js/
 

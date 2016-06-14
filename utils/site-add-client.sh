@@ -19,9 +19,9 @@ ssh_port=${2:-2201}
 
 ### set some variables
 container="qcl-$lng"
-domain="$lng.qtranslator.org"
+domain="$lng.qtranslate.org"
 admin_passwd=$(mcookie | head -c 10)
-gmail_account="$lng@qtranslator.org"
+gmail_account="$lng@qtranslate.org"
 gmail_passwd=$(mcookie)
 
 
@@ -33,7 +33,7 @@ mkdir -p /data/containers/$container
 ### create a new container
 docker create --name=$container --hostname=$domain \
     -v /data/containers/$container:/data -p $ssh_port:2201 \
-    qtranslator/qtr_client:v2.2
+    qtranslate/qtr_client:v2.2
 docker start $container
 
 ### update drupal and the code of the application
@@ -44,7 +44,7 @@ docker exec $container dev/drush_up.sh
 ################## make configurations for oauth2 ###################
 
 ### configuration variables
-server_url='https://qtranslator.org'
+server_url='https://qtranslate.org'
 client_id="$domain"
 client_secret=$(mcookie)
 redirect_url="https://$domain/oauth2/authorized"
@@ -104,7 +104,7 @@ for file in $(ls xmp*.conf)
 do
     file1=${file/#xmp/$lng}
     cp $file $file1
-    sed -i $file1 -e "s/example\.org/$lng.qtranslator.org/g"
+    sed -i $file1 -e "s/example\.org/$lng.qtranslate.org/g"
 done 
 cd ../sites-enabled/
 ln -s ../sites-available/$lng*.conf .
@@ -113,7 +113,7 @@ cd /data/
 ### modify the configuration of wsproxy/hosts.txt
 sed -i /data/wsproxy/hosts.txt -e "/^$container:/d"
 cat << EOF >> /data/wsproxy/hosts.txt
-$container: $lng.qtranslator.org dev.$lng.qtranslator.org test.$lng.qtranslator.org
+$container: $lng.qtranslate.org dev.$lng.qtranslate.org test.$lng.qtranslate.org
 EOF
 
 ### restart wsproxy

@@ -30,7 +30,7 @@ function _qtr_vocabulary_get_drush_help() {
 /**
  * Callback function for the command 'qtr-vocabulary-get'.
  */
-function drush_qtranslator_qtr_vocabulary_get($name, $lng) {
+function drush_qtranslate_qtr_vocabulary_get($name, $lng) {
   // Get the vocabulary content.
   $result = qtr::vocabulary_get($name, $lng);
 

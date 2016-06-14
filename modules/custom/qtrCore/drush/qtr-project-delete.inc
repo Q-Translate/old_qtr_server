@@ -34,10 +34,10 @@ of the given name (from any origin) will be deleted.";
 /**
  * Callback function for the command 'qtr-project-delete'.
  */
-function drush_qtranslator_qtr_project_delete() {
+function drush_qtranslate_qtr_project_delete() {
   $origin = drush_get_option('origin');
   $project = drush_get_option('project');
-  _qtranslator_drush_check_params($origin, $project);
+  _qtranslate_drush_check_params($origin, $project);
 
   $erase = drush_get_option('erase');
   $erase = ($erase == 'false' ? FALSE : TRUE);

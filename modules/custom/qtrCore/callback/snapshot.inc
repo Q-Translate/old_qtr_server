@@ -10,7 +10,7 @@
  * Make a snapshot of the given origin/project/lng.
  *
  * Examples:
- *   curl 'https://qtranslator.org/project/snapshot/LibreOffice/sw/sq?export_mode=preferred_by_me&friends='
+ *   curl 'https://qtranslate.org/project/snapshot/LibreOffice/sw/sq?export_mode=preferred_by_me&friends='
  */
 function qtrCore_project_snapshot($origin, $project, $lng) {
   // For performance reasons, this is restricted only to the project admins.

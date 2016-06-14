@@ -52,7 +52,7 @@ function translation_del($tguid, $notify = TRUE, $uid = NULL) {
   // Check that the current user has the right to delete translations.
   $is_own = ($umail == $author->umail);
   if (!$is_own and ($uid != 1)
-    and !user_access('qtranslator-resolve', $account)
+    and !user_access('qtranslate-resolve', $account)
     and !qtr::user_has_project_role('admin', $sguid)
     and !qtr::user_has_project_role('moderator', $sguid))
     {

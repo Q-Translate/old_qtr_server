@@ -32,7 +32,7 @@ The option 'name' can contain '%' (for LIKE matches).
 /**
  * Callback function for the command 'qtr-vocabulary-list'.
  */
-function drush_qtranslator_qtr_vocabulary_list() {
+function drush_qtranslate_qtr_vocabulary_list() {
   $name = drush_get_option('name', '%');
   $lng = drush_get_option('lng', '%');
 

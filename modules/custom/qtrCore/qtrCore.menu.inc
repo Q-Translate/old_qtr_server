@@ -22,7 +22,7 @@ function qtrCore_menu() {
     'description'      => 'Q-Translate Core configuration settings.',
     'page callback'    => 'drupal_get_form',
     'page arguments'   => array('qtrCore_config'),
-    'access arguments' => array('qtranslator-admin'),
+    'access arguments' => array('qtranslate-admin'),
     'file'             => 'admin/core.inc',
   );
 
@@ -31,7 +31,7 @@ function qtrCore_menu() {
     'description'      => 'Q-Translate Backup/Restore.',
     'page callback'    => 'drupal_get_form',
     'page arguments'   => ['qtrCore_backup'],
-    'access arguments' => ['qtranslator-admin'],
+    'access arguments' => ['qtranslate-admin'],
     'file'            => 'admin/data.inc',
   );
 

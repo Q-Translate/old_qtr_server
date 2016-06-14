@@ -29,9 +29,9 @@ function _qtr_project_diff_ls_drush_help() {
 /**
  * Callback function for the command 'qtr-project-diff-ls'.
  */
-function drush_qtranslator_qtr_project_diff_ls($origin, $project, $lng) {
+function drush_qtranslate_qtr_project_diff_ls($origin, $project, $lng) {
   // Check parameters $origin, $project, $lng.
-  _qtranslator_drush_check_params($origin, $project, $lng);
+  _qtranslate_drush_check_params($origin, $project, $lng);
 
   $arr_diffs = array();
   $diff_list = qtr::project_diff_list($origin, $project, $lng);

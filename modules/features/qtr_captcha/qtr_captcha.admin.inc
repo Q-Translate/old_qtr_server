@@ -14,7 +14,7 @@ function qtr_captcha_menu() {
     'description'      => 'Private reCaptca settings.',
     'page callback'    => 'drupal_get_form',
     'page arguments'   => array('qtr_captcha_config'),
-    'access arguments' => array('qtranslator-admin'),
+    'access arguments' => array('qtranslate-admin'),
   );
 
   return $items;

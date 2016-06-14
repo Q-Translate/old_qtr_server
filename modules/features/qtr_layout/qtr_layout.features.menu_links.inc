@@ -10,10 +10,10 @@
 function qtr_layout_menu_default_menu_links() {
   $menu_links = array();
 
-  // Exported menu link: main-menu_about:http://info.qtranslator.org/.
-  $menu_links['main-menu_about:http://info.qtranslator.org/'] = array(
+  // Exported menu link: main-menu_about:http://info.qtranslate.org/.
+  $menu_links['main-menu_about:http://info.qtranslate.org/'] = array(
     'menu_name' => 'main-menu',
-    'link_path' => 'http://info.qtranslator.org/',
+    'link_path' => 'http://info.qtranslate.org/',
     'router_path' => '',
     'link_title' => 'About',
     'options' => array(
@@ -23,7 +23,7 @@ function qtr_layout_menu_default_menu_links() {
           0 => '_blank',
         ),
       ),
-      'identifier' => 'main-menu_about:http://info.qtranslator.org/',
+      'identifier' => 'main-menu_about:http://info.qtranslate.org/',
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -33,10 +33,10 @@ function qtr_layout_menu_default_menu_links() {
     'weight' => -47,
     'customized' => 1,
   );
-  // Exported menu link: main-menu_api-examples:http://info.qtranslator.org/api-examples-js/.
-  $menu_links['main-menu_api-examples:http://info.qtranslator.org/api-examples-js/'] = array(
+  // Exported menu link: main-menu_api-examples:http://info.qtranslate.org/api-examples-js/.
+  $menu_links['main-menu_api-examples:http://info.qtranslate.org/api-examples-js/'] = array(
     'menu_name' => 'main-menu',
-    'link_path' => 'http://info.qtranslator.org/api-examples-js/',
+    'link_path' => 'http://info.qtranslate.org/api-examples-js/',
     'router_path' => '',
     'link_title' => 'API Examples',
     'options' => array(
@@ -46,7 +46,7 @@ function qtr_layout_menu_default_menu_links() {
           0 => '_blank',
         ),
       ),
-      'identifier' => 'main-menu_api-examples:http://info.qtranslator.org/api-examples-js/',
+      'identifier' => 'main-menu_api-examples:http://info.qtranslate.org/api-examples-js/',
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -56,10 +56,10 @@ function qtr_layout_menu_default_menu_links() {
     'weight' => -46,
     'customized' => 1,
   );
-  // Exported menu link: main-menu_api-reference:http://info.qtranslator.org/api/.
-  $menu_links['main-menu_api-reference:http://info.qtranslator.org/api/'] = array(
+  // Exported menu link: main-menu_api-reference:http://info.qtranslate.org/api/.
+  $menu_links['main-menu_api-reference:http://info.qtranslate.org/api/'] = array(
     'menu_name' => 'main-menu',
-    'link_path' => 'http://info.qtranslator.org/api/',
+    'link_path' => 'http://info.qtranslate.org/api/',
     'router_path' => '',
     'link_title' => 'API Reference',
     'options' => array(
@@ -69,7 +69,7 @@ function qtr_layout_menu_default_menu_links() {
           0 => '_blank',
         ),
       ),
-      'identifier' => 'main-menu_api-reference:http://info.qtranslator.org/api/',
+      'identifier' => 'main-menu_api-reference:http://info.qtranslate.org/api/',
     ),
     'module' => 'menu',
     'hidden' => 0,

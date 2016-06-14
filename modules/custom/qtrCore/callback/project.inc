@@ -19,7 +19,7 @@
  *
  * Examples:
  *   curl -k 'https://dev.qtr.example.org/project/sync?origin=LibreOffice&project=cui&lng=sq'
- *   curl -k https://dev.qtranslator.org/project/sync \
+ *   curl -k https://dev.qtranslate.org/project/sync \
  *        -d origin=LibreOffice -d project=cui -d lng=sq
  */
 function qtrCore_project_sync() {

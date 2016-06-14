@@ -25,7 +25,7 @@ function _qtrServices_vocabulary() {
     'callback' => '_qtrServices_vocabulary_add_string',
     'args' => array($params),
     'access callback' => 'user_access',
-    'access arguments' => array('qtranslator-suggest'),
+    'access arguments' => array('qtranslate-suggest'),
   );
 
   // Delete a string from a vocabulary.
@@ -35,7 +35,7 @@ function _qtrServices_vocabulary() {
     'callback' => '_qtrServices_vocabulary_del_string',
     'args' => array($params),
     'access callback' => 'user_access',
-    'access arguments' => array('qtranslator-suggest'),
+    'access arguments' => array('qtranslate-suggest'),
   );
 
   // Import vocabulary from a text file.
@@ -45,7 +45,7 @@ function _qtrServices_vocabulary() {
     'callback' => '_qtrServices_vocabulary_import',
     'args' => array($params),
     'access callback' => 'user_access',
-    'access arguments' => array('qtranslator-vote'),
+    'access arguments' => array('qtranslate-vote'),
   );
 
   // Delete a vocabulary.
@@ -95,13 +95,13 @@ function _qtrServices_vocabulary_add_string($params) {
   $notify = check_plain($params['notify']);
 
   // Check access permissions.
-  if (!user_access('qtranslator-suggest')) {
+  if (!user_access('qtranslate-suggest')) {
     $msg = t('No rights for contributing suggestions!');
     return ['sguid' => NULL, 'messages' => [[$msg, 'error']]];
   }
   // Check that the language matches the translation language of the user.
   $account = user_load($GLOBALS['user']->uid);
-  if (!user_access('qtranslator-admin') and ($lng != $account->translation_lng)) {
+  if (!user_access('qtranslate-admin') and ($lng != $account->translation_lng)) {
     $msg = t('No rights for contributing to language <strong>!lng</strong>.', ['!lng' => $lng]);
     return ['sguid' => NULL, 'messages' => [[$msg, 'error']]];
   }
@@ -201,7 +201,7 @@ function _qtrServices_vocabulary_import($params) {
   if (qtr::project_exists($origin, $project)) {
     // Check the rights for updating an existing project.
     $is_owner = ( qtr::project_owner($origin, $project) == $uid );
-    $can_reimport = ( $is_owner or user_access('qtranslator-admin') );
+    $can_reimport = ( $is_owner or user_access('qtranslate-admin') );
     if (!$can_reimport) {
       $msg = t("Vocabulary '!vocabulary' already exists. You can update only your own vocabularies.",
              ['!vocabulary' => $project]);
@@ -254,7 +254,7 @@ function _qtrServices_vocabulary_delete($params) {
 
   // Check the rights for deleting this project.
   $is_owner = ( qtr::project_owner($origin, $project) == $uid );
-  $can_delete = ( $is_owner or user_access('qtranslator-admin') );
+  $can_delete = ( $is_owner or user_access('qtranslate-admin') );
   if (!$can_delete) {
     $msg = t('You can delete only your own vocabularies.');
     return ['message' => [$msg, 'error']];

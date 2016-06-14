@@ -33,9 +33,9 @@ Also generates the diffs with the previous snapshot and saves them in DB.
 /**
  * Callback function for the command 'qtr-project-snapshot'.
  */
-function drush_qtranslator_qtr_project_snapshot($origin, $project, $lng, $comment) {
+function drush_qtranslate_qtr_project_snapshot($origin, $project, $lng, $comment) {
   // Check parameters $origin, $project, $lng.
-  _qtranslator_drush_check_params($origin, $project, $lng);
+  _qtranslate_drush_check_params($origin, $project, $lng);
 
   // Make the snapshot.
   qtr::project_snapshot($origin, $project, $lng, $comment);

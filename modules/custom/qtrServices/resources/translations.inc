@@ -121,7 +121,7 @@ function _qtrServices_translations() {
       ),
     ),
     'access callback' => 'user_access',
-    'access arguments' => array('qtranslator-suggest'),
+    'access arguments' => array('qtranslate-suggest'),
   );
 
   // Add a vote for a translation.
@@ -139,7 +139,7 @@ function _qtrServices_translations() {
       ),
     ),
     'access callback' => 'user_access',
-    'access arguments' => array('qtranslator-vote'),
+    'access arguments' => array('qtranslate-vote'),
   );
 
   // Delete a translation.
@@ -157,7 +157,7 @@ function _qtrServices_translations() {
       ),
     ),
     'access callback' => 'user_access',
-    'access arguments' => array('qtranslator-suggest'),
+    'access arguments' => array('qtranslate-suggest'),
   );
 
   // Delete a vote from a translation.
@@ -175,7 +175,7 @@ function _qtrServices_translations() {
       ),
     ),
     'access callback' => 'user_access',
-    'access arguments' => array('qtranslator-vote'),
+    'access arguments' => array('qtranslate-vote'),
   );
 
   // Submit multiple actions at once.
@@ -193,7 +193,7 @@ function _qtrServices_translations() {
       ),
     ),
     'access callback' => 'user_access',
-    'access arguments' => array('qtranslator-vote'),
+    'access arguments' => array('qtranslate-vote'),
   );
 
   // Import translations and votes from PO files.
@@ -211,7 +211,7 @@ function _qtrServices_translations() {
       ),
     ),
     'access callback' => 'user_access',
-    'access arguments' => array('qtranslator-vote'),
+    'access arguments' => array('qtranslate-vote'),
   );
 
   return $translations;
@@ -467,13 +467,13 @@ function _qtrServices_translations_add($params) {
   }
 
   // Check access permissions.
-  if (!user_access('qtranslator-suggest')) {
+  if (!user_access('qtranslate-suggest')) {
     $msg = t('No rights for contributing suggestions!');
     return ['tguid' => NULL, 'messages' => [[$msg, 'error']]];
   }
   // Check that the language matches the translation language of the user.
   $account = user_load($GLOBALS['user']->uid);
-  if (!user_access('qtranslator-admin') and ($lng != $account->translation_lng)) {
+  if (!user_access('qtranslate-admin') and ($lng != $account->translation_lng)) {
     $msg = t('No rights for contributing to language <strong>!lng</strong>.', ['!lng' => $lng]);
     return ['tguid' => NULL, 'messages' => [[$msg, 'error']]];
   }
@@ -505,7 +505,7 @@ function _qtrServices_translations_vote($params) {
   $tguid = $params['tguid'];
 
   // Check access permissions.
-  if (!user_access('qtranslator-vote')) {
+  if (!user_access('qtranslate-vote')) {
     $msg = t('No rights for submitting votes!');
     return ['vid' => NULL, 'messages' => [[$msg, 'error']]];
   }
@@ -662,11 +662,11 @@ function _qtrServices_vote_import($params) {
   }
 
   // Check access permissions.
-  if (!user_access('qtranslator-vote')) {
+  if (!user_access('qtranslate-vote')) {
     $msg = t('No rights for submitting votes!');
     return ['messages' => [[$msg, 'error']]];
   }
-  if (!user_access('qtranslator-suggest')) {
+  if (!user_access('qtranslate-suggest')) {
     $msg = t('No rights for submitting translations!');
     return ['messages' => [[$msg, 'error']]];
   }

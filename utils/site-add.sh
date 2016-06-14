@@ -20,10 +20,10 @@ ssh_port=${2:-2201}
 
 ### set some variables
 container="qtr-$lng"
-qcl_domain="$lng.qtranslator.org"
-qtr_domain="qtr-$lng.qtranslator.org"
+qcl_domain="$lng.qtranslate.org"
+qtr_domain="qtr-$lng.qtranslate.org"
 admin_passwd=$(mcookie | head -c 10)
-gmail_account="$lng@qtranslator.org"
+gmail_account="$lng@qtranslate.org"
 gmail_passwd=$(mcookie)
 languages=$(echo $lng fr de it es | tr ' ' "\n" | sort -u | tr "\n" ' ')
 
@@ -35,11 +35,11 @@ mkdir -p /data/containers/$container
 
 ### create a new container
 docker create --name=$container \
-    --hostname=$lng.qtranslator.org \
+    --hostname=$lng.qtranslate.org \
     -v /data/containers/$container:/data \
     -v /data/PO_files:/data/PO_files:ro \
     -p $ssh_port:2201 \
-    qtranslator/qtr_server:v2.3
+    qtranslate/qtr_server:v2.3
 docker start $container
 
 ### update drupal and the code of the application
@@ -93,8 +93,8 @@ do
     file2=${file/#xmp/qtr-$lng}
     cp $file $file1
     cp $file $file2
-    sed -i $file1 -e "s/example\.org/$lng.qtranslator.org/g"
-    sed -i $file2 -e "s/example\.org/qtr-$lng.qtranslator.org/g"
+    sed -i $file1 -e "s/example\.org/$lng.qtranslate.org/g"
+    sed -i $file2 -e "s/example\.org/qtr-$lng.qtranslate.org/g"
 done
 cd ../sites-enabled/
 ln -s ../sites-available/$lng*.conf .
@@ -104,8 +104,8 @@ cd /data/
 ### modify the configuration of wsproxy/hosts.txt
 sed -i /data/wsproxy/hosts.txt -e "/^$container:/d"
 cat << EOF >> /data/wsproxy/hosts.txt
-$container: $lng.qtranslator.org dev.$lng.qtranslator.org test.$lng.qtranslator.org
-$container: qtr-$lng.qtranslator.org dev.qtr-$lng.qtranslator.org test.qtr-$lng.qtranslator.org
+$container: $lng.qtranslate.org dev.$lng.qtranslate.org test.$lng.qtranslate.org
+$container: qtr-$lng.qtranslate.org dev.qtr-$lng.qtranslate.org test.qtr-$lng.qtranslate.org
 EOF
 
 ### restart wsproxy

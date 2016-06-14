@@ -18,9 +18,9 @@
  *   Default is 'json'.
  *
  * Examples:
- *   curl -s https://qtranslator.org/vocabulary/export/ICT_sq | python -m json.tool
- *   curl https://qtranslator.org/vocabulary/export/ICT_sq/txt1
- *   curl https://qtranslator.org/vocabulary/export/ICT_sq/org
+ *   curl -s https://qtranslate.org/vocabulary/export/ICT_sq | python -m json.tool
+ *   curl https://qtranslate.org/vocabulary/export/ICT_sq/txt1
+ *   curl https://qtranslate.org/vocabulary/export/ICT_sq/org
  */
 function qtrCore_vocabulary_export($vocabulary, $format ='JSON') {
   // Try to avoid concurrent exports because they

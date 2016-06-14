@@ -6,4 +6,4 @@ include_once($path . '/http_request.php');
 // GET vocabulary/list
 $url = $base_url . '/vocabulary/list';
 http_request($url);
-http_request('https://qtranslator.org/vocabulary/list');
+http_request('https://qtranslate.org/vocabulary/list');

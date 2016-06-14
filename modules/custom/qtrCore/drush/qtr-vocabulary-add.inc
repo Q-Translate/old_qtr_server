@@ -29,9 +29,9 @@ function _qtr_vocabulary_add_drush_help() {
 /**
  * Callback function for the command 'qtr-vocabulary-add'.
  */
-function drush_qtranslator_qtr_vocabulary_add($name, $lng) {
+function drush_qtranslate_qtr_vocabulary_add($name, $lng) {
   // Check the language.
-  _qtranslator_drush_check_params(NULL, NULL, $lng);
+  _qtranslate_drush_check_params(NULL, NULL, $lng);
 
   // Add the vocabulary.
   qtr::vocabulary_add($name, $lng);

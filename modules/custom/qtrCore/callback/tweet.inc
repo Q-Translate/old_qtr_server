@@ -6,7 +6,7 @@
  * If the request header 'Accept: application/json' is set, then
  * the output will be in JSON, for example:
  *   curl -k -i -H 'Accept: application/json' \
- *        'https://qtranslator.org/tweet/sq'
+ *        'https://qtranslate.org/tweet/sq'
  * This can be useful for adding your custom hashtags, url, etc.
  */
 

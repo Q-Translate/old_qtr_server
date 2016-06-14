@@ -82,12 +82,12 @@ function translation_add($sguid, $lng, $translation, $uid = NULL, $notify = TRUE
   // the new translation should replace the old one. This is useful when
   // the user wants to correct the translation, but it limits the user to
   // only one suggested translation per string.
-  // However, translators (with the 'qtranslator-import' access right)
+  // However, translators (with the 'qtranslate-import' access right)
   // do not have this limitation and can suggest more than one translation
   // for the same string.
   // The same is applied for the users with admin or moderator role in the
   // project of the string.
-  if (!user_access('qtranslator-import', $account) and $uid > 1
+  if (!user_access('qtranslate-import', $account) and $uid > 1
     and !qtr::user_has_project_role('admin', $sguid, $uid)
     and !qtr::user_has_project_role('moderator', $sguid, $uid))
     {

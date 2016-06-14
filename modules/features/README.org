@@ -258,7 +258,7 @@
       'description'      => 'Private GoogleAnalytics settings.',
       'page callback'    => 'drupal_get_form',
       'page arguments'   => array('qtr_googleanalytics_config'),
-      'access arguments' => array('qtranslator-admin'),
+      'access arguments' => array('qtranslate-admin'),
     );
 
     return $items;

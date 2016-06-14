@@ -11,7 +11,7 @@
  * snapshot.
  *
  * Examples:
- *   curl 'https://qtranslator.org/project/diff-latest/LibreOffice/sw/sq?format=diff&export_mode=preferred_by_me&friends='
+ *   curl 'https://qtranslate.org/project/diff-latest/LibreOffice/sw/sq?format=diff&export_mode=preferred_by_me&friends='
  */
 function qtrCore_project_diff_latest($origin, $project, $lng) {
   // For performance reasons, this is restricted only to the project admins.

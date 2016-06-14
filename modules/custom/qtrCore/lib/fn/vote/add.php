@@ -38,7 +38,7 @@ function vote_add($tguid, $uid = NULL) {
   $ulng = $account->translation_lng;
 
   // Make sure that the language of the user matches the language of the translation.
-  if ($ulng != $trans->lng and !user_access('qtranslator-admin', $account)) {
+  if ($ulng != $trans->lng and !user_access('qtranslate-admin', $account)) {
     $msg = t('You cannot vote the translations of language <strong>!lng</strong>', ['!lng' => $trans->lng]);
     qtr::messages($msg, 'error');
     return NULL;

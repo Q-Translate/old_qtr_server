@@ -18,35 +18,35 @@ require_once(dirname(__FILE__) . '/include/hybridauth.inc');
  */
 function qtrUser_permission() {
   return array(
-    'qtranslator-vote' => array(
+    'qtranslate-vote' => array(
       'title' => t('Vote translations.'),
       'description' => t('Can submit votes (or likes) for translation suggestions.'),
     ),
-    'qtranslator-suggest' => array(
+    'qtranslate-suggest' => array(
       'title' => t('Suggest new translations.'),
       'description' => t('Can submit new translation suggestions.'),
     ),
-    'qtranslator-flag' => array(
+    'qtranslate-flag' => array(
       'title' => t('Flag translations.'),
       'description' => t('Can flag translations as inaproppriate.'),
     ),
-    'qtranslator-import' => array(
+    'qtranslate-import' => array(
       'title' => t('Import translation (PO) files.'),
       'description' => t('Can import to Q-Translate new translation files (in the PO format).'),
     ),
-    'qtranslator-export' => array(
+    'qtranslate-export' => array(
       'title' => t('Export translation files.'),
       'description' => t('Can export translations from Q-Translate (either in PO format, or as diff/ediff).'),
     ),
-    'qtranslator-stats' => array(
+    'qtranslate-stats' => array(
       'title' => t('Statistics.'),
       'description' => t('Can access global statistics of Q-Translate.'),
     ),
-    'qtranslator-resolve' => array(
+    'qtranslate-resolve' => array(
       'title' => t('Resolve issues.'),
       'description' => t('Can resolve flag issues and other problems.'),
     ),
-    'qtranslator-admin' => array(
+    'qtranslate-admin' => array(
       'title' => t('Administer Q-Translate.'),
       'description' => t('Can perform administration tasks for Q-Translate.'),
     ),

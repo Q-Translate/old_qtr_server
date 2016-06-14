@@ -14,9 +14,9 @@ link_to('https://l10n.org.al/qtr/rss-feed');
 link_to('https://l10n.org.al/qtr/rss-feed/LibreOffice');
 link_to('https://l10n.org.al/qtr/rss-feed/LibreOffice/cui');
 
-link_to('https://qtranslator.net/qtr/rss-feed/LibreOffice/cui/sq');
-link_to('https://qtranslator.net/qtr/rss-feed/LibreOffice/cui');
+link_to('https://qtranslate.net/qtr/rss-feed/LibreOffice/cui/sq');
+link_to('https://qtranslate.net/qtr/rss-feed/LibreOffice/cui');
 
-link_to('https://qtranslator.org/rss-feed/sq');
-link_to('https://qtranslator.org/rss-feed/sq/LibreOffice');
-link_to('https://qtranslator.org/rss-feed/sq/LibreOffice/cui');
+link_to('https://qtranslate.org/rss-feed/sq');
+link_to('https://qtranslate.org/rss-feed/sq/LibreOffice');
+link_to('https://qtranslate.org/rss-feed/sq/LibreOffice/cui');

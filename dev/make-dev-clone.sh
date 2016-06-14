@@ -24,4 +24,4 @@ drush @qtr_dev user-create user1 --password=pass1 \
 drush @qtr_dev php-script \
     --script-path=/usr/local/src/qtr_server/install/config \
     register_oauth2_client.php 'test1' '12345' \
-    'https://qtranslator.net/oauth2-client-php/authorized.php'
+    'https://qtranslate.net/oauth2-client-php/authorized.php'

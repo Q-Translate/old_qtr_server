@@ -10,7 +10,7 @@
 ###     utils/run-tests.sh stdout
 
 ### the URL where the application being tested can be accessed
-URL="https://tst.qtranslator.org/"
+URL="https://tst.qtranslate.org/"
 
 ### if a parameter is given, then the output will be dumped on the screen
 ### otherwise it will be saved on a file on directory 'tests/'

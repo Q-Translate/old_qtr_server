@@ -33,7 +33,7 @@ If --project='-' then only a list of 'origin' is outputed.
 /**
  * Callback function for the command 'qtr-project-list'.
  */
-function drush_qtranslator_qtr_project_list() {
+function drush_qtranslate_qtr_project_list() {
   $origin = drush_get_option('origin');
   $project = drush_get_option('project');
 

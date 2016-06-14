@@ -13,7 +13,7 @@ function qtr_qtrServices_default_services_endpoint() {
   $endpoint = new stdClass();
   $endpoint->disabled = FALSE; /* Edit this to true to make a default endpoint disabled initially */
   $endpoint->api_version = 3;
-  $endpoint->name = 'qtranslator';
+  $endpoint->name = 'qtranslate';
   $endpoint->server = 'rest_server';
   $endpoint->path = 'api';
   $endpoint->authentication = array(
@@ -308,7 +308,7 @@ function qtr_qtrServices_default_services_endpoint() {
     ),
   );
   $endpoint->debug = 0;
-  $export['qtranslator'] = $endpoint;
+  $export['qtranslate'] = $endpoint;
 
   return $export;
 }

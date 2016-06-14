@@ -34,7 +34,7 @@ it will be deleted first (related data will be erased as well).
 /**
  * Callback function for the command 'qtr-project-add'.
  */
-function drush_qtranslator_qtr_project_add($origin, $project, $path) {
+function drush_qtranslate_qtr_project_add($origin, $project, $path) {
   qtr::project_add($origin, $project, $path);
   foreach(qtr::messages() as $msg)  drush_log($msg[0], $msg[1]);
 }

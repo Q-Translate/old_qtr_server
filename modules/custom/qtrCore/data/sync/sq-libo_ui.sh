@@ -38,7 +38,7 @@ echo "
 There is no automatic upload yet.
 
 Download:
-    https://qtranslator.org/downloads/$name.zip
+    https://qtranslate.org/downloads/$name.zip
 
 and import it to:
     $pootle/$lng/$project/$subproj/

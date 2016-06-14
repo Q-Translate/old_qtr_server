@@ -9,7 +9,7 @@ cd $(dirname $0)
 ./ubuntu.sh
 ./office.sh
 ./kde.sh
-./qtranslator.sh
+./qtranslate.sh
 ./drupal.sh
 ./firefox-os.sh
 ./wordpress.sh

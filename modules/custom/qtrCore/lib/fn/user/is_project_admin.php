@@ -16,7 +16,7 @@ function user_is_project_admin($origin, $project, $lng = NULL, $uid = NULL) {
 
   // If user has global admin permission,
   // he can administrate this project as well.
-  if (user_access('qtranslator-admin', $account))  return TRUE;
+  if (user_access('qtranslate-admin', $account))  return TRUE;
 
   // Check that the project language matches translation_lng of the user.
   if ($lng !== NULL and $lng != $account->translation_lng) return FALSE;

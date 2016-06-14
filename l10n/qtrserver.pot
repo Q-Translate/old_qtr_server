@@ -16,7 +16,7 @@
 #  modules/custom/qtrCore/callback/ajax.inc: n/a
 #  modules/custom/qtrCore/callback/project.inc: n/a
 #  modules/custom/qtrCore/callback/vocabulary.inc: n/a
-#  modules/custom/qtrCore/drush/qtranslator.drush.inc: n/a
+#  modules/custom/qtrCore/drush/qtranslate.drush.inc: n/a
 #  modules/custom/qtrCore/lib/fn/schedule/project_export.php: n/a
 #  modules/custom/qtrCore/drush/qtr-project-export.inc: n/a
 #  modules/custom/qtrCore/callback/rss_feed.inc: n/a
@@ -211,7 +211,7 @@ msgid "Error: Server is currently busy. Please try to export again later."
 msgstr ""
 
 #: modules/custom/qtrCore/callback/project.inc:114
-#: modules/custom/qtrCore/drush/qtranslator.drush.inc:108
+#: modules/custom/qtrCore/drush/qtranslate.drush.inc:108
 #: modules/custom/qtrCore/lib/fn/schedule/project_export.php:48
 msgid "The project '!project' does not exist."
 msgstr ""
@@ -266,7 +266,7 @@ msgstr ""
 msgid "Only files with the following extensions are allowed: !files-allowed."
 msgstr ""
 
-#: modules/custom/qtrCore/drush/qtranslator.drush.inc:115
+#: modules/custom/qtrCore/drush/qtranslate.drush.inc:115
 msgid "The language '!lng' does not exist."
 msgstr ""
 

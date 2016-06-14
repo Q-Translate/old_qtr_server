@@ -48,9 +48,9 @@ project).
 /**
  * Callback function for the command 'qtr-project-export'.
  */
-function drush_qtranslator_qtr_project_export($origin, $project, $lng, $path) {
+function drush_qtranslate_qtr_project_export($origin, $project, $lng, $path) {
   // Check parameters $origin, $project, $lng.
-  _qtranslator_drush_check_params($origin, $project, $lng);
+  _qtranslate_drush_check_params($origin, $project, $lng);
 
   // Check the export_mode.
   $export_mode = drush_get_option('export-mode', 'most_voted');

@@ -8,4 +8,4 @@ dependencies[] = oauth2_loginprovider
 dependencies[] = services
 features[ctools][] = services:services:3
 features[features_api][] = api:2
-features[services_endpoint][] = qtranslator
+features[services_endpoint][] = qtranslate

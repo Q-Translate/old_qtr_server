@@ -10,27 +10,27 @@
 function qtr_qtr_user_default_permissions() {
   $permissions = array();
 
-  // Exported permission: 'qtranslator-admin'.
-  $permissions['qtranslator-admin'] = array(
-    'name' => 'qtranslator-admin',
+  // Exported permission: 'qtranslate-admin'.
+  $permissions['qtranslate-admin'] = array(
+    'name' => 'qtranslate-admin',
     'roles' => array(
       'administrator' => 'administrator',
     ),
     'module' => 'qtrUser',
   );
 
-  // Exported permission: 'qtranslator-export'.
-  $permissions['qtranslator-export'] = array(
-    'name' => 'qtranslator-export',
+  // Exported permission: 'qtranslate-export'.
+  $permissions['qtranslate-export'] = array(
+    'name' => 'qtranslate-export',
     'roles' => array(
       'translator' => 'translator',
     ),
     'module' => 'qtrUser',
   );
 
-  // Exported permission: 'qtranslator-flag'.
-  $permissions['qtranslator-flag'] = array(
-    'name' => 'qtranslator-flag',
+  // Exported permission: 'qtranslate-flag'.
+  $permissions['qtranslate-flag'] = array(
+    'name' => 'qtranslate-flag',
     'roles' => array(
       'contributor' => 'contributor',
       'moderator' => 'moderator',
@@ -39,27 +39,27 @@ function qtr_qtr_user_default_permissions() {
     'module' => 'qtrUser',
   );
 
-  // Exported permission: 'qtranslator-import'.
-  $permissions['qtranslator-import'] = array(
-    'name' => 'qtranslator-import',
+  // Exported permission: 'qtranslate-import'.
+  $permissions['qtranslate-import'] = array(
+    'name' => 'qtranslate-import',
     'roles' => array(
       'translator' => 'translator',
     ),
     'module' => 'qtrUser',
   );
 
-  // Exported permission: 'qtranslator-resolve'.
-  $permissions['qtranslator-resolve'] = array(
-    'name' => 'qtranslator-resolve',
+  // Exported permission: 'qtranslate-resolve'.
+  $permissions['qtranslate-resolve'] = array(
+    'name' => 'qtranslate-resolve',
     'roles' => array(
       'moderator' => 'moderator',
     ),
     'module' => 'qtrUser',
   );
 
-  // Exported permission: 'qtranslator-stats'.
-  $permissions['qtranslator-stats'] = array(
-    'name' => 'qtranslator-stats',
+  // Exported permission: 'qtranslate-stats'.
+  $permissions['qtranslate-stats'] = array(
+    'name' => 'qtranslate-stats',
     'roles' => array(
       'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
@@ -68,9 +68,9 @@ function qtr_qtr_user_default_permissions() {
     'module' => 'qtrUser',
   );
 
-  // Exported permission: 'qtranslator-suggest'.
-  $permissions['qtranslator-suggest'] = array(
-    'name' => 'qtranslator-suggest',
+  // Exported permission: 'qtranslate-suggest'.
+  $permissions['qtranslate-suggest'] = array(
+    'name' => 'qtranslate-suggest',
     'roles' => array(
       'contributor' => 'contributor',
       'moderator' => 'moderator',
@@ -79,9 +79,9 @@ function qtr_qtr_user_default_permissions() {
     'module' => 'qtrUser',
   );
 
-  // Exported permission: 'qtranslator-vote'.
-  $permissions['qtranslator-vote'] = array(
-    'name' => 'qtranslator-vote',
+  // Exported permission: 'qtranslate-vote'.
+  $permissions['qtranslate-vote'] = array(
+    'name' => 'qtranslate-vote',
     'roles' => array(
       'contributor' => 'contributor',
       'moderator' => 'moderator',

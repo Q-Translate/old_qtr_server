@@ -13,11 +13,11 @@
  * it returns a list of the saved diffs instead.
  *
  * Examples:
- *   curl https://qtranslator.org/project/diff/LibreOffice/sw/sq
- *   curl https://qtranslator.org/project/diff/LibreOffice/sw/sq/2 > 2.diff
- *   curl https://qtranslator.org/project/diff/LibreOffice/sw/sq/2/ediff > 2.ediff
- *   curl https://qtranslator.org/project/diff/LibreOffice/sw/sq/4 > 4.diff
- *   curl https://qtranslator.org/project/diff/LibreOffice/sw/sq/4/ediff > 4.ediff
+ *   curl https://qtranslate.org/project/diff/LibreOffice/sw/sq
+ *   curl https://qtranslate.org/project/diff/LibreOffice/sw/sq/2 > 2.diff
+ *   curl https://qtranslate.org/project/diff/LibreOffice/sw/sq/2/ediff > 2.ediff
+ *   curl https://qtranslate.org/project/diff/LibreOffice/sw/sq/4 > 4.diff
+ *   curl https://qtranslate.org/project/diff/LibreOffice/sw/sq/4/ediff > 4.ediff
  */
 function qtrCore_project_diff($origin, $project, $lng, $nr =NULL, $format =NULL) {
   $origin = check_plain($origin);
@@ -50,10 +50,10 @@ function qtrCore_project_diff($origin, $project, $lng, $nr =NULL, $format =NULL)
  * Similar to project_diff, but return a file for download (not plain text).
  *
  * Examples:
- *   curl https://qtranslator.org/project/diff-dl/LibreOffice/sw/sq/2
- *   curl https://qtranslator.org/project/diff-dl/LibreOffice/sw/sq/2/ediff
- *   curl https://qtranslator.org/project/diff-dl/LibreOffice/sw/sq/4/diff
- *   curl https://qtranslator.org/project/diff-dl/LibreOffice/sw/sq/4/ediff
+ *   curl https://qtranslate.org/project/diff-dl/LibreOffice/sw/sq/2
+ *   curl https://qtranslate.org/project/diff-dl/LibreOffice/sw/sq/2/ediff
+ *   curl https://qtranslate.org/project/diff-dl/LibreOffice/sw/sq/4/diff
+ *   curl https://qtranslate.org/project/diff-dl/LibreOffice/sw/sq/4/ediff
  */
 function qtrCore_project_diff_download($origin, $project, $lng, $nr =NULL, $format =NULL) {
   $origin = check_plain($origin);

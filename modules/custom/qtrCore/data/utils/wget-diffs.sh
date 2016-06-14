@@ -26,8 +26,8 @@ lng=$3
 nr=$4
 echo "$0 $origin $project $lng $nr"
 
-base_url="https://dev.qtranslator.org/"
-#base_url="https://$lng.qtranslator.org/"
+base_url="https://dev.qtranslate.org/"
+#base_url="https://$lng.qtranslate.org/"
 #base_url="https://dev.qtr.example.org/"
 diff_url="$base_url/project/diff"
 wget="wget -q --no-check-certificate"

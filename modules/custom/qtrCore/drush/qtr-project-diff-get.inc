@@ -33,9 +33,9 @@ function _qtr_project_diff_get_drush_help() {
 /**
  * Callback function for the command 'qtr-project-diff-get'.
  */
-function drush_qtranslator_qtr_project_diff_get($origin, $project, $lng, $nr) {
+function drush_qtranslate_qtr_project_diff_get($origin, $project, $lng, $nr) {
   // Check parameters $origin, $project, $lng.
-  _qtranslator_drush_check_params($origin, $project, $lng);
+  _qtranslate_drush_check_params($origin, $project, $lng);
 
   // Get the options.
   $format = drush_get_option('format');

@@ -27,10 +27,10 @@ function _qtr_vocabulary_del_drush_help() {
 /**
  * Callback function for the command 'qtr-vocabulary-del'.
  */
-function drush_qtranslator_qtr_vocabulary_del($name, $lng) {
+function drush_qtranslate_qtr_vocabulary_del($name, $lng) {
   $origin = 'vocabulary';
   $project = $name . '_' . $lng;
-  _qtranslator_drush_check_params($origin, $project, $lng);
+  _qtranslate_drush_check_params($origin, $project, $lng);
 
   qtr::vocabulary_del($name, $lng);
 }

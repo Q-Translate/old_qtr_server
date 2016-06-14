@@ -2,7 +2,7 @@
 ### change the old prefix of the tables to the new one
 
 ### what are the old and new prefices
-old='qtranslator_data.l10n_feedback_'
+old='qtranslate_data.l10n_feedback_'
 new='qtr_data.qtr_'
 
 ### list of all the tables

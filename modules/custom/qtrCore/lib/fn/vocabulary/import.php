@@ -26,13 +26,13 @@ function vocabulary_import($name, $lng, $file, $uid = NULL) {
   // Check access permissions.
   $uid = qtr::user_check($uid);
   $account = user_load($uid);
-  if (!user_access('qtranslator-suggest', $account) and !user_access('qtranslator-admin', $account)) {
+  if (!user_access('qtranslate-suggest', $account) and !user_access('qtranslate-admin', $account)) {
     $msg = t('No rights for contributing suggestions!');
     qtr::messages($msg, 'error');
     return;
   }
   // Check that the language matches the translation language of the user.
-  if (($lng != $account->translation_lng) and !user_access('qtranslator-admin', $account)) {
+  if (($lng != $account->translation_lng) and !user_access('qtranslate-admin', $account)) {
     $msg = t('No rights for contributing to language <strong>!lng</strong>.', ['!lng' => $lng]);
     qtr::messages($msg, 'error');
     return;

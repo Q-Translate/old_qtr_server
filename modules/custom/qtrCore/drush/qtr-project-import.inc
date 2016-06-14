@@ -36,9 +36,9 @@ be imported.
 /**
  * Callback function for the command 'qtr-project-import'.
  */
-function drush_qtranslator_qtr_project_import($origin, $project, $lng, $path) {
+function drush_qtranslate_qtr_project_import($origin, $project, $lng, $path) {
   // Check parameters $origin, $project, $lng.
-  _qtranslator_drush_check_params($origin, $project, $lng);
+  _qtranslate_drush_check_params($origin, $project, $lng);
 
   // Import the project.
   qtr::project_import($origin, $project, $lng, $path);

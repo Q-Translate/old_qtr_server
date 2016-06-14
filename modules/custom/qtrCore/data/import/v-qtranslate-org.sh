@@ -13,7 +13,7 @@ git clone https://github.com/Q-Translate/vocabulary-jquery $data_root/vocabulary
 
 ### set some variables
 origin=dashohoxha
-project=v.qtranslator.org
+project=v.qtranslate.org
 
 ### create the project and import the PO files of each language
 echo -e "\n==========> $origin $project"

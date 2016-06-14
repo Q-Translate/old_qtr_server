@@ -6,7 +6,7 @@ if (php_sapi_name() != "cli") {
 
 define('DEBUG', TRUE);
 
-$base_url = 'http://dev.qtranslator.org';
+$base_url = 'http://dev.qtranslate.org';
 //$base_url = 'https://dev.qtr.example.org';
 
 $auth = array(

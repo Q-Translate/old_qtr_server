@@ -27,5 +27,5 @@ export drush="drush --root=$drupal_dir"
 ### system level configuration (services etc.)
 ./system-config.sh
 
-### qtranslator configuration
+### qtranslate configuration
 $code_dir/install/config.sh
