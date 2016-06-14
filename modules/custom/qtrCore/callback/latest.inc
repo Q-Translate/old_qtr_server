@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * RSS feed from B-Translator.
+ * RSS feed from Q-Translate.
  */
 
 function qtrCore_latest($lng =NULL, $origin =NULL, $project =NULL) {

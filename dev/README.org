@@ -58,7 +58,7 @@ Development Tools, Tips and Tricks
   drush @qtr_dev php-script dev/config.php dev2
   #+END_EXAMPLE
 
-  It will set site_name to 'B-Translator (dev1)', will make site email
+  It will set site_name to 'Q-Translate (dev1)', will make site email
   something like 'user+dev1@gmail.com', will enable email re-routing,
   display the /devel/ menu on the footer region, etc. Sometimes it may
   be useful.

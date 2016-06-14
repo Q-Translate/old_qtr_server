@@ -1,11 +1,11 @@
 <?php
 /**
  * @file
- * Form for backup/restore of B-Translator data.
+ * Form for backup/restore of Q-Translate data.
  */
 
 /**
- * Backup and restore B-Translator data.
+ * Backup and restore Q-Translate data.
  *
  * @return
  *   An array containing form items.
@@ -15,7 +15,7 @@ function qtrCore_backup() {
     // Backup.
     'data_backup' => [
       '#type' => 'fieldset',
-      '#title' => t('Backup B-Translator Data'),
+      '#title' => t('Backup Q-Translate Data'),
       '#description' => t('Backup users, translations and votes, etc.'),
 
       'submit' => [
@@ -27,7 +27,7 @@ function qtrCore_backup() {
     // Restore.
     'data_restore' => [
       '#type' => 'fieldset',
-      '#title' => t('Restote B-Translator Data'),
+      '#title' => t('Restote Q-Translate Data'),
       '#description' => t('Restore users, translations and votes, etc.'),
 
       'file' => [

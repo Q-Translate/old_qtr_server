@@ -74,11 +74,11 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: qtr_server.info:0
-msgid "B-Translator Server"
+msgid "Q-Translate Server"
 msgstr ""
 
 #: qtr_server.info:0
-msgid "Drupal installation profile for B-Translator Server."
+msgid "Drupal installation profile for Q-Translate Server."
 msgstr ""
 
 #: install/config/gmailsmtp.php:50
@@ -90,7 +90,7 @@ msgid "Send e-mail to admin when user modifies his account"
 msgstr ""
 
 #: modules/custom/qtrCore/qtrCore.admin.inc:17
-msgid "B-Translator Configuration"
+msgid "Q-Translate Configuration"
 msgstr ""
 
 #: modules/custom/qtrCore/qtrCore.admin.inc:23
@@ -125,7 +125,7 @@ msgid "Select Voting Mode"
 msgstr ""
 
 #: modules/custom/qtrCore/qtrCore.admin.inc:44
-msgid "B-Translator Defaults"
+msgid "Q-Translate Defaults"
 msgstr ""
 
 #: modules/custom/qtrCore/qtrCore.admin.inc:48
@@ -148,7 +148,7 @@ msgid "The List of Projects that Will be Used for Voting and Translation"
 msgstr ""
 
 #: modules/custom/qtrCore/qtrCore.admin.inc:59
-msgid "B-Translator Export/Import"
+msgid "Q-Translate Export/Import"
 msgstr ""
 
 #: modules/custom/qtrCore/qtrCore.admin.inc:64
@@ -180,12 +180,12 @@ msgid "Authentication"
 msgstr ""
 
 #: modules/custom/qtrCore/qtrCore.info:0
-msgid "B-Translator Data"
+msgid "Q-Translate Data"
 msgstr ""
 
 #: modules/custom/qtrCore/qtrCore.info:0
 msgid ""
-"B-Translator Back-End, including data of PO files, strings, translations, "
+"Q-Translate Back-End, including data of PO files, strings, translations, "
 "votes, etc."
 msgstr ""
 
@@ -194,7 +194,7 @@ msgstr ""
 #: modules/custom/qtrServices/qtrServices.info:0
 #: modules/custom/qtrTranslationProjects/qtrTranslationProjects.info:0
 #: modules/custom/qtrUser/qtrUser.info:0
-msgid "B-Translator"
+msgid "Q-Translate"
 msgstr ""
 
 #: modules/custom/qtrCore/callback/ajax.inc:83
@@ -231,11 +231,11 @@ msgid "Export file '!filename' does not exist!"
 msgstr ""
 
 #: modules/custom/qtrCore/callback/rss_feed.inc:44
-msgid "Latest translation suggestions on B-Translator"
+msgid "Latest translation suggestions on Q-Translate"
 msgstr ""
 
 #: modules/custom/qtrCore/callback/rss_feed.inc:47
-msgid "Latest translation suggestions on B-Translator, for @domain"
+msgid "Latest translation suggestions on Q-Translate, for @domain"
 msgstr ""
 
 #: modules/custom/qtrCore/callback/tweet.inc:35
@@ -636,19 +636,19 @@ msgid "Plurals: "
 msgstr ""
 
 #: modules/custom/qtrLanguages/qtrLanguages.info:0
-msgid "B-Translator Languages"
+msgid "Q-Translate Languages"
 msgstr ""
 
 #: modules/custom/qtrLanguages/qtrLanguages.info:0
-msgid "Languages supported by B-Translator."
+msgid "Languages supported by Q-Translate."
 msgstr ""
 
 #: modules/custom/qtrServices/qtrServices.info:0
-msgid "B-Translator Web Services"
+msgid "Q-Translate Web Services"
 msgstr ""
 
 #: modules/custom/qtrServices/qtrServices.info:0
-msgid "Web Services (API-s) that are offered by B-Translator."
+msgid "Web Services (API-s) that are offered by Q-Translate."
 msgstr ""
 
 #: modules/custom/qtrServices/resources/project.inc:253
@@ -792,11 +792,11 @@ msgid "URL of the mobile app."
 msgstr ""
 
 #: modules/custom/qtrTranslationProjects/qtrTranslationProjects.info:0
-msgid "B-Translator Projects"
+msgid "Q-Translate Projects"
 msgstr ""
 
 #: modules/custom/qtrTranslationProjects/qtrTranslationProjects.info:0
-msgid "Details and settings of B-Translator projects."
+msgid "Details and settings of Q-Translate projects."
 msgstr ""
 
 #: modules/custom/qtrUser/qtrUser.module:22
@@ -828,7 +828,7 @@ msgid "Import translation (PO) files."
 msgstr ""
 
 #: modules/custom/qtrUser/qtrUser.module:35
-msgid "Can import to B-Translator new translation files (in the PO format)."
+msgid "Can import to Q-Translate new translation files (in the PO format)."
 msgstr ""
 
 #: modules/custom/qtrUser/qtrUser.module:38
@@ -837,7 +837,7 @@ msgstr ""
 
 #: modules/custom/qtrUser/qtrUser.module:39
 msgid ""
-"Can export translations from B-Translator (either in PO format, or as diff/"
+"Can export translations from Q-Translate (either in PO format, or as diff/"
 "ediff)."
 msgstr ""
 
@@ -846,7 +846,7 @@ msgid "Statistics."
 msgstr ""
 
 #: modules/custom/qtrUser/qtrUser.module:43
-msgid "Can access global statistics of B-Translator."
+msgid "Can access global statistics of Q-Translate."
 msgstr ""
 
 #: modules/custom/qtrUser/qtrUser.module:46
@@ -858,20 +858,20 @@ msgid "Can resolve flag issues and other problems."
 msgstr ""
 
 #: modules/custom/qtrUser/qtrUser.module:50
-msgid "Administer B-Translator."
+msgid "Administer Q-Translate."
 msgstr ""
 
 #: modules/custom/qtrUser/qtrUser.module:51
-msgid "Can perform administration tasks for B-Translator."
+msgid "Can perform administration tasks for Q-Translate."
 msgstr ""
 
 #: modules/custom/qtrUser/qtrUser.info:0
-msgid "B-Translator User Profile"
+msgid "Q-Translate User Profile"
 msgstr ""
 
 #: modules/custom/qtrUser/qtrUser.info:0
 msgid ""
-"User Profile for B-Translator, with extra fields, hybridauth login and "
+"User Profile for Q-Translate, with extra fields, hybridauth login and "
 "registration, etc."
 msgstr ""
 
@@ -954,5 +954,5 @@ msgid "Mail Settings"
 msgstr ""
 
 #: qtr_server.profile:36
-msgid "B-Translator Server Settings"
+msgid "Q-Translate Server Settings"
 msgstr ""

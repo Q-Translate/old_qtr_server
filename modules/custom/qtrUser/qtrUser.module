@@ -32,23 +32,23 @@ function qtrUser_permission() {
     ),
     'qtranslator-import' => array(
       'title' => t('Import translation (PO) files.'),
-      'description' => t('Can import to B-Translator new translation files (in the PO format).'),
+      'description' => t('Can import to Q-Translate new translation files (in the PO format).'),
     ),
     'qtranslator-export' => array(
       'title' => t('Export translation files.'),
-      'description' => t('Can export translations from B-Translator (either in PO format, or as diff/ediff).'),
+      'description' => t('Can export translations from Q-Translate (either in PO format, or as diff/ediff).'),
     ),
     'qtranslator-stats' => array(
       'title' => t('Statistics.'),
-      'description' => t('Can access global statistics of B-Translator.'),
+      'description' => t('Can access global statistics of Q-Translate.'),
     ),
     'qtranslator-resolve' => array(
       'title' => t('Resolve issues.'),
       'description' => t('Can resolve flag issues and other problems.'),
     ),
     'qtranslator-admin' => array(
-      'title' => t('Administer B-Translator.'),
-      'description' => t('Can perform administration tasks for B-Translator.'),
+      'title' => t('Administer Q-Translate.'),
+      'description' => t('Can perform administration tasks for Q-Translate.'),
     ),
   );
 }

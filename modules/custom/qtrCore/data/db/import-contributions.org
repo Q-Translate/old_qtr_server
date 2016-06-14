@@ -4,7 +4,7 @@ bit complex, so it can be useful to try and explain some things about
 it.
 
 The aim of this script is to apply the latest changes from one
-B-Translator site to another. If applied multiple times the result
+Q-Translate site to another. If applied multiple times the result
 should still be the same. If changes from site *A* are applied to site
 *B* and then changes from site *B* are applied to site *A*, then both
 sites *A* and *B* at the end should have the same content (they should

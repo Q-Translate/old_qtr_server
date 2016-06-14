@@ -1,6 +1,6 @@
-name = B-Translator Web Services
-description = Web Services (API-s) that are offered by B-Translator.
-package = B-Translator
+name = Q-Translate Web Services
+description = Web Services (API-s) that are offered by Q-Translate.
+package = Q-Translate
 core = 7.x
 
 dependencies[] = qtrCore

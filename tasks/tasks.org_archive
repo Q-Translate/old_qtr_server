@@ -108,7 +108,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Make ID of projects guid (because they can be used in user prefs)
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-03-18 Sun 09:37
-  :ARCHIVE_FILE: /var/www-ssl/drupal/sites/all/modules/B-Translator/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/drupal/sites/all/modules/Q-Translate/tasks.org
   :ARCHIVE_OLPATH: Tasks/DB
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -116,7 +116,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Convert to PO and import the translation files of Firefox, Mozilla, Thunderbird, etc.
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-03-18 Sun 09:37
-  :ARCHIVE_FILE: /var/www-ssl/drupal/sites/all/modules/B-Translator/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/drupal/sites/all/modules/Q-Translate/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -124,7 +124,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Import LibreOffice.
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-03-18 Sun 09:37
-  :ARCHIVE_FILE: /var/www-ssl/drupal/sites/all/modules/B-Translator/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/drupal/sites/all/modules/Q-Translate/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -132,7 +132,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Add origin on the search filter.
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-03-18 Sun 09:37
-  :ARCHIVE_FILE: /var/www-ssl/drupal/sites/all/modules/B-Translator/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/drupal/sites/all/modules/Q-Translate/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -140,7 +140,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Show related projects.
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-03-18 Sun 09:38
-  :ARCHIVE_FILE: /var/www-ssl/drupal/sites/all/modules/B-Translator/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/drupal/sites/all/modules/Q-Translate/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -148,7 +148,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Export in format diff/ediff.
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-03-18 Sun 09:38
-  :ARCHIVE_FILE: /var/www-ssl/drupal/sites/all/modules/B-Translator/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/drupal/sites/all/modules/Q-Translate/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -156,7 +156,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Use short url on the emails sent by cron.
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-03-18 Sun 09:38
-  :ARCHIVE_FILE: /var/www-ssl/drupal/sites/all/modules/B-Translator/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/drupal/sites/all/modules/Q-Translate/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -165,7 +165,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE For each l10n string, display in which projects it occurs (related locations), etc.
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-08-14 Tue 00:58
-  :ARCHIVE_FILE: /var/www-ssl/B-Translator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/Q-Translate/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/UI
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -173,7 +173,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Add FB comments for each string-lng
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-08-14 Tue 00:58
-  :ARCHIVE_FILE: /var/www-ssl/B-Translator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/Q-Translate/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Integration with Facebook
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -182,7 +182,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Build a Drupal Installation Profile for l10n.
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-08-14 Tue 00:58
-  :ARCHIVE_FILE: /var/www-ssl/B-Translator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/Q-Translate/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -192,7 +192,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Add the possibility to leave comments/discussions under each string-lng
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-08-14 Tue 00:58
-  :ARCHIVE_FILE: /var/www-ssl/B-Translator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/Q-Translate/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -203,7 +203,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Is it possible to integrate with translation review with StackOverflow API?
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-08-14 Tue 00:58
-  :ARCHIVE_FILE: /var/www-ssl/B-Translator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/Q-Translate/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -213,7 +213,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Use GoogleTranslate API to make an initial suggestion for strings with no translation.
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-08-14 Tue 00:58
-  :ARCHIVE_FILE: /var/www-ssl/B-Translator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/Q-Translate/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -344,7 +344,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
   :END:
-* DONE Generate a POT file for B-Translator and import it.
+* DONE Generate a POT file for Q-Translate and import it.
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-10-12 Fri 02:49
   :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
@@ -352,7 +352,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
   :END:
-* DONE Import Wordpress translations into B-Translator.
+* DONE Import Wordpress translations into Q-Translate.
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-10-12 Fri 02:49
   :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
@@ -581,7 +581,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 ** DONE Split the module l10n_feedback into server and client
    These two should communicate only through the API/web-service.
 
-* DONE Test and fix the installation of a new B-Translator server.
+* DONE Test and fix the installation of a new Q-Translate server.
   :PROPERTIES:
   :ARCHIVE_TIME: 2014-07-02 Wed 14:41
   :ARCHIVE_FILE: /var/chroot/qtr_dev/tasks/tasks.org

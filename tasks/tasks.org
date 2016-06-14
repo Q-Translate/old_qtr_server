@@ -41,7 +41,7 @@
     This can improve the integration with the other Drupal modules.
 *** TODO Publish/export incremental dumps of the database
     Maybe it should be a synch API which allows different instances of
-    B-Translator to synchronize with each-other, according to the
+    Q-Translate to synchronize with each-other, according to the
     rules defined and agreed by the administrators.
 *** Send out HTML notification emails.
 *** Upgrade to Drupal8

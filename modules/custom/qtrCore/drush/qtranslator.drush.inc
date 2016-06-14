@@ -48,7 +48,7 @@ function qtranslator_drush_command() {
   // These will appear in the list of topics when `drush topic` is executed.
   // To view this topic, run `drush --include=/full/path/to/examples topic`
   $items['qtranslator-exposition'] = array(
-    'description' => dt('Importing and exporting PO files from B-Translator.'),
+    'description' => dt('Importing and exporting PO files from Q-Translate.'),
     'hidden' => TRUE,
     'topic' => TRUE,
     'callback' => 'drush_print_file',
@@ -101,9 +101,9 @@ function qtranslator_drush_help($section) {
       return _qtr_vocabulary_import_drush_help();
 
     case 'meta:qtranslator:title':
-      return dt("B-Translator Commands");
+      return dt("Q-Translate Commands");
     case 'meta:qtranslator:summary':
-      return dt("Handle the import/export of PO/POT files for B-Translator.");
+      return dt("Handle the import/export of PO/POT files for Q-Translate.");
   }
 }
 

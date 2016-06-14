@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Install functions for the profile B-Translator Server.
+ * Install functions for the profile Q-Translate Server.
  */
 
 /**
@@ -11,7 +11,7 @@
  */
 function qtr_server_install() {
 
-  // Define the database of B-Translator.
+  // Define the database of Q-Translate.
   if (isset($GLOBALS['databases']['qtr_db']['default'])) {
     define('BTR_DB', 'qtr_db');
   }

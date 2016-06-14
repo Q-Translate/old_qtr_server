@@ -19,12 +19,12 @@ function qtrUser_oauth2_loginprovider_userprofile_alter(&$data) {
   unset($data['field_projects']);
   unset($data['field_auxiliary_languages']);
 
-  // Add to profile data the B-Translator permissions of the user.
+  // Add to profile data the Q-Translate permissions of the user.
   $data['permissions'] = _qtrUser_get_qtr_permissions();
 }
 
 /**
- * Return an array of the B-Translator permissions of the current user.
+ * Return an array of the Q-Translate permissions of the current user.
  */
 function _qtrUser_get_qtr_permissions() {
   global $user;

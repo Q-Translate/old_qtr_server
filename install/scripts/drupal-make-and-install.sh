@@ -59,7 +59,7 @@ fi
 db_name=qtr
 db_user=qtr
 db_pass=qtr
-site_name="B-Translator"
+site_name="Q-Translate"
 site_mail="$gmail_account"
 account_name=admin
 account_pass="$qtr_admin_passwd"

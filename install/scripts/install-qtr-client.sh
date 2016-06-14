@@ -2,7 +2,7 @@
 
 ### get the code of qtr_client
 cd /usr/local/src/
-git clone --branch=$bcl_git_branch https://github.com/B-Translator/qtr_client
+git clone --branch=$bcl_git_branch https://github.com/Q-Translate/qtr_client
 
 ### export drupal_dir
 export drupal_dir=/var/www/bcl

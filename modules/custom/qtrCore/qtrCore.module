@@ -4,7 +4,7 @@
  * Module file for qtrCore.
  */
 
-// Define the database of B-Translator.
+// Define the database of Q-Translate.
 if (isset($GLOBALS['databases']['qtr_db']['default'])) {
   define('BTR_DB', 'qtr_db');
  }
@@ -94,7 +94,7 @@ function qtrCore_flush_caches() {
  */
 function qtrCore_robotstxt() {
   return [
-    '# B-Translator',
+    '# Q-Translate',
     'User-agent: *',
     'Disallow: /',
   ];

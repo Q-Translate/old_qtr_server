@@ -1,5 +1,5 @@
 #!/bin/bash
-### Import the translations of https://github.com/B-Translator/vocabulary-jquery
+### Import the translations of https://github.com/Q-Translate/vocabulary-jquery
 
 ### go to the script directory
 cd $(dirname $0)
@@ -9,7 +9,7 @@ cd $(dirname $0)
 
 ### get the po files
 rm -rf $data_root/vocabulary-jquery/
-git clone https://github.com/B-Translator/vocabulary-jquery $data_root/vocabulary-jquery/
+git clone https://github.com/Q-Translate/vocabulary-jquery $data_root/vocabulary-jquery/
 
 ### set some variables
 origin=dashohoxha

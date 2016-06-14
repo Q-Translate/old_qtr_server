@@ -50,7 +50,7 @@
 
   For example, these are the components that I have selected for the
   /layout/ feature (which is supposed to re-construct automatically
-  the layout and look of a freshly installed B-Translator site):
+  the layout and look of a freshly installed Q-Translate site):
   #+BEGIN_EXAMPLE
   variable:theme_qtr_server_settings
   variable:theme_default
@@ -227,7 +227,7 @@
   different from site to site. We cannot save these private attributes
   on the feature, because they are specific for each different
   site. But we would like to offer the administrator/maintainer of the
-  (B-Translator) application an easy way to manage them, without
+  (Q-Translate) application an easy way to manage them, without
   having to search up and down among a huge number of configuration
   options available to the Drupal admin. In order to do this, I have
   customized the automatically generated features, taking advantage of
@@ -299,7 +299,7 @@
   #+END_EXAMPLE
 
   It creates a configuration page for GoogleAnalytics under the
-  section of B-Translator configurations. This admin/config page
+  section of Q-Translate configurations. This admin/config page
   allows the site administrator to set quickly and easily the /account
   ID/ of GoogleAnalytics. All this is just normal Drupal stuff, which
   can be done for any Drupal module. Nothing specially related to
@@ -352,7 +352,7 @@
   <?php
   /**
    * Backup of sensitive/private variables, that are specific
-   * only for this instance of B-Translator. This file should
+   * only for this instance of Q-Translate. This file should
    * never be made public.
    */
 

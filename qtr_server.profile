@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Installation steps for the profile B-Translator Server.
+ * Installation steps for the profile Q-Translate Server.
  */
 
 /**
@@ -11,7 +11,7 @@
  */
 function qtr_server_form_install_configure_form_alter(&$form, $form_state) {
   // Pre-populate the site name with the server name.
-  $form['site_information']['site_name']['#default_value'] = 'B-Translator';
+  $form['site_information']['site_name']['#default_value'] = 'Q-Translate';
 }
 
 /**
@@ -33,7 +33,7 @@ function qtr_server_install_tasks($install_state) {
       'function' => 'phpmailer_settings_form',
     ),
     'qtr_server_config' => array(
-      'display_name' => st('B-Translator Server Settings'),
+      'display_name' => st('Q-Translate Server Settings'),
       'type' => 'form',
       'run' => INSTALL_TASK_RUN_IF_NOT_COMPLETED,
       'function' => 'qtrCore_config',

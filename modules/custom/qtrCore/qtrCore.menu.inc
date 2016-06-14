@@ -7,8 +7,8 @@ function qtrCore_menu() {
   $items = array();
 
   $items['admin/config/qtr'] = array(
-    'title' => 'B-Translator',
-    'description' => 'B-Translator Configuration',
+    'title' => 'Q-Translate',
+    'description' => 'Q-Translate Configuration',
     'weight' => -100,
     'page callback' => 'system_admin_menu_block_page',
     'file' => 'system.admin.inc',
@@ -19,7 +19,7 @@ function qtrCore_menu() {
 
   $items['admin/config/qtr/core'] = array(
     'title'            => 'BTR Core',
-    'description'      => 'B-Translator Core configuration settings.',
+    'description'      => 'Q-Translate Core configuration settings.',
     'page callback'    => 'drupal_get_form',
     'page arguments'   => array('qtrCore_config'),
     'access arguments' => array('qtranslator-admin'),
@@ -28,7 +28,7 @@ function qtrCore_menu() {
 
   $items['admin/config/qtr/data'] = array(
     'title'            => 'BTR Data',
-    'description'      => 'B-Translator Backup/Restore.',
+    'description'      => 'Q-Translate Backup/Restore.',
     'page callback'    => 'drupal_get_form',
     'page arguments'   => ['qtrCore_backup'],
     'access arguments' => ['qtranslator-admin'],

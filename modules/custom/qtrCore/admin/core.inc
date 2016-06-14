@@ -14,7 +14,7 @@ function qtrCore_config() {
 
   $form['config'] = array(
     '#type'  => 'fieldset',
-    '#title' => t('B-Translator Configuration'),
+    '#title' => t('Q-Translate Configuration'),
   );
 
   // qtr_languages
@@ -49,7 +49,7 @@ function qtrCore_config() {
 
   $form['defaults'] = array(
     '#type'  => 'fieldset',
-    '#title' => t('B-Translator Defaults'),
+    '#title' => t('Q-Translate Defaults'),
   );
 
   // qtr_preferred_projects
@@ -64,7 +64,7 @@ function qtrCore_config() {
 
   $form['export'] = array(
     '#type'  => 'fieldset',
-    '#title' => t('B-Translator Export/Import'),
+    '#title' => t('Q-Translate Export/Import'),
   );
 
   $form['export']['qtr_export_path'] = array(

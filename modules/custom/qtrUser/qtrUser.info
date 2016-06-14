@@ -1,6 +1,6 @@
-name = B-Translator User Profile
-description = User Profile for B-Translator, with extra fields, hybridauth login and registration, etc.
-package = B-Translator
+name = Q-Translate User Profile
+description = User Profile for Q-Translate, with extra fields, hybridauth login and registration, etc.
+package = Q-Translate
 core = 7.x
 
 dependencies[] = qtrCore

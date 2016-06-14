@@ -1,6 +1,6 @@
 <?php
    /**
-    * Modifies the configuration of a B-Translator site
+    * Modifies the configuration of a Q-Translate site
     * that is installed for development. Not required,
     * but sometimes can be useful.
     *
@@ -12,7 +12,7 @@ $tag = drush_shift();
 if ($tag == '')  $tag = 'dev';
 
 // append ($tag) to site_name
-variable_set('site_name', "B-Translator ($tag)");
+variable_set('site_name', "Q-Translate ($tag)");
 
 $site_mail = variable_get('site_mail');
 

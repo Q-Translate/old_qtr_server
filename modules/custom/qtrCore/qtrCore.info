@@ -1,6 +1,6 @@
-name = B-Translator Data
-description = B-Translator Back-End, including data of PO files, strings, translations, votes, etc.
-package = B-Translator
+name = Q-Translate Data
+description = Q-Translate Back-End, including data of PO files, strings, translations, votes, etc.
+package = Q-Translate
 core = 7.x
 
 dependencies[] = qtrUser

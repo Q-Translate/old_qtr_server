@@ -43,7 +43,7 @@ function _qtrUser_delete_userprofile_fields() {
 /**
  * This function is called by hook_install(), in order
  * to create custom fields about user preferencies for
- * B-Translator.
+ * Q-Translate.
  */
 function _qtrUser_create_userprofile_fields() {
 

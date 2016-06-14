@@ -1,9 +1,9 @@
 
-This is a Drupal installation profile for B-Translator Server.
+This is a Drupal installation profile for Q-Translate Server.
 
-* What is B-Translator
+* What is Q-Translate
 
-  The codename *B-Translator* can be decoded like *Bee Translator*,
+  The codename *Q-Translate* can be decoded like *Bee Translator*,
   since it aims at collecting very small translation contributions
   from a wide crowd of people and to dilute them into something
   useful.
@@ -95,7 +95,7 @@ This is a Drupal installation profile for B-Translator Server.
   correct website container is handled by the *wsproxy* container,
   based on the domain name.
 
-  *NOTE:* Although [[https://github.com/B-Translator/qtr_server/blob/master/utils/docker-install.sh][utils/docker-install.sh]] is handy for making a quick
+  *NOTE:* Although [[https://github.com/Q-Translate/qtr_server/blob/master/utils/docker-install.sh][utils/docker-install.sh]] is handy for making a quick
   installation, it is highly recommended to read and understand this
   script, because this will be helpful for maintaining the
   installation.  It is not so long and it is easy to understand.
@@ -125,7 +125,7 @@ This is a Drupal installation profile for B-Translator Server.
   docker/exec.sh install/config/domain.sh
   docker/exec.sh install/config/languages.sh
   #+END_EXAMPLE
-  These scripts can be found on [[https://github.com/B-Translator/qtr_server/tree/master/install/config][install/config/]].
+  These scripts can be found on [[https://github.com/Q-Translate/qtr_server/tree/master/install/config][install/config/]].
 
 
 * Import projects
@@ -162,7 +162,7 @@ This is a Drupal installation profile for B-Translator Server.
 
   Importing a single project can also be done from the web UI and with
   the drush commands *qtr-project-add* and *qtr-project-import*. For
-  more details see: [[https://github.com/B-Translator/qtr_server/blob/master/modules/custom/qtrCore/data/README.org][/var/www/data/README.org]]
+  more details see: [[https://github.com/Q-Translate/qtr_server/blob/master/modules/custom/qtrCore/data/README.org][/var/www/data/README.org]]
 
 
 * Contacts
@@ -180,13 +180,13 @@ This is a Drupal installation profile for B-Translator Server.
 
   - Misc
     + Homepage: http://info.qtranslator.org
-    + Wiki: https://github.com/B-Translator/qtr_server/wiki
-    + Issues: https://github.com/B-Translator/qtr_server/issues
+    + Wiki: https://github.com/Q-Translate/qtr_server/wiki
+    + Issues: https://github.com/Q-Translate/qtr_server/issues
 
 
 * Sites
 
-  Sites using B-Translator:
+  Sites using Q-Translate:
   - https://l10n.org.al - Albanian translations.
 
   To install and setup your site you would need some basic skills on

@@ -17,12 +17,12 @@ bcl_admin_passwd='admin'
 gmail_account='MyEmailAddress@gmail.com'
 gmail_passwd='gmailpassword'
 
-### Translation languages supported by the B-Translator Server.
+### Translation languages supported by the Q-Translate Server.
 ### Do not remove 'fr', because sometimes French translations
 ### are used instead of template files (when they are missing).
 languages='fr de it sq'
 
-### Translation language of B-Translator Client.
+### Translation language of Q-Translate Client.
 translation_lng='all'
 
 ### Mysql passwords. Leave it as 'random'

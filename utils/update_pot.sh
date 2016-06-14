@@ -1,9 +1,9 @@
 #/bin/bash
-### Extract translatable strings of B-Translator Server and update the
+### Extract translatable strings of Q-Translate Server and update the
 ### file 'qtrserver.pot'.
 ###
-### Run it on a copy of B-Translator Server that is just cloned from
-### git, don't run it on an installed copy of B-Translator, otherwise
+### Run it on a copy of Q-Translate Server that is just cloned from
+### git, don't run it on an installed copy of Q-Translate, otherwise
 ### 'potx-cli.php' will scan also the other modules that are on the
 ### directory 'modules/'.
 

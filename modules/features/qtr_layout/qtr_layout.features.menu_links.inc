@@ -18,7 +18,7 @@ function qtr_layout_menu_default_menu_links() {
     'link_title' => 'About',
     'options' => array(
       'attributes' => array(
-        'title' => 'More info about B-Translator',
+        'title' => 'More info about Q-Translate',
         'target' => array(
           0 => '_blank',
         ),

@@ -52,7 +52,7 @@ then
     git pull
 else
     cd $srcdir/
-    git clone https://github.com/B-Translator/qtr_server
+    git clone https://github.com/Q-Translate/qtr_server
 fi
 
 ### create a link on workspace

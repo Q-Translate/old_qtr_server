@@ -1,6 +1,6 @@
-name = B-Translator Projects
-description = Details and settings of B-Translator projects.
-package = B-Translator
+name = Q-Translate Projects
+description = Details and settings of Q-Translate projects.
+package = Q-Translate
 
 core = 7.x
 dependencies[] = entity

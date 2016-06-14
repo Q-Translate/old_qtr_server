@@ -8,7 +8,7 @@ namespace BTranslator;
 use \Database;
 
 /**
- * Get the propper connection for the B-Translator database.
+ * Get the propper connection for the Q-Translate database.
  */
 function get_db_connection(&$options) {
   if (empty($options['target'])) {
@@ -18,7 +18,7 @@ function get_db_connection(&$options) {
 }
 
 /**
- * Run a query on the B-Translator database and return the result.
+ * Run a query on the Q-Translate database and return the result.
  */
 function db_query($query, array $args =array(), array $options =array()) {
   $db = get_db_connection($options);

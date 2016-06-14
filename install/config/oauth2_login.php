@@ -1,7 +1,7 @@
 <?php
 /**
  * Set drupal variables and configurations related
- * to OAuth2 Login and to B-Translator Server.
+ * to OAuth2 Login and to Q-Translate Server.
  * Takes these arguments:
  *   server_url, client_id, client_secret, skip_ssl
  */
@@ -17,7 +17,7 @@ variable_set('oauth2_login_client_id', $client_id);
 variable_set('oauth2_login_client_secret', $client_secret);
 variable_set('oauth2_login_skipssl', $skip_ssl);
 
-// Set the B-Translator API server
+// Set the Q-Translate API server
 variable_set('qtrClient_server', $server_url);
 
 // Enable the oauth2 login link and set the settings to hybridauth.

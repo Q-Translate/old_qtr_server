@@ -1,5 +1,5 @@
 #!/bin/bash -x
-### Import B-Translator translations.
+### Import Q-Translate translations.
 
 ### go to the script directory
 cd $(dirname $0)

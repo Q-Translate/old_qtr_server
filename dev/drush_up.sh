@@ -24,9 +24,9 @@ do
     drush pm-refresh
     drush up -y
     sed -i $dir/robots.txt \
-        -e '/# B-Translator/,$ d'
+        -e '/# Q-Translate/,$ d'
     cat <<EOF >> $dir/robots.txt
-# B-Translator
+# Q-Translate
 Disallow: /qtr/
 Disallow: /?q=qtr/
 Disallow: /translations/

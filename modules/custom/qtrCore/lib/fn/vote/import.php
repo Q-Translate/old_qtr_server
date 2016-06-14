@@ -20,7 +20,7 @@ use \qtr;
  * This can be useful for translators if they prefer to work off-line
  * with PO files. They can export the PO files of a project, work on
  * them with desktop tools (like Lokalize) to translate or correct
- * exported translations, and then import back to B-Translator the
+ * exported translations, and then import back to Q-Translate the
  * translated/corrected PO files.
  *
  * @param $uid

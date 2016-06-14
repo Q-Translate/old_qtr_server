@@ -39,12 +39,12 @@ function qtrCore_rss_feed($lng = 'fr', $origin = NULL, $project = NULL) {
   if (!empty($domain)) {
     $link .= '/' . $domain;
   }
-  $title = variable_get('site_name', 'B-Translator');
+  $title = variable_get('site_name', 'Q-Translate');
   if (empty($domain)) {
-    $description = t('Latest translation suggestions on B-Translator');
+    $description = t('Latest translation suggestions on Q-Translate');
   }
   else {
-    $description = t('Latest translation suggestions on B-Translator, for @domain', array('@domain' => $domain));
+    $description = t('Latest translation suggestions on Q-Translate, for @domain', array('@domain' => $domain));
   }
   $ttl = 180;
   $site_mail = variable_get('site_mail');
@@ -57,7 +57,7 @@ function qtrCore_rss_feed($lng = 'fr', $origin = NULL, $project = NULL) {
       <title>$title</title>
       <link>$link</link>
       <description>$description</description>
-      <category>B-Translator</category>
+      <category>Q-Translate</category>
       <language>$lng</language>
       <ttl>$ttl</ttl>
       <webMaster>$web_master</webMaster>
