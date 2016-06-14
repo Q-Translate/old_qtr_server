@@ -1,0 +1,5 @@
+dependencies:qtrServices
+services_endpoint:qtranslator
+services_endpoint:public_qtranslator
+oauth2_server:oauth2_qtr
+user_permission:use oauth2 server

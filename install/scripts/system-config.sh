@@ -12,7 +12,7 @@ sed -i /etc/fstab \
 cat <<EOF >> /etc/fstab
 ##### appended by installation scripts
 tmpfs		/dev/shm	tmpfs	defaults,noexec,nosuid	0	0
-tmpfs		/var/www/btr/cache	tmpfs	defaults,size=5M,mode=0777,noexec,nosuid	0	0
+tmpfs		/var/www/qtr/cache	tmpfs	defaults,size=5M,mode=0777,noexec,nosuid	0	0
 tmpfs		/var/www/bcl/cache	tmpfs	defaults,size=5M,mode=0777,noexec,nosuid	0	0
 devpts		/dev/pts	devpts	rw,noexec,nosuid,gid=5,mode=620		0	0
 # mount /tmp on RAM for better performance
@@ -41,7 +41,7 @@ sed -i /root/.bashrc \
 ### configure apache2
 a2enmod ssl
 a2dissite 000-default
-a2ensite bcl bcl-ssl btr btr-ssl
+a2ensite bcl bcl-ssl qtr qtr-ssl
 a2enmod headers rewrite
 ln -sf /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf
 a2enconf api-examples-php downloads phpmyadmin
@@ -98,11 +98,11 @@ echo 'php_admin_value[max_execution_time] = 90' >> /etc/php5/fpm/pool.d/www.conf
 update-locale
 
 ### enable apache2 as a webserver
-dev_scripts="$drupal_dir/profiles/btr_server/dev"
+dev_scripts="$drupal_dir/profiles/qtr_server/dev"
 $dev_scripts/webserver.sh apache2
 
 ### link to php api examples
-ln -s /var/www/btr_dev/profiles/btr_server/modules/custom/btrServices/examples/php /var/www/api-examples-php
+ln -s /var/www/qtr_dev/profiles/qtr_server/modules/custom/qtrServices/examples/php /var/www/api-examples-php
 
 ### customize the configuration of sshd
 sed -i /etc/ssh/sshd_config \

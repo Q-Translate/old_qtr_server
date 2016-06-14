@@ -35,7 +35,7 @@ EOF
 
 # set base_url
 cat >> $drupal_settings << EOF
-\$base_url = "https://btr.example.org";
+\$base_url = "https://qtr.example.org";
 
 EOF
 
@@ -43,7 +43,7 @@ EOF
 cat >> $drupal_settings << EOF
 // Adds memcache as a cache backend
 /* comment memcache config
-\$conf['cache_backends'][] = 'profiles/btr_server/modules/contrib/memcache/memcache.inc';
+\$conf['cache_backends'][] = 'profiles/qtr_server/modules/contrib/memcache/memcache.inc';
 // Makes it so that memcache is the default caching backend
 \$conf['cache_default_class'] = 'MemCacheDrupal';
 // Keep forms in persistent storage, as per discussed at the beginning
@@ -58,44 +58,44 @@ cat >> $drupal_settings << EOF
 \$conf['memcache_bins'] = array('cache' => 'default');
 
 // If you wanted multiple Drupal installations to share one Memcache instance use the prefix like so:
-\$conf['memcache_key_prefix'] = 'btr_server';
+\$conf['memcache_key_prefix'] = 'qtr_server';
 comment memcache config */
 
 EOF
 
-### set variable btr_client
-$drush --yes vset btr_client "https://$bcl_domain"
+### set variable qtr_client
+$drush --yes vset qtr_client "https://$bcl_domain"
 
 ### set the directory for uploads
-### $drush is an alias for 'drush --root=/var/www/btr'
+### $drush is an alias for 'drush --root=/var/www/qtr'
 mkdir -p /var/www/uploads/
 chown www-data: /var/www/uploads/
 $drush variable-set file_private_path '/var/www/uploads/' --exact --yes
 
 ### install features
-$drush --yes pm-enable btr_btrServices
-$drush --yes features-revert btr_btrServices
+$drush --yes pm-enable qtr_qtrServices
+$drush --yes features-revert qtr_qtrServices
 
-$drush --yes pm-enable btr_btr
-$drush --yes features-revert btr_btr
+$drush --yes pm-enable qtr_qtr
+$drush --yes features-revert qtr_qtr
 
-$drush --yes pm-enable btr_misc
-$drush --yes features-revert btr_misc
+$drush --yes pm-enable qtr_misc
+$drush --yes features-revert qtr_misc
 
-$drush --yes pm-enable btr_layout
-$drush --yes features-revert btr_layout
+$drush --yes pm-enable qtr_layout
+$drush --yes features-revert qtr_layout
 
-$drush --yes pm-enable btr_hybridauth
-$drush --yes features-revert btr_hybridauth
+$drush --yes pm-enable qtr_hybridauth
+$drush --yes features-revert qtr_hybridauth
 
-#$drush --yes pm-enable btr_captcha
-#$drush --yes features-revert btr_captcha
+#$drush --yes pm-enable qtr_captcha
+#$drush --yes features-revert qtr_captcha
 
-$drush --yes pm-enable btr_permissions
-$drush --yes features-revert btr_permissions
+$drush --yes pm-enable qtr_permissions
+$drush --yes features-revert qtr_permissions
 
 ### import the vocabulary projects
-#$drupal_dir/profiles/btr_server/modules/custom/btrCore/data/import/vocabulary.sh --root=$drupal_dir
+#$drupal_dir/profiles/qtr_server/modules/custom/qtrCore/data/import/vocabulary.sh --root=$drupal_dir
 /var/www/data/import/vocabulary.sh --root=$drupal_dir
 
 ### update to the latest version of core and modules

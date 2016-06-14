@@ -1,5 +1,5 @@
 #!/bin/bash -x
-### Install the containers of wsproxy and btr_server.
+### Install the containers of wsproxy and qtr_server.
 
 ### stop on error
 set -e
@@ -14,7 +14,7 @@ if [ "$1" != "--dont-fork" ]
 then
     # this script should be called recursively by itself
     datestamp=$(date +%F | tr -d -)
-    nohup_out=$workdir/nohup-btr_server-$datestamp.out
+    nohup_out=$workdir/nohup-qtr_server-$datestamp.out
     rm -f $nohup_out
     nohup nice $0 --dont-fork $@ > $nohup_out &
     sleep 1
@@ -45,33 +45,33 @@ wsproxy/rm.sh 2>/dev/null
 wsproxy/build.sh
 wsproxy/run.sh
 
-### get btr_server
-if test -d $srcdir/btr_server
+### get qtr_server
+if test -d $srcdir/qtr_server
 then
-    cd $srcdir/btr_server
+    cd $srcdir/qtr_server
     git pull
 else
     cd $srcdir/
-    git clone https://github.com/B-Translator/btr_server
+    git clone https://github.com/B-Translator/qtr_server
 fi
 
 ### create a link on workspace
-mkdir -p $workdir/btr
-cd $workdir/btr/
-ln -sf $srcdir/btr_server/docker .
+mkdir -p $workdir/qtr
+cd $workdir/qtr/
+ln -sf $srcdir/qtr_server/docker .
 
 ### build the image
 cd $workdir/
-btr/docker/build.sh --dont-fork $@
+qtr/docker/build.sh --dont-fork $@
 
 ### create and start the container
-sed -i btr/config -e '/^ports=/ c ports='
-btr/docker/rm.sh 2>/dev/null
-btr/docker/create.sh
-btr/docker/start.sh
+sed -i qtr/config -e '/^ports=/ c ports='
+qtr/docker/rm.sh 2>/dev/null
+qtr/docker/create.sh
+qtr/docker/start.sh
 
 ### set up the domain
-source btr/config
+source qtr/config
 if test -n "$domains"
 then
     wsproxy/domains-rm.sh $domains

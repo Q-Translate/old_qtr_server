@@ -12,8 +12,8 @@ Development Tools, Tips and Tricks
 
   We can choose one of them like this:
   #+BEGIN_EXAMPLE
-  docker-enter btr
-  cd /usr/local/src/btr_server/
+  docker-enter qtr
+  cd /usr/local/src/qtr_server/
   dev/webserver.sh apache2
   dev/webserver.sh nginx
   #+END_EXAMPLE
@@ -25,14 +25,14 @@ Development Tools, Tips and Tricks
 
   Inside the container you can make a clone for development like this:
   #+BEGIN_EXAMPLE
-  docker-enter btr
-  cd /usr/local/src/btr_server/
-  dev/clone.sh btr btr_dev1
-  dev/clone.sh btr_dev1 btr_test1
+  docker-enter qtr
+  cd /usr/local/src/qtr_server/
+  dev/clone.sh qtr qtr_dev1
+  dev/clone.sh qtr_dev1 qtr_test1
   #+END_EXAMPLE
 
-  It creates a new application with root */var/www/btr_dev1/* and with
-  DB named *btr_dev1*. It also creates the drush alias *@btr_dev1*,
+  It creates a new application with root */var/www/qtr_dev1/* and with
+  DB named *qtr_dev1*. It also creates the drush alias *@qtr_dev1*,
   and modifies the configuration of the webserver so that the cloned
   application can be accessed at *dev1.example.org*.
 
@@ -42,10 +42,10 @@ Development Tools, Tips and Tricks
   Other clones like this can be created for testing etc. To cleanup
   (remove/erase) a clone, you can use *clone_rm.sh* like this:
   #+BEGIN_EXAMPLE
-  docker-enter btr
-  cd /usr/local/src/btr_server/
-  dev/clone_rm.sh btr_dev1
-  dev/clone_rm.sh btr_test1
+  docker-enter qtr
+  cd /usr/local/src/qtr_server/
+  dev/clone_rm.sh qtr_dev1
+  dev/clone_rm.sh qtr_test1
   #+END_EXAMPLE
 
   By the way, you can also modify a little bit the configuration of a
@@ -53,9 +53,9 @@ Development Tools, Tips and Tricks
   a development copy with a live or testing one), with the script
   =dev/config.php=:
   #+BEGIN_EXAMPLE
-  docker-enter btr
-  cd /usr/local/src/btr_server/
-  drush @btr_dev php-script dev/config.php dev2
+  docker-enter qtr
+  cd /usr/local/src/qtr_server/
+  drush @qtr_dev php-script dev/config.php dev2
   #+END_EXAMPLE
 
   It will set site_name to 'B-Translator (dev1)', will make site email
@@ -78,34 +78,34 @@ Development Tools, Tips and Tricks
   the code (the whole Drupal directory) and the database. It can be
   done like this:
   #+BEGIN_EXAMPLE
-  docker-enter btr
-  cd /usr/local/src/btr_server/
-  dev/snapshot.sh make @btr
-  dev/snapshot.sh make @btr_dev
+  docker-enter qtr
+  cd /usr/local/src/qtr_server/
+  dev/snapshot.sh make @qtr
+  dev/snapshot.sh make @qtr_dev
   #+END_EXAMPLE
-  These will create the files ~snapshot-btr-20140914.tgz~ and
-  ~snapshot-btr_dev-20140914.tgz~. They can be restored like this:
+  These will create the files ~snapshot-qtr-20140914.tgz~ and
+  ~snapshot-qtr_dev-20140914.tgz~. They can be restored like this:
   #+BEGIN_EXAMPLE
-  dev/snapshot.sh restore @btr --file=snapshot-btr-20140914.tgz
-  dev/snapshot.sh restore @btr --file=snapshot-btr_dev-20140914.tgz
-  dev/snapshot.sh restore @btr_dev --file=snapshot-btr-20140914.tgz
-  dev/snapshot.sh restore @btr_dev --file=snapshot-btr_dev-20140914.tgz
+  dev/snapshot.sh restore @qtr --file=snapshot-qtr-20140914.tgz
+  dev/snapshot.sh restore @qtr --file=snapshot-qtr_dev-20140914.tgz
+  dev/snapshot.sh restore @qtr_dev --file=snapshot-qtr-20140914.tgz
+  dev/snapshot.sh restore @qtr_dev --file=snapshot-qtr_dev-20140914.tgz
   #+END_EXAMPLE
-  As you may notice, a snapshot of *@btr_dev* can also be restored on the
+  As you may notice, a snapshot of *@qtr_dev* can also be restored on the
   main application, and the other way around.
 
   However, in many cases a backup/restore of the database is all that
   is needed, and it is more efficient. It can be done with *drush
   sql-dump* and *drush sql-query* like this:
   #+BEGIN_EXAMPLE
-  drush sql-dump @btr > btr.sql
-  drush sql-dump @btr_dev > btr_dev.sql
+  drush sql-dump @qtr > qtr.sql
+  drush sql-dump @qtr_dev > qtr_dev.sql
 
-  drush @btr sql-query --file=$(pwd)/btr.sql
-  drush @btr sql-query --file=$(pwd)/btr_dev.sql
+  drush @qtr sql-query --file=$(pwd)/qtr.sql
+  drush @qtr sql-query --file=$(pwd)/qtr_dev.sql
 
-  drush @btr_dev sql-query --file=$(pwd)/btr.sql
-  drush @btr_dev sql-query --file=$(pwd)/btr_dev.sql
+  drush @qtr_dev sql-query --file=$(pwd)/qtr.sql
+  drush @qtr_dev sql-query --file=$(pwd)/qtr_dev.sql
   #+END_EXAMPLE
 
 
@@ -119,43 +119,43 @@ Development Tools, Tips and Tricks
   + First we make a backup of the directory inside the container that
     we want to share:
     #+BEGIN_EXAMPLE
-    docker-enter btr
-    cd /var/www/btr_dev/profiles/
-    cp -a btr_server/ btr_server-bak
+    docker-enter qtr
+    cd /var/www/qtr_dev/profiles/
+    cp -a qtr_server/ qtr_server-bak
     exit
     #+END_EXAMPLE
 
-  + Then we save the image of the container as =btr_server:dev=, in order
+  + Then we save the image of the container as =qtr_server:dev=, in order
     to start a new container based on it:
     #+BEGIN_EXAMPLE
-    docker stop btr
-    docker commit btr btr_server:dev
+    docker stop qtr
+    docker commit qtr qtr_server:dev
     docker images
     #+END_EXAMPLE
 
   + Next we create a new container that shares a directory with the
     host system (using the option =-v=):
     #+BEGIN_EXAMPLE
-    docker run -d --name=btr_dev --hostname=dev.example.org \
-	       -v $(pwd)/btr_dev:/var/www/btr_dev/profiles/btr_server/
-	       -p 80:80 -p 443:443 btr_server:dev
+    docker run -d --name=qtr_dev --hostname=dev.example.org \
+	       -v $(pwd)/qtr_dev:/var/www/qtr_dev/profiles/qtr_server/
+	       -p 80:80 -p 443:443 qtr_server:dev
     #+END_EXAMPLE
-    *Note:* The container *btr* must be stoped before we create and
-    start the new container *btr_dev*, otherwise the ports 80 and 443
+    *Note:* The container *qtr* must be stoped before we create and
+    start the new container *qtr_dev*, otherwise the ports 80 and 443
     will conflict.
 
   + Finally we enter the container and move the content of the backup
     directory to the shared directory:
     #+BEGIN_EXAMPLE
-    docker-enter btr_dev
-    cd /var/www/btr_dev/profiles/btr_server/
-    cp -a ../btr_server-bak/* .
-    cp -a ../btr_server-bak/.* .
-    rm -rf ../btr_server-bak/
+    docker-enter qtr_dev
+    cd /var/www/qtr_dev/profiles/qtr_server/
+    cp -a ../qtr_server-bak/* .
+    cp -a ../qtr_server-bak/.* .
+    rm -rf ../qtr_server-bak/
     exit
     #+END_EXAMPLE
 
-  Now we can go to the directory *btr_dev/* and start /emacs/ or any
+  Now we can go to the directory *qtr_dev/* and start /emacs/ or any
   other tools. This way we don't have to install /emacs/ or any other
   development tools inside the container and we can use the best of
   development tools that the host system can offer.
@@ -163,8 +163,8 @@ Development Tools, Tips and Tricks
 
 * Pushing commits
 
-  The copy of the application on =/var/www/btr_dev/profiles/btr_server/=
-  (as well as the one on =/var/www/btr/profiles/btr_server/=) are actually
+  The copy of the application on =/var/www/qtr_dev/profiles/qtr_server/=
+  (as well as the one on =/var/www/qtr/profiles/qtr_server/=) are actually
   clones of the git repository of the project on GitHub, so we can
   *pull* from it and *push* to it. Pulling (to get up-to-date) can be
   done by everybody, however pushing requires a username and password
@@ -233,7 +233,7 @@ Development Tools, Tips and Tricks
   <?php
 
   $aliases['live'] = array (
-    'root' => '/var/www/btr',
+    'root' => '/var/www/qtr',
     'uri' => 'http://example.org',
 
     'remote-host' => 'example.org',
@@ -241,7 +241,7 @@ Development Tools, Tips and Tricks
     'ssh-options' => '-p 2201 -i /root/.ssh/id_rsa',
 
     'path-aliases' => array (
-      '%profile' => 'profiles/btr_server',
+      '%profile' => 'profiles/qtr_server',
       '%downloads' => '/var/www/downloads',
     ),
 
@@ -257,7 +257,7 @@ Development Tools, Tips and Tricks
 
   $aliases['test'] = array (
     'parent' => '@live',
-    'root' => '/var/www/btr',
+    'root' => '/var/www/qtr',
     'uri' => 'http://test.example.org',
     'remote-host' => 'test.example.org',
 
@@ -279,19 +279,19 @@ Development Tools, Tips and Tricks
   things, before applying them to the real live application. In my
   case it is placed on a different server, however it can also be
   placed on the same server as the live application (just make a clone
-  of the main application with =dev/clone.sh btr btr_test=).
+  of the main application with =dev/clone.sh qtr qtr_test=).
 
   When everything is set up correctly, the synchronization can be done
   as simply as this:
   #+BEGIN_EXAMPLE
   drush rsync @live @test
   drush sql-sync @live @test
-  drush rsync @live @btr_dev
-  drush sql-sync @live @btr_dev
+  drush rsync @live @qtr_dev
+  drush sql-sync @live @qtr_dev
   #+END_EXAMPLE
 
   *Note:* Synchronizing this way from *@test* to *@live* or from
-  *@btr_dev* to *@live*, usually is a HUGE mistake, but the /simulate/
+  *@qtr_dev* to *@live*, usually is a HUGE mistake, but the /simulate/
   option on the config file will make sure that it fails.
 
   For drush commands to work remotely, *ssh* daemon has to be running

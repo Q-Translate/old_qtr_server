@@ -1,6 +1,6 @@
 #!/bin/bash -x
-### Reinstall the Drupal profile 'btr_server' and its features.
-### This script touches only the database of Drupal (btr)
+### Reinstall the Drupal profile 'qtr_server' and its features.
+### This script touches only the database of Drupal (qtr)
 ### and nothing else. Useful for testing the features.
 ###
 ### Usually, when features are un-installed, things are not undone
@@ -47,38 +47,38 @@ $mysql -e "
 ### start site installation
 sed -e '/memory_limit/ c memory_limit = -1' -i /etc/php5/cli/php.ini
 cd $drupal_dir
-drush site-install --verbose --yes btr_server \
+drush site-install --verbose --yes qtr_server \
       --db-url="mysql://$db_user:$db_pass@localhost/$db_name" \
       --site-name="$site_name" --site-mail="$site_mail" \
       --account-name="$account_name" --account-pass="$account_pass" --account-mail="$account_mail"
 
-### install btrClient
-drush --yes pm-enable btrClient
-drush --yes pm-enable btrVocabulary
+### install qtrClient
+drush --yes pm-enable qtrClient
+drush --yes pm-enable qtrVocabulary
 #drush --yes pm-enable bcl_disqus
 #drush --yes features-revert bcl_disqus
 
 ### install features
-drush --yes pm-enable btr_btrServices
-drush --yes features-revert btr_btrServices
+drush --yes pm-enable qtr_qtrServices
+drush --yes features-revert qtr_qtrServices
 
-drush --yes pm-enable btr_btr
-drush --yes features-revert btr_btr
+drush --yes pm-enable qtr_qtr
+drush --yes features-revert qtr_qtr
 
-drush --yes pm-enable btr_misc
-drush --yes features-revert btr_misc
+drush --yes pm-enable qtr_misc
+drush --yes features-revert qtr_misc
 
-drush --yes pm-enable btr_layout
-drush --yes features-revert btr_layout
+drush --yes pm-enable qtr_layout
+drush --yes features-revert qtr_layout
 
-drush --yes pm-enable btr_hybridauth
-drush --yes features-revert btr_hybridauth
+drush --yes pm-enable qtr_hybridauth
+drush --yes features-revert qtr_hybridauth
 
-#drush --yes pm-enable btr_captcha
-#drush --yes features-revert btr_captcha
+#drush --yes pm-enable qtr_captcha
+#drush --yes features-revert qtr_captcha
 
-drush --yes pm-enable btr_permissions
-drush --yes features-revert btr_permissions
+drush --yes pm-enable qtr_permissions
+drush --yes features-revert qtr_permissions
 
 ### add languages
 drush --yes pm-enable l10n_update
@@ -99,5 +99,5 @@ fi
 ### install some test translation projecs
 if [ "$development" = 'true' ]
 then
-    $drupal_dir/profiles/btr_server/modules/custom/btrCore/data/install.sh
+    $drupal_dir/profiles/qtr_server/modules/custom/qtrCore/data/install.sh
 fi

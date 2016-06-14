@@ -3,15 +3,15 @@
 /* uncomment and modify properly
 
 $aliases['live'] = array (
-  'root' => '/var/www/btr',
-  'uri' => 'http://btr.example.org',
+  'root' => '/var/www/qtr',
+  'uri' => 'http://qtr.example.org',
 
-  'remote-host' => 'btr.example.org',
+  'remote-host' => 'qtr.example.org',
   'remote-user' => 'root',
   'ssh-options' => '-p 2201 -i /root/.ssh/id_rsa',
 
   'path-aliases' => array (
-    '%profile' => 'profiles/btr_server',
+    '%profile' => 'profiles/qtr_server',
     '%data' => '/var/www/data',
     '%pofiles' => '/var/www/PO_files',
     '%exports' => '/var/www/exports',
@@ -30,8 +30,8 @@ $aliases['live'] = array (
 
 $aliases['test'] = array (
   'parent' => '@live',
-  'root' => '/var/www/btr_test',
-  'uri' => 'http://test.btr.example.org',
+  'root' => '/var/www/qtr_test',
+  'uri' => 'http://test.qtr.example.org',
 
   'command-specific' => array (
     'sql-sync' => array (

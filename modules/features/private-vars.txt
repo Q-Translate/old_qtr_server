@@ -1,5 +1,5 @@
-btr_preferred_projects
-btr_export_notify_admin
+qtr_preferred_projects
+qtr_export_notify_admin
 recaptcha_site_key
 recaptcha_secret_key
 googleanalytics_account

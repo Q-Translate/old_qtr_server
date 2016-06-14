@@ -1,6 +1,6 @@
 
 -- assign the first voter as author of a translation
-update btr_translations t
+update qtr_translations t
 inner join (
     select v.tguid, v.umail, min(v.time) as min_time
     from l10n_feedback_votes v

@@ -42,23 +42,23 @@ then
         -v $(pwd)/exports:/var/www/exports \
         -w /var/www/data $ports $image
 else
-    ### remove the directories btr_client/ and btr_server/ if they exist
-    remove_dir btr_client
-    remove_dir btr_server
+    ### remove the directories qtr_client/ and qtr_server/ if they exist
+    remove_dir qtr_client
+    remove_dir qtr_server
 
-    ### copy directories btr_client/ and btr_server/ from the image to the host
+    ### copy directories qtr_client/ and qtr_server/ from the image to the host
     docker create --name=$container $image
     docker start $container
-    docker cp $container:/var/www/btr/profiles/btr_server $(pwd)/
-    docker cp $container:/var/www/bcl/profiles/btr_client $(pwd)/
+    docker cp $container:/var/www/qtr/profiles/qtr_server $(pwd)/
+    docker cp $container:/var/www/bcl/profiles/qtr_client $(pwd)/
     docker stop $container
     docker rm $container
 
     ### create a container for development, sharing diectories
-    ### btr_client/ and btr_server/ between the container and the host
+    ### qtr_client/ and qtr_server/ between the container and the host
     docker create --name=$container --hostname=$hostname --restart=always \
         -v /data/PO_files:/var/www/PO_files \
-        -v $(pwd)/btr_server:/var/www/btr/profiles/btr_server \
-        -v $(pwd)/btr_client:/var/www/bcl/profiles/btr_client \
+        -v $(pwd)/qtr_server:/var/www/qtr/profiles/qtr_server \
+        -v $(pwd)/qtr_client:/var/www/bcl/profiles/qtr_client \
         $ports $image
 fi

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-btr_domain='btr.example.org'
+qtr_domain='qtr.example.org'
 bcl_domain='l10n.example.org'
 email='info@example.org'
 
@@ -29,7 +29,7 @@ a2enconf letsencrypt
 
 ### get the ssl cert
 certbot certonly --webroot -w /var/www \
-    -d $btr_domain -d $bcl_domain -d dev.$btr_domain \
+    -d $qtr_domain -d $bcl_domain -d dev.$qtr_domain \
     -m $email --agree-tos $dry_run
 
 [[ $dry_run == '--dry-run' ]] && exit 0
@@ -37,9 +37,9 @@ certbot certonly --webroot -w /var/www \
 ### update config files
 for file in $(ls /etc/apache2/sites-enabled/*-ssl.conf); do
     sed -i $file \
-        -e "s#SSLCertificateFile .*#SSLCertificateFile      /etc/letsencrypt/live/$btr_domain/cert.pem#" \
-        -e "s#SSLCertificateKeyFile .*#SSLCertificateKeyFile   /etc/letsencrypt/live/$btr_domain/privkey.pem#" \
-        -e "s#SSLCertificateChainFile .*#SSLCertificateChainFile /etc/letsencrypt/live/$btr_domain/chain.pem#"
+        -e "s#SSLCertificateFile .*#SSLCertificateFile      /etc/letsencrypt/live/$qtr_domain/cert.pem#" \
+        -e "s#SSLCertificateKeyFile .*#SSLCertificateKeyFile   /etc/letsencrypt/live/$qtr_domain/privkey.pem#" \
+        -e "s#SSLCertificateChainFile .*#SSLCertificateChainFile /etc/letsencrypt/live/$qtr_domain/chain.pem#"
 done
 
 ### setup a cron job for renewing the cert

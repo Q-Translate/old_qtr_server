@@ -1,5 +1,5 @@
 #!/bin/bash -x
-### Removes the btr_server container for a language.
+### Removes the qtr_server container for a language.
 
 ### get the language code
 if [ "$1" = '' ]
@@ -10,10 +10,10 @@ The parameter 'lng' is the language code (fr/de/it etc.)
     exit 1
 fi
 lng=$1
-container="btr-$lng"
+container="qtr-$lng"
 
 ### update the configuration of wsproxy and restart it
-rm /data/wsproxy/config/etc/apache2/sites-{available,enabled}/{$lng,btr-$lng}*.conf
+rm /data/wsproxy/config/etc/apache2/sites-{available,enabled}/{$lng,qtr-$lng}*.conf
 sed -i /data/wsproxy/hosts.txt -e "/^$container:/d"
 /data/wsproxy/restart.sh
 

@@ -12,7 +12,7 @@ This is a Drupal installation profile for B-Translator Server.
   anybody to give his small contribution for translating programs or
   making their translations better.
 
-  For more detailed information see: http://info.btranslator.org
+  For more detailed information see: http://info.qtranslator.org
 
 
 * Installation
@@ -28,7 +28,7 @@ This is a Drupal installation profile for B-Translator Server.
   + Link the docker directory inside the working directory:
     #+BEGIN_EXAMPLE
     cd workdir/
-    ln -s ../btr_server/docker .
+    ln -s ../qtr_server/docker .
     #+END_EXAMPLE
 
   + Modify and customize the settings:
@@ -40,10 +40,10 @@ This is a Drupal installation profile for B-Translator Server.
   + Build a Docker image:
     #+BEGIN_EXAMPLE
     docker/build.sh settings.sh
-    tail -f logs/nohup-btr_server-master-20150929.out
-    less -r logs/nohup-btr_server-master-20150929.out
+    tail -f logs/nohup-qtr_server-master-20150929.out
+    less -r logs/nohup-qtr_server-master-20150929.out
     #+END_EXAMPLE
-    This will create a docker image, named =btr_server:master= with a
+    This will create a docker image, named =qtr_server:master= with a
     minimal ubuntu system and everything that is needed for the normal
     work of the Drupal application.
 
@@ -61,17 +61,17 @@ This is a Drupal installation profile for B-Translator Server.
 
   + If =development=true= is set on the settings, then the code of the
     application inside the container will be linked to the directories
-    ~btr_server/~ and ~btr_client/~ inside the workdir, so that you
+    ~qtr_server/~ and ~qtr_client/~ inside the workdir, so that you
     can edit and work on it easily.
 
   + If it is installed on a local machine (for testing or
-    development), add the domain names =btr.example.org= and
+    development), add the domain names =qtr.example.org= and
     =l10n.example.org= on ~/etc/hosts~, like this:
     #+BEGIN_EXAMPLE
-    127.0.0.1 btr.example.org
+    127.0.0.1 qtr.example.org
     127.0.0.1 l10n.example.org
     #+END_EXAMPLE
-    This way it can be accessed by typing =https://btr.example.org=
+    This way it can be accessed by typing =https://qtr.example.org=
     and =https://l10n.example.org= on the browser location.
 
 
@@ -95,7 +95,7 @@ This is a Drupal installation profile for B-Translator Server.
   correct website container is handled by the *wsproxy* container,
   based on the domain name.
 
-  *NOTE:* Although [[https://github.com/B-Translator/btr_server/blob/master/utils/docker-install.sh][utils/docker-install.sh]] is handy for making a quick
+  *NOTE:* Although [[https://github.com/B-Translator/qtr_server/blob/master/utils/docker-install.sh][utils/docker-install.sh]] is handy for making a quick
   installation, it is highly recommended to read and understand this
   script, because this will be helpful for maintaining the
   installation.  It is not so long and it is easy to understand.
@@ -125,7 +125,7 @@ This is a Drupal installation profile for B-Translator Server.
   docker/exec.sh install/config/domain.sh
   docker/exec.sh install/config/languages.sh
   #+END_EXAMPLE
-  These scripts can be found on [[https://github.com/B-Translator/btr_server/tree/master/install/config][install/config/]].
+  These scripts can be found on [[https://github.com/B-Translator/qtr_server/tree/master/install/config][install/config/]].
 
 
 * Import projects
@@ -161,27 +161,27 @@ This is a Drupal installation profile for B-Translator Server.
   #+END_EXAMPLE
 
   Importing a single project can also be done from the web UI and with
-  the drush commands *btr-project-add* and *btr-project-import*. For
-  more details see: [[https://github.com/B-Translator/btr_server/blob/master/modules/custom/btrCore/data/README.org][/var/www/data/README.org]]
+  the drush commands *qtr-project-add* and *qtr-project-import*. For
+  more details see: [[https://github.com/B-Translator/qtr_server/blob/master/modules/custom/qtrCore/data/README.org][/var/www/data/README.org]]
 
 
 * Contacts
 
-  - Email: info@btranslator.org
+  - Email: info@qtranslator.org
 
   - Follow on Twitter: https://twitter.com/b_translator
 
   - Discussion group/forum
-    + Email: /btranslator@googlegroups.com/
-    + Web: https://groups.google.com/forum/?fromgroups&hl=en#!forum/btranslator
+    + Email: /qtranslator@googlegroups.com/
+    + Web: https://groups.google.com/forum/?fromgroups&hl=en#!forum/qtranslator
     + Google+ Community: https://plus.google.com/u/0/communities/109327047119841706609
 
-  - Chat/IRC: *#btranslator* on *irc.freenode.net*
+  - Chat/IRC: *#qtranslator* on *irc.freenode.net*
 
   - Misc
-    + Homepage: http://info.btranslator.org
-    + Wiki: https://github.com/B-Translator/btr_server/wiki
-    + Issues: https://github.com/B-Translator/btr_server/issues
+    + Homepage: http://info.qtranslator.org
+    + Wiki: https://github.com/B-Translator/qtr_server/wiki
+    + Issues: https://github.com/B-Translator/qtr_server/issues
 
 
 * Sites

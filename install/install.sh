@@ -11,7 +11,7 @@ cd $code_dir/install/scripts/
 
 ### make and install the drupal profile
 export DEBIAN_FRONTEND=noninteractive
-export drupal_dir=/var/www/btr
+export drupal_dir=/var/www/qtr
 export drush="drush --root=$drupal_dir"
 ./drupal-make-and-install.sh
 
@@ -21,11 +21,11 @@ export drush="drush --root=$drupal_dir"
 ### additional configurations related to drupal
 ./drupal-config.sh
 
-### install btr_client as well
-./install-btr-client.sh
+### install qtr_client as well
+./install-qtr-client.sh
 
 ### system level configuration (services etc.)
 ./system-config.sh
 
-### btranslator configuration
+### qtranslator configuration
 $code_dir/install/config.sh

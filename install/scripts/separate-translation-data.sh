@@ -1,11 +1,11 @@
 #!/bin/bash -x
 ### Create another database for the translation data
-### and copy to it the relevant tables (of module btrCore).
+### and copy to it the relevant tables (of module qtrCore).
 
 ### database and user settings
-db_name=btr_data
-db_user=btr_data
-db_pass=btr_data
+db_name=qtr_data
+db_user=qtr_data
+db_pass=qtr_data
 
 ### create the database and user
 mysql="mysql --defaults-file=/etc/mysql/debian.cnf -B"
@@ -15,20 +15,20 @@ $mysql -e "
     GRANT ALL ON $db_name.* TO $db_user@localhost IDENTIFIED BY '$db_pass';
 "
 
-### copy the tables of btr_data to the new database
-tables=$($mysql -D btr -e "SHOW TABLES" | grep '^btr_' )
+### copy the tables of qtr_data to the new database
+tables=$($mysql -D qtr -e "SHOW TABLES" | grep '^qtr_' )
 for table in $tables
 do
     echo "Copy: $table"
     $mysql -e "
-        CREATE TABLE $db_name.$table LIKE btr.$table;
-        INSERT INTO $db_name.$table SELECT * FROM btr.$table;
+        CREATE TABLE $db_name.$table LIKE qtr.$table;
+        INSERT INTO $db_name.$table SELECT * FROM qtr.$table;
     "
 done
 
 ### put a link to the data directory on /var/www/data
 rm -f /var/www/data
-ln -s $drupal_dir/profiles/btr_server/modules/custom/btrCore/data /var/www/data
+ln -s $drupal_dir/profiles/qtr_server/modules/custom/qtrCore/data /var/www/data
 
 ### modify Drupal settings
 drupal_settings=$drupal_dir/sites/default/settings.php
@@ -44,7 +44,7 @@ cat << EOF >> $drupal_settings
  * (testing new drupal features) can connect to the
  * same translation database.
  */
-\$databases['btr_db']['default'] = array (
+\$databases['qtr_db']['default'] = array (
     'database' => '$db_name',
     'username' => '$db_user',
     'password' => '$db_pass',

@@ -1,40 +1,40 @@
 #!/bin/bash -x
 
 ### make sure that we have the right git branch on the make file
-makefile="$code_dir/build-btrserver.make"
+makefile="$code_dir/build-qtrserver.make"
 sed -i $makefile \
-    -e "/btr_server..download..branch/ c projects[btr_server][download][branch] = $btr_git_branch"
+    -e "/qtr_server..download..branch/ c projects[qtr_server][download][branch] = $qtr_git_branch"
 
 ### retrieve all the projects/modules and build the application directory
 rm -rf $drupal_dir
 drush make --prepare-install --force-complete \
-           --contrib-destination=profiles/btr_server \
+           --contrib-destination=profiles/qtr_server \
            $makefile $drupal_dir
 
 ### copy the bootstrap library to the custom theme, etc.
-cd $drupal_dir/profiles/btr_server/
+cd $drupal_dir/profiles/qtr_server/
 cp -a libraries/bootstrap themes/contrib/bootstrap/
-cp -a libraries/bootstrap themes/btr_server/
-cp libraries/bootstrap/less/variables.less themes/btr_server/less/
+cp -a libraries/bootstrap themes/qtr_server/
+cp libraries/bootstrap/less/variables.less themes/qtr_server/less/
 
 ### copy hybridauth provider GitHub.php to the right place
-cd $drupal_dir/profiles/btr_server/libraries/hybridauth/
+cd $drupal_dir/profiles/qtr_server/libraries/hybridauth/
 cp additional-providers/hybridauth-github/Providers/GitHub.php \
    hybridauth/Hybrid/Providers/
 
-### replace the profile btr_server with a version
+### replace the profile qtr_server with a version
 ### that is a git clone, so that any updates
 ### can be retrieved easily (without having to
 ### reinstall the whole application).
 cd $drupal_dir/profiles/
-mv btr_server btr_server-bak
+mv qtr_server qtr_server-bak
 cp -a $code_dir .
 ### copy contrib libraries and modules
-cp -a btr_server-bak/libraries/ btr_server/
-cp -a btr_server-bak/modules/contrib/ btr_server/modules/
-cp -a btr_server-bak/themes/contrib/ btr_server/themes/
+cp -a qtr_server-bak/libraries/ qtr_server/
+cp -a qtr_server-bak/modules/contrib/ qtr_server/modules/
+cp -a qtr_server-bak/themes/contrib/ qtr_server/themes/
 ### cleanup
-rm -rf btr_server-bak/
+rm -rf qtr_server-bak/
 
 ### create the directory of PO files
 mkdir -p /var/www/PO_files
@@ -56,13 +56,13 @@ then
 fi
 
 ### settings for the database and the drupal site
-db_name=btr
-db_user=btr
-db_pass=btr
+db_name=qtr
+db_user=qtr
+db_pass=qtr
 site_name="B-Translator"
 site_mail="$gmail_account"
 account_name=admin
-account_pass="$btr_admin_passwd"
+account_pass="$qtr_admin_passwd"
 account_mail="$gmail_account"
 
 ### create the database and user
@@ -76,7 +76,7 @@ $mysql -e "
 ### site installation
 sed -e '/memory_limit/ c memory_limit = -1' -i /etc/php5/cli/php.ini
 cd $drupal_dir
-drush site-install --verbose --yes btr_server \
+drush site-install --verbose --yes qtr_server \
       --db-url="mysql://$db_user:$db_pass@localhost/$db_name" \
       --site-name="$site_name" --site-mail="$site_mail" \
       --account-name="$account_name" --account-pass="$account_pass" --account-mail="$account_mail"
@@ -86,9 +86,9 @@ mkdir -p $drupal_dir/sites/all/translations
 chown -R www-data: $drupal_dir/sites/all/translations
 
 ### set the list of supported languages
-sed -i $drupal_dir/profiles/btr_server/modules/custom/btrCore/data/config.sh \
+sed -i $drupal_dir/profiles/qtr_server/modules/custom/qtrCore/data/config.sh \
     -e "/^languages=/c languages=\"$languages\""
-drush --root=$drupal_dir --yes vset btr_languages "$languages"
+drush --root=$drupal_dir --yes vset qtr_languages "$languages"
 
 ### add these languages to drupal
 drush dl drush_language
@@ -98,7 +98,7 @@ do
 done
 
 ### fix tha DB schema and install some test data
-$drupal_dir/profiles/btr_server/modules/custom/btrCore/data/install.sh
+$drupal_dir/profiles/qtr_server/modules/custom/qtrCore/data/install.sh
 
 ### set propper directory permissions
 mkdir -p sites/default/files/

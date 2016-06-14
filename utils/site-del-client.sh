@@ -1,5 +1,5 @@
 #!/bin/bash -x
-### Removes the btr_client container for a language.
+### Removes the qtr_client container for a language.
 
 ### get the language code
 if [ "$1" = '' ]

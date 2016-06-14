@@ -51,5 +51,5 @@ done
 echo "Modifying drupal variables that are used for sending email..."
 drush --yes @local_bcl php-script $(dirname $0)/gmailsmtp.php  \
     "$gmail_account" "$gmail_passwd"
-drush --yes @local_btr php-script $(dirname $0)/gmailsmtp.php  \
+drush --yes @local_qtr php-script $(dirname $0)/gmailsmtp.php  \
     "$gmail_account" "$gmail_passwd"

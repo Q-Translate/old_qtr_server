@@ -1,4 +1,4 @@
-variable:theme_btr_server_settings
+variable:theme_qtr_server_settings
 variable:theme_default
 box:headerbox
 context:admin
@@ -9,11 +9,11 @@ views_view:front_page
 variable:site_frontpage
 menu_custom:main-menu
 menu_links:main-menu:<front>
-menu_links:main-menu:btr/project
+menu_links:main-menu:qtr/project
 menu_links:main-menu:contact
-menu_links:main-menu:http://info.btranslator.org/
-menu_links:main-menu:http://info.btranslator.org/api-examples-js/
-menu_links:main-menu:http://info.btranslator.org/api/
+menu_links:main-menu:http://info.qtranslator.org/
+menu_links:main-menu:http://info.qtranslator.org/api-examples-js/
+menu_links:main-menu:http://info.qtranslator.org/api/
 dependencies:menu_target
 variable:jquery_update_compression_type
 variable:jquery_update_jquery_cdn

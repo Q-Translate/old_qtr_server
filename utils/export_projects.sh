@@ -3,7 +3,7 @@
 ### Usually called by cron. It can be called by cron like this:
 ###
 ###     0 2 * * * nice \
-###         /var/www/btr_dev/profiles/btr_server/utils/export_projects.sh \
+###         /var/www/qtr_dev/profiles/qtr_server/utils/export_projects.sh \
 ###         /var/www/downloads/exports/ \
 ###         /var/www/downloads/exports/projects.txt
 
@@ -33,7 +33,7 @@ do
     filename=$origin-$project-$lng
     rm -rf $filename/
     mkdir -p $filename/
-    drush @btr btrp-export $origin $project $lng /tmp/$filename/
+    drush @qtr qtrp-export $origin $project $lng /tmp/$filename/
     tar cfz $filename.tgz $filename/
     mv -f $filename.tgz $output_dir/$filename.tgz
 done < $project_list

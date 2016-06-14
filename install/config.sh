@@ -9,47 +9,47 @@ then
     set +a
 fi
 
-### install dirs of the btr_server and btr_client
-btr=/usr/local/src/btr_server/install
-bcl=/usr/local/src/btr_client/install
+### install dirs of the qtr_server and qtr_client
+qtr=/usr/local/src/qtr_server/install
+bcl=/usr/local/src/qtr_client/install
 
 ### remove dev sites
-test -d /var/www/btr_dev && $btr/../dev/clone_rm.sh btr_dev
+test -d /var/www/qtr_dev && $qtr/../dev/clone_rm.sh qtr_dev
 test -d /var/www/bcl_dev && $bcl/../dev/clone_rm.sh bcl_dev
 
 ### configure domains
-$btr/config/domain.sh
+$qtr/config/domain.sh
 
 ### set new passwords for mysql users
-$btr/config/mysql_passwords.sh
-$bcl/config/mysql_btrclient.sh
-$btr/config/mysql_btrserver.sh
+$qtr/config/mysql_passwords.sh
+$bcl/config/mysql_qtrclient.sh
+$qtr/config/mysql_qtrserver.sh
 
 ### setup SMTP through a gmail account
-$btr/config/gmailsmtp.sh
+$qtr/config/gmailsmtp.sh
 
 ### set new password for drupal user 'admin'
-### on btr_server and btr_client
+### on qtr_server and qtr_client
 $bcl/config/drupalpass.sh
-$btr/config/drupalpass.sh
+$qtr/config/drupalpass.sh
 
 ### configurations for oauth2 login
-$btr/config/oauth2_login.sh @bcl @btr
+$qtr/config/oauth2_login.sh @bcl @qtr
 
 ### configure languages
 $bcl/config/translation_lng.sh
-$btr/config/languages.sh
+$qtr/config/languages.sh
 
 ### regenerate ssh keys
-$btr/config/ssh_keys.sh
+$qtr/config/ssh_keys.sh
 
-### make clones btr_dev and bcl_dev
+### make clones qtr_dev and bcl_dev
 if [ "$development" = 'true' ]
 then
-    $btr/../dev/make-dev-clone.sh
+    $qtr/../dev/make-dev-clone.sh
     $bcl/../dev/make-dev-clone.sh
-    $btr/config/oauth2_login.sh @bcl_dev @btr_dev
+    $qtr/config/oauth2_login.sh @bcl_dev @qtr_dev
 fi
 
 ### drush may create some files with wrong permissions, fix them
-$btr/config/fix_file_permissions.sh
+$qtr/config/fix_file_permissions.sh

@@ -7,9 +7,9 @@ case $1 in
         /etc/init.d/php5-fpm stop
 
         drush @local_bcl -y dis memcache
-        drush @local_btr -y dis memcache
+        drush @local_qtr -y dis memcache
         /etc/init.d/memcached stop
-        for file in $(ls /var/www/btr*/sites/default/settings.php) \
+        for file in $(ls /var/www/qtr*/sites/default/settings.php) \
                     $(ls /var/www/bcl*/sites/default/settings.php)
         do
             sed -i $file -e "/comment memcache config/ d"
@@ -34,13 +34,13 @@ case $1 in
         update-rc.d php5-fpm enable
         update-rc.d memcached enable
 
-        for file in $(ls /var/www/btr*/sites/default/settings.php)
+        for file in $(ls /var/www/qtr*/sites/default/settings.php)
         do
             sed -i $file -e "/comment memcache config/ d"
         done
         /etc/init.d/memcached start
         drush @local_bcl -y en memcache
-        drush @local_btr -y en memcache
+        drush @local_qtr -y en memcache
 
         /etc/init.d/php5-fpm start
         /etc/init.d/nginx start

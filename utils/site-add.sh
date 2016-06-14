@@ -1,6 +1,6 @@
 #!/bin/bash -x
-### Installs a btr_server container for a language
-### (which contains both btr_server and btr_client).
+### Installs a qtr_server container for a language
+### (which contains both qtr_server and qtr_client).
 
 ### get the language code and the ssh port
 if [ "$1" = '' ]
@@ -19,11 +19,11 @@ lng=$1
 ssh_port=${2:-2201}
 
 ### set some variables
-container="btr-$lng"
-bcl_domain="$lng.btranslator.org"
-btr_domain="btr-$lng.btranslator.org"
+container="qtr-$lng"
+bcl_domain="$lng.qtranslator.org"
+qtr_domain="qtr-$lng.qtranslator.org"
 admin_passwd=$(mcookie | head -c 10)
-gmail_account="$lng@btranslator.org"
+gmail_account="$lng@qtranslator.org"
 gmail_passwd=$(mcookie)
 languages=$(echo $lng fr de it es | tr ' ' "\n" | sort -u | tr "\n" ' ')
 
@@ -35,11 +35,11 @@ mkdir -p /data/containers/$container
 
 ### create a new container
 docker create --name=$container \
-    --hostname=$lng.btranslator.org \
+    --hostname=$lng.qtranslator.org \
     -v /data/containers/$container:/data \
     -v /data/PO_files:/data/PO_files:ro \
     -p $ssh_port:2201 \
-    btranslator/btr_server:v2.3
+    qtranslator/qtr_server:v2.3
 docker start $container
 
 ### update drupal and the code of the application
@@ -50,8 +50,8 @@ docker exec $container dev/drush_up.sh
 ######### customize settings and reconfigure the container ##########
 
 docker exec $container \
-    sed -i /usr/local/src/btr_server/install/settings.sh \
-        -e "/^domain=/ c domain='$btr_domain'" \
+    sed -i /usr/local/src/qtr_server/install/settings.sh \
+        -e "/^domain=/ c domain='$qtr_domain'" \
         -e "/^bcl_domain=/ c bcl_domain='$bcl_domain'" \
         -e "/^admin_passwd=/ c admin_passwd='$admin_passwd'" \
         -e "/^bcl_admin_passwd=/ c bcl_admin_passwd='$admin_passwd'" \
@@ -60,7 +60,7 @@ docker exec $container \
         -e "/^languages=/ c languages='$languages'" \
         -e "/^translation_lng=/ c translation_lng='$lng'"
 docker exec $container install/{config.sh,settings.sh}
-docker exec $container bash -c "translation_lng=$lng /usr/local/src/btr_client/install/config/translation_lng.sh"
+docker exec $container bash -c "translation_lng=$lng /usr/local/src/qtr_client/install/config/translation_lng.sh"
 
 ############### get the ssh key of the container ####################
 
@@ -76,7 +76,7 @@ chmod 600 $file_rsa
 docker exec $container \
     killall mysqld
 docker exec $container \
-    drush @local_btr --yes cc all
+    drush @local_qtr --yes cc all
 docker exec $container \
     drush @local_bcl --yes cc all
 
@@ -90,22 +90,22 @@ cd /data/wsproxy/config/etc/apache2/sites-available/
 for file in $(ls xmp*.conf)
 do
     file1=${file/#xmp/$lng}
-    file2=${file/#xmp/btr-$lng}
+    file2=${file/#xmp/qtr-$lng}
     cp $file $file1
     cp $file $file2
-    sed -i $file1 -e "s/example\.org/$lng.btranslator.org/g"
-    sed -i $file2 -e "s/example\.org/btr-$lng.btranslator.org/g"
+    sed -i $file1 -e "s/example\.org/$lng.qtranslator.org/g"
+    sed -i $file2 -e "s/example\.org/qtr-$lng.qtranslator.org/g"
 done
 cd ../sites-enabled/
 ln -s ../sites-available/$lng*.conf .
-ln -s ../sites-available/btr-$lng*.conf .
+ln -s ../sites-available/qtr-$lng*.conf .
 cd /data/
 
 ### modify the configuration of wsproxy/hosts.txt
 sed -i /data/wsproxy/hosts.txt -e "/^$container:/d"
 cat << EOF >> /data/wsproxy/hosts.txt
-$container: $lng.btranslator.org dev.$lng.btranslator.org test.$lng.btranslator.org
-$container: btr-$lng.btranslator.org dev.btr-$lng.btranslator.org test.btr-$lng.btranslator.org
+$container: $lng.qtranslator.org dev.$lng.qtranslator.org test.$lng.qtranslator.org
+$container: qtr-$lng.qtranslator.org dev.qtr-$lng.qtranslator.org test.qtr-$lng.qtranslator.org
 EOF
 
 ### restart wsproxy

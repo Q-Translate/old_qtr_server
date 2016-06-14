@@ -87,7 +87,7 @@ function show_devel_menu_on_footer() {
 
 function create_oauth2_clients() {
   $client = entity_create('oauth2_server_client', array());
-  $client->server = 'oauth2_btr';
+  $client->server = 'oauth2_qtr';
   $client->label = 'Test 1';
   $client->client_key = 'test1';
   $client->client_secret = 'test1';
@@ -96,7 +96,7 @@ function create_oauth2_clients() {
   $client->save();
 
   $client = entity_create('oauth2_server_client', array());
-  $client->server = 'oauth2_btr';
+  $client->server = 'oauth2_qtr';
   $client->label = 'Test 2';
   $client->client_key = 'test2';
   $client->client_secret = 'test2';
@@ -113,7 +113,7 @@ function create_oauth2_scopes() {
     );
     foreach ($scopes as $scope_name => $scope_label) {
       $scope = entity_create('oauth2_server_scope', array());
-      $scope->server = 'oauth2_btr';
+      $scope->server = 'oauth2_qtr';
       $scope->name = $scope_name;
       $scope->description = '';
       $scope->save();

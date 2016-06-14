@@ -18,7 +18,7 @@ variable_set('oauth2_login_client_secret', $client_secret);
 variable_set('oauth2_login_skipssl', $skip_ssl);
 
 // Set the B-Translator API server
-variable_set('btrClient_server', $server_url);
+variable_set('qtrClient_server', $server_url);
 
 // Enable the oauth2 login link and set the settings to hybridauth.
 variable_set('oauth2_login_enabled', TRUE);

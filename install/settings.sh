@@ -1,14 +1,14 @@
 
 ### Git branches that will be used.
-btr_git_branch='master'
+qtr_git_branch='master'
 bcl_git_branch='master'
 
 ### Domains of the website.
-btr_domain='btr.example.org'
+qtr_domain='qtr.example.org'
 bcl_domain='l10n.example.org'
 
 ### Drupal 'admin' password.
-btr_admin_passwd='admin'
+qtr_admin_passwd='admin'
 bcl_admin_passwd='admin'
 
 ### Emails from the server are sent through the SMTP
@@ -29,8 +29,8 @@ translation_lng='all'
 ### to generate a new one randomly
 mysql_passwd_root='random'
 mysql_passwd_bcl='random'
-mysql_passwd_btr='random'
-mysql_passwd_btr_data='random'
+mysql_passwd_qtr='random'
+mysql_passwd_qtr_data='random'
 
 ### Install also extra things that are useful for development.
 development='true'

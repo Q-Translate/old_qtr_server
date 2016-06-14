@@ -1,7 +1,7 @@
 #!/bin/bash
 ### Update all projects at once.
 
-for dir in /var/www/btr*
+for dir in /var/www/qtr*
 do
     echo
     echo "===> $dir"
@@ -27,8 +27,8 @@ do
         -e '/# B-Translator/,$ d'
     cat <<EOF >> $dir/robots.txt
 # B-Translator
-Disallow: /btr/
-Disallow: /?q=btr/
+Disallow: /qtr/
+Disallow: /?q=qtr/
 Disallow: /translations/
 Disallow: /?q=translations/
 Disallow: /vocabulary/

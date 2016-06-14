@@ -22,10 +22,10 @@ function process_comment($title, $link, $description) {
   list($lng, $sguid) = explode('/', $substr);
 
   // Get a list of users who have voted for this string.
-  $uids = btr::db_query(
-    'SELECT u.uid FROM {btr_translations} t
-     INNER JOIN {btr_votes} v ON (v.tguid = t.tguid)
-     INNER JOIN {btr_users} u ON (u.umail = v.umail AND u.ulng = v.ulng)
+  $uids = qtr::db_query(
+    'SELECT u.uid FROM {qtr_translations} t
+     INNER JOIN {qtr_votes} v ON (v.tguid = t.tguid)
+     INNER JOIN {qtr_users} u ON (u.umail = v.umail AND u.ulng = v.ulng)
      WHERE t.sguid = :sguid AND t.lng = :lng',
     array(':sguid' => $sguid, ':lng' => $lng)
   )->fetchCol();
@@ -34,7 +34,7 @@ function process_comment($title, $link, $description) {
 
   // Notify each user about this comment.
   foreach ($users as $user) {
-    btrCore_send_notification_by_email((object) array(
+    qtrCore_send_notification_by_email((object) array(
         'type' => 'notify-on-new-disqus-comment',
         'uid' => $user->uid,
         'username' => $user->name,

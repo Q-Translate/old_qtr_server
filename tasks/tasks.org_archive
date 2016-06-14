@@ -223,7 +223,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Fix the irc proxy on the server.
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-09-26 Wed 11:56
-  :ARCHIVE_FILE: /var/www-ssl/dev.btranslator.org/profiles/btranslator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -233,7 +233,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Use a different database for the translation data
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-09-26 Wed 11:56
-  :ARCHIVE_FILE: /var/www-ssl/dev.btranslator.org/profiles/btranslator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -245,7 +245,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Import the translation data (PO files) of other languages.
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-09-26 Wed 11:57
-  :ARCHIVE_FILE: /var/www-ssl/dev.btranslator.org/profiles/btranslator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -253,10 +253,10 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
   Import the translation data of Slovenian. Try to import the
   translation data of German and Italian as well.
 
-* DONE Create a twitter account for btranslator and connect it to the github account.
+* DONE Create a twitter account for qtranslator and connect it to the github account.
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-09-26 Wed 11:57
-  :ARCHIVE_FILE: /var/www-ssl/dev.btranslator.org/profiles/btranslator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -265,19 +265,19 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Disqus:
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-09-26 Wed 11:57
-  :ARCHIVE_FILE: /var/www-ssl/dev.btranslator.org/profiles/btranslator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
   :END:
   - improve the title of the disqus threads
-  - transfer domain l10n_sq to btranslator
-  - create also a domain btranslator_dev
+  - transfer domain l10n_sq to qtranslator
+  - create also a domain qtranslator_dev
 
 * DONE Improve the content of the notification emails.
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-09-26 Wed 11:57
-  :ARCHIVE_FILE: /var/www-ssl/dev.btranslator.org/profiles/btranslator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -289,7 +289,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Install any module for sending email to all the users of l10n.org.al
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-10-12 Fri 02:48
-  :ARCHIVE_FILE: /var/www-ssl/dev.btranslator.org/profiles/btranslator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -300,7 +300,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Invite all the existing users to customize their profile/settings.
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-10-12 Fri 02:48
-  :ARCHIVE_FILE: /var/www-ssl/dev.btranslator.org/profiles/btranslator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -308,7 +308,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Install any module for sending invitations to other users.
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-10-12 Fri 02:48
-  :ARCHIVE_FILE: /var/www-ssl/dev.btranslator.org/profiles/btranslator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -317,7 +317,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Create user dashboards/stats/reports.
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-10-12 Fri 02:49
-  :ARCHIVE_FILE: /var/www-ssl/dev.btranslator.org/profiles/btranslator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -329,7 +329,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Admin dashboards/stats/reports.
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-10-12 Fri 02:49
-  :ARCHIVE_FILE: /var/www-ssl/dev.btranslator.org/profiles/btranslator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -339,7 +339,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Import PO files of Drupal.
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-10-12 Fri 02:49
-  :ARCHIVE_FILE: /var/www-ssl/dev.btranslator.org/profiles/btranslator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -347,7 +347,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Generate a POT file for B-Translator and import it.
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-10-12 Fri 02:49
-  :ARCHIVE_FILE: /var/www-ssl/dev.btranslator.org/profiles/btranslator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -355,7 +355,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Import Wordpress translations into B-Translator.
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-10-12 Fri 02:49
-  :ARCHIVE_FILE: /var/www-ssl/dev.btranslator.org/profiles/btranslator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -364,7 +364,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Try fastcgi:
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-10-12 Fri 02:49
-  :ARCHIVE_FILE: /var/www-ssl/dev.btranslator.org/profiles/btranslator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc/Try to improve the performance.
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -376,7 +376,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Try to improve the performance.
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-11-10 Sat 21:01
-  :ARCHIVE_FILE: /var/www-ssl/dev.btranslator.org/profiles/btranslator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -392,7 +392,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Create custom blocks
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-11-10 Sat 21:01
-  :ARCHIVE_FILE: /var/www-ssl/dev.btranslator.org/profiles/btranslator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -404,7 +404,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * CANCELED Apply mod_security on l10n.org.al
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-11-10 Sat 21:02
-  :ARCHIVE_FILE: /var/www-ssl/dev.btranslator.org/profiles/btranslator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :END:
@@ -413,7 +413,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE When a new suggestion is added, notify previous voters to review their votes.
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-12-06 Thu 13:36
-  :ARCHIVE_FILE: /var/www-ssl/dev.btranslator.org/profiles/btranslator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Workflow
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -422,7 +422,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE The author of a suggestion can modify it.
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-12-06 Thu 13:36
-  :ARCHIVE_FILE: /var/www-ssl/dev.btranslator.org/profiles/btranslator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Workflow
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -434,7 +434,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Moderators can delete unacceptable translations
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-12-06 Thu 13:36
-  :ARCHIVE_FILE: /var/www-ssl/dev.btranslator.org/profiles/btranslator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Workflow
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -443,7 +443,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Enable export again.
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-12-06 Thu 13:38
-  :ARCHIVE_FILE: /var/www-ssl/dev.btranslator.org/profiles/btranslator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -451,7 +451,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Improve export, so that different export algorithms can be used.
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-12-06 Thu 13:38
-  :ARCHIVE_FILE: /var/www-ssl/dev.btranslator.org/profiles/btranslator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -463,7 +463,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Create a dictionary/thesaurus with the most interesting terms and translations
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-12-29 Sat 21:46
-  :ARCHIVE_FILE: /var/www-ssl/dev.btranslator.org/profiles/btranslator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -473,7 +473,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Make nightly exports of the active projects
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-12-29 Sat 21:46
-  :ARCHIVE_FILE: /var/www-ssl/dev.btranslator.org/profiles/btranslator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -485,7 +485,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Enable exporting of diffs
   :PROPERTIES:
   :ARCHIVE_TIME: 2012-12-29 Sat 21:46
-  :ARCHIVE_FILE: /var/www-ssl/dev.btranslator.org/profiles/btranslator/docs/tasks.org
+  :ARCHIVE_FILE: /var/www-ssl/dev.qtranslator.org/profiles/qtranslator/docs/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -499,7 +499,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
   :END:
-* DONE Create a page on Google+ for l10n-sq and btranslator.
+* DONE Create a page on Google+ for l10n-sq and qtranslator.
   :PROPERTIES:
   :ARCHIVE_TIME: 2013-07-13 Sat 23:50
   :ARCHIVE_FILE: /var/chroot/dev/docs/tasks.org
@@ -584,7 +584,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Test and fix the installation of a new B-Translator server.
   :PROPERTIES:
   :ARCHIVE_TIME: 2014-07-02 Wed 14:41
-  :ARCHIVE_FILE: /var/chroot/btr_dev/tasks/tasks.org
+  :ARCHIVE_FILE: /var/chroot/qtr_dev/tasks/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -592,7 +592,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Export vocabulary in formats CSV, PDF, etc.
   :PROPERTIES:
   :ARCHIVE_TIME: 2014-07-02 Wed 14:41
-  :ARCHIVE_FILE: /var/chroot/btr_dev/tasks/tasks.org
+  :ARCHIVE_FILE: /var/chroot/qtr_dev/tasks/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -601,7 +601,7 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Use the module MetaTags.
   :PROPERTIES:
   :ARCHIVE_TIME: 2014-07-02 Wed 14:41
-  :ARCHIVE_FILE: /var/chroot/btr_dev/tasks/tasks.org
+  :ARCHIVE_FILE: /var/chroot/qtr_dev/tasks/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
@@ -610,18 +610,18 @@ Archived entries from file /var/www-ssl/drupal/sites/all/modules/l10n_feedback/d
 * DONE Client module for Drupal
   :PROPERTIES:
   :ARCHIVE_TIME: 2014-07-02 Wed 14:41
-  :ARCHIVE_FILE: /var/chroot/btr_dev/tasks/tasks.org
+  :ARCHIVE_FILE: /var/chroot/qtr_dev/tasks/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE
   :END:
-  Make btrClient a completely separate Drupal module, which can be
+  Make qtrClient a completely separate Drupal module, which can be
   installed on any drupal site.
 
 * DONE Upgrade the server on rackspace
   :PROPERTIES:
   :ARCHIVE_TIME: 2014-07-02 Wed 14:41
-  :ARCHIVE_FILE: /var/chroot/btr_dev/tasks/tasks.org
+  :ARCHIVE_FILE: /var/chroot/qtr_dev/tasks/tasks.org
   :ARCHIVE_OLPATH: Tasks/Misc
   :ARCHIVE_CATEGORY: tasks
   :ARCHIVE_TODO: DONE

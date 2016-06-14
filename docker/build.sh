@@ -126,8 +126,8 @@ time docker build --tag=$project:$git_branch --file=$srcdir/docker/Dockerfile $s
 cat <<EOF > $workdir/config
 image=$project:$git_branch
 container=$project-$git_branch
-hostname=$btr_domain
-domains="$btr_domain $bcl_domain dev.$btr_domain dev.$bcl_domain"
+hostname=$qtr_domain
+domains="$qtr_domain $bcl_domain dev.$qtr_domain dev.$bcl_domain"
 dev=$development
 ports="-p 80:80 -p 443:443 -p $sshd_port:$sshd_port"
 EOF
