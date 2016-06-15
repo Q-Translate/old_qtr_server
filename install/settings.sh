@@ -4,8 +4,8 @@ qtr_git_branch='master'
 qcl_git_branch='master'
 
 ### Domains of the website.
-qtr_domain='qtr.example.org'
-qcl_domain='l10n.example.org'
+qtr_domain='qtranslate.org'
+qcl_domain='qtranslate.net'
 
 ### Drupal 'admin' password.
 qtr_admin_passwd='admin'
