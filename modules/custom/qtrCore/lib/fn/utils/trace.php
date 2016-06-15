@@ -4,7 +4,7 @@
  * Function: utils_trace()
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

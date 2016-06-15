@@ -4,7 +4,7 @@
  * Function: cron_update_mysql_materialized_views()
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

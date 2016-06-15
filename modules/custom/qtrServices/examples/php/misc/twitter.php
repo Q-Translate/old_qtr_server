@@ -10,8 +10,8 @@ function link_to($url) {
 print "<br/><hr/><br/>\n";
 
 // Get a random tweet.
-link_to('https://l10n.org.al/qtr/tweet');
-link_to('https://l10n.org.al/qtr/tweet/vocabulary/ICT_sq');
+link_to('https://sq.qtranslate.net/qtr/tweet');
+link_to('https://sq.qtranslate.net/qtr/tweet/vocabulary/ICT_sq');
 
 link_to('https://qtranslate.net/qtr/tweet/vocabulary/ICT_sq/sq');
 

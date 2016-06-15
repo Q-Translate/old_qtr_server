@@ -4,7 +4,7 @@
  * Definition of function user_is_project_admin().
  */
 
-namespace BTranslator;
+namespace QTranslate;
 
 /**
  * Return TRUE if the user can administrate the given project.

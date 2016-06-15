@@ -4,7 +4,7 @@
  * Definition of function project_del() which is used for deleting projects.
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

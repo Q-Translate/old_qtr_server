@@ -1,7 +1,7 @@
 #!/usr/bin/drush php-script
 <?php
 
-$url = 'https://dev.qtr.example.org/api/report/topcontrib.json';
+$url = 'https://dev.qtranslate.org/api/report/topcontrib.json';
 $params = array(
   'lng' => 'sq',
   'period' => 'week',

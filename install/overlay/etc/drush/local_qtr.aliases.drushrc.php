@@ -11,7 +11,7 @@
 
 $aliases['qtr'] = array (
   'root' => '/var/www/qtr',
-  'uri' => 'http://qtr.example.org',
+  'uri' => 'http://qtranslate.org',
   'path-aliases' => array (
     '%profile' => 'profiles/qtr_server',
     '%data' => '/var/www/data',
@@ -24,5 +24,5 @@ $aliases['qtr'] = array (
 // $aliases['qtr_dev'] = array (
 //   'parent' => '@qtr',
 //   'root' => '/var/www/qtr_dev',
-//   'uri' => 'http://dev.qtr.example.org',
+//   'uri' => 'http://dev.qtranslate.org',
 // );

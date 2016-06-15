@@ -4,7 +4,7 @@
  * Function: search_build_query()
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

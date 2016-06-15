@@ -65,14 +65,14 @@ This is a Drupal installation profile for Q-Translate Server.
     can edit and work on it easily.
 
   + If it is installed on a local machine (for testing or
-    development), add the domain names =qtr.example.org= and
-    =l10n.example.org= on ~/etc/hosts~, like this:
+    development), add the domain names =qtranslate.org= and
+    =qtranslate.net= on ~/etc/hosts~, like this:
     #+BEGIN_EXAMPLE
-    127.0.0.1 qtr.example.org
-    127.0.0.1 l10n.example.org
+    127.0.0.1 qtranslate.org
+    127.0.0.1 qtranslate.net
     #+END_EXAMPLE
-    This way it can be accessed by typing =https://qtr.example.org=
-    and =https://l10n.example.org= on the browser location.
+    This way it can be accessed by typing =https://qtranslate.org=
+    and =https://qtranslate.net= on the browser location.
 
 
 * Quick install
@@ -82,10 +82,10 @@ This is a Drupal installation profile for Q-Translate Server.
   certain conventions for directory names etc.
   #+BEGIN_EXAMPLE
   vim utils/docker-install.sh
-  utils/docker-install.sh --qcl_domain=test.example.org
+  utils/docker-install.sh --qcl_domain=test.qtranslate.net
   or
   utils/docker-install.sh $(pwd)/settings.sh \
-      --git_branch=test --qcl_domain=test.example.org
+      --git_branch=test --qcl_domain=test.qtranslate.net
   #+END_EXAMPLE
 
   This script also installs [[https://github.com/docker-build/wsproxy][wsproxy]], which allows to run more that one
@@ -187,7 +187,7 @@ This is a Drupal installation profile for Q-Translate Server.
 * Sites
 
   Sites using Q-Translate:
-  - https://l10n.org.al - Albanian translations.
+  - https://sq.qtranslate.net - Albanian translations.
 
   To install and setup your site you would need some basic skills on
   Ubuntu server administration and Drupal administration.

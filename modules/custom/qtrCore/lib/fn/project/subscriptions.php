@@ -4,7 +4,7 @@
  * Definition of function project_subscriptions()
  */
 
-namespace BTranslator;
+namespace QTranslate;
 
 /**
  * Return the list of projects to which the user is subscribed.

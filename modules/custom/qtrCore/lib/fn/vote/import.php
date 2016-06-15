@@ -4,7 +4,7 @@
  * Importing translations from PO files.
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

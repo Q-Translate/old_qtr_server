@@ -4,7 +4,7 @@
  * Function: queue()
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \DrupalQueue;
 
 /**

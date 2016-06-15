@@ -4,9 +4,9 @@
 
 $aliases['live'] = array (
   'root' => '/var/www/qtr',
-  'uri' => 'http://qtr.example.org',
+  'uri' => 'http://qtranslate.org',
 
-  'remote-host' => 'qtr.example.org',
+  'remote-host' => 'qtranslate.org',
   'remote-user' => 'root',
   'ssh-options' => '-p 2201 -i /root/.ssh/id_rsa',
 
@@ -31,7 +31,7 @@ $aliases['live'] = array (
 $aliases['test'] = array (
   'parent' => '@live',
   'root' => '/var/www/qtr_test',
-  'uri' => 'http://test.qtr.example.org',
+  'uri' => 'http://test.qtranslate.org',
 
   'command-specific' => array (
     'sql-sync' => array (

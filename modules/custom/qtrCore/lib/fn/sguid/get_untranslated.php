@@ -4,7 +4,7 @@
  * Get a translated random sguid.
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 include_once(dirname(__FILE__). '/get_pool_of_projects.inc');

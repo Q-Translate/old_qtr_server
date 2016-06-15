@@ -4,7 +4,7 @@
  * Function: translation_latest()
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

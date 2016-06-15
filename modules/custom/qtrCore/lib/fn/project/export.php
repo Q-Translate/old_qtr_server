@@ -4,7 +4,7 @@
  * Exporting translation files of a project.
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 module_load_include('php', 'qtrCore', 'lib/gettext/POParser');

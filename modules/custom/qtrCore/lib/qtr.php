@@ -8,7 +8,7 @@
  *
  * If the function qtr::some_function_name() is called, this class
  * will convert it into a call to the function
- * 'BTranslator\some_function_name()'. If such a function is not
+ * 'QTranslate\some_function_name()'. If such a function is not
  * declared then it will try to load these files (in this order):
  *   - fn/some_function_name.php
  *   - fn/some_function.php
@@ -35,7 +35,7 @@ class qtr {
   /**
    * The namespace of the functions.
    */
-  const NS = 'BTranslator';
+  const NS = 'QTranslate';
 
   /**
    * Relative directory where the functions are located.

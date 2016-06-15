@@ -4,7 +4,7 @@
  * Functions that are used for sending notification emails.
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

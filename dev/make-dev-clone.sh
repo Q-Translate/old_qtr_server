@@ -18,7 +18,7 @@ sed -i /var/www/qtr_dev/sites/default/settings.php \
 
 ### add a test user
 drush @qtr_dev user-create user1 --password=pass1 \
-      --mail='user1@example.org' > /dev/null 2>&1
+      --mail='user1@qtranslate.net' > /dev/null 2>&1
 
 ### register a test oauth2 client on qtr_server
 drush @qtr_dev php-script \

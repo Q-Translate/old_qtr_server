@@ -4,7 +4,7 @@
  * Creating a vocabulary.
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

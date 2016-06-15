@@ -4,7 +4,7 @@
  * Function: schedule_project_export()
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

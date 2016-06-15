@@ -4,7 +4,7 @@
  * Get the list of terms in a vocabulary and all the suggested translations.
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

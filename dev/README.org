@@ -34,7 +34,7 @@ Development Tools, Tips and Tricks
   It creates a new application with root */var/www/qtr_dev1/* and with
   DB named *qtr_dev1*. It also creates the drush alias *@qtr_dev1*,
   and modifies the configuration of the webserver so that the cloned
-  application can be accessed at *dev1.example.org*.
+  application can be accessed at *dev1.qtranslate.net*.
 
   *Caution:* The root directory and the DB of the clone will be
   erased, if they exist.
@@ -136,7 +136,7 @@ Development Tools, Tips and Tricks
   + Next we create a new container that shares a directory with the
     host system (using the option =-v=):
     #+BEGIN_EXAMPLE
-    docker run -d --name=qtr_dev --hostname=dev.example.org \
+    docker run -d --name=qtr_dev --hostname=dev.qtranslate.net \
 	       -v $(pwd)/qtr_dev:/var/www/qtr_dev/profiles/qtr_server/
 	       -p 80:80 -p 443:443 qtr_server:dev
     #+END_EXAMPLE
@@ -234,9 +234,9 @@ Development Tools, Tips and Tricks
 
   $aliases['live'] = array (
     'root' => '/var/www/qtr',
-    'uri' => 'http://example.org',
+    'uri' => 'http://qtranslate.net',
 
-    'remote-host' => 'example.org',
+    'remote-host' => 'qtranslate.net',
     'remote-user' => 'root',
     'ssh-options' => '-p 2201 -i /root/.ssh/id_rsa',
 
@@ -258,8 +258,8 @@ Development Tools, Tips and Tricks
   $aliases['test'] = array (
     'parent' => '@live',
     'root' => '/var/www/qtr',
-    'uri' => 'http://test.example.org',
-    'remote-host' => 'test.example.org',
+    'uri' => 'http://test.qtranslate.net',
+    'remote-host' => 'test.qtranslate.net',
 
     'command-specific' => array (
       'sql-sync' => array (

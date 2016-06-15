@@ -4,7 +4,7 @@
  * Function: project_owner()
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

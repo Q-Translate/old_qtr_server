@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace BTranslator;
+namespace QTranslate;
 
 class POWriter {
   /** Array of lines. */

@@ -3,11 +3,11 @@
 case $1 in
     get)
         rsync -a -e 'ssh -p 2201 -i /root/.ssh/id_rsa' \
-            l10n.org.al:/var/www/backup /var/www/
+            sq.qtranslate.net:/var/www/backup /var/www/
         ;;
     put)
         rsync -a -e 'ssh -p 2201 -i /root/.ssh/id_rsa' \
-            /var/www/backup test.l10n.org.al:/var/www/
+            /var/www/backup test.sq.qtranslate.net:/var/www/
         ;;
     *)
         echo " * Usage: $0 [get|put]"

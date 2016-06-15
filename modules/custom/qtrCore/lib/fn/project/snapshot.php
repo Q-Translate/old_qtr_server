@@ -4,7 +4,7 @@
  * Functions for project snapshots.
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

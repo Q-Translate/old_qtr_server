@@ -4,7 +4,7 @@
  * Definition of function vocabulary_string_del().
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

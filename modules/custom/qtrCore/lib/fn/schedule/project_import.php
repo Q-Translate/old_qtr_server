@@ -4,7 +4,7 @@
  * Function: schedule_project_import()
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 use \stdClass, \Exception;
 

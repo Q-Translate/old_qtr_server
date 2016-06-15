@@ -4,7 +4,7 @@
  * Definition of function project_unsubscribe()
  */
 
-namespace BTranslator;
+namespace QTranslate;
 
 /**
  * Unsubscribe a user from the given project.

@@ -234,7 +234,7 @@ function _qtrServices_translations() {
  *
  * @example
  *   curl -k -i \
- *     'https://dev.qtr.example.org/api/translations/random?lng=sq'
+ *     'https://dev.qtranslate.org/api/translations/random?lng=sq'
  */
 function _qtrServices_translations_retrieve($sguid, $lng) {
   $strings = _qtrServices_translations_get(array(
@@ -263,7 +263,7 @@ function _qtrServices_translations_retrieve($sguid, $lng) {
  *
  * @example
  *   curl -k -i -H 'Accept: application/json' \
- *     'https://dev.qtr.example.org/api/translations?lng=sq&words=file'
+ *     'https://dev.qtranslate.org/api/translations?lng=sq&words=file'
  */
 function _qtrServices_translations_index($params) {
   return _qtrServices_translations_search($params);
@@ -414,7 +414,7 @@ function _qtrServices_translations_get_random_sguid($params) {
  *
  * @example
  *   curl -k -i -H 'Content-type: application/json' \
- *     -X POST https://dev.qtr.example.org/api/translations/get
+ *     -X POST https://dev.qtranslate.org/api/translations/get
  *     -d '{"lng": "sq"}'
  */
 function _qtrServices_translations_get($params) {

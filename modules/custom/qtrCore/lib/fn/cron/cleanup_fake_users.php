@@ -4,7 +4,7 @@
  * Function: cron_cleanup_fake_users()
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \EntityFieldQuery;
 use \DrupalQueue;
 

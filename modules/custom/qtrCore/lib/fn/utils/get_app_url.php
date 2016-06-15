@@ -4,7 +4,7 @@
  * Function: utils_get_app_url()
  */
 
-namespace BTranslator;
+namespace QTranslate;
 
 /**
  * Return the url of the mobile application for the given project.

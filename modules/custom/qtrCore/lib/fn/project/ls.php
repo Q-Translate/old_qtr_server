@@ -4,7 +4,7 @@
  * Definition of function project_ls() which returns a list of projects.
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

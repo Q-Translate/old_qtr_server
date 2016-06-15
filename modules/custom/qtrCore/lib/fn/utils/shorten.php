@@ -4,7 +4,7 @@
  * Function: utils_shorten()
  */
 
-namespace BTranslator;
+namespace QTranslate;
 
 /**
  * Shorten the given string.

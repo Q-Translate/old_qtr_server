@@ -4,7 +4,7 @@
  * Function: string_unpack().
  */
 
-namespace BTranslator;
+namespace QTranslate;
 
 /**
  * Unpacks a string as retrieved from the database.

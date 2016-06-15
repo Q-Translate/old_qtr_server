@@ -4,7 +4,7 @@
  * Function: cron_import_project()
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

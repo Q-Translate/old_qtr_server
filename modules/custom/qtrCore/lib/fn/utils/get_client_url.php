@@ -4,7 +4,7 @@
  * Function: utils_get_client_url()
  */
 
-namespace BTranslator;
+namespace QTranslate;
 
 /**
  * Return the url of the client site of a language, or the default client url
@@ -16,7 +16,7 @@ function utils_get_client_url($lng) {
     $site_url = $sites[$lng]['url'];
   }
   else {
-    $site_url = variable_get('qtr_client', 'https://l10n.example.org');
+    $site_url = variable_get('qtr_client', 'https://qtranslate.net');
   }
 
   return $site_url;
@@ -32,7 +32,7 @@ function qtr_get_sites() {
       //'url' => 'https://example.org',
     ],
     'sq' => [
-      //'url' => 'https://l10n.org.al',
+      //'url' => 'https://sq.qtranslate.net',
     ],
   ];
 }

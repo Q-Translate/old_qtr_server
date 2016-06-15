@@ -4,7 +4,7 @@
  * Function: utils_get_emails()
  */
 
-namespace BTranslator;
+namespace QTranslate;
 
 /**
  * Converts a comma separated list of usernames into an array of user emails.

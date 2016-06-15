@@ -4,7 +4,7 @@
  * Function: cron_delete_old_export_files()
  */
 
-namespace BTranslator;
+namespace QTranslate;
 
 /**
  * Delete export files that are older than 2 days

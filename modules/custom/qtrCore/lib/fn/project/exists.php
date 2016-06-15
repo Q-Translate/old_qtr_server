@@ -4,7 +4,7 @@
  * Function: project_exists()
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

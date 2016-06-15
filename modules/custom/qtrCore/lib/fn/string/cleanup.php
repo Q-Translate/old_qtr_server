@@ -4,7 +4,7 @@
  * Definition of function string_cleanup().
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

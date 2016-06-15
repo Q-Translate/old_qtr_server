@@ -4,7 +4,7 @@
  * Function: cron_send_strings_for_review()
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

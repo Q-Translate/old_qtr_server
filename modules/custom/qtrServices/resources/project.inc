@@ -99,8 +99,8 @@ function _qtrServices_project() {
  *   'origin/project' or just 'origin'.
  *
  * @example
- *   curl -k -i -X POST https://dev.qtr.example.org/api/project/list
- *   curl -k -i -X POST https://dev.qtr.example.org/api/project/list \
+ *   curl -k -i -X POST https://dev.qtranslate.org/api/project/list
+ *   curl -k -i -X POST https://dev.qtranslate.org/api/project/list \
  *        -H "Content-type: application/json" \
  *        -d '{"origin": "t*"}'
  */

@@ -4,7 +4,7 @@
  * Database functions: db_query(), db_select(), db_insert(), etc.
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \Database;
 
 /**

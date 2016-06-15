@@ -5,7 +5,7 @@
  * project with a certain role (admin, moderator, etc.)
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

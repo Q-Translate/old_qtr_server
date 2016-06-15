@@ -7,7 +7,6 @@ if (php_sapi_name() != "cli") {
 define('DEBUG', TRUE);
 
 $base_url = 'http://dev.qtranslate.org';
-//$base_url = 'https://dev.qtr.example.org';
 
 $auth = array(
   'token_url' => $base_url . '/oauth2/token',

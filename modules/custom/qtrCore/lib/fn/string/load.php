@@ -4,7 +4,7 @@
  * Function: string_load()
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

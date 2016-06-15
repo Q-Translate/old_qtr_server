@@ -1,10 +1,10 @@
 #!/bin/bash
 
-qtr_domain='qtr.example.org'
-qcl_domain='l10n.example.org'
-email='info@example.org'
+qtr_domain='qtranslate.org'
+qcl_domain='qtranslate.net'
+email='info@qtranslate.net'
 
-dry_run='--dry-run' ;  [[ $email != info@example.org ]] && dry_run=''
+dry_run='--dry-run' ;  [[ $email != info@qtranslate.net ]] && dry_run=''
 
 ### install certbot
 if [[ -z $(which certbot) ]]; then

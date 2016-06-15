@@ -4,7 +4,7 @@
  * Function: string_pack().
  */
 
-namespace BTranslator;
+namespace QTranslate;
 
 /**
  * Packs a string for storage in the database.

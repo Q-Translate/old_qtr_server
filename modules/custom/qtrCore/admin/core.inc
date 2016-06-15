@@ -29,7 +29,7 @@ function qtrCore_config() {
   $form['config']['qtr_client'] = array(
     '#type'          => 'textfield',
     '#title'         => t('Client URL'),
-    '#default_value' => variable_get('qtr_client', 'https://l10n.example.org'),
+    '#default_value' => variable_get('qtr_client', 'https://qtranslate.net'),
     '#description'   => t('URL of the default client.'),
   );
 

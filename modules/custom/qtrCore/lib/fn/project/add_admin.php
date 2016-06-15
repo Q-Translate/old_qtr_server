@@ -4,7 +4,7 @@
  * Function project_add_admin().
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

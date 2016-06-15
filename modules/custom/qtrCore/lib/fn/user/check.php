@@ -4,7 +4,7 @@
  * Function user_check()
  */
 
-namespace BTranslator;
+namespace QTranslate;
 
 /**
  * Check the give $uid and make sure that it has a correct value.

@@ -4,7 +4,7 @@
  * Definition of the function project_sync().
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

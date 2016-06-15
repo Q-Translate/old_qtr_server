@@ -4,7 +4,7 @@
  * Function: report_topcontrib()
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

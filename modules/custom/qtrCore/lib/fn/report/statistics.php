@@ -4,7 +4,7 @@
  * Function: report_statistics()
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

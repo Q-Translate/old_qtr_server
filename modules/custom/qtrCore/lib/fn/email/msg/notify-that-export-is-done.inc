@@ -1,5 +1,5 @@
 <?php
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

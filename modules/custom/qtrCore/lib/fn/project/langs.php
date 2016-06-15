@@ -5,7 +5,7 @@
  * which returns a list of languages of a project.
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

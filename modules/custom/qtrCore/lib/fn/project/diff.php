@@ -4,7 +4,7 @@
  * Functions for project diffs.
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

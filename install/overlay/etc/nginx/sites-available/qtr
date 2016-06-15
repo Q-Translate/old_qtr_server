@@ -5,7 +5,7 @@ server {
 	ssl_certificate		/etc/ssl/certs/ssl-cert-snakeoil.pem;
 	ssl_certificate_key	/etc/ssl/private/ssl-cert-snakeoil.key;
 
-	server_name qtr.example.org;
+	server_name qtranslate.org;
 	root /var/www/qtr;
 
 	access_log /var/log/nginx/qtr.access.log;

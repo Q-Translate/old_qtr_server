@@ -4,7 +4,7 @@
  * Definition of function project_list_all().
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

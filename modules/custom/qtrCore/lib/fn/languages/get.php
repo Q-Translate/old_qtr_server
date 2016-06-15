@@ -4,7 +4,7 @@
  * Get the languages that are supported by the application.
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

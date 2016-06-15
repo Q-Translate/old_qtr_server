@@ -4,7 +4,7 @@
  * Function: utils_projects_to_where_condition()
  */
 
-namespace BTranslator;
+namespace QTranslate;
 
 /**
  * Return an array of a WHERE condition for SQL queries, and arguments

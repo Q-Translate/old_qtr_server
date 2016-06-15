@@ -4,7 +4,7 @@
  * Definition of function project_subscribe()
  */
 
-namespace BTranslator;
+namespace QTranslate;
 
 /**
  * Subscribe a user to the given project.

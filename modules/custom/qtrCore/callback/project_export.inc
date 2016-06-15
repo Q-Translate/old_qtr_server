@@ -42,7 +42,7 @@
  *      Comma separated list of usernames of the preferred voters.
  *
  * Examples:
- *   curl -k 'https://dev.qtr.example.org/project/export?origin=test&project=kturtle&lng=sq' > test1.tgz
+ *   curl -k 'https://dev.qtranslate.org/project/export?origin=test&project=kturtle&lng=sq' > test1.tgz
  *   curl -k https://dev.qtranslate.org/project/export \
  *        -d 'origin=test&project=kturtle&lng=sq&export_mode=original' > test1.tgz
  *   curl -k https://dev.qtranslate.org/project/export \

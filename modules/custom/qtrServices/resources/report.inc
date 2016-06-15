@@ -102,9 +102,9 @@ function _qtrServices_report() {
  *
  * @example
  *   curl -k -i \
- *     'https://dev.qtr.example.org/api/report/statistics?lng=sq'
+ *     'https://dev.qtranslate.org/api/report/statistics?lng=sq'
  *   curl -k -i \
- *     'https://dev.qtr.example.org/api/report/topcontrib?lng=sq&period=week'
+ *     'https://dev.qtranslate.org/api/report/topcontrib?lng=sq&period=week'
  */
 function _qtr_report_retrieve($report, $params) {
   $report_function = '_qtr_report_' . $report;
@@ -130,7 +130,7 @@ function _qtr_report_retrieve($report, $params) {
  *
  * @example
  *   curl -k -i -H "Content-type: application/json"  \
- *        -X POST https://dev.qtr.example.org/api/report/statistics \
+ *        -X POST https://dev.qtranslate.org/api/report/statistics \
  *        -d '{"lng": "sq"}'
  */
 function _qtr_report_statistics($params) {
@@ -168,7 +168,7 @@ function _qtr_report_statistics($params) {
  *
  * @example
  *   curl -k -i -H "Content-type: application/json"  \
- *        -X POST https://dev.qtr.example.org/api/report/project_stats \
+ *        -X POST https://dev.qtranslate.org/api/report/project_stats \
  *        -d '{"origin": "LibreOffice", "project": "cui", "lng": "sq"}'
  */
 function _qtr_report_project_stats($params) {
@@ -211,7 +211,7 @@ function _qtr_report_project_stats($params) {
  *
  * @example
  *   curl -k -i -H "Content-type: application/json"  \
- *     -X POST https://dev.qtr.example.org/api/report/topcontrib \
+ *     -X POST https://dev.qtranslate.org/api/report/topcontrib \
  *     -d '{"lng": "sq", "period": "week", "size": 10}'
  */
 function _qtr_report_topcontrib($params) {

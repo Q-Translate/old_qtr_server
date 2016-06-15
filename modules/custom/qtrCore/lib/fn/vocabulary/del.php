@@ -4,7 +4,7 @@
  * Definition of function vocabulary_del() which is used for deleting vocabularies.
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

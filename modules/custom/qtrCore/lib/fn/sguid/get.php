@@ -4,7 +4,7 @@
  * Get a random sguid.
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

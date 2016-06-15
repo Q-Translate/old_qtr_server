@@ -4,7 +4,7 @@
  * Function: user_has_project_role()
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

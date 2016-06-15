@@ -19,9 +19,9 @@ It will modify the files:
 
 ### get the current domains
 old_qcl_domain=$(head -n 1 /etc/hosts.conf | cut -d' ' -f2)
-old_qcl_domain=${old_qcl_domain:-example.org}
+old_qcl_domain=${old_qcl_domain:-qtranslate.net}
 old_qtr_domain=$(head -n 1 /etc/hosts.conf | cut -d' ' -f3)
-old_qtr_domain=${old_qtr_domain:-qtr.example.org}
+old_qtr_domain=${old_qtr_domain:-qtranslate.org}
 
 ### get the new domains
 if [ -z "${qcl_domain+xxx}" -o "$qcl_domain" = '' ]

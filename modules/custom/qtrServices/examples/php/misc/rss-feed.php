@@ -10,9 +10,9 @@ function link_to($url) {
 print "<br/><hr/><br/>\n";
 
 // Get a RSS feed of the latest translations.
-link_to('https://l10n.org.al/qtr/rss-feed');
-link_to('https://l10n.org.al/qtr/rss-feed/LibreOffice');
-link_to('https://l10n.org.al/qtr/rss-feed/LibreOffice/cui');
+link_to('https://sq.qtranslate.net/qtr/rss-feed');
+link_to('https://sq.qtranslate.net/qtr/rss-feed/LibreOffice');
+link_to('https://sq.qtranslate.net/qtr/rss-feed/LibreOffice/cui');
 
 link_to('https://qtranslate.net/qtr/rss-feed/LibreOffice/cui/sq');
 link_to('https://qtranslate.net/qtr/rss-feed/LibreOffice/cui');

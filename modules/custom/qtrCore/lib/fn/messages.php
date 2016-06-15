@@ -4,7 +4,7 @@
  * Function for collecting output messages.
  */
 
-namespace BTranslator;
+namespace QTranslate;
 
 /**
  * Collect output messages from functions.

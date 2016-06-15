@@ -2,12 +2,12 @@
 <?php
 
 // general contribution statistics
-$url = 'https://dev.qtr.example.org/api/report/statistics?lng=sq';
+$url = 'https://dev.qtranslate.org/api/report/statistics?lng=sq';
 $response = drupal_http_request($url);
 print_r($response);
 
 // top contributors
-$url = 'https://dev.qtr.example.org/api/report/topcontrib'
+$url = 'https://dev.qtranslate.org/api/report/topcontrib'
   . '?lng=sq&period=week&size=5';
 $options = array(
   'headers' => array('Accept' => 'application/xml'),

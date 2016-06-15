@@ -4,7 +4,7 @@
  * Function vocabulary_ls().
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

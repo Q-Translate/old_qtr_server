@@ -4,7 +4,7 @@
  * Import the terms and translations of a vocabulary from a text file.
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**

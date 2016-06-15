@@ -4,7 +4,7 @@
  * Function: string_details()
  */
 
-namespace BTranslator;
+namespace QTranslate;
 use \qtr;
 
 /**
