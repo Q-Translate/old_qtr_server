@@ -19,6 +19,22 @@ function qtrCore_disable() {
 }
 
 /**
+ * Implements hook_install().
+ */
+function qtrCore_install() {
+  $data = drupal_get_path('module', 'qtrCore') . '/data';
+
+  // Import the chapters and verses of the Quran.
+  qtr::import_chapters("$data/quran/index.xml");
+  qtr::import_verses("$data/quran/uthmani.xml");
+
+  // Import a few English translations.
+  qtr::import_translations("$data/translations/en/pickthall.txt");
+  qtr::import_translations("$data/translations/en/shakir.txt");
+  qtr::import_translations("$data/translations/en/yusufali.txt");
+}
+
+/**
  * Implements hook_uninstall().
  */
 function qtrCore_uninstall() {
