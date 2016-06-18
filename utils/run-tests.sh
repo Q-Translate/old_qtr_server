@@ -32,7 +32,7 @@ output_file="tests/output_$timestamp.txt"
 mkdir -p tests/
 
 ### make a backup of the database
-dbname=${BTR_DATA:-qtr_data}
+dbname=${QTR_DATA:-qtr_data}
 mysqldump="mysqldump --defaults-file=/etc/mysql/debian.cnf --database=$dbname"
 $mysqldump --opt > $dump_file
 

@@ -5,7 +5,7 @@
 cd $(dirname $0)
 
 ### mysql and mysqldump options
-dbname=${BTR_DATA:-qtr_data}
+dbname=${QTR_DATA:-qtr_data}
 mysql="mysql --defaults-file=/etc/mysql/debian.cnf --database=$dbname -B"
 mysqldump="mysqldump --defaults-file=/etc/mysql/debian.cnf --databases $dbname"
 

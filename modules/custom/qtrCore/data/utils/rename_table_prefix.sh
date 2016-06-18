@@ -21,7 +21,7 @@ tables="
   users
 "
 
-dbname=${BTR_DATA:-qtr_data}
+dbname=${QTR_DATA:-qtr_data}
 mysql="mysql --defaults-file=/etc/mysql/debian.cnf -B --database=$dbname"
 
 ### rename each table

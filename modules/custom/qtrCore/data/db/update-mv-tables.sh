@@ -7,7 +7,7 @@
 cd $(dirname $0)
 
 ### mysql and mysqldump options
-dbname=${BTR_DATA:-qtr_data}
+dbname=${QTR_DATA:-qtr_data}
 mysql="mysql --defaults-file=/etc/mysql/debian.cnf --database=$dbname -B"
 
 ### drop all 'qtr_mv_*' tables (except 'qtr_mv_sample')
