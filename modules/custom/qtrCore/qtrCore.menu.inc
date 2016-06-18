@@ -18,7 +18,7 @@ function qtrCore_menu() {
   );
 
   $items['admin/config/qtr/core'] = array(
-    'title'            => 'BTR Core',
+    'title'            => 'QTR Core',
     'description'      => 'Q-Translate Core configuration settings.',
     'page callback'    => 'drupal_get_form',
     'page arguments'   => array('qtrCore_config'),
@@ -27,7 +27,7 @@ function qtrCore_menu() {
   );
 
   $items['admin/config/qtr/data'] = array(
-    'title'            => 'BTR Data',
+    'title'            => 'QTR Data',
     'description'      => 'Q-Translate Backup/Restore.',
     'page callback'    => 'drupal_get_form',
     'page arguments'   => ['qtrCore_backup'],
