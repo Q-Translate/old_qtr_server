@@ -22,7 +22,7 @@ CREATE TABLE `qtr_languages` (
   `direction` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'LeftToRight=0, RightToLeft=1.',
   `plurals` tinyint(3) unsigned NOT NULL DEFAULT '2' COMMENT 'Number of plurals of the language.',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `k1` (`code`)
+  UNIQUE KEY `code` (`code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='The base table for the Language entity';
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `qtr_translations`;
@@ -32,7 +32,7 @@ CREATE TABLE `qtr_translations` (
   `tguid` char(40) CHARACTER SET ascii NOT NULL COMMENT 'Globally Unique ID of the translation, defined as hash: SHA1(CONCAT(translation,lng,verse_id))',
   `verse_id` smallint(6) NOT NULL,
   `lng` varchar(5) COLLATE utf8_bin NOT NULL COMMENT 'Language code (en, fr, sq_AL, etc.)',
-  `translation` varchar(2500) COLLATE utf8_bin NOT NULL COMMENT 'The (suggested) translation of the phrase.',
+  `translation` varchar(2500) COLLATE utf8_bin NOT NULL COMMENT 'The translation of the verse.',
   `count` smallint(6) DEFAULT '1' COMMENT 'Count of votes received so far. This can be counted on the table Votes, but for convenience is stored here as well.',
   `umail` varchar(250) CHARACTER SET utf8 NOT NULL COMMENT 'The email of the user that submitted this suggestion.',
   `ulng` varchar(5) CHARACTER SET utf8 NOT NULL COMMENT 'The translation language of the user that submitted this suggestion.',
@@ -41,8 +41,8 @@ CREATE TABLE `qtr_translations` (
   PRIMARY KEY (`tguid`),
   KEY `time` (`time`),
   KEY `umail` (`umail`(20)),
-  KEY `aid` (`verse_id`),
-  FULLTEXT KEY `translation_text` (`translation`)
+  KEY `verse_id` (`verse_id`),
+  FULLTEXT KEY `translation` (`translation`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Translations/suggestions of the l10n strings. For...';
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `qtr_translations_trash`;
@@ -93,8 +93,8 @@ CREATE TABLE `qtr_verses` (
   `verse_nr` smallint(6) NOT NULL COMMENT 'Number of the verse.',
   `verse_text` varchar(2500) NOT NULL COMMENT 'The text of the verse.',
   PRIMARY KEY (`verse_id`),
-  KEY `cid` (`chapter_id`),
-  FULLTEXT KEY `verse` (`verse_text`)
+  KEY `chapter_id` (`chapter_id`),
+  FULLTEXT KEY `verse_text` (`verse_text`)
 ) ENGINE=MyISAM AUTO_INCREMENT=6237 DEFAULT CHARSET=utf8 COMMENT='Verses of the Quran.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `qtr_votes`;
