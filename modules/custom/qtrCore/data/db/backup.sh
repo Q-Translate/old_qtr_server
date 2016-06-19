@@ -38,15 +38,12 @@ $mysqldump --tables $table_list > $backup_dir/qcl.sql
 ### backup qtr tables
 mysqldump=$(drush @qtr sql-connect | sed -e 's/^mysql/mysqldump/' -e 's/--database=/--databases /')
 table_list="
-    translation_projects
     qtr_languages
     users
     users_roles
     field_data_field_auxiliary_languages
-    field_data_field_projects
     field_data_field_translation_lng
     field_revision_field_auxiliary_languages
-    field_revision_field_projects
     field_revision_field_translation_lng
     hybridauth_identity
     hybridauth_session
