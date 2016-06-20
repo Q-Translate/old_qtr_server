@@ -41,11 +41,11 @@ function search_build_filter($params) {
   $mode = isset($params['mode']) ? $params['mode'] : '';
   $filter['mode'] = in_array($mode, $search_mode_options) ? $mode : 'natural-strings';
 
-  // If no searching words are given but there is a sguid in $params
+  // If no searching words are given but there is a vid in $params
   // search for that string (find strings similar to that one).
   $filter['words'] = isset($params['words']) ? $params['words'] : '';
-  if ($filter['words'] == '' and isset($params['sguid'])) {
-    $string = qtr::string_get($params['sguid']);
+  if ($filter['words'] == '' and isset($params['vid'])) {
+    $string = qtr::string_get($params['vid']);
     if ($string) {
       $filter['words'] = $string;
     }
@@ -55,16 +55,16 @@ function search_build_filter($params) {
   $filter['project'] = isset($params['project']) ? trim($params['project']) : '';
   $filter['origin'] = isset($params['origin']) ? trim($params['origin']) : '';
 
-  // Limit search only to the strings touched (translated or voted)
+  // Limit search only to the strings touched (translated or liked)
   // by the current user.
   $filter['only_mine'] = isset($params['only_mine']) && (int)$params['only_mine'] ? 1 : 0;
 
   // Limit search by the editing users (used by admins).
   $filter['translated_by'] = isset($params['translated_by']) ? trim($params['translated_by']) : '';
-  $filter['voted_by'] = isset($params['voted_by']) ? trim($params['voted_by']) : '';
+  $filter['liked_by'] = isset($params['liked_by']) ? trim($params['liked_by']) : '';
 
   // Limit by date of string, translation or voting (used by admins).
-  $date_filter_options = array('strings', 'translations', 'votes');
+  $date_filter_options = array('strings', 'translations', 'likes');
   $date_filter = isset($params['date_filter']) ? trim($params['date_filter']) : '';
   $filter['date_filter'] = in_array($date_filter, $date_filter_options) ? $date_filter : 'translations';
 

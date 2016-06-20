@@ -33,15 +33,15 @@ function cron_send_strings_for_review() {
     $idx = rand(0, sizeof($account->subscribed_projects) - 1);
     $project = $account->subscribed_projects[$idx];
 
-    // get a sguid according to the user preferencies
-    module_load_include('inc', 'qtrCore', 'includes/get_sguid');
-    $sguid = qtr::sguid_get_random($account->uid, array($project));
-    if (!$sguid)  continue;
+    // get a vid according to the user preferencies
+    module_load_include('inc', 'qtrCore', 'includes/get_vid');
+    $vid = qtr::vid_get_random($account->uid, array($project));
+    if (!$vid)  continue;
 
     $message_params = array(
       'type' => 'string-to-be-reviewed',
       'uid' => $account->uid,
-      'sguid' => $sguid,
+      'vid' => $vid,
       'project' => $project,
       'username' => $account->name,
       'recipient' => $account->name .' <' . $account->mail . '>',

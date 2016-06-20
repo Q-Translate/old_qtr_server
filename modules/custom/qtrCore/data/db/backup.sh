@@ -1,5 +1,5 @@
 #!/bin/bash
-### Backup all the users, suggestions and votes.
+### Backup all the users, suggestions and likes.
 
 ### create the backup directory
 date=$(date +%Y%m%d)
@@ -17,9 +17,9 @@ $mysqldump --tables qtr_translations --where="umail != ''" \
 
 ### backup other tables of qtr_data
 table_list="
-    qtr_votes
+    qtr_likes
     qtr_translations_trash
-    qtr_votes_trash
+    qtr_likes_trash
     qtr_users
     qtr_user_project_roles
     qtr_languages

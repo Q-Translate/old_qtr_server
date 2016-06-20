@@ -28,18 +28,18 @@ function import_translations($lng, $file, $uid = NULL) {
   $account = user_load($uid);
   $umail = ($uid==1 ?  $umail = '' : $account->init);
 
-  $verse_id = 0;
+  $vid = 0;
   while(!feof($handle)){
-    $verse_id++;
+    $vid++;
     $translation = fgets($handle);
-    $tguid = sha1($translation . $lng . $verse_id);
+    $tguid = sha1($translation . $lng . $vid);
     qtr::db_delete('qtr_translations')
       ->condition('tguid', $tguid)
       ->execute();
     qtr::db_insert('qtr_translations')
       ->fields(array(
           'tguid' => $tguid,
-          'verse_id' => $verse_id,
+          'vid' => $vid,
           'lng' => $lng,
           'translation' => $translation,
           'count' => 0,

@@ -66,7 +66,7 @@ function qtrCore_schema() {
   $schema['qtr_chapters'] = array(
     'description' => 'Chapters of the Quran.',
     'fields' => array(
-      'chapter_id' => array(
+      'cid' => array(
         'description' => 'Number of chapter (from 1 up to 114).',
         'type' => 'int',
         'size' => 'tiny',
@@ -97,7 +97,7 @@ function qtrCore_schema() {
         'not null' => TRUE,
       ),
     ),
-    'primary key' => array('chapter_id'),
+    'primary key' => array('cid'),
     'indexes' => array(
       'name' => array('name'),
       'tname' => array('tname'),
@@ -108,34 +108,34 @@ function qtrCore_schema() {
   $schema['qtr_verses'] = array(
     'description' => 'Verses of the Quran.',
     'fields' => array(
-      'verse_id' => array(
+      'vid' => array(
         'description' => 'Verse id.',
         'type' => 'serial',
         'size' => 'small',
         'not null' => TRUE,
       ),
-      'chapter_id' => array(
+      'cid' => array(
         'description' => 'Number of chapter (from 1 up to 114).',
         'type' => 'int',
         'size' => 'tiny',
         'not null' => TRUE,
       ),
-      'verse_nr' => array(
+      'nr' => array(
         'description' => 'Number of the verse.',
         'type' => 'int',
         'size' => 'small',
         'not null' => TRUE,
       ),
-      'verse_text' => array(
+      'verse' => array(
         'description' => 'The text of the verse.',
         'type' => 'varchar',
         'length' => '2500',
         'not null' => TRUE,
       ),
     ),
-    'primary key' => array('verse_id'),
+    'primary key' => array('vid'),
     'indexes' => array(
-      'verse_text' => array('verse_text'),
+      'verse' => array('verse'),
     ),
   );
 
@@ -146,12 +146,12 @@ function qtrCore_schema() {
     'description' => 'Translations of verses.',
     'fields' => array(
       'tguid' => array(
-        'description' => 'Globally Unique ID of the translation, defined as hash: SHA1(CONCAT(translation,lng,verse_id))',
+        'description' => 'Globally Unique ID of the translation, defined as hash: SHA1(CONCAT(translation,lng,vid))',
         'type' => 'char',
         'length' => '40',
         'not null' => TRUE,
       ),
-      'verse_id' => array(
+      'vid' => array(
         'description' => 'Verse id.',
         'type' => 'int',
         'size' => 'small',
@@ -170,7 +170,7 @@ function qtrCore_schema() {
         'not null' => TRUE,
       ),
       'count' => array(
-        'description' => 'Count of votes received so far. This can be counted on the table Votes, but for convenience is stored here as well.',
+        'description' => 'Count of likes received so far. This can be counted on the table Likes, but for convenience is stored here as well.',
         'type' => 'int',
         'size' => 'small',
         'not null' => FALSE,
@@ -206,7 +206,7 @@ function qtrCore_schema() {
     'indexes' => array(
       'time' => array('time'),
       'umail' => array(array('umail', 20)),
-      'verse_id' => array('verse_id'),
+      'vid' => array('vid'),
       'translation' => array('translation'),
     ),
   );
@@ -241,17 +241,17 @@ function qtrCore_schema() {
   $schema['qtr_translations_trash']['indexes']['d_time'] = array('d_time');
   $schema['qtr_translations_trash']['indexes']['d_umail'] = array(array('d_umail', 10));
 
-  // Votes for each translation/suggestion.
-  $schema['qtr_votes'] = array(
-    'description' => 'Votes for each translation/suggestion.',
+  // Likes for each translation/suggestion.
+  $schema['qtr_likes'] = array(
+    'description' => 'Likes for each translation/suggestion.',
     'fields' => array(
-      'vid' => array(
-        'description' => 'Internal numeric identifier for a vote.',
+      'lid' => array(
+        'description' => 'Internal numeric identifier for a like.',
         'type' => 'serial',
         'not null' => TRUE,
       ),
       'tguid' => array(
-        'description' => 'Reference to the id of the translation which is voted.',
+        'description' => 'Reference to the id of the translation which is liked.',
         'type' => 'char',
         'length' => '40',
         'not null' => TRUE,
@@ -282,7 +282,7 @@ function qtrCore_schema() {
         'default' => 1,
       ),
     ),
-    'primary key' => array('vid'),
+    'primary key' => array('lid'),
     'indexes' => array(
       'umail_ulng_tguid' => array(array('umail', 20), 'ulng', 'tguid'),
       'tguid' => array('tguid'),
@@ -291,25 +291,25 @@ function qtrCore_schema() {
     ),
   );
 
-  // Votes that are deleted are saved on the trash table.
-  $schema['qtr_votes_trash'] = $schema['qtr_votes'];
-  $schema['qtr_votes_trash']['description'] =
-    'Votes that are deleted are saved on the trash table.';
-  $schema['qtr_votes_trash']['fields']['vid']['type'] = 'int';
-  $schema['qtr_votes_trash']['fields']['d_time'] =
+  // Likes that are deleted are saved on the trash table.
+  $schema['qtr_likes_trash'] = $schema['qtr_likes'];
+  $schema['qtr_likes_trash']['description'] =
+    'Likes that are deleted are saved on the trash table.';
+  $schema['qtr_likes_trash']['fields']['lid']['type'] = 'int';
+  $schema['qtr_likes_trash']['fields']['d_time'] =
     array(
       'description' => 'Timestamp of the deletion time.',
       'type' => 'datetime',
       'mysql_type' => 'DATETIME',
       'not null' => FALSE,
     );
-  $schema['qtr_votes_trash']['primary key'] = array();
-  $schema['qtr_votes_trash']['indexes']['vid'] = array('vid');
-  $schema['qtr_votes_trash']['indexes']['d_time'] = array('d_time');
+  $schema['qtr_likes_trash']['primary key'] = array();
+  $schema['qtr_likes_trash']['indexes']['lid'] = array('lid');
+  $schema['qtr_likes_trash']['indexes']['d_time'] = array('d_time');
 
-  // Users that contribute translations/suggestions/votes.
+  // Users that contribute translations/suggestions/likes.
   $schema['qtr_users'] = array(
-    'description' => 'Users that contribute translations/suggestions/votes.',
+    'description' => 'Users that contribute translations/suggestions/likes.',
     'fields' => array(
       'umail' => array(
         'description' => 'The email of the user.',

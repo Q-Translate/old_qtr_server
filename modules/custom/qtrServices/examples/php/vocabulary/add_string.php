@@ -29,10 +29,10 @@ catch (Exception $e) {
   print $e->getMessage();
   print '</xmp>';
 }
-$sguid = $result['sguid'];
+$vid = $result['vid'];
 
 // Retrive the string.
-$url = $base_url . "/api/translations/$sguid?lng=sq";
+$url = $base_url . "/api/translations/$vid?lng=sq";
 $result = http_request($url);
 
 // Delete the string that was added above.
@@ -42,7 +42,7 @@ $options = array(
   'data' => array(
     'name' => 'ICT',
     'lng' => 'sq',
-    'sguid' => $sguid,
+    'vid' => $vid,
   ),
   'headers' => array(
     'Content-type' => 'application/x-www-form-urlencoded',

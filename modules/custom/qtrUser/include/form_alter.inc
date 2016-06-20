@@ -53,90 +53,12 @@ function qtrUser_form_user_profile_form_alter(&$form, &$form_state, $form_id) {
     '#description' => t("Set the projects that the user can moderate. Enter each project on a separate line, in the form <em>origin/project</em>."),
     '#default_value' => implode("\n", $form_state['user']->moderate_projects),
   );
-
-  array_unshift($form['#submit'], '_qtrUser_form_user_profile_submit');
-}
-
-/**
- * Called before form_user_profile submit
- * in order to save the extra form fields.
- */
-function _qtrUser_form_user_profile_submit($form, &$form_state) {
-
-  function _qtrUser_update_user_project_roles($umail, $ulng, $projects, $role) {
-    // Delete any existings records.
-    qtr::db_delete('qtr_user_project_roles')
-      ->condition('umail', $umail)
-      ->condition('ulng', $ulng)
-      ->condition('role', $role)
-      ->execute();
-
-    // Get the projects as an array.
-    $arr_projects = array();
-    $lines = preg_split('#\r\n|\r|\n#', $projects);
-    foreach ($lines as $line) {
-      $line = trim($line);
-      if ($line == '')  continue;
-      $arr_projects[] = $line;
-    }
-    if (!$arr_projects)  return;
-
-    // Get project pguid-s and for each of them insert a record.
-    list($condition, $args) = qtr::utils_projects_to_where_condition($arr_projects);
-    $query = "SELECT pguid FROM {qtr_projects} WHERE $condition";
-    $arr_pguid = qtr::db_query($query, $args)->fetchCol();
-    foreach ($arr_pguid as $pguid) {
-      qtr::db_insert('qtr_user_project_roles')
-        ->fields(array(
-            'umail' => $umail,
-            'ulng' => $ulng,
-            'pguid' => $pguid,
-            'role' => $role,
-          ))
-        ->execute();
-    }
-
-    // If a project is vocabulary, update its recipients of the contact form.
-    foreach ($arr_projects as $project) {
-      if (strpos($project, 'vocabulary/') !== FALSE) {
-        $project = str_replace('vocabulary/', '', $project);
-        $q = 'SELECT recipients FROM {contact} WHERE category = :project';
-        $recipients = db_query($q, array(':project' => $project))->fetchField();
-        $arr_recipients = explode(',', $recipients);
-        if (!in_array($umail, $arr_recipients)) $arr_recipients[] = $umail;
-        $arr_recipients = array_diff($arr_recipients, array(variable_get('site_mail')));
-        db_update('contact')
-          ->fields(array(
-              'recipients' => implode(',', $arr_recipients),
-            ))
-          ->condition('category', $project)
-          ->execute();
-      }
-    }
-  }
-
-  if (in_array('administrator', $GLOBALS['user']->roles)) {
-    $umail = $form_state['user']->init;
-    $ulng = $form_state['user']->translation_lng;
-    if (isset($form_state['values']['admin_projects'])) {
-      $projects = $form_state['values']['admin_projects'];
-      _qtrUser_update_user_project_roles($umail, $ulng, $projects, 'admin');
-    }
-    if (isset($form_state['values']['moderate_projects'])) {
-      $projects = $form_state['values']['moderate_projects'];
-      _qtrUser_update_user_project_roles($umail, $ulng, $projects, 'moderator');
-    }
-  }
 }
 
 /**
  * Implements hook_form_FORM_ID_alter() for user_register_form.
  */
 function qtrUser_form_user_register_form_alter(&$form, &$form_state, $form_id) {
-  // Hide 'field_projects', it can be modified with
-  // the buttons subscribe/unsubscribe from project pages.
-  $form['field_projects']['#access'] = FALSE;
-
   // Hide 'field_auxiliary_languages', it is not useful yet.
   $form['field_auxiliary_languages']['#access'] = FALSE;
 
@@ -159,10 +81,5 @@ function _qtrUser_user_register_validate($form, &$form_state) {
   // Set the value for the language field.
   if (isset($_GET['lng'])) {
       $values['field_translation_lng']['und'][0]['value'] = $_GET['lng'];
-  }
-
-  // Set the value for the projects.
-  if (isset($_GET['proj'])) {
-    $values['field_projects']['und'][0]['value'] = $_GET['proj'];
   }
 }

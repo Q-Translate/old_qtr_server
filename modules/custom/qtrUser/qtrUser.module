@@ -18,9 +18,9 @@ require_once(dirname(__FILE__) . '/include/hybridauth.inc');
  */
 function qtrUser_permission() {
   return array(
-    'qtranslate-vote' => array(
-      'title' => t('Vote translations.'),
-      'description' => t('Can submit votes (or likes) for translation suggestions.'),
+    'qtranslate-like' => array(
+      'title' => t('Like translations.'),
+      'description' => t('Can submit likes (or likes) for translation suggestions.'),
     ),
     'qtranslate-suggest' => array(
       'title' => t('Suggest new translations.'),

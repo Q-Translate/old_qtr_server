@@ -38,7 +38,7 @@ function cron_import_translations($params) {
   exec("cd $tmpdir ; dtrx -q -n $file->filename 2>/dev/null");
 
   // Import the PO files.
-  qtr::vote_import($account->uid, $lng, $tmpdir);
+  qtr::like_import($account->uid, $lng, $tmpdir);
   $txt_messages = qtr::messages_cat(qtr::messages());
 
   // Get the url of the client site.
@@ -56,8 +56,8 @@ function cron_import_translations($params) {
                     'query' => array(
                       'lng' => $lng,
                       'translated_by' => $account->name,
-                      'voted_by' => $account->name,
-                      'date_filter' => 'votes',
+                      'liked_by' => $account->name,
+                      'date_filter' => 'likes',
                       'from_date' => date('Y-m-d H:i:s', REQUEST_TIME - 1),
                       'to_date' => date('Y-m-d H:i:s', REQUEST_TIME + 1),
                       'limit' => 50,

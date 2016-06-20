@@ -179,7 +179,7 @@ function qtr_qtrServices_default_services_endpoint() {
             ),
           ),
         ),
-        'get_random_sguid' => array(
+        'get_random_vid' => array(
           'enabled' => '1',
           'settings' => array(
             'oauth2_server' => array(
@@ -206,7 +206,7 @@ function qtr_qtrServices_default_services_endpoint() {
             ),
           ),
         ),
-        'vote' => array(
+        'like' => array(
           'enabled' => '1',
           'settings' => array(
             'oauth2_server' => array(
@@ -224,7 +224,7 @@ function qtr_qtrServices_default_services_endpoint() {
             ),
           ),
         ),
-        'del_vote' => array(
+        'del_like' => array(
           'enabled' => '1',
           'settings' => array(
             'oauth2_server' => array(

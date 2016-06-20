@@ -17,7 +17,7 @@ function import_chapters($file) {
   foreach($quran->suras->sura as $chapter) {
     qtr::db_insert('qtr_chapters')
       ->fields(array(
-          'chapter_id' => $chapter['index'],
+          'cid' => $chapter['index'],
           'verses' => $chapter['ayas'],
           'start' => $chapter['start'],
           'name' => $chapter['name'],

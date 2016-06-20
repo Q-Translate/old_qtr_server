@@ -45,7 +45,7 @@ function _qtrServices_vocabulary() {
     'callback' => '_qtrServices_vocabulary_import',
     'args' => array($params),
     'access callback' => 'user_access',
-    'access arguments' => array('qtranslate-vote'),
+    'access arguments' => array('qtranslate-like'),
   );
 
   // Delete a vocabulary.
@@ -74,8 +74,8 @@ function _qtrServices_vocabulary() {
  *       If TRUE, notify subscribers about the new string. Default is TRUE.
  *
  * @return
- *   array('sguid' => $sguid, 'messages' => $messages)
- *   - $sguid is the ID of the new string,
+ *   array('vid' => $vid, 'messages' => $messages)
+ *   - $vid is the ID of the new string,
  *               or NULL if no string was added
  *   - $messages is an array of notification messages; each notification
  *               message is an array of a message and a type, where
@@ -97,17 +97,17 @@ function _qtrServices_vocabulary_add_string($params) {
   // Check access permissions.
   if (!user_access('qtranslate-suggest')) {
     $msg = t('No rights for contributing suggestions!');
-    return ['sguid' => NULL, 'messages' => [[$msg, 'error']]];
+    return ['vid' => NULL, 'messages' => [[$msg, 'error']]];
   }
   // Check that the language matches the translation language of the user.
   $account = user_load($GLOBALS['user']->uid);
   if (!user_access('qtranslate-admin') and ($lng != $account->translation_lng)) {
     $msg = t('No rights for contributing to language <strong>!lng</strong>.', ['!lng' => $lng]);
-    return ['sguid' => NULL, 'messages' => [[$msg, 'error']]];
+    return ['vid' => NULL, 'messages' => [[$msg, 'error']]];
   }
 
-  $sguid = qtr::vocabulary_string_add($name, $lng, $string, $uid, $notify);
-  return ['sguid' => $sguid, 'messages' => []];
+  $vid = qtr::vocabulary_string_add($name, $lng, $string, $uid, $notify);
+  return ['vid' => $vid, 'messages' => []];
 }
 
 /**
@@ -119,7 +119,7 @@ function _qtrServices_vocabulary_add_string($params) {
  *       The name of the vocabulary.
  *   - lng
  *       The language of the vocabulary.
- *   - sguid
+ *   - vid
  *       ID of the string to be deleted.
  *
  * @return
@@ -133,12 +133,12 @@ function _qtrServices_vocabulary_del_string($params) {
   $params += array(
     'name' => NULL,
     'lng' => NULL,
-    'sguid' => NULL,
+    'vid' => NULL,
   );
   $name = check_plain($params['name']);
   $lng = check_plain($params['lng']);
-  $sguid = check_plain($params['sguid']);
-  if (qtr::vocabulary_string_del($name, $lng, $sguid)) {
+  $vid = check_plain($params['vid']);
+  if (qtr::vocabulary_string_del($name, $lng, $vid)) {
     return ['messages' => []];
   }
   else {

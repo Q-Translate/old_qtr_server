@@ -12,8 +12,8 @@ function _qtr_project_export_drush_command() {
       'path' => 'The directory where the PO files will be exported.',
     ),
     'options' => array(
-      'export-mode' => "'most_voted' (default) or 'preferred' or 'original'",
-      'preferred-voters' => 'Comma separated list of the preferred users.',
+      'export-mode' => "'most_liked' (default) or 'preferred' or 'original'",
+      'preferred-users' => 'Comma separated list of the preferred users.',
       'user' => 'The username of the user who is requesting the export.',
     ),
     'examples' => array(
@@ -29,14 +29,14 @@ function _qtr_project_export_drush_command() {
 function _qtr_project_export_drush_help() {
   return "Export the PO files of a project from the DB.
 
-The export mode 'most_voted' (which is the default one) exports the
-most voted translations and suggestions.
+The export mode 'most_liked' (which is the default one) exports the
+most liked translations and suggestions.
 
 The export mode 'preferred' gives priority to translations that are
-voted by a certain user or a group of users. It requires an additional
-option (preferred_voters) to specify the user (or a list of users)
+liked by a certain user or a group of users. It requires an additional
+option (preferred_users) to specify the user (or a list of users)
 whose translations are preferred. If a string has no translation that
-is voted by any of the preferred users, then the most voted
+is liked by any of the preferred users, then the most liked
 translation is exported.
 
 The export mode 'original' exports the translations of the original
@@ -53,8 +53,8 @@ function drush_qtranslate_qtr_project_export($origin, $project, $lng, $path) {
   _qtranslate_drush_check_params($origin, $project, $lng);
 
   // Check the export_mode.
-  $export_mode = drush_get_option('export-mode', 'most_voted');
-  if (!in_array($export_mode, ['most_voted', 'preferred', 'original'])) {
+  $export_mode = drush_get_option('export-mode', 'most_liked');
+  if (!in_array($export_mode, ['most_liked', 'preferred', 'original'])) {
     drush_log(t("Unknown export mode '!export_mode'.",
         ['!export_mode' => $export_mode]), 'error');
     drupal_exit();
@@ -62,8 +62,8 @@ function drush_qtranslate_qtr_project_export($origin, $project, $lng, $path) {
 
   // Get the preferred users.
   if ($export_mode == 'preferred') {
-    $preferred_voters = drush_get_option('preferred-voters', NULL);
-    list($arr_emails, $error_messages) = qtr::utils_get_emails($preferred_voters);
+    $preferred_users = drush_get_option('preferred-users', NULL);
+    list($arr_emails, $error_messages) = qtr::utils_get_emails($preferred_users);
     if (!empty($error_messages)) {
       foreach ($error_messages as $msg)  drush_log($msg[0], $msg[1]);
       drupal_exit();

@@ -7,7 +7,7 @@
 /**
  * Callback function for the menu 'project/diff-latest'
  *
- * Export the latest most voted translations and make the diffs with the last
+ * Export the latest most liked translations and make the diffs with the last
  * snapshot.
  *
  * Examples:
@@ -21,19 +21,19 @@ function qtrCore_project_diff_latest($origin, $project, $lng) {
   }
 
   // Get parameters.
-  $preferred_voters = check_plain($_GET['friends']);
+  $preferred_users = check_plain($_GET['friends']);
   $export_mode = check_plain($_GET['export_mode']);
 
   if (in_array($export_mode, ['preferred_by_me', 'preferred_by_my_friends'])) {
     $export_mode = 'preferred';
   }
 
-  // Get and check the list of preferred voters.
+  // Get and check the list of preferred users.
   if ($export_mode == 'preferred') {
-    if (empty($preferred_voters)) {
-      $preferred_voters = $GLOBALS['user']->name;
+    if (empty($preferred_users)) {
+      $preferred_users = $GLOBALS['user']->name;
     }
-    list($arr_emails, $error_messages) = qtr::utils_get_emails($preferred_voters);
+    list($arr_emails, $error_messages) = qtr::utils_get_emails($preferred_users);
     if (!empty($error_messages)) {
       header('Content-Type: text/plain; charset=utf-8');
       foreach ($error_messages as $msg) { print $msg[0] . "\n"; }

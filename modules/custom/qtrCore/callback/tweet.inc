@@ -25,8 +25,8 @@ function qtrCore_tweet($lng =NULL, $origin =NULL, $project =NULL) {
   // Get a translated string shorter than 50 chars.
   $i = 0;
   do {
-    $sguid = qtr::sguid_get('translated', $lng, array($scope));
-    list($string, $translations) = qtr::string_get_translations($sguid, $lng);
+    $vid = qtr::vid_get('translated', $lng, array($scope));
+    list($string, $translations) = qtr::string_get_translations($vid, $lng);
     $i++;
   } while (strlen($string) > 50 and $i < 10);
 
@@ -49,7 +49,7 @@ function qtrCore_tweet($lng =NULL, $origin =NULL, $project =NULL) {
     //drupal_add_http_header('Content-Type', 'application/json; utf-8');
     print drupal_json_encode(array(
         'lng' => $lng,
-        'sguid' => $sguid,
+        'vid' => $vid,
         'twitter' => $twitter,
       ));
     exit;
@@ -67,7 +67,7 @@ function qtrCore_tweet($lng =NULL, $origin =NULL, $project =NULL) {
   else {
     module_load_include('inc', 'qtrCore', 'includes/sites');
     $client_url = qtr::utils_get_client_url($lng);
-    $twitter .= ' ' . $client_url . "/translations/$lng/$sguid";
+    $twitter .= ' ' . $client_url . "/translations/$lng/$vid";
   }
 
   print $twitter;

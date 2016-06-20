@@ -79,9 +79,9 @@ function qtr_qtr_user_default_permissions() {
     'module' => 'qtrUser',
   );
 
-  // Exported permission: 'qtranslate-vote'.
-  $permissions['qtranslate-vote'] = array(
-    'name' => 'qtranslate-vote',
+  // Exported permission: 'qtranslate-like'.
+  $permissions['qtranslate-like'] = array(
+    'name' => 'qtranslate-like',
     'roles' => array(
       'contributor' => 'contributor',
       'moderator' => 'moderator',

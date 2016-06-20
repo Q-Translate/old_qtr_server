@@ -38,7 +38,7 @@ function qtrCore_config() {
     'single'   => t('Single'),
     'multiple' => t('Multiple'),
   );
-  $voting_mode_description = t('When voting mode is <em>Single</em>, only one translation can be voted as suitable for each string. When voting mode is <em>Multiple</em>, more than one translation can be selected as suitable for each string. <br/> <strong>Note:</strong> Switching back from <em>Multiple</em> to <em>Single</em> may have a bad impact on the existing votes.');
+  $voting_mode_description = t('When voting mode is <em>Single</em>, only one translation can be liked for each string. When voting mode is <em>Multiple</em>, more than one translation can be selected as suitable for each string. <br/> <strong>Note:</strong> Switching back from <em>Multiple</em> to <em>Single</em> may have a bad impact on the existing likes.');
   $form['config']['qtr_voting_mode'] = array(
     '#type'          => 'radios',
     '#title'         => t('Select Voting Mode'),

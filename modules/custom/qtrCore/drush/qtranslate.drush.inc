@@ -13,7 +13,7 @@ require_once(dirname(__FILE__) . '/qtr-project-diff.inc');
 require_once(dirname(__FILE__) . '/qtr-project-diff-ls.inc');
 require_once(dirname(__FILE__) . '/qtr-project-diff-get.inc');
 require_once(dirname(__FILE__) . '/qtr-project-snapshot.inc');
-require_once(dirname(__FILE__) . '/qtr-vote-import.inc');
+require_once(dirname(__FILE__) . '/qtr-like-import.inc');
 require_once(dirname(__FILE__) . '/qtr-vocabulary-add.inc');
 require_once(dirname(__FILE__) . '/qtr-vocabulary-del.inc');
 require_once(dirname(__FILE__) . '/qtr-vocabulary-list.inc');
@@ -37,7 +37,7 @@ function qtranslate_drush_command() {
     'qtr-project-diff-ls' => _qtr_project_diff_ls_drush_command(),
     'qtr-project-diff-get' => _qtr_project_diff_get_drush_command(),
     'qtr-project-snapshot' => _qtr_project_snapshot_drush_command(),
-    'qtr-vote-import' => _qtr_vote_import_drush_command(),
+    'qtr-like-import' => _qtr_like_import_drush_command(),
     'qtr-vocabulary-add' => _qtr_vocabulary_add_drush_command(),
     'qtr-vocabulary-del' => _qtr_vocabulary_del_drush_command(),
     'qtr-vocabulary-list' => _qtr_vocabulary_list_drush_command(),
@@ -87,8 +87,8 @@ function qtranslate_drush_help($section) {
       return _qtr_project_diff_get_drush_help();
     case 'drush:qtr-project-snapshot':
       return _qtr_project_snapshot_drush_help();
-    case 'drush:qtr-vote-import':
-      return _qtr_vote_import_drush_help();
+    case 'drush:qtr-like-import':
+      return _qtr_like_import_drush_help();
     case 'drush:qtr-vocabulary-add':
       return _qtr_vocabulary_add_drush_help();
     case 'drush:qtr-vocabulary-del':

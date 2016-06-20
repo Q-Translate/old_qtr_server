@@ -29,7 +29,7 @@ function cron_export_project($export_params) {
   $origin = $export_params->origin;
   $project = $export_params->project;
   $export_mode = $export_params->export_mode;
-  $preferred_voters = $export_params->preferred_voters;
+  $preferred_users = $export_params->preferred_users;
   $account = user_load($export_params->uid);
 
   // Get the full path of the export files.
@@ -44,7 +44,7 @@ function cron_export_project($export_params) {
   exec("rm -f $file_diff $file_ediff $file_tgz");
   qtr::project_diff($origin, $project, $lng,
     $file_diff, $file_ediff, $file_tgz,
-    $export_mode, $preferred_voters, $account->uid);
+    $export_mode, $preferred_users, $account->uid);
   $output = qtr::messages_cat(qtr::messages());
 
   // Notify the user that the export is done.

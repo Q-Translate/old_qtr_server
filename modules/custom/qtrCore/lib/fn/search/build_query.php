@@ -15,16 +15,16 @@ use \qtr;
  *
  * It should be something like this:
  *
- *    SELECT s.sguid,
+ *    SELECT v.vid,
  *           MAX(MATCH (t.translation) AGAINST (:words)) AS score
- *    FROM {qtr_strings} s
- *    LEFT JOIN {qtr_translations} t ON (s.sguid = t.sguid)
+ *    FROM {qtr_verses} v
+ *    LEFT JOIN {qtr_translations} t ON (v.vid = t.vid)
  *    LEFT JOIN . . . . .
  *    . . . . . . . . . .
  *    WHERE (t.lng = :lng)
  *      AND (MATCH (t.translation) AGAINST (:words IN BOOLEAN MODE))
  *    . . . . . . . . . .
- *    GROUP BY s.sguid
+ *    GROUP BY v.vid
  *    ORDER BY score DESC
  *    LIMIT :limit;
  *
@@ -34,8 +34,8 @@ use \qtr;
  * @param $filter
  *   Filter conditions that should be matched.
  *   It is an associated array with these keys:
- *      lng, limit, mode, words, project, origin, only_mine, translated_by,
- *      voted_by, date_filter, from_date, to_date, list_mode
+ *      lng, limit, mode, words, chapter, only_mine, translated_by,
+ *      liked_by, date_filter, from_date, to_date, list_mode
  *
  * @return
  *   A query object that corresponds to the filter.
@@ -45,14 +45,14 @@ function search_build_query($filter) {
   // Store the value of the language.
   _lng($filter['lng']);
 
-  $query = qtr::db_select('qtr_strings', 's')
+  $query = qtr::db_select('qtr_verses', 'v')
     ->extend('PagerDefault')->limit($filter['limit']);
-  $query->addField('s', 'sguid');
-  $query->groupBy('s.sguid');
+  $query->addField('v', 'vid');
+  $query->groupBy('v.vid');
 
   _filter_by_content($query, $filter['mode'], $filter['words']);
-  _filter_by_project($query, $filter['project'], $filter['origin']);
-  _filter_by_author($query, $filter['lng'], $filter['only_mine'], $filter['translated_by'], $filter['voted_by']);
+  _filter_by_chapter($query, $filter['chapter']);
+  _filter_by_author($query, $filter['lng'], $filter['only_mine'], $filter['translated_by'], $filter['liked_by']);
   _filter_by_date($query, $filter['date_filter'], $filter['from_date'], $filter['to_date']);
   _filter_by_list_mode($query, $filter['list_mode']);
 
@@ -98,8 +98,8 @@ function _lng($lang = NULL) {
 /**
  * Apply to the query conditions related to the content
  * (of strings and translations). Depending on the search_mode,
- * we look either for strings/translations similar to the given phase,
- * or for strings/translations matching the given words,
+ * we look either for verses/translations similar to the given phase,
+ * or for verses/translations matching the given words,
  * The first parameter, $query, is an object, so it is
  * passed by reference.
  */
@@ -115,10 +115,10 @@ function _filter_by_content($query, $search_mode, $search_words) {
   //according to the search mode
   list($mode, $content) = explode('-', $search_mode);
   $in_boolean_mode = ($mode=='boolean' ? ' IN BOOLEAN MODE' : '');
-  if ($content=='strings') {
-    $query->addExpression('MATCH (s.string) AGAINST (:words)', 'score');
+  if ($content=='verses') {
+    $query->addExpression('MATCH (v.verse) AGAINST (:words)', 'score');
     $query->where(
-      'MATCH (s.string) AGAINST (:words' . $in_boolean_mode . ')',
+      'MATCH (v.verse) AGAINST (:words' . $in_boolean_mode . ')',
       array(':words' => $search_words)
     );
   }
@@ -136,33 +136,23 @@ function _filter_by_content($query, $search_mode, $search_words) {
 }
 
 /**
- * Apply to the query conditions related to projects and origin.
- * The first parameter, $query, is an object, so it is passed
- * by reference.
+ * Apply to the query conditions related to chapter.
+ * The first parameter, $query, is an object, so it is passed by reference.
  */
-function _filter_by_project($query, $project, $origin) {
-
-  if ($project == '' and $origin == '')  return;
-
-  _join_table($query, 'projects');
-
-  if ($project != '') {
-    $query->condition('p.project', $project);
-  }
-  if ($origin != '') {
-    $query->condition('p.origin', $origin);
-  }
+function _filter_by_chapter($query, $chapter) {
+  if ($chapter == '')  return;
+  _join_table($query, 'chapters');
+  $query->condition('c.tname', $chapter);
 }
 
 /**
  * Apply to the query conditions related to authors.
- * The first parameter, $query, is an object, so it is passed
- * by reference.
+ * The first parameter, $query, is an object, so it is passed by reference.
  */
-function _filter_by_author($query, $lng, $only_mine, $translated_by, $voted_by) {
+function _filter_by_author($query, $lng, $only_mine, $translated_by, $liked_by) {
 
   if ($only_mine) {
-    _join_table($query, 'votes');
+    _join_table($query, 'likes');
 
     global $user;
     $umail = $user->init;  // initial mail used for registration
@@ -176,11 +166,11 @@ function _filter_by_author($query, $lng, $only_mine, $translated_by, $voted_by) 
         ->condition('v.ulng', $lng)
       )
     );
-    //done, ignore $translated_by and $voted_by
+    //done, ignore $translated_by and $liked_by
     return;
   }
 
-  //get the umail for $translated_by and $voted_by
+  //get the umail for $translated_by and $liked_by
   $get_umail = 'SELECT umail FROM {qtr_users} WHERE name = :name AND ulng = :ulng';
   $args = array();
   if ($translated_by == '') $t_umail = '';
@@ -190,18 +180,18 @@ function _filter_by_author($query, $lng, $only_mine, $translated_by, $voted_by) 
     $args[':name'] = $translated_by;
     $t_umail = qtr::db_query($get_umail, $args)->fetchField();
   }
-  if ($voted_by == '') $v_umail = '';
+  if ($liked_by == '') $v_umail = '';
   else {
-    $account = user_load_by_name($voted_by);
+    $account = user_load_by_name($liked_by);
     $args[':ulng'] = $account->translation_lng;
-    $args[':name'] = $voted_by;
+    $args[':name'] = $liked_by;
     $v_umail = qtr::db_query($get_umail, $args)->fetchField();
   }
 
   //if it is the same user, then search for strings
-  //translated OR voted by this user
+  //translated OR liked by this user
   if ($t_umail==$v_umail and $t_umail!='') {
-    _join_table($query, 'votes');
+    _join_table($query, 'likes');
     $query->condition(db_or()
       ->condition(db_and()
         ->condition('t.umail', $t_umail)
@@ -216,13 +206,13 @@ function _filter_by_author($query, $lng, $only_mine, $translated_by, $voted_by) 
   }
 
   //if the users are different, then search for strings
-  //translated by $t_umail AND voted by $v_umail
+  //translated by $t_umail AND liked by $v_umail
   if ($t_umail != '') {
     _join_table($query, 'translations');
     $query->condition('t.umail', $t_umail)->condition('t.ulng', $lng);
   }
   if ($v_umail != '') {
-    _join_table($query, 'votes');
+    _join_table($query, 'likes');
     $query->condition('v.umail', $v_umail)->condition('v.ulng', $lng);
   }
 }
@@ -233,25 +223,24 @@ function _filter_by_author($query, $lng, $only_mine, $translated_by, $voted_by) 
  * The first parameter, $query, is an object, so it is passed
  * by reference.
  *
- * $date_filter has one of the values ('strings', 'translations', 'votes')
+ * $date_filter has one of the values ('strings', 'translations', 'likes')
  */
 function _filter_by_date($query, $date_filter, $from_date, $to_date) {
   // If both dates are empty, there is no condition to be added.
   if ($from_date == '' and $to_date == '')  return;
 
-  //if the date of translations or votes has to be checked,
+  //if the date of translations or likes has to be checked,
   //then the corresponding tables must be joined
   if ($date_filter == 'translations') {
     _join_table($query, 'translations');
   }
-  elseif ($date_filter == 'votes') {
-    _join_table($query, 'votes');
+  elseif ($date_filter == 'likes') {
+    _join_table($query, 'likes');
   }
 
   //get the alias (name) of the date field that has to be checked
-  if      ($date_filter=='strings')  $field = 's.time';
-  elseif  ($date_filter=='votes')    $field = 'v.time';
-  else                               $field = 't.time';
+  if  ($date_filter=='likes')    $field = 'l.time';
+  else                           $field = 't.time';
 
   //add to query the propper date condition;
   //if none of the dates are given, no condition is added
@@ -290,17 +279,17 @@ function _filter_by_list_mode($query, $list_mode) {
 
   // Add the condition for filtering the translated/untranslated strings.
   if ($list_mode == 'translated') {
-    $query->isNotNull('t.sguid');
+    $query->isNotNull('t.vid');
   }
   else {
-    $query->isNull('t.sguid');
+    $query->isNull('t.vid');
   }
 }
 
 /**
  * Add a join for the given table to the $query.
  * Make sure that the join is added only once (by using tags).
- * $table can be one of: translations, votes, locations
+ * $table can be one of: translations, likes, chapters
  */
 function _join_table($query, $table) {
   $tag = "join-$table";
@@ -309,22 +298,14 @@ function _join_table($query, $table) {
 
   switch ($table) {
     case 'translations':
-      $query->leftJoin("qtr_translations", 't', 's.sguid = t.sguid AND t.lng = :lng', [':lng' => _lng()]);
+      $query->leftJoin("qtr_translations", 't', 'v.vid = t.vid AND t.lng = :lng', [':lng' => _lng()]);
       break;
-    case 'votes':
+    case 'likes':
       _join_table($query, 'translations');
-      $query->leftJoin("qtr_votes", 'v', 'v.tguid = t.tguid');
+      $query->leftJoin("qtr_likes", 'l', 'l.tguid = t.tguid');
       break;
-    case 'locations':
-      $query->leftJoin("qtr_locations", 'l', 's.sguid = l.sguid');
-      break;
-    case 'templates':
-      $query->leftJoin("qtr_templates", 'tpl', 'tpl.potid = l.potid');
-      break;
-    case 'projects':
-      _join_table($query, 'locations');
-      _join_table($query, 'templates');
-      $query->leftJoin("qtr_projects", 'p', 'p.pguid = tpl.pguid');
+    case 'chapters':
+      $query->leftJoin("qtr_chapters", 'c', 'c.cid = v.cid');
       break;
     default:
       debug("Error: _join_table(): table '$table' is unknown.");

@@ -184,7 +184,7 @@ fg=red</panel_attributes>
       <w>60</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>_:Vote_
+    <panel_attributes>_:Like_
 bg=yellow
 fg=red</panel_attributes>
     <additional_attributes/>
@@ -221,7 +221,7 @@ fg=red</panel_attributes>
       <w>60</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>_:Vote_
+    <panel_attributes>_:Like_
 bg=yellow
 fg=red</panel_attributes>
     <additional_attributes/>
@@ -246,7 +246,7 @@ fg=red</panel_attributes>
       <w>60</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>_:Vote_
+    <panel_attributes>_:Like_
 bg=yellow
 fg=red</panel_attributes>
     <additional_attributes/>
@@ -270,7 +270,7 @@ fg=red</panel_attributes>
       <w>90</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>no votes
+    <panel_attributes>no likes
 bg=pink</panel_attributes>
     <additional_attributes/>
   </element>
@@ -294,7 +294,7 @@ fg=red</panel_attributes>
       <w>60</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>_:Vote_
+    <panel_attributes>_:Like_
 bg=yellow
 fg=red</panel_attributes>
     <additional_attributes/>

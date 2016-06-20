@@ -13,21 +13,18 @@ use \qtr;
  * If $origin and $project are given, then they will be used
  * to filter only the translations that belong to them.
  * The fields that are returned are:
- *   origin, project, sguid, string, lng, translation, tguid, time, name, umail
+ *   origin, project, vid, string, lng, translation, tguid, time, name, umail
  */
 function translation_latest($lng, $origin =NULL, $project =NULL) {
 
   $get_latest_translations = "
-    SELECT p.origin, p.project,
-           s.sguid, s.string,
+    SELECT c.tname, v.cid, v.vid, v.verse,
            t.lng, t.translation, t.tguid, t.time,
            u.name, u.umail
     FROM {qtr_translations} t
-    LEFT JOIN {qtr_strings} s ON (s.sguid = t.sguid)
+    LEFT JOIN {qtr_verses} v ON (v.vid = t.vid)
     LEFT JOIN {qtr_users} u ON (u.umail = t.umail AND u.ulng = t.ulng)
-    LEFT JOIN {qtr_locations} l ON (l.sguid = s.sguid)
-    LEFT JOIN {qtr_templates} tpl ON (tpl.potid = l.potid)
-    LEFT JOIN {qtr_projects} p ON (p.pguid = tpl.pguid)
+    LEFT JOIN {qtr_chapters} c ON (c.cid = v.cid)
     WHERE t.umail != '' AND t.lng = :lng AND t.time > :from_date
     ";
 

@@ -10,7 +10,7 @@ use \qtr;
 /**
  * Add a new translation to a source string.
  *
- * @param $sguid
+ * @param $vid
  *   The string ID for which a new translation should be added.
  *
  * @param $lng
@@ -30,7 +30,7 @@ use \qtr;
  * @return
  *   ID of the new translation, or NULL if no translation was added.
  */
-function translation_add($sguid, $lng, $translation, $uid = NULL, $notify = TRUE) {
+function translation_add($vid, $lng, $translation, $uid = NULL, $notify = TRUE) {
   // Don't add empty translations.
   $translation = qtr::string_pack($translation);
   $translation = str_replace(t('<New translation>'), '', $translation);
@@ -41,13 +41,13 @@ function translation_add($sguid, $lng, $translation, $uid = NULL, $notify = TRUE
   }
 
   // Make spacing and newlines the same in translation as in the source.
-  $string = qtr::string_get($sguid);
+  $string = qtr::string_get($vid);
   $matches = array();
   preg_match("/^(\s*).*\S(\s*)\$/s", $string, $matches);
   $translation = $matches[1] . trim($translation) . $matches[2];
 
   // Look for an existing translation, if any.
-  $tguid = sha1($translation . $lng . $sguid);
+  $tguid = sha1($translation . $lng . $vid);
   $existing = qtr::translation_get($tguid);
 
   // If this translation already exists, there is nothing to be added.
@@ -67,7 +67,7 @@ function translation_add($sguid, $lng, $translation, $uid = NULL, $notify = TRUE
   // Insert the new suggestion.
   qtr::db_insert('qtr_translations')
     ->fields(array(
-        'sguid' => $sguid,
+        'vid' => $vid,
         'lng' => $lng,
         'translation' => $translation,
         'tguid' => $tguid,
@@ -88,21 +88,21 @@ function translation_add($sguid, $lng, $translation, $uid = NULL, $notify = TRUE
   // The same is applied for the users with admin or moderator role in the
   // project of the string.
   if (!user_access('qtranslate-import', $account) and $uid > 1
-    and !qtr::user_has_project_role('admin', $sguid, $uid)
-    and !qtr::user_has_project_role('moderator', $sguid, $uid))
+    and !qtr::user_has_project_role('admin', $vid, $uid)
+    and !qtr::user_has_project_role('moderator', $vid, $uid))
     {
-      _remove_old_translation($sguid, $lng, $umail, $tguid);
+      _remove_old_translation($vid, $lng, $umail, $tguid);
     }
 
-  // Add also a vote for the new translation (but not if it is added by admin).
+  // Add also a like for the new translation (but not if it is added by admin).
   if ($uid > 1) {
-    qtr::vote_add($tguid, $uid);
+    qtr::like_add($tguid, $uid);
   }
 
-  // Notify previous voters of this string that a new translation has been
-  // suggested. Maybe they would like to review it and change their vote.
+  // Notify previous users of this string that a new translation has been
+  // suggested. Maybe they would like to review it and change their like.
   if ($notify) {
-    _notify_voters_on_new_translation($sguid, $lng, $tguid, $string, $translation);
+    _notify_users_on_new_translation($vid, $lng, $tguid, $string, $translation);
   }
 
   return $tguid;
@@ -115,7 +115,7 @@ function translation_add($sguid, $lng, $translation, $uid = NULL, $notify = TRUE
  * the user wants to correct the translation, but it limits the user to
  * only one suggested translation per string.
  *
- * @param $sguid
+ * @param $vid
  *   Id of the string being translated.
  *
  * @param $lng
@@ -127,15 +127,15 @@ function translation_add($sguid, $lng, $translation, $uid = NULL, $notify = TRUE
  * @param $tguid
  *   Id of the new translation.
  */
-function _remove_old_translation($sguid, $lng, $umail, $tguid) {
+function _remove_old_translation($vid, $lng, $umail, $tguid) {
   // Get the old translation (if any).
   $query = 'SELECT tguid, translation
             FROM {qtr_translations}
-            WHERE sguid = :sguid AND lng = :lng
+            WHERE vid = :vid AND lng = :lng
               AND umail = :umail AND ulng = :ulng
               AND tguid != :tguid';
   $args = array(
-    ':sguid' => $sguid,
+    ':vid' => $vid,
     ':lng' => $lng,
     ':umail' => $umail,
     ':ulng' => $lng,
@@ -145,7 +145,7 @@ function _remove_old_translation($sguid, $lng, $umail, $tguid) {
 
   // Copy to the trash table the old translation.
   $query = qtr::db_select('qtr_translations', 't')
-    ->fields('t', array('sguid', 'lng', 'translation', 'tguid', 'count', 'umail', 'ulng', 'time', 'active'))
+    ->fields('t', array('vid', 'lng', 'translation', 'tguid', 'count', 'umail', 'ulng', 'time', 'active'))
     ->condition('tguid', $old_trans->tguid);
   $query->addExpression(':d_umail', 'd_umail', array(':d_umail' => $umail));
   $query->addExpression(':d_ulng', 'd_ulng', array(':d_ulng' => $lng));
@@ -157,70 +157,70 @@ function _remove_old_translation($sguid, $lng, $umail, $tguid) {
     ->condition('tguid', $old_trans->tguid)
     ->execute();
 
-  // Get the votes of the old translation.
-  $query = "SELECT v.tguid, v.time, u.umail, u.ulng, u.uid,
+  // Get the likes of the old translation.
+  $query = "SELECT l.tguid, l.time, u.umail, u.ulng, u.uid,
                    u.name AS user_name, u.status AS user_status
-            FROM {qtr_votes} v
-            JOIN {qtr_users} u ON (u.umail = v.umail AND u.ulng = v.ulng)
-            WHERE v.tguid = :tguid AND v.umail != :umail";
+            FROM {qtr_likes} l
+            JOIN {qtr_users} u ON (u.umail = l.umail AND u.ulng = l.ulng)
+            WHERE l.tguid = :tguid AND l.umail != :umail";
   $args = array(':tguid' => $old_trans->tguid, ':umail' => $umail);
-  $votes = qtr::db_query($query, $args)->fetchAll();
+  $likes = qtr::db_query($query, $args)->fetchAll();
 
-  // Insert to the trash table the votes that will be deleted.
-  $query = qtr::db_select('qtr_votes', 'v')
-    ->fields('v', array('vid', 'tguid', 'umail', 'ulng', 'time', 'active'))
+  // Insert to the trash table the likes that will be deleted.
+  $query = qtr::db_select('qtr_likes', 'l')
+    ->fields('l', array('lid', 'tguid', 'umail', 'ulng', 'time', 'active'))
     ->condition('tguid', $old_trans->tguid);
   $query->addExpression('NOW()', 'd_time');
-  qtr::db_insert('qtr_votes_trash')->from($query)->execute();
+  qtr::db_insert('qtr_likes_trash')->from($query)->execute();
 
-  // Delete the votes belonging to the old translation.
-  qtr::db_delete('qtr_votes')->condition('tguid', $old_trans->tguid)->execute();
+  // Delete the likes belonging to the old translation.
+  qtr::db_delete('qtr_likes')->condition('tguid', $old_trans->tguid)->execute();
 
-  // Associate these votes to the new translation.
+  // Associate these likes to the new translation.
   $notification_list = array();
-  foreach ($votes as $vote) {
-    // Associate the vote to the new translation.
-    qtr::db_insert('qtr_votes')
+  foreach ($likes as $like) {
+    // Associate the like to the new translation.
+    qtr::db_insert('qtr_likes')
       ->fields(array(
           'tguid' => $tguid,
-          'umail' => $vote->umail,
-          'ulng' => $vote->ulng,
-          'time' => $vote->time,
+          'umail' => $like->umail,
+          'ulng' => $like->ulng,
+          'time' => $like->time,
         ))
       ->execute();
 
-    if ($vote->user_status != 1)  continue;   // skip non-active voters
+    if ($like->user_status != 1)  continue;   // skip non-active users
 
-    // Add voter to the notification list.
+    // Add user to the notification list.
     $notification_list[$uid] = array(
       'uid' => $uid,
-      'name' => $vote->user_name,
-      'umail' => $vote->umail,
+      'name' => $like->user_name,
+      'umail' => $like->umail,
     );
   }
 
-  _notify_voters_on_translation_change($notification_list, $sguid, $old_trans->translation, $tguid);
+  _notify_users_on_translation_change($notification_list, $vid, $old_trans->translation, $tguid);
 }
 
 /**
- * Notify the voters of a translation that the author has changed
- * the translation and their votes count now for the new translation.
+ * Notify the users that have liked a translation that the author has changed
+ * the translation and their likes count now for the new translation.
  */
-function _notify_voters_on_translation_change($voters, $sguid, $old_translation, $tguid) {
+function _notify_users_on_translation_change($users, $vid, $old_translation, $tguid) {
 
-  if (empty($voters))  return;
+  if (empty($users))  return;
 
-  $string = qtr::string_get($sguid);
+  $string = qtr::string_get($vid);
   $new_translation = qtr::translation_get($tguid);
 
   $notifications = array();
-  foreach ($voters as $uid => $voter) {
+  foreach ($users as $uid => $user) {
     $notification = array(
-      'type' => 'notify-voter-on-translation-change',
-      'uid' => $voter['uid'],
-      'username' => $voter['name'],
-      'recipient' => $voter['name'] . ' <' . $voter['umail'] . '>',
-      'sguid' => $sguid,
+      'type' => 'notify-user-on-translation-change',
+      'uid' => $user['uid'],
+      'username' => $user['name'],
+      'recipient' => $user['name'] . ' <' . $user['umail'] . '>',
+      'vid' => $vid,
       'string' => $string,
       'old_translation' => $old_translation,
       'new_translation' => $new_translation,
@@ -232,31 +232,31 @@ function _notify_voters_on_translation_change($voters, $sguid, $old_translation,
 }
 
 /**
- * Notify the previous voters of a string that a new translation has been
- * submitted. Maybe they would like to review it and change their vote.
+ * Notify the users that have liked a verse that a new translation has been
+ * submitted. Maybe they would like to review it and change their preference.
  */
-function _notify_voters_on_new_translation($sguid, $lng, $tguid, $string, $translation) {
+function _notify_users_on_new_translation($vid, $lng, $tguid, $string, $translation) {
 
   $query = "SELECT u.umail, u.ulng, u.uid, u.name, u.status, t.translation
             FROM {qtr_translations} t
-            JOIN {qtr_votes} v ON (v.tguid = t.tguid)
-            JOIN {qtr_users} u ON (u.umail = v.umail AND u.ulng = v.ulng)
-            WHERE t.sguid = :sguid AND t.lng = :lng AND t.tguid != :tguid";
-  $args = array(':sguid' => $sguid, ':lng' => $lng, ':tguid' => $tguid);
-  $voters = qtr::db_query($query, $args)->fetchAll();
+            JOIN {qtr_likes} l ON (l.tguid = t.tguid)
+            JOIN {qtr_users} u ON (u.umail = l.umail AND u.ulng = l.ulng)
+            WHERE t.vid = :vid AND t.lng = :lng AND t.tguid != :tguid";
+  $args = array(':vid' => $vid, ':lng' => $lng, ':tguid' => $tguid);
+  $users = qtr::db_query($query, $args)->fetchAll();
 
-  if (empty($voters))  return;
+  if (empty($users))  return;
 
   $notifications = array();
-  foreach ($voters as $voter) {
+  foreach ($users as $user) {
     $notification = array(
-      'type' => 'notify-voter-on-new-translation',
-      'uid' => $voter->uid,
-      'username' => $voter->name,
-      'recipient' => $voter->name . ' <' . $voter->umail . '>',
-      'sguid' => $sguid,
+      'type' => 'notify-user-on-new-translation',
+      'uid' => $user->uid,
+      'username' => $user->name,
+      'recipient' => $user->name . ' <' . $user->umail . '>',
+      'vid' => $vid,
       'string' => $string,
-      'voted_translation' => $voter->translation,
+      'liked_translation' => $user->translation,
       'new_translation' => $translation,
     );
     $notifications[] = $notification;

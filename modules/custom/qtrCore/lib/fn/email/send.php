@@ -14,7 +14,7 @@ use \qtr;
  * Other required attributes of $params are $params->recipient
  * and $params->uid. The other attributes are needed to build the
  * subject and body of the message. Some common attributes are:
- *   $params->username, $params->sguid, $params->string,
+ *   $params->username, $params->vid, $params->string,
  *   $params->translation, etc.
  */
 function email_send($params) {
@@ -52,7 +52,7 @@ function get_sender() {
  * of the notification, defined by $params->type.
  *
  * The other attributes depend on the notification type.
- * Some common attributes are: $params->uid, $params->sguid,
+ * Some common attributes are: $params->uid, $params->vid,
  * $params->username, $params->string, $params->translation, etc.
  */
 function get_subject_and_body($params) {
@@ -65,8 +65,8 @@ function get_subject_and_body($params) {
   $client_url = qtr::utils_get_client_url($lng);
 
   // Get the url of the string.
-  if (isset($params->sguid)) {
-    $url = $client_url . "/translations/$lng/" . $params->sguid;
+  if (isset($params->vid)) {
+    $url = $client_url . "/translations/$lng/" . $params->vid;
   }
 
   // Include the subject and body of the message.

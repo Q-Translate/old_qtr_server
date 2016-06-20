@@ -24,22 +24,22 @@
  *      Translation to be exported.
  *
  *  - export_mode
- *      Mode of export: most_voted | preferred | original
+ *      Mode of export: most_liked | preferred | original
  *
- *      Default is 'most_voted' which exports the most voted
+ *      Default is 'most_liked' which exports the most liked
  *      translations and suggestions.
  *
  *      The export mode 'original' exports the translations of the
  *      original file that was imported (useful for making diffs).
  *
  *      The export mode 'preferred' gives priority to translations
- *      that are voted by a certain user or a group of users. It
- *      requires an additional argument (preferred_voters) to specify
+ *      that are liked by a certain user or a group of users. It
+ *      requires an additional argument (preferred_users) to specify
  *      the user (or a list of users) whose translations are
  *      preferred.
  *
- * - preferred_voters
- *      Comma separated list of usernames of the preferred voters.
+ * - preferred_users
+ *      Comma separated list of usernames of the preferred users.
  *
  * Examples:
  *   curl -k 'https://dev.qtranslate.org/project/export?origin=test&project=kturtle&lng=sq' > test1.tgz
@@ -48,7 +48,7 @@
  *   curl -k https://dev.qtranslate.org/project/export \
  *        -d origin=test -d project=kturtle -d lng=sq \
  *        -d export_mode=preferred \
- *        -d preferred_voters=user1,user2 > test1.tgz
+ *        -d preferred_users=user1,user2 > test1.tgz
  */
 function qtrCore_project_export() {
   // Try to avoid concurrent exports because they
@@ -63,7 +63,7 @@ function qtrCore_project_export() {
   $project = check_plain($_REQUEST['project']);
   $lng = check_plain($_REQUEST['lng']);
   $export_mode = check_plain($_REQUEST['export_mode']);
-  $preferred_voters = check_plain($_REQUEST['preferred_voters']);
+  $preferred_users = check_plain($_REQUEST['preferred_users']);
 
   // Only a project admin can request a direct export.
   if (!qtr::user_is_project_admin($origin, $project, $lng)) {
@@ -79,19 +79,19 @@ function qtrCore_project_export() {
   }
 
   // Check the export_mode.
-  if (empty($export_mode))  $export_mode = 'most_voted';
-  if (!in_array($export_mode, array('most_voted', 'preferred', 'original'))) {
+  if (empty($export_mode))  $export_mode = 'most_liked';
+  if (!in_array($export_mode, array('most_liked', 'preferred', 'original'))) {
     print t("Unknown export mode '!export_mode'.",
       array('!export_mode' => $export_mode));
     drupal_exit();
   }
 
-  // Get and check the list of preferred voters.
+  // Get and check the list of preferred users.
   if ($export_mode == 'preferred') {
-    if (empty($preferred_voters)) {
-      $preferred_voters = $GLOBALS['user']->name;
+    if (empty($preferred_users)) {
+      $preferred_users = $GLOBALS['user']->name;
     }
-    list($arr_emails, $error_messages) = qtr::utils_get_emails($preferred_voters);
+    list($arr_emails, $error_messages) = qtr::utils_get_emails($preferred_users);
     if (!empty($error_messages)) {
       foreach ($error_messages as $msg) { print $msg[0] . "\n"; }
       drupal_exit();

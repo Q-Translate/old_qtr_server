@@ -18,9 +18,9 @@ function import_verses($file) {
     foreach ($chapter->aya as $verse) {
       qtr::db_insert('qtr_verses')
         ->fields(array(
-            'chapter_id' => $chapter['index'],
-            'verse_nr' => $verse['index'],
-            'verse_text' => $verse['text'],
+            'cid' => $chapter['index'],
+            'nr' => $verse['index'],
+            'verse' => $verse['text'],
           ))
         ->execute();
     }

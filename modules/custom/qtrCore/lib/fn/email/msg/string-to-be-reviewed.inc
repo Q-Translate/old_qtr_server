@@ -6,7 +6,7 @@ use \qtr;
  * Send by email a string to be reviewed.
  */
 {
-  list($string, $translations) = qtr::string_get_translations($params->sguid, $lng);
+  list($string, $translations) = qtr::string_get_translations($params->vid, $lng);
   // Get the url of the string.
   list($origin, $project) = explode('/', $params->project);
   $app_url = qtr::utils_get_app_url($lng, $origin, $project);
@@ -15,7 +15,7 @@ use \qtr;
   }
   elseif ($project) {
     $client_url = qtr::utils_get_client_url($lng);
-    $url = $client_url . "/qtr/project/$origin/$project/$lng/" . $params->sguid;
+    $url = $client_url . "/qtr/project/$origin/$project/$lng/" . $params->vid;
   }
 
   $subject = "[$subject_prefix] " . cut($string, 60);

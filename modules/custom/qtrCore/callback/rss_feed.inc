@@ -70,7 +70,7 @@ function qtrCore_rss_feed($lng = 'fr', $origin = NULL, $project = NULL) {
     $title = qtr::utils_shorten($string, 60);
     $link = isset($_GET['url']) ?
       $_GET['url'] . "/?lng=$lng&proj=$project#$string" :
-      url('translations', array('absolute' => TRUE)) . "/$lng/$sguid";
+      url('translations', array('absolute' => TRUE)) . "/$lng/$vid";
     $description = "<xmp>$string</xmp> -- <xmp>$translation</xmp>";
     $pub_date = date('r', strtotime($time));
     $rss_feed .= "

@@ -41,7 +41,7 @@ function _qtrServices_project() {
     'callback' => '_qtrServices_project_import',
     'args' => array($params),
     'access callback' => 'user_access',
-    'access arguments' => array('qtranslate-vote'),
+    'access arguments' => array('qtranslate-like'),
   );
 
   // Subscribe to a project.
@@ -144,15 +144,15 @@ function _qtrServices_project_list($params) {
  *       Translation to be exported.
  *   - export_mode
  *       The export mode that should be used. It can be one of:
- *       (original | most_voted | preferred).
+ *       (original | most_liked | preferred).
  *        - The mode 'original' exports the translations of the
  *          original files that were imported.
- *        - The mode 'most_voted' exports the translations with the
- *          highest number of votes.
+ *        - The mode 'most_liked' exports the translations with the
+ *          highest number of likes.
  *        - The mode 'preferred' gives precedence to the translations
- *          voted by a user or a list of users, despite the number of
- *          votes.
- *   - preferred_voters
+ *          liked by a user or a list of users, despite the number of
+ *          likes.
+ *   - preferred_users
  *       Comma separated list of usernames. Used only when export_mode
  *       is 'preferred'.
  *
@@ -169,7 +169,7 @@ function _qtrServices_project_export($params) {
     'project' => NULL,
     'lng' => NULL,
     'export_mode' => NULL,
-    'preferred_voters' => NULL,
+    'preferred_users' => NULL,
   ];
 
   qtr::schedule_project_export(
@@ -177,7 +177,7 @@ function _qtrServices_project_export($params) {
     check_plain($params['project']),
     check_plain($params['lng']),
     check_plain($params['export_mode']),
-    check_plain($params['preferred_voters'])
+    check_plain($params['preferred_users'])
   );
 
   return ['messages' => qtr::messages()];

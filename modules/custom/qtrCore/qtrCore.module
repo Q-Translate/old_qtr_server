@@ -28,8 +28,8 @@ function qtrCore_help($path, $args) {
         $help = t('Get translation suggestions for a given string.');
         break;
 
-      case 'translations/vote':
-        $help = t('Vote the best translation for a string, or suggest a better translation.');
+      case 'translations/like':
+        $help = t('Like the best translation for a string, or suggest a better translation.');
         break;
     }
 

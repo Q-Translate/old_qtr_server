@@ -19,7 +19,7 @@ use \qtr;
   $body[] = "
     <ul>
       <li>export_mode: $params->export_mode</li>
-      <li>preferred_voters: $params->preferred_voters</li>
+      <li>preferred_users: $params->preferred_users</li>
     </ul>
   ";
 }

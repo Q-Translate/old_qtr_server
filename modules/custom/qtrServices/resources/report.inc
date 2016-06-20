@@ -34,10 +34,10 @@ function _qtrServices_report() {
     ),
   ) + $access;
 
-  // Getting general statistics (number of votes and
+  // Getting general statistics (number of likes and
   // translations) for the last week, month and year.
   $report['actions']['statistics'] = array(
-    'help' => 'General statistics (number of votes and translations) for the last week, month and year.',
+    'help' => 'General statistics (number of likes and translations) for the last week, month and year.',
     'file' => $file,
     'callback' => '_qtr_report_statistics',
     'args' => array(
@@ -115,7 +115,7 @@ function _qtr_report_retrieve($report, $params) {
 }
 
 /**
- * Getting general statistics (number of votes and
+ * Getting general statistics (number of likes and
  * translations) for the last week, month and year.
  *
  * @param $params
@@ -154,7 +154,7 @@ function _qtr_report_statistics($params) {
 
 /**
  * Getting project details and statistics (number of translated and untranslated
- * strings, number of votes and translations, users and contributers, etc.)
+ * strings, number of likes and translations, users and contributers, etc.)
  *
  * @param $params
  *   Parameters of the report, comming from the POST request.
@@ -207,7 +207,7 @@ function _qtr_report_project_stats($params) {
  *
  * @return
  *   Array of users, where each user is an object with these attributes:
- *   uid, name, umail, score, translations, votes
+ *   uid, name, umail, score, translations, likes
  *
  * @example
  *   curl -k -i -H "Content-type: application/json"  \

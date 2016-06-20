@@ -1,7 +1,7 @@
 These drush commands are used to import/export PO files and projects
 into the database. The existing translations of the PO files will
 create the initial bases for voting and adding further
-suggestions. Then, the most voted translation will be exported.
+suggestions. Then, the most liked translation will be exported.
 
 There are two steps for importing a projects' translations.  The first
 step is to import the POT (template) file of the project, and the
