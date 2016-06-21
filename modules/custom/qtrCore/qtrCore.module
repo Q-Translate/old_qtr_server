@@ -18,27 +18,6 @@ require_once(dirname(__FILE__) . '/qtrCore.cron.inc');
 module_load_include('php', 'qtrCore', 'lib/qtr');
 
 /**
- * Implements hook_help().
- */
-/*
-function qtrCore_help($path, $args) {
-  switch($path)
-    {
-      case 'translations/get':
-        $help = t('Get translation suggestions for a given string.');
-        break;
-
-      case 'translations/like':
-        $help = t('Like the best translation for a string, or suggest a better translation.');
-        break;
-    }
-
-  return $help;
-}
-*/
-
-
-/**
  * Implement hook_mail().
  *
  * This hook defines a list of possible e-mail templates that this module can

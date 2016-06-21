@@ -103,7 +103,6 @@ dependencies[] = mimemail_compress
 dependencies[] = qtrCore
 dependencies[] = qtrUser
 dependencies[] = qtrLanguages
-dependencies[] = qtrTranslationProjects
 dependencies[] = qtrServices
 
 ;dependencies[] = qtr_qtrServices

@@ -5,7 +5,6 @@ core = 7.x
 
 dependencies[] = qtrUser
 dependencies[] = qtrLanguages
-dependencies[] = qtrTranslationProjects
 
 dependencies[] = mailsystem
 dependencies[] = mimemail

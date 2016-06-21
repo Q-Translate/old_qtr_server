@@ -7,19 +7,9 @@
 /**
  * Callback for 'translations/rss_feed'.
  */
-function qtrCore_rss_feed($lng = 'fr', $origin = NULL, $project = NULL) {
-  // Get the domain of the feed in the form of 'origin/project'
-  // (or just 'origin').
-  $domain = '';
-  if (!empty($origin)) {
-    $domain = $origin;
-    if (!empty($project)) {
-      $domain .= '/' . $project;
-    }
-  }
-
+function qtrCore_rss_feed($lng = 'en') {
   // Get the feed data from cache, if possible.
-  $cid = "qtrCore_rss_feed:$lng:$domain";
+  $cid = "qtrCore_rss_feed:$lng";
   $cache = cache_get($cid, 'cache_qtrCore');
   if (!empty($cache) && isset($cache->data) && !empty($cache->data)) {
     $rss_feed = $cache->data;
@@ -29,23 +19,15 @@ function qtrCore_rss_feed($lng = 'fr', $origin = NULL, $project = NULL) {
   }
 
   // Get the latest translations.
-  $translations = qtr::translation_latest($lng, $origin, $project);
+  $translations = qtr::translation_latest($lng);
 
   // Start building the RSS feed output.
   $rss_feed = '<?xml version="1.0" encoding="utf-8"?>' . "\n";
   $rss_feed .= '<rss version="2.0">';
 
   $link = url("rss-feed/$lng", array('absolute' => TRUE));
-  if (!empty($domain)) {
-    $link .= '/' . $domain;
-  }
   $title = variable_get('site_name', 'Q-Translate');
-  if (empty($domain)) {
-    $description = t('Latest translation suggestions on Q-Translate');
-  }
-  else {
-    $description = t('Latest translation suggestions on Q-Translate, for @domain', array('@domain' => $domain));
-  }
+  $description = t('Latest translation suggestions on Q-Translate');
   $ttl = 180;
   $site_mail = variable_get('site_mail');
   $site_name = variable_get('site_name');
@@ -79,8 +61,6 @@ function qtrCore_rss_feed($lng = 'fr', $origin = NULL, $project = NULL) {
         <link>$link</link>
         <description><![CDATA[$description]]></description>
         <author>$umail ($name)</author>
-        <category>$origin</category>
-        <category>$project</category>
         <guid isPermaLink='false'>$tguid</guid>
         <pubDate>$pub_date</pubDate>
       </item>
