@@ -31,7 +31,7 @@ function qtrUser_form_hybridauth_additional_info_form_alter(&$form, &$form_state
     '#type' => 'select',
     '#title' => t('Translation Language'),
     '#description' => t('The language of translations. You will help with the translations of this language (review existing translations or submit new ones).'),
-    '#options' => qtr::languages_get_list(),
+    '#options' => qtr::lng_get_list(),
   );
 
   // $form['#validate'][] = '_qtrUser_form_hybridauth_additional_info_form_validate';

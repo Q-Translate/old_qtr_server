@@ -92,11 +92,11 @@ function qtrCore_config() {
 function qtrCore_config_set_languages() {
   // Update 'allowed_values' of 'field_translation_lng'.
   $info = field_info_field('field_translation_lng');
-  $info['settings']['allowed_values'] = qtr::languages_get_list();
+  $info['settings']['allowed_values'] = qtr::lng_get_list();
   field_update_field($info);
 
   // Update 'allowed_values' of 'field_auxiliary_languages'.
   $info = field_info_field('field_auxiliary_languages');
-  $info['settings']['allowed_values'] = qtr::languages_get_list();
+  $info['settings']['allowed_values'] = qtr::lng_get_list();
   field_update_field($info);
 }

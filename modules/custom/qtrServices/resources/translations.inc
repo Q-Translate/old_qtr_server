@@ -324,7 +324,7 @@ function _qtrServices_translations_index($params) {
 function _qtrServices_translations_search($params) {
   // Get and check the parameter 'lng'.
   $lng = $params['lng'];
-  if (!in_array($lng, qtr::languages_get())) {
+  if (!in_array($lng, qtr::lng_get())) {
     return services_error('Language missing or not supported.', 406);
   }
 
@@ -419,7 +419,7 @@ function _qtrServices_translations_get_random_vid($params) {
  */
 function _qtrServices_translations_get($params) {
   $lng = $params['lng'];
-  if (!in_array($lng, qtr::languages_get())) {
+  if (!in_array($lng, qtr::lng_get())) {
     return services_error('Language missing or not supported.', 406);
   }
 
@@ -462,7 +462,7 @@ function _qtrServices_translations_add($params) {
   $vid = $params['vid'];
   $translation = $params['translation'];
   $lng = $params['lng'];
-  if (!in_array($lng, qtr::languages_get())) {
+  if (!in_array($lng, qtr::lng_get())) {
     return services_error(t('Language missing or not supported.'), 406);
   }
 
@@ -649,7 +649,7 @@ function _qtrServices_translations_submit($params) {
 function _qtrServices_like_import($params) {
   // Get and check the parameter 'lng'.
   $lng = $params['lng'];
-  if (!in_array($lng, qtr::languages_get())) {
+  if (!in_array($lng, qtr::lng_get())) {
     return services_error('Language missing or not supported.', 406);
   }
 

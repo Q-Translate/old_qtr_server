@@ -143,7 +143,7 @@ function _qtr_report_statistics($params) {
   // get parameters and validate them
   $lng = $params['lng'];
   if (!$lng)  $lng = 'all';
-  if (!in_array($lng, qtr::languages_get()) and $lng != 'all') {
+  if (!in_array($lng, qtr::lng_get()) and $lng != 'all') {
     return services_error('Language missing or not supported.', 406);
   }
   $origin = $params['origin'];
@@ -180,7 +180,7 @@ function _qtr_report_project_stats($params) {
 
   // get parameters and validate them
   $lng = $params['lng'];
-  if (!in_array($lng, qtr::languages_get())) {
+  if (!in_array($lng, qtr::lng_get())) {
     return services_error('Language missing or not supported.', 406);
   }
   $origin = $params['origin'];
@@ -234,7 +234,7 @@ function _qtr_report_topcontrib($params) {
   }
   $lng = $params['lng'];
   if (!$lng)  $lng = 'all';
-  if (!in_array($lng, qtr::languages_get()) and $lng != 'all') {
+  if (!in_array($lng, qtr::lng_get()) and $lng != 'all') {
     return services_error('Language missing or not supported.', 406);
   }
   $origin = $params['origin'];

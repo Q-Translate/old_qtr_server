@@ -5,7 +5,7 @@
  * Returns a json list of languages and their details.
  */
 function qtrCore_languages() {
-  $languages = qtr::languages_get_details();
+  $languages = qtr::lng_get_details();
   drupal_json_output($languages);
   drupal_exit();
 }

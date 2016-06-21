@@ -47,7 +47,7 @@ function qtrLanguages_schema() {
     ),
     'primary key' => array('id'),
     'unique keys' => array(
-      'k1' => array('code'),
+      'code' => array('code'),
     ),
   );
 
