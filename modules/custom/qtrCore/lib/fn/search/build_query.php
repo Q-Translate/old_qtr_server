@@ -218,7 +218,7 @@ function _filter_by_author($query, $lng, $only_mine, $translated_by, $liked_by) 
 }
 
 /**
- * Apply to the query conditions related to translation or voting dates.
+ * Apply to the query conditions related to translation or like dates.
  *
  * The first parameter, $query, is an object, so it is passed
  * by reference.

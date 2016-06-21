@@ -54,7 +54,7 @@
          this suggestion.
     - ulng : varchar(5) :: The translation language of the user that
          submitted this suggestion.
-    - time : datetime :: Timestamp of the voting time.
+    - time : datetime :: Timestamp of the like time.
     - active : boolean :: The active or deleted status of the record.
 
   + Users :: Users that contribute translations/suggestions/likes.

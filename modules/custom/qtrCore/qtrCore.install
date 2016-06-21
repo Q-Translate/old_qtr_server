@@ -42,10 +42,7 @@ function qtrCore_uninstall() {
   $variables = array(
     'qtr_languages',
     'qtr_client',
-    'qtr_voting_mode',
-    'qtr_preferred_projects',
     'qtr_export_path',
-    'qtr_export_notify_admin',
 
     'qtrCore_crontime',
   );
@@ -269,7 +266,7 @@ function qtrCore_schema() {
         'not null' => TRUE,
       ),
       'time' => array(
-        'description' => 'Timestamp of the voting time.',
+        'description' => 'Timestamp of the like time.',
         'type' => 'datetime',
         'mysql_type' => 'DATETIME',
         'not null' => FALSE,

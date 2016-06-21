@@ -5,8 +5,6 @@ use \qtr;
 /**
  * Delete a like for the given translation from the given user.
  *
- * This is useful only when the voting mode is 'multiple'.
- *
  * @param $tguid
  *   ID of the translation.
  *
