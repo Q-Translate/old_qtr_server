@@ -16,9 +16,7 @@ is done. You can download it from these links:",
             ['!project' => $params->project]);
   $body[] = "
     <ul>
-      <li>$params->export_url_tgz</li>
-      <li>$params->export_url_diff</li>
-      <li>$params->export_url_ediff</li>
+      <li>$params->export_url</li>
     </ul>
   ";
   $body[] = t('Thanks');

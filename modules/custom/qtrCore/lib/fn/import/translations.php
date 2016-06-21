@@ -48,6 +48,7 @@ function import_translations($lng, $file, $uid = NULL) {
           'time' => date('Y-m-d H:i:s', REQUEST_TIME),
         ))
       ->execute();
+    qtr::like_add($tguid, $uid);
   }
   fclose($handle);
 }

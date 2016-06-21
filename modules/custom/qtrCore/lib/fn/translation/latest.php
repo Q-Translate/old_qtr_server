@@ -10,12 +10,10 @@ use \qtr;
 /**
  * Get and return an array of the latest translation suggestions,
  * submitted between the last midnight and the midnight before.
- * If $origin and $project are given, then they will be used
- * to filter only the translations that belong to them.
  * The fields that are returned are:
- *   origin, project, vid, string, lng, translation, tguid, time, name, umail
+ *   tname, cid, vid, string, lng, translation, tguid, time, name, umail
  */
-function translation_latest($lng, $origin =NULL, $project =NULL) {
+function translation_latest($lng) {
 
   $get_latest_translations = "
     SELECT c.tname, v.cid, v.vid, v.verse,
@@ -26,27 +24,13 @@ function translation_latest($lng, $origin =NULL, $project =NULL) {
     LEFT JOIN {qtr_users} u ON (u.umail = t.umail AND u.ulng = t.ulng)
     LEFT JOIN {qtr_chapters} c ON (c.cid = v.cid)
     WHERE t.umail != '' AND t.lng = :lng AND t.time > :from_date
+    ORDER BY t.time DESC
     ";
 
   $args = array(
     ':lng' => $lng,
     ':from_date' => date('Y-m-d', strtotime("-1 day")),
   );
-
-  if ( ! empty($origin) ) {
-    // filter by origin
-    $get_latest_translations .= " AND p.origin = :origin";
-    $args[':origin'] = $origin;
-
-    if ( ! empty($project) ) {
-      // filter also by project
-      $get_latest_translations .= " AND p.project = :project";
-      $args[':project'] = $project;
-    }
-  }
-
-  // display the latest first
-  $get_latest_translations .= "\n    ORDER BY t.time DESC";
 
   // run the query and get the translations
   $translations = qtr::db_query($get_latest_translations, $args)->fetchAll();

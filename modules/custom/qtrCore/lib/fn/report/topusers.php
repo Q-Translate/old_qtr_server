@@ -27,7 +27,7 @@ use \qtr;
 function report_topusers($period = 'week', $size = 5, $lng = NULL) {
 
   // validate parameters
-  if (!in_array($lng, qtr::languages_get())) {
+  if (!in_array($lng, qtr::lng_get())) {
     $lng = 'all';
   }
   if (!in_array($period, array('day', 'week', 'month', 'year'))) {

@@ -13,7 +13,7 @@ use \qtr;
  * @return
  *   Array of language codes.
  */
-function languages_get() {
+function lng_get() {
   $langs = array();
 
   $qtr_langs = variable_get('qtr_languages', '');
@@ -36,10 +36,10 @@ function languages_get() {
  *   Associated array with language codes as keys and language names as
  *   values.
  */
-function languages_get_list() {
+function lng_get_list() {
   $list = array();
   $all_langs = \db_query('SELECT * FROM qtr_languages')->fetchAllAssoc('code');
-  $langs = qtr::languages_get();
+  $langs = qtr::lng_get();
   foreach ($langs as $lng) {
     $list[$lng] = isset($all_langs[$lng]) ? $all_langs[$lng]->name : $lng;
   }
@@ -54,10 +54,10 @@ function languages_get_list() {
  *   Associated array with language codes as keys and language details as
  *   values.
  */
-function languages_get_details() {
+function lng_get_details() {
   $lng_details = array();
   $all_langs = \db_query('SELECT * FROM qtr_languages')->fetchAllAssoc('code');
-  $langs = qtr::languages_get();
+  $langs = qtr::lng_get();
   foreach ($langs as $lng) {
     if (isset($all_langs[$lng])) {
       $lng_details[$lng] = array(

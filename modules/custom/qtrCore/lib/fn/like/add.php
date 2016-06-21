@@ -3,7 +3,7 @@ namespace QTranslate;
 use \qtr;
 
 /**
- * Add a like for the given translation from the current user.
+ * Add a like for the given translation from the given user.
  * Make sure that any previous like is cleaned first
  * (don't allow multiple likes for the same translation).
  *

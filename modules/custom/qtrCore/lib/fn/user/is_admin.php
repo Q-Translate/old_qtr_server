@@ -1,15 +1,15 @@
 <?php
 /**
  * @file
- * Definition of function user_is_project_admin().
+ * Definition of function user_is_admin().
  */
 
 namespace QTranslate;
 
 /**
- * Return TRUE if the user can administrate the given project.
+ * Return TRUE if the user can administrate.
  */
-function user_is_project_admin($origin, $project, $lng = NULL, $uid = NULL) {
+function user_is_admin($lng = NULL, $uid = NULL) {
   // Get the user account.
   if ($uid === NULL)  $uid = $GLOBALS['user']->uid;
   $account = user_load($uid);
@@ -20,9 +20,6 @@ function user_is_project_admin($origin, $project, $lng = NULL, $uid = NULL) {
 
   // Check that the project language matches translation_lng of the user.
   if ($lng !== NULL and $lng != $account->translation_lng) return FALSE;
-
-  // Check whether the user is an admin of the given project.
-  if (in_array("$origin/$project", $account->admin_projects)) return TRUE;
 
   // Otherwise he cannot administrate.
   return FALSE;

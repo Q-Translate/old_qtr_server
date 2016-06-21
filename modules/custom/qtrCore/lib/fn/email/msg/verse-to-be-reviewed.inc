@@ -3,20 +3,12 @@ namespace QTranslate;
 use \qtr;
 
 /**
- * Send by email a string to be reviewed.
+ * Send by email a verse to be reviewed.
  */
 {
-  list($string, $translations) = qtr::string_get_translations($params->vid, $lng);
+  list($verse, $translations) = qtr::verse_get_translations($params->vid, $lng);
   // Get the url of the string.
-  list($origin, $project) = explode('/', $params->project);
-  $app_url = qtr::utils_get_app_url($lng, $origin, $project);
-  if ($app_url and $origin=='vocabulary') {
-    $url = "$app_url?lng=$lng&proj=$project#$string";
-  }
-  elseif ($project) {
-    $client_url = qtr::utils_get_client_url($lng);
-    $url = $client_url . "/qtr/project/$origin/$project/$lng/" . $params->vid;
-  }
+  $url = $client_url . "/qtr/$lng/" . $params->vid;
 
   $subject = "[$subject_prefix] " . cut($string, 60);
 

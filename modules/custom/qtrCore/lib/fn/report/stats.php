@@ -20,7 +20,7 @@ use \qtr;
 function report_stats($lng = NULL) {
 
   // validate parameters
-  if (!in_array($lng, qtr::languages_get())) {
+  if (!in_array($lng, qtr::lng_get())) {
     $lng = 'all';
   }
 

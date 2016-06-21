@@ -14,7 +14,7 @@ use \qtr;
  * Other required attributes of $params are $params->recipient
  * and $params->uid. The other attributes are needed to build the
  * subject and body of the message. Some common attributes are:
- *   $params->username, $params->vid, $params->string,
+ *   $params->username, $params->vid, $params->verse,
  *   $params->translation, etc.
  */
 function email_send($params) {

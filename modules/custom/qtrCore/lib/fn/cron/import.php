@@ -1,20 +1,20 @@
 <?php
 /**
  * @file
- * Function: cron_import_translations()
+ * Function: cron_import()
  */
 
 namespace QTranslate;
 use \qtr;
 
 /**
- * The callback function called from cron_queue 'import_translations'.
+ * The callback function called from cron_queue 'import'.
  */
-function cron_import_translations($params) {
+function cron_import($params) {
 
   // Make sure that imports do not run in parallel,
   // so that the server is not overloaded.
-  if (!lock_acquire('import_translations', 3000)) {
+  if (!lock_acquire('import', 3000)) {
     // If we cannot get the lock, just stop the execution, do not return,
     // because after the callback function returns, the cron_queue will
     // remove the item from the queue, no matter whether it is processed or not.
@@ -72,5 +72,5 @@ function cron_import_translations($params) {
   file_delete($file, TRUE);
 
   // This import is done, allow any other imports to run.
-  lock_release('import_translations');
+  lock_release('import');
 }

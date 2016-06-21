@@ -8,9 +8,9 @@ namespace QTranslate;
 use \qtr;
 
 /**
- * Build the query that selects the strings that match the given filter.
+ * Build the query that selects the verses that match the given filter.
  *
- * This query should return only the id-s of the matching strings and
+ * This query should return only the id-s of the matching versess and
  * the matching scores, ordered by the score in decreasing order.
  *
  * It should be something like this:
@@ -35,7 +35,7 @@ use \qtr;
  *   Filter conditions that should be matched.
  *   It is an associated array with these keys:
  *      lng, limit, mode, words, chapter, only_mine, translated_by,
- *      liked_by, date_filter, from_date, to_date, list_mode
+ *      liked_by, date_filter, from_date, to_date
  *
  * @return
  *   A query object that corresponds to the filter.
@@ -142,7 +142,7 @@ function _filter_by_content($query, $search_mode, $search_words) {
 function _filter_by_chapter($query, $chapter) {
   if ($chapter == '')  return;
   _join_table($query, 'chapters');
-  $query->condition('c.tname', $chapter);
+  $query->condition('c.cid', $chapter);
 }
 
 /**

@@ -1,56 +1,39 @@
 <?php
 /**
  * @file
- * Function: schedule_project_export()
+ * Function: schedule_export()
  */
 
 namespace QTranslate;
 use \qtr;
 
 /**
- * Schedule a project for export. When the request
+ * Schedule export of translations. When the request
  * is completed, the user will be notified by email.
- *
- * @param $origin
- *   The origin of the project.
- *
- * @param $project
- *   The name of the project.
  *
  * @param $lng
  *   Translation to be exported.
  *
  * @param $export_mode
  *   The export mode that should be used. It can be one of:
- *   (original | most_liked | preferred).
- *     - The mode 'original' exports the translations of the
- *       original files that were imported.
+ *   (most_liked | preferred).
  *     - The mode 'most_liked' exports the translations with the
  *       highest number of likes.
  *     - The mode 'preferred' gives precedence to the translations
- *       liked by a user or a list of users, despite the number of
+ *       liked by a user or a group of users, despite the number of
  *       likes.
  *
  * @param preferred_users
  *   Comma separated list of usernames. Used only when export_mode
  *   is 'preferred'.
  */
-function schedule_project_export($origin, $project, $lng,
-  $export_mode = NULL, $preferred_users = NULL)
+function schedule_export($lng, $export_mode = NULL, $preferred_users = NULL)
 {
-  // Make sure that the given origin and project do exist.
-  if (!qtr::project_exists($origin, $project)) {
-    $msg = t("The project '!project' does not exist.",
-           ['!project' => "$origin/$project"]);
-    qtr::messages($msg, 'error');
-    return;
-  }
-
   // Check the export_mode.
   if (empty($params['export_mode'])) {
     $params['export_mode'] = 'most_liked';
   }
-  if (!in_array($export_mode, array('most_liked', 'preferred', 'original'))) {
+  if ($export_mode != 'most_liked' and $export_mode != 'preferred') {
     $msg = t("Unknown export mode '!export_mode'.",
              ['!export_mode' => $export_mode]);
     qtr::messages($msg, 'error');
@@ -72,26 +55,12 @@ function schedule_project_export($origin, $project, $lng,
 
   // Schedule the project export.
   $queue_params = [
-    'origin' => $origin,
-    'project' => $project,
     'lng' => $lng,
     'uid' => $GLOBALS['user']->uid,
     'export_mode' => $export_mode,
     'preferred_users' => $arr_emails,
   ];
-  qtr::queue('export_project', [$queue_params]);
-
-  // Schedule a notification to each admin of the project.
-  $notify_admin = variable_get('qtr_export_notify_admin', TRUE);
-  if ($notify_admin) {
-    $queue_params['type'] = 'notify-admin-on-export-request';
-    $admins = qtr::project_users('admin', $origin, $project, $lng);
-    foreach ($admins as $uid => $user) {
-      $queue_params['recipient'] = $user->email;
-      $queue_params['username'] = $user->name;
-      qtr::queue('notifications', [$queue_params]);
-    }
-  }
+  qtr::queue('export', [$queue_params]);
 
   // Return a notification message.
   $msg = t("Export of '!project' is scheduled. You will be notified by email when it is done.",
