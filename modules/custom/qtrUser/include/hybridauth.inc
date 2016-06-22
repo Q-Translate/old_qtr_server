@@ -63,10 +63,4 @@ function qtrUser_hybridauth_userinfo_alter(&$userinfo, $data) {
   elseif (isset($data['translation_lng'])) {
     $userinfo['translation_lng'] = $data['translation_lng'];
   }
-
-  // Set the projects on the user profile.
-  if (isset($destination['query']['proj'])) {
-    $arr_projects = explode(',', $destination['query']['proj']);
-    $userinfo['subscribed_projects'] = $arr_projects;
-  }
 }

@@ -98,15 +98,6 @@ function _qtrUser_user_get_fields(&$user) {
     $user->translation_lng = $user->field_translation_lng[$lang][0]['value'];
   }
 
-  // field_projects
-  $user->subscribed_projects = array();
-  if ( isset($user->field_projects[$lang]) and is_array($user->field_projects[$lang]) ) {
-    $field_projects = $user->field_projects[$lang];
-    foreach ($field_projects as $project) {
-      $user->subscribed_projects[] = $project['value'];
-    }
-  }
-
   // field_auxiliary_languages
   $user->auxiliary_languages = array();
   if ( isset($user->field_auxiliary_languages[$lang]) and is_array($user->field_auxiliary_languages[$lang]) ) {
@@ -115,23 +106,6 @@ function _qtrUser_user_get_fields(&$user) {
       $user->auxiliary_languages[] = $language['value'];
     }
   }
-
-  // Get the projects for which the user is an admin.
-  $get_managed_projects = "
-    SELECT CONCAT(p.origin, '/', p.project) AS project
-    FROM {qtr_user_project_roles} r
-    LEFT JOIN {qtr_projects} p ON (p.pguid = r.pguid)
-    WHERE umail = :umail AND role = :role
-  ";
-  $params = array(
-    ':umail' => $user->init,
-    ':role' => 'admin',
-  );
-  $user->admin_projects = qtr::db_query($get_managed_projects, $params)->fetchCol();
-
-  // Get the projects for which the user is a moderator.
-  $params[':role'] = 'moderator';
-  $user->moderate_projects = qtr::db_query($get_managed_projects, $params)->fetchCol();
 }
 
 /**
@@ -145,12 +119,6 @@ function _qtrUser_user_set_fields(&$edit, $account) {
 
   if (isset($edit['translation_lng'])) {
     $edit['field_translation_lng'][$lang][0]['value'] = $edit['translation_lng'];
-  }
-
-  if (isset($edit['subscribed_projects']) && is_array($edit['subscribed_projects'])) {
-    foreach ($edit['subscribed_projects'] as $project) {
-      $edit['field_projects'][$lang][]['value'] = $project;
-    }
   }
 
   if (isset($edit['auxiliary_languages']) && is_array($edit['auxiliary_languages'])) {

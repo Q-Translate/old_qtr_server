@@ -28,7 +28,6 @@ function _qtrUser_delete_userprofile_fields() {
 
   $field_names = array(
     'field_translation_lng',
-    'field_projects',
     'field_auxiliary_languages',
   );
 
@@ -68,32 +67,6 @@ function _qtrUser_create_userprofile_fields() {
         'weight' => '1',
         'type' => 'options_select',
         'module' => 'options',
-      ),
-    ));
-
-  // create a field and instance for 'field_projects'
-  field_create_field(
-    array(
-      'field_name' => 'field_projects',
-      'type' => 'text',
-      'cardinality' => FIELD_CARDINALITY_UNLIMITED,  //multiple (unlimited) number of values
-      'entity_types' => array('user'),
-    ));
-  field_create_instance(
-    array(
-      'field_name' => 'field_projects',
-      'entity_type' => 'user',
-      'bundle' => 'user',
-      'label' => 'Projects',
-      'description' => "List of the subscribed projects of the user.",
-      'settings' => array(
-        'text_processing' => '0',
-        'user_register_form' => 1,
-      ),
-      'widget' => array(
-        'weight' => '2',
-        'type' => 'text_textfield',
-        'settings' => array('size' => '30'),
       ),
     ));
 
