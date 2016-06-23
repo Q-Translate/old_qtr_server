@@ -19,10 +19,6 @@ devpts		/dev/pts	devpts	rw,noexec,nosuid,gid=5,mode=620		0	0
 tmpfs /tmp tmpfs defaults,noatime,mode=1777,nosuid 0 0
 EOF
 
-### create other dirs that are needed
-mkdir -p /var/run/memcached/
-chown nobody /var/run/memcached/
-
 ### change the prompt to display the chroot name, the git branch etc
 echo $target > /etc/debian_chroot
 sed -i /root/.bashrc \
@@ -76,23 +72,6 @@ sed -i /etc/php5/apache2/php.ini \
     -e '/^;\?cgi\.fix_pathinfo/ c cgi.fix_pathinfo = 1' \
     -e '/^;\?upload_max_filesize/ c upload_max_filesize = 16M' \
     -e '/^;\?default_socket_timeout/ c default_socket_timeout = 90'
-
-sed -i /etc/php5/fpm/php.ini \
-    -e '/^;\?memory_limit/ c memory_limit = 200M' \
-    -e '/^;\?max_execution_time/ c max_execution_time = 90' \
-    -e '/^;\?display_errors/ c display_errors = On' \
-    -e '/^;\?post_max_size/ c post_max_size = 16M' \
-    -e '/^;\?cgi\.fix_pathinfo/ c cgi.fix_pathinfo = 1' \
-    -e '/^;\?upload_max_filesize/ c upload_max_filesize = 16M' \
-    -e '/^;\?default_socket_timeout/ c default_socket_timeout = 90'
-
-sed -i /etc/php5/fpm/pool.d/www.conf \
-    -e '/listen = 127.0.0.1:9000/ c listen = /run/php5-fpm.sock' \
-    -e '/^;\?pm\.max_children/ c pm.max_children = 20' \
-    -e '/^;\?pm\.max_requests/ c pm.max_requests = 5000' \
-    -e '/^;\?php_flag\[display_errors/ c php_flag[display_errors] = on' \
-    -e '/^;\?php_admin_value\[memory_limit/ c php_admin_value[memory_limit] = 128M'
-echo 'php_admin_value[max_execution_time] = 90' >> /etc/php5/fpm/pool.d/www.conf
 
 ### generates the file /etc/defaults/locale
 update-locale

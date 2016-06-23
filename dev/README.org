@@ -4,21 +4,6 @@
 
 Development Tools, Tips and Tricks
 
-* Change the webserver
-
-  There are two webservers installed, apache2 and nginx (with php5-fpm
-  and memcached). For development Apache2 can be more suitable, while
-  for production NGINX is supposed to be more responsive in high load.
-
-  We can choose one of them like this:
-  #+BEGIN_EXAMPLE
-  docker-enter qtr
-  cd /usr/local/src/qtr_server/
-  dev/webserver.sh apache2
-  dev/webserver.sh nginx
-  #+END_EXAMPLE
-
-
 * Making clones of the application
 
   Clones of the main site can be used for development and testing. 

@@ -266,46 +266,6 @@ function qtr_qtrServices_default_services_endpoint() {
         ),
       ),
     ),
-    'vocabulary' => array(
-      'actions' => array(
-        'add_string' => array(
-          'enabled' => '1',
-          'settings' => array(
-            'oauth2_server' => array(
-              'require_authentication' => '1',
-              'scope' => '',
-            ),
-          ),
-        ),
-        'del_string' => array(
-          'enabled' => '1',
-          'settings' => array(
-            'oauth2_server' => array(
-              'require_authentication' => '1',
-              'scope' => '',
-            ),
-          ),
-        ),
-        'import' => array(
-          'enabled' => '1',
-          'settings' => array(
-            'oauth2_server' => array(
-              'require_authentication' => '1',
-              'scope' => '',
-            ),
-          ),
-        ),
-        'delete' => array(
-          'enabled' => '1',
-          'settings' => array(
-            'oauth2_server' => array(
-              'require_authentication' => '1',
-              'scope' => '',
-            ),
-          ),
-        ),
-      ),
-    ),
   );
   $endpoint->debug = 0;
   $export['qtranslate'] = $endpoint;

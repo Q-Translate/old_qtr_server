@@ -16,7 +16,7 @@ export drush="drush --root=$drupal_dir"
 ./drupal-make-and-install.sh
 
 ### move translation tables on their own database
-./separate-translation-data.sh
+./separate-qtr-data.sh
 
 ### additional configurations related to drupal
 ./drupal-config.sh

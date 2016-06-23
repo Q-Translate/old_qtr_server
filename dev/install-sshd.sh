@@ -17,5 +17,5 @@ chmod 700 ~/.ssh
 ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -N ''
 
 ### For more detailed instructions see:
-### http://dashohoxha.blogspot.com/2012/08/how-to-secure-ubuntu-server.html
+### http://dashohoxha.fs.al/how-to-secure-ubuntu-server/
 

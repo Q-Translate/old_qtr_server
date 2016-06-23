@@ -4,8 +4,6 @@
 echo "
 ===> Languages supported by Q-Translate Server
 
-Do not remove 'fr', because sometimes French translations
-are used instead of template files (when they are missing).
 "
 if [ -z "${languages+xxx}" -o "$languages" = '' ]
 then

@@ -9,8 +9,6 @@ for the qtr_server and for the qtr_client.
 It will modify the files:
  1) /etc/hostname
  2) /etc/hosts
- 3) /etc/nginx/sites-available/qcl*
- 4) /etc/nginx/sites-available/qtr*
  5) /etc/apache2/sites-available/qcl*
  6) /etc/apache2/sites-available/qtr*
  7) /var/www/qcl*/sites/default/settings.php
@@ -45,10 +43,6 @@ sed -i /etc/hosts.conf \
 /etc/hosts_update.sh
 
 ### update config files for the client
-for file in $(ls /etc/nginx/sites-available/qcl*)
-do
-    sed -i $file -e "/server_name/ s/$old_qcl_domain/$qcl_domain/"
-done
 for file in $(ls /etc/apache2/sites-available/qcl*)
 do
     sed -i $file \
@@ -61,10 +55,6 @@ do
 done
 
 ### update config files for the server
-for file in $(ls /etc/nginx/sites-available/qtr*)
-do
-    sed -i $file -e "/server_name/ s/$old_qtr_domain/$qtr_domain/"
-done
 for file in $(ls /etc/apache2/sites-available/qtr*)
 do
     sed -i $file \

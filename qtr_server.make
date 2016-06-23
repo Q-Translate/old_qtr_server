@@ -88,7 +88,6 @@ projects[google_analytics] = 2.1
 
 ;;; Performance
 projects[boost] = 1.1
-projects[memcache] = 1.5
 
 
 ;--------------------
