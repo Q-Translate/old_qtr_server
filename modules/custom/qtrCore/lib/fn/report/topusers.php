@@ -38,7 +38,7 @@ function report_topusers($period = 'week', $size = 5, $lng = NULL) {
   if ($size > 100) $size = 100;
 
   // Return cache if possible.
-  $cid = "report_topcontrib:$period:$size:$lng";
+  $cid = "report_topusers:$period:$size:$lng";
   $cache = cache_get($cid, 'cache_qtrCore');
   if (!empty($cache) && isset($cache->data) && !empty($cache->data)) {
     return $cache->data;
@@ -55,7 +55,7 @@ function report_topusers($period = 'week', $size = 5, $lng = NULL) {
   // Give weight 5 to a translation and weight 1 to a like,
   // get the sum of all the weights grouped by user (umail),
   // order by this score, and get the top users.
-  $sql_get_topcontrib = "
+  $sql_get_topusers = "
     SELECT u.uid, u.name, u.umail, sum(w.weight) AS score,
            sum(w.translation) AS translations, sum(w.like) AS likes
     FROM (
@@ -79,10 +79,10 @@ function report_topusers($period = 'week', $size = 5, $lng = NULL) {
     GROUP BY w.umail
     ORDER BY score DESC
   ";
-  $topcontrib = qtr::db_query_range($sql_get_topcontrib, 0, $size, $args)->fetchAll();
+  $topusers = qtr::db_query_range($sql_get_topusers, 0, $size, $args)->fetchAll();
 
   // Cache for 12 hours.
-  cache_set($cid, $topcontrib, 'cache_qtrCore', time() + 12*60*60);
+  cache_set($cid, $topusers, 'cache_qtrCore', time() + 12*60*60);
 
-  return $topcontrib;
+  return $topusers;
 }

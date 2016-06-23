@@ -10,13 +10,9 @@
 function qtrServices_services_resources() {
   module_load_include('inc', 'qtrServices', 'resources/report');
   module_load_include('inc', 'qtrServices', 'resources/translations');
-  module_load_include('inc', 'qtrServices', 'resources/project');
-  module_load_include('inc', 'qtrServices', 'resources/vocabulary');
 
   $resources['report'] = _qtrServices_report();
   $resources['translations'] = _qtrServices_translations();
-  $resources['project'] = _qtrServices_project();
-  $resources['vocabulary'] = _qtrServices_vocabulary();
   return $resources;
 }
 
