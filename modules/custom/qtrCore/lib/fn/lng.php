@@ -8,6 +8,13 @@ namespace QTranslate;
 use \qtr;
 
 /**
+ * Return TRUE if the given language is supported.
+ */
+function lng_check($lng) {
+  return in_array($lng, qtr::lng_get());
+}
+
+/**
  * Get a list of supported languages.
  *
  * @return

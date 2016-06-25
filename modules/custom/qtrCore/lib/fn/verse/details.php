@@ -62,9 +62,9 @@ function verse_details($filter_query, $lng, $alternative_langs = array()) {
       'SELECT t.tguid, l.lid, u.name, u.umail, u.ulng, u.uid, l.time
        FROM {qtr_translations} t
        JOIN {qtr_likes} l ON (l.tguid = t.tguid)
-       JOIN {qtr_users} u ON (u.umail = l.umail AND l.ulng = v.ulng)
+       JOIN {qtr_users} u ON (u.umail = l.umail AND l.ulng = l.ulng)
        WHERE t.tguid IN (:arr_tguid)
-       ORDER BY v.time DESC',
+       ORDER BY l.time DESC',
       array(':arr_tguid' => $arr_tguid)
     )->fetchAllAssoc('vid');
   }

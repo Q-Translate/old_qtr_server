@@ -15,24 +15,10 @@ function _qtrServices_translations() {
     'callback' => '_qtrServices_translations_retrieve',
     'args' => array(
       array(
-        'name' => 'chapter',
+        'name' => 'trans',
         'optional' => FALSE,
         'source' => array('path' => 0),
-        'description' => 'Chapter number.',
-        'type' => 'int',
-      ),
-      array(
-        'name' => 'verse',
-        'optional' => FALSE,
-        'source' => array('path' => 1),
-        'description' => 'Verse number.',
-        'type' => 'int',
-      ),
-      array(
-        'name' => 'lng',
-        'optional' => FALSE,
-        'source' => array('path' => 2),
-        'description' => 'The language of translations.',
+        'description' => 'Translation selector, in the form: chapter,verse,lng',
         'type' => 'string',
       ),
     ),
@@ -40,10 +26,10 @@ function _qtrServices_translations() {
     'access arguments' => array('access content'),
   );
 
-  // Filter verses and translations
+  // Search verses and translations
   // according to the given parameters.
   $translations['operations']['index'] = array(
-    'help' => 'Index of verses and translations.',
+    'help' => 'Search verses and translations.',
     'file' => $file,
     'callback' => '_qtrServices_translations_index',
     'args' => array(
@@ -191,14 +177,8 @@ function _qtrServices_translations() {
 /**
  * Get a verse, along with its translations, likes and other details.
  *
- * @param $chapter
- *   Chapter number.
- *
- * @param $verse
- *   Verse number.
- *
- * @param $lng
- *   The language of translations, like: 'en', 'fr', 'sq', etc.
+ * @param $selector
+ *   Translation selector, in the form: chapter,verse,lng
  *
  * @return
  *   A nested structure containing the verse, its
@@ -206,9 +186,10 @@ function _qtrServices_translations() {
  *
  * @example
  *   curl -k -i \
- *     'https://dev.qtranslate.org/api/translations/2/3/sq'
+ *     'https://dev.qtranslate.org/api/translations/2,3,sq'
  */
-function _qtrServices_translations_retrieve($chapter, $verse, $lng) {
+function _qtrServices_translations_retrieve($selector) {
+  list($chapter, $verse, $lng) = explode(',', $selector, 3);
   $verse = _qtrServices_translations_get(array(
                'chapter' => $chapter,
                'verse' => $verse,
@@ -345,13 +326,14 @@ function _qtrServices_translations_get($params) {
   $chapter = $params['chapter'];
   $verse = $params['verse'];
   $lng = $params['lng'];
-  if (!in_array($lng, qtr::lng_get())) {
-    return services_error('Language missing or not supported.', 406);
-  }
 
-  $vid = $params['vid'];
-  if (in_array($vid, ['random', 'translated', 'untranslated'])) {
-    $vid = qtr::vid_get($vid, $lng);
+  if ($chapter < 1 or $chapter > 114)
+    return services_error('Chapter must be between 1 and 114.', 406);
+  $vid = qtr::verse_get_vid($chapter, $verse);
+  if (!$vid)
+    return services_error('The verse number is not correct.', 406);
+  if (!qtr::lng_check($lng)) {
+    return services_error('Language missing or not supported.', 406);
   }
 
   $verses = qtr::verse_load([$vid], $lng);

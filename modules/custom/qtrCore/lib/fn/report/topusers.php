@@ -57,18 +57,18 @@ function report_topusers($period = 'week', $size = 5, $lng = NULL) {
   // order by this score, and get the top users.
   $sql_get_topusers = "
     SELECT u.uid, u.name, u.umail, sum(w.weight) AS score,
-           sum(w.translation) AS translations, sum(w.like) AS likes
+           sum(w.translation) AS translations, sum(w.likes) AS likes
     FROM (
        (
          SELECT t.umail, t.lng as ulng,
-                5 AS weight, 1 AS translation, 0 AS like
+                5 AS weight, 1 AS translation, 0 AS likes
          FROM {qtr_translations} t
          WHERE $condition
        )
        UNION ALL
        (
          SELECT l.umail, l.ulng,
-                1 AS weight, 0 AS translation, 1 AS like
+                1 AS weight, 0 AS translation, 1 AS likes
          FROM {qtr_likes} l
          WHERE $condition
        )

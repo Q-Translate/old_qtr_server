@@ -39,73 +39,6 @@ function qtr_qtrServices_default_services_endpoint() {
     ),
   );
   $endpoint->resources = array(
-    'project' => array(
-      'actions' => array(
-        'list' => array(
-          'enabled' => '1',
-          'settings' => array(
-            'oauth2_server' => array(
-              'scope' => '',
-              'require_authentication' => NULL,
-            ),
-          ),
-        ),
-        'export' => array(
-          'enabled' => '1',
-          'settings' => array(
-            'oauth2_server' => array(
-              'require_authentication' => '1',
-              'scope' => '',
-            ),
-          ),
-        ),
-        'import' => array(
-          'enabled' => '1',
-          'settings' => array(
-            'oauth2_server' => array(
-              'require_authentication' => '1',
-              'scope' => '',
-            ),
-          ),
-        ),
-        'subscribe' => array(
-          'enabled' => '1',
-          'settings' => array(
-            'oauth2_server' => array(
-              'require_authentication' => '1',
-              'scope' => '',
-            ),
-          ),
-        ),
-        'unsubscribe' => array(
-          'enabled' => '1',
-          'settings' => array(
-            'oauth2_server' => array(
-              'require_authentication' => '1',
-              'scope' => '',
-            ),
-          ),
-        ),
-        'subscriptions' => array(
-          'enabled' => '1',
-          'settings' => array(
-            'oauth2_server' => array(
-              'require_authentication' => '1',
-              'scope' => '',
-            ),
-          ),
-        ),
-        'delete' => array(
-          'enabled' => '1',
-          'settings' => array(
-            'oauth2_server' => array(
-              'require_authentication' => '1',
-              'scope' => '',
-            ),
-          ),
-        ),
-      ),
-    ),
     'report' => array(
       'operations' => array(
         'retrieve' => array(
@@ -119,7 +52,7 @@ function qtr_qtrServices_default_services_endpoint() {
         ),
       ),
       'actions' => array(
-        'statistics' => array(
+        'stats' => array(
           'enabled' => '1',
           'settings' => array(
             'oauth2_server' => array(
@@ -128,16 +61,7 @@ function qtr_qtrServices_default_services_endpoint() {
             ),
           ),
         ),
-        'project_stats' => array(
-          'enabled' => '1',
-          'settings' => array(
-            'oauth2_server' => array(
-              'scope' => '',
-              'require_authentication' => NULL,
-            ),
-          ),
-        ),
-        'topcontrib' => array(
+        'topusers' => array(
           'enabled' => '1',
           'settings' => array(
             'oauth2_server' => array(
@@ -171,15 +95,6 @@ function qtr_qtrServices_default_services_endpoint() {
       ),
       'actions' => array(
         'search' => array(
-          'enabled' => '1',
-          'settings' => array(
-            'oauth2_server' => array(
-              'scope' => '',
-              'require_authentication' => NULL,
-            ),
-          ),
-        ),
-        'get_random_vid' => array(
           'enabled' => '1',
           'settings' => array(
             'oauth2_server' => array(
@@ -224,15 +139,6 @@ function qtr_qtrServices_default_services_endpoint() {
             ),
           ),
         ),
-        'del_like' => array(
-          'enabled' => '1',
-          'settings' => array(
-            'oauth2_server' => array(
-              'require_authentication' => '1',
-              'scope' => '',
-            ),
-          ),
-        ),
         'submit' => array(
           'enabled' => '1',
           'settings' => array(
@@ -256,6 +162,19 @@ function qtr_qtrServices_default_services_endpoint() {
     'user' => array(
       'actions' => array(
         'profile' => array(
+          'enabled' => '1',
+          'settings' => array(
+            'oauth2_server' => array(
+              'require_authentication' => '1',
+              'scope' => '',
+            ),
+          ),
+        ),
+      ),
+    ),
+    'user_profile' => array(
+      'operations' => array(
+        'index' => array(
           'enabled' => '1',
           'settings' => array(
             'oauth2_server' => array(
