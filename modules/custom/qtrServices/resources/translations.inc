@@ -200,7 +200,7 @@ function _qtrServices_translations_retrieve($selector) {
 
 
 /**
- * Filter versess and translations according to the given parameters.
+ * Filter verses and translations according to the given parameters.
  *
  * This provides the same functionality and has the same parameters
  * as the operation 'translations/search'. The only difference is that
@@ -217,7 +217,7 @@ function _qtrServices_translations_retrieve($selector) {
  *
  * @example
  *   curl -k -i -H 'Accept: application/json' \
- *     'https://dev.qtranslate.org/api/translations?lng=sq&words=file'
+ *     'https://qtranslate.org/api/translations?lng=en&words=unseen'
  */
 function _qtrServices_translations_index($params) {
   return _qtrServices_translations_search($params);
@@ -232,13 +232,15 @@ function _qtrServices_translations_index($params) {
  *   the filter parameters. These parameters can be:
  *   - lng
  *       The language of translations.
- *   - limit
+ *   - limit (int)
  *       The number of results to be returned (min: 5, max: 50).
  *   - words
  *       Words to be searched for.
+ *   - chapter (int)
+ *       Chapter to search on.
  *   - mode
  *       Search mode. Can be one of:
- *       - natural-versess       Natural search on verses (default).
+ *       - natural-verses        Natural search on verses (default).
  *       - natural-translations  Natural search on translations.
  *       - boolean-verses        Boolean search on verses.
  *       - boolean-translations  Boolean search on translations.
@@ -258,9 +260,6 @@ function _qtrServices_translations_index($params) {
  *       - likes         Filter Likes By Date
  *   - from_date
  *   - to_date
- *   - list_mode
- *       Used when listing the strings of a project.
- *       Can be one of: 'all', 'translated', 'untranslated'
  *
  * @return
  *   Array containing search results, along with the filters
@@ -270,7 +269,7 @@ function _qtrServices_translations_index($params) {
 function _qtrServices_translations_search($params) {
   // Get and check the parameter 'lng'.
   $lng = $params['lng'];
-  if (!in_array($lng, qtr::lng_get())) {
+  if (!qtr::lng_check($lng)) {
     return services_error('Language missing or not supported.', 406);
   }
 
@@ -319,8 +318,8 @@ function _qtrServices_translations_search($params) {
  *
  * @example
  *   curl -k -i -H 'Content-type: application/json' \
- *     -X POST https://dev.qtranslate.org/api/translations/get
- *     -d '{"chapter": "2", "verse": "3", "lng": "sq"}'
+ *     -X POST https://qtranslate.org/api/translations/get
+ *     -d '{"chapter": "2", "verse": "3", "lng": "en"}'
  */
 function _qtrServices_translations_get($params) {
   $chapter = $params['chapter'];
