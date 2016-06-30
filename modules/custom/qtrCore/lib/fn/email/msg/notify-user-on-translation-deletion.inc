@@ -13,18 +13,18 @@ use \qtr;
   $body = array();
   $body[] = t('Greetings !username,', ['!username' => $params->username]);
   $body[] = t("A translation that you have liked, has been deleted by a moderator.
-You can see the string and the rest of translations at this link:");
+You can see the verse and the rest of translations at this link:");
   $body[] = $url;
   $body[] = t('Thanks');
 
-  $string_header = t('String:');
+  $verse_header = t('Verse:');
   $deleted_translation = t('Deleted Translation:');
   $body[] = "
     <hr/>
 
-    <h4>$string_header</h4>
+    <h4>$verse_header</h4>
     <ul>
-      <li>$params->string</li>
+      <li>$params->verse</li>
     </ul>
 
     <h4>$deleted_translation</h4>

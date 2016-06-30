@@ -10,7 +10,7 @@ use \qtr;
 
   $body = array();
   $body[] = t('Greetings !username,', ['!username' => $params->username]);
-  $body[] = t('A new comment has been added to a string that you have liked.');
+  $body[] = t('A new comment has been added to a verse that you have liked.');
   $body[] = $params->link;
   $body[] = t('Thanks');
 

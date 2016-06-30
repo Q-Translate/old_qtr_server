@@ -8,8 +8,8 @@ use \qtr;
  */
 {
   $subject = "[$subject_prefix] "
-    . t("Translation modified for: !string",
-      ['!string' => cut($params->string, 30)]);
+    . t("Translation modified for: !verse",
+      ['!verse' => cut($params->verse, 30)]);
 
   $body = array();
   $body[] = t('Greetings !username,', ['!username' => $params->username]);
@@ -24,15 +24,15 @@ can change your like at this link:");
   $body[] = $url;
   $body[] = t('Thanks');
 
-  $string = t('String:');
+  $verse = t('Verse:');
   $old_translation = t('Old Translation:');
   $new_translation = t('New Translation:');
   $body[] = "
     <hr/>
 
-    <h4>$string:</h4>
+    <h4>$verse:</h4>
     <ul>
-      <li>$params->string</li>
+      <li>$params->verse</li>
     </ul>
 
     <h4>$old_translation</h4>
