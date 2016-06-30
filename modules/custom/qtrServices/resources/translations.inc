@@ -15,7 +15,7 @@ function _qtrServices_translations() {
     'callback' => '_qtrServices_translations_retrieve',
     'args' => array(
       array(
-        'name' => 'trans',
+        'name' => 'selector',
         'optional' => FALSE,
         'source' => array('path' => 0),
         'description' => 'Translation selector, in the form: chapter,verse,lng',
@@ -185,8 +185,7 @@ function _qtrServices_translations() {
  *   translations, likes, etc.
  *
  * @example
- *   curl -k -i \
- *     'https://dev.qtranslate.org/api/translations/2,3,sq'
+ *   curl 'https://dev.qtranslate.org/api/translations/2,3,sq'
  */
 function _qtrServices_translations_retrieve($selector) {
   list($chapter, $verse, $lng) = explode(',', $selector, 3);
@@ -196,6 +195,47 @@ function _qtrServices_translations_retrieve($selector) {
                'lng' => $lng,
              ));
   return $verse;
+}
+
+
+/**
+ * Get a verse, along with its translations, likes and other details.
+ *
+ * @param $params
+ *   Associative array of the POST data, which contains:
+ *   - chapter
+ *       Chapter number.
+ *   - verse
+ *       Verse number.
+ *   - lng
+ *       The language of translations, like: 'en', 'fr', 'sq', etc.
+ *
+ * @return
+ *   A nested array containing the verse, its translations, likes, etc.
+ *
+ * @example
+ *   curl -H 'Content-type: application/json' \
+ *     -X POST https://qtranslate.org/api/translations/get
+ *     -d '{"chapter": "2", "verse": "3", "lng": "en"}'
+ */
+function _qtrServices_translations_get($params) {
+  $chapter = $params['chapter'];
+  $verse = $params['verse'];
+  $lng = $params['lng'];
+
+  if ($chapter < 1 or $chapter > 114)
+    return services_error('Chapter must be between 1 and 114.', 406);
+  $vid = qtr::verse_get_vid($chapter, $verse);
+  if (!$vid)
+    return services_error('The verse number is not correct.', 406);
+  if (!qtr::lng_check($lng)) {
+    return services_error('Language missing or not supported.', 406);
+  }
+
+  $verses = qtr::verse_load([$vid], $lng);
+  $verse = empty($verses) ? NULL : $verses[0];
+
+  return [ 'verse' => $verse ];
 }
 
 
@@ -216,7 +256,7 @@ function _qtrServices_translations_retrieve($selector) {
  *   and the pager info (same as for the search case).
  *
  * @example
- *   curl -k -i -H 'Accept: application/json' \
+ *   curl -H 'Accept: application/json' \
  *     'https://qtranslate.org/api/translations?lng=en&words=unseen'
  */
 function _qtrServices_translations_index($params) {
@@ -302,46 +342,6 @@ function _qtrServices_translations_search($params) {
 
 
 /**
- * Get a verse, along with its translations, likes and other details.
- *
- * @param $params
- *   Associative array of the POST data, which contains:
- *   - chapter
- *       Chapter number.
- *   - verse
- *       Verse number.
- *   - lng
- *       The language of translations, like: 'en', 'fr', 'sq', etc.
- *
- * @return
- *   A nested array containing the verse, its translations, likes, etc.
- *
- * @example
- *   curl -k -i -H 'Content-type: application/json' \
- *     -X POST https://qtranslate.org/api/translations/get
- *     -d '{"chapter": "2", "verse": "3", "lng": "en"}'
- */
-function _qtrServices_translations_get($params) {
-  $chapter = $params['chapter'];
-  $verse = $params['verse'];
-  $lng = $params['lng'];
-
-  if ($chapter < 1 or $chapter > 114)
-    return services_error('Chapter must be between 1 and 114.', 406);
-  $vid = qtr::verse_get_vid($chapter, $verse);
-  if (!$vid)
-    return services_error('The verse number is not correct.', 406);
-  if (!qtr::lng_check($lng)) {
-    return services_error('Language missing or not supported.', 406);
-  }
-
-  $verses = qtr::verse_load([$vid], $lng);
-  $verse = empty($verses) ? NULL : $verses[0];
-
-  return [ 'verse' => $verse ];
-}
-
-/**
  * Add a new translation to a verse.
  *
  * @param $params
@@ -369,9 +369,14 @@ function _qtrServices_translations_add($params) {
   $chapter = $params['chapter'];
   $verse = $params['verse'];
   $translation = $params['translation'];
-  $lng = $params['lng'];
-  if (!in_array($lng, qtr::lng_get())) {
-    return services_error(t('Language missing or not supported.'), 406);
+
+  if ($chapter < 1 or $chapter > 114)
+    return services_error('Chapter must be between 1 and 114.', 406);
+  $vid = qtr::verse_get_vid($chapter, $verse);
+  if (!$vid)
+    return services_error('The verse number is not correct.', 406);
+  if (!qtr::lng_check($lng)) {
+    return services_error('Language missing or not supported.', 406);
   }
 
   // Check access permissions.
@@ -389,6 +394,28 @@ function _qtrServices_translations_add($params) {
   // Add the translation.
   $tguid = qtr::translation_add($vid, $lng, $translation);
   return ['tguid' => $tguid, 'messages' => qtr::messages()];
+}
+
+
+/**
+ * Delete a translation.
+ *
+ * @param $params
+ *   Associative array of the POST data, which contains:
+ *   - tguid
+ *       ID of the translation
+ *
+ * @return
+ *   Associative array containing:
+ *   - messages
+ *       Array of notification messages; each notification message
+ *       is an array of a message and a type, where type can be one of
+ *       'status', 'warning', 'error'.
+ */
+function _qtrServices_translations_del($params) {
+  $tguid = $params['tguid'];
+  qtr::translation_del($tguid);
+  return ['messages' => qtr::messages()];
 }
 
 
@@ -419,30 +446,10 @@ function _qtrServices_translations_like($params) {
   }
 
   // Add the like.
-  $vid = qtr::like_add($tguid);
-  return ['vid' => $vid, 'messages' => qtr::messages()];
+  $lid = qtr::like_add($tguid);
+  return ['lid' => $lid, 'messages' => qtr::messages()];
 }
 
-/**
- * Delete a translation.
- *
- * @param $params
- *   Associative array of the POST data, which contains:
- *   - tguid
- *       ID of the translation
- *
- * @return
- *   Associative array containing:
- *   - messages
- *       Array of notification messages; each notification message
- *       is an array of a message and a type, where type can be one of
- *       'status', 'warning', 'error'.
- */
-function _qtrServices_translations_del($params) {
-  $tguid = $params['tguid'];
-  qtr::translation_del($tguid);
-  return ['messages' => qtr::messages()];
-}
 
 /**
  * Submit multiple actions at once.
@@ -451,7 +458,7 @@ function _qtrServices_translations_del($params) {
  *   Array of the POST data, which contains an item for each action.
  *   Each action is an associated array that contains the items:
  *   - action
- *       The action to be done (add, like, del, del_like)
+ *       The action to be done (add, like, del)
  *   - params
  *       Associative array of the needed parameters for this action.
  *
@@ -531,7 +538,7 @@ function _qtrServices_translations_submit($params) {
 function _qtrServices_import($params) {
   // Get and check the parameter 'lng'.
   $lng = $params['lng'];
-  if (!in_array($lng, qtr::lng_get())) {
+  if (!qtr::lng_check($lng)) {
     return services_error('Language missing or not supported.', 406);
   }
 

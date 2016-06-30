@@ -21,30 +21,23 @@ use \qtr;
  *   version(s) as well, they are concatenated with NULL bytes ("\0")
  *   between them.
  *
- * @param $uid
+ * @param $uid (optional)
  *   Id of the user that is adding the string.
  *
  * @param $notify (optional)
- *   It TRUE, notify translators about the new translation.
+ *   It TRUE, notify relevant users about the new translation.
  *
  * @return
  *   ID of the new translation, or NULL if no translation was added.
  */
 function translation_add($vid, $lng, $translation, $uid = NULL, $notify = TRUE) {
   // Don't add empty translations.
-  $translation = qtr::string_pack($translation);
   $translation = str_replace(t('<New translation>'), '', $translation);
   if (trim($translation) == '')  {
     $msg = t('The given translation is empty.');
     qtr::messages($msg, 'warning');
     return NULL;
   }
-
-  // Make spacing and newlines the same in translation as in the source.
-  $string = qtr::string_get($vid);
-  $matches = array();
-  preg_match("/^(\s*).*\S(\s*)\$/s", $string, $matches);
-  $translation = $matches[1] . trim($translation) . $matches[2];
 
   // Look for an existing translation, if any.
   $tguid = sha1($translation . $lng . $vid);
@@ -210,7 +203,7 @@ function _notify_users_on_translation_change($users, $vid, $old_translation, $tg
 
   if (empty($users))  return;
 
-  $string = qtr::string_get($vid);
+  $verse = qtr::verse_get($vid);
   $new_translation = qtr::translation_get($tguid);
 
   $notifications = array();
@@ -221,7 +214,7 @@ function _notify_users_on_translation_change($users, $vid, $old_translation, $tg
       'username' => $user['name'],
       'recipient' => $user['name'] . ' <' . $user['umail'] . '>',
       'vid' => $vid,
-      'string' => $string,
+      'verse' => $verse,
       'old_translation' => $old_translation,
       'new_translation' => $new_translation,
     );
@@ -235,7 +228,7 @@ function _notify_users_on_translation_change($users, $vid, $old_translation, $tg
  * Notify the users that have liked a verse that a new translation has been
  * submitted. Maybe they would like to review it and change their preference.
  */
-function _notify_users_on_new_translation($vid, $lng, $tguid, $string, $translation) {
+function _notify_users_on_new_translation($vid, $lng, $tguid, $verse, $translation) {
 
   $query = "SELECT u.umail, u.ulng, u.uid, u.name, u.status, t.translation
             FROM {qtr_translations} t
@@ -255,7 +248,7 @@ function _notify_users_on_new_translation($vid, $lng, $tguid, $string, $translat
       'username' => $user->name,
       'recipient' => $user->name . ' <' . $user->umail . '>',
       'vid' => $vid,
-      'string' => $string,
+      'verse' => $verse,
       'liked_translation' => $user->translation,
       'new_translation' => $translation,
     );

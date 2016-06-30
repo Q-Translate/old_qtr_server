@@ -20,7 +20,7 @@ use \qtr;
  *   Id of the user that is deleting the translation.
  */
 function translation_del($tguid, $notify = TRUE, $uid = NULL) {
-  // Before deleting, get the author, likers, string and translation
+  // Before deleting, get the author, likers, verse and translation
   // (for notifications).
   $author = qtr::db_query(
     'SELECT u.uid, u.name, u.umail
@@ -40,7 +40,7 @@ function translation_del($tguid, $notify = TRUE, $uid = NULL) {
     'SELECT vid FROM {qtr_translations} WHERE tguid = :tguid',
     [':tguid' => $tguid]
   )->fetchField();
-  $string = qtr::string_get($vid);
+  $verse = qtr::verse_get($vid);
   $translation = qtr::translation_get($tguid);
 
   // Get the mail and lng of the user that is deleting the translation.
@@ -63,7 +63,7 @@ function translation_del($tguid, $notify = TRUE, $uid = NULL) {
 
   // Copy to the trash table the translation that will be deleted.
   $query = qtr::db_select('qtr_translations', 't')
-    ->fields('t', array('vid', 'lng', 'translation', 'tguid', 'count', 'umail', 'ulng', 'time', 'active'))
+    ->fields('t', array('tguid', 'vid', 'lng', 'translation', 'count', 'umail', 'ulng', 'time', 'active'))
     ->condition('tguid', $tguid);
   $query->addExpression(':d_umail', 'd_umail', array(':d_umail' => $umail));
   $query->addExpression(':d_ulng', 'd_ulng', array(':d_ulng' => $ulng));
@@ -84,7 +84,7 @@ function translation_del($tguid, $notify = TRUE, $uid = NULL) {
   // Notify the author of a translation and its users
   // that it has been deleted.
   if ($notify) {
-    _notify_users_on_translation_del($vid, $tguid, $string, $translation, $author, $users);
+    _notify_users_on_translation_del($vid, $tguid, $verse, $translation, $author, $users);
   }
 }
 
@@ -92,7 +92,7 @@ function translation_del($tguid, $notify = TRUE, $uid = NULL) {
  * Notify the author of a translation and its users
  * that it has been deleted.
  */
-function _notify_users_on_translation_del($vid, $tguid, $string, $translation, $author, $users) {
+function _notify_users_on_translation_del($vid, $tguid, $verse, $translation, $author, $users) {
 
   $notifications = array();
 
@@ -104,13 +104,13 @@ function _notify_users_on_translation_del($vid, $tguid, $string, $translation, $
       'username' => $author->name,
       'recipient' => $author->name . ' <' . $author->umail . '>',
       'vid' => $vid,
-      'string' => $string,
+      'verse' => $verse,
       'translation' => $translation,
     );
     $notifications[] = $notification;
   }
 
-  // Notify the users of the translation as well.
+  // Notify the users that have liked the translation as well.
   foreach ($users as $user) {
     if (!$user->uid)  continue;
     if ($user->name == $author->name)  continue;  // don't send a second message to the author
@@ -120,7 +120,7 @@ function _notify_users_on_translation_del($vid, $tguid, $string, $translation, $
       'username' => $user->name,
       'recipient' => $user->name . ' <' . $user->umail . '>',
       'vid' => $vid,
-      'string' => $string,
+      'verse' => $verse,
       'translation' => $translation,
     );
     $notifications[] = $notification;

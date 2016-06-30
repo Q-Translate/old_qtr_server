@@ -39,7 +39,7 @@ function search_build_filter($params) {
     'boolean-translations',
   );
   $mode = isset($params['mode']) ? $params['mode'] : '';
-  $filter['mode'] = in_array($mode, $search_mode_options) ? $mode : 'natural-verses';
+  $filter['mode'] = in_array($mode, $search_mode_options) ? $mode : 'natural-translations';
 
   // Words to search for and chapter to search in.
   $filter['words'] = isset($params['words']) ? $params['words'] : '';

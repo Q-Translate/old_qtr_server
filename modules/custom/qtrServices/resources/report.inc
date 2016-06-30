@@ -85,10 +85,8 @@ function _qtrServices_report() {
  *   The data of the requested report.
  *
  * @example
- *   curl -k -i \
- *     'https://dev.qtranslate.org/api/report/stats?lng=sq'
- *   curl -k -i \
- *     'https://dev.qtranslate.org/api/report/topusers?lng=sq&period=week'
+ *   curl 'https://dev.qtranslate.org/api/report/stats?lng=en'
+ *   curl 'https://dev.qtranslate.org/api/report/topusers?lng=en&period=week'
  */
 function _qtr_report_retrieve($report, $params) {
   $report_function = '_qtr_report_' . $report;
@@ -111,9 +109,9 @@ function _qtr_report_retrieve($report, $params) {
  *   Array of general stats for week, month and year.
  *
  * @example
- *   curl -k -i -H "Content-type: application/json"  \
+ *   curl -H "Content-type: application/json"  \
  *        -X POST https://dev.qtranslate.org/api/report/stats \
- *        -d '{"lng": "sq"}'
+ *        -d '{"lng": "en"}'
  */
 function _qtr_report_stats($params) {
   $params += array(
@@ -145,9 +143,9 @@ function _qtr_report_stats($params) {
  *   uid, name, umail, score, translations, likes
  *
  * @example
- *   curl -k -i -H "Content-type: application/json"  \
+ *   curl -H "Content-type: application/json"  \
  *     -X POST https://dev.qtranslate.org/api/report/topusers \
- *     -d '{"lng": "sq", "period": "week", "size": 10}'
+ *     -d '{"lng": "en", "period": "week", "size": 10}'
  */
 function _qtr_report_topusers($params) {
   $params += array(
