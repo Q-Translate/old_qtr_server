@@ -9,10 +9,10 @@ for the qtr_server and for the qtr_client.
 It will modify the files:
  1) /etc/hostname
  2) /etc/hosts
- 5) /etc/apache2/sites-available/qcl*
- 6) /etc/apache2/sites-available/qtr*
- 7) /var/www/qcl*/sites/default/settings.php
- 8) /var/www/qtr*/sites/default/settings.php
+ 3) /etc/apache2/sites-available/qcl*
+ 4) /etc/apache2/sites-available/qtr*
+ 5) /var/www/qcl*/sites/default/settings.php
+ 6) /var/www/qtr*/sites/default/settings.php
 "
 
 ### get the current domains
