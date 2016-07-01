@@ -6,9 +6,9 @@ apt-get -y upgrade
 
 ### install other needed packages
 apt-get -y install aptitude vim psmisc cron
-apt-get -y install mysql-server ssmtp translate-toolkit \
+apt-get -y install apache2 mysql-server ssmtp translate-toolkit \
          php5-mysql php5-gd php-db php5-dev php-pear php5-curl php-apc \
-         make ssl-cert gawk unzip wget curl diffutils phpmyadmin git ruby \
+         make ssl-cert gawk unzip wget curl diffutils phpmyadmin git ruby
 apt-get -y install screen logwatch
 
 ### install nodejs and less
