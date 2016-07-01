@@ -1,12 +1,12 @@
 #!/bin/bash
-### Export contributions from users (translations and votes)
+### Export contributions from users (translations and likes)
 ### since a certain date.
 
 ### get the arguments
 from_date=${1:-'0000-00-00'}    # in format YYYY-MM-DD
 
 ### mysqldump default options
-dbname=${BTR_DATA:-qtr_data}
+dbname=${QTR_DATA:-qtr_data}
 mysqldump="mysqldump --defaults-file=/etc/mysql/debian.cnf --databases $dbname"
 
 ### get the dump filename
@@ -14,16 +14,16 @@ date1=${from_date//-/}
 date2=$(date +%Y%m%d)
 dump_file=contributions-$date1-$date2.sql
 
-### dump translations and votes
+### dump translations and likes
 $mysqldump --tables qtr_translations \
     --where="time > '$from_date' AND umail != ''" > $dump_file
-$mysqldump --tables qtr_votes \
+$mysqldump --tables qtr_likes \
     --where="time > '$from_date'" >> $dump_file
 
-### dump also deleted translations and votes
+### dump also deleted translations and likes
 $mysqldump --tables qtr_translations_trash \
     --where="d_time > '$from_date'" >> $dump_file
-$mysqldump --tables qtr_votes_trash \
+$mysqldump --tables qtr_likes_trash \
     --where="d_time > '$from_date'" >> $dump_file
 
 ### compress the dump file

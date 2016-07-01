@@ -36,10 +36,6 @@ cp -a qtr_server-bak/themes/contrib/ qtr_server/themes/
 ### cleanup
 rm -rf qtr_server-bak/
 
-### create the directory of PO files
-mkdir -p /var/www/PO_files
-chown www-data: /var/www/PO_files
-
 ### create the downloads and exports dirs
 mkdir -p /var/www/downloads/
 chown www-data: /var/www/downloads/

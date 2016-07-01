@@ -1,5 +1,5 @@
 #!/bin/bash
-### Import the contributions from users (translations and votes)
+### Import the contributions from users (translations and likes)
 ### which are exported with 'export-contributions.sh'
 
 function usage {
@@ -29,57 +29,57 @@ file_sql=${file_gz%.gz}
 $mysql -D $A < $file_sql
 
 ### get the name of database
-B=${BTR_DATA:-qtr_data}
+B=${QTR_DATA:-qtr_data}
 
-### Find multiple votes on both A_votes and B_votes and append to
-### A_votes_trash all of them except for the latest vote.
+### Find multiple likes on both A_likes and B_likes and append to
+### A_likes_trash all of them except for the latest like.
 $mysql -e "
     CREATE TEMPORARY TABLE $A.tmp_tguid AS (
-        SELECT DISTINCT tguid FROM $A.qtr_votes
+        SELECT DISTINCT tguid FROM $A.qtr_likes
     );
 
-    CREATE TEMPORARY TABLE $A.tmp_all_votes AS (
+    CREATE TEMPORARY TABLE $A.tmp_all_likes AS (
         SELECT * FROM (
-            SELECT * FROM $A.qtr_votes
+            SELECT * FROM $A.qtr_likes
             UNION ALL
-            SELECT T1.* FROM $B.qtr_votes T1
+            SELECT T1.* FROM $B.qtr_likes T1
                 INNER JOIN $A.tmp_tguid T2 ON (T1.tguid = T2.tguid)
         ) AS T
     );
 
-    CREATE TEMPORARY TABLE $A.tmp_latest_votes AS (
+    CREATE TEMPORARY TABLE $A.tmp_latest_likes AS (
         SELECT tguid, umail, ulng, max(time) AS max_time
-        FROM $A.tmp_all_votes
+        FROM $A.tmp_all_likes
         GROUP by tguid, umail, ulng
         HAVING count(*) > 1
     );
 
-    INSERT INTO $A.qtr_votes_trash
+    INSERT INTO $A.qtr_likes_trash
         SELECT T1.*, NOW()
-        FROM $A.qtr_votes T1
-        LEFT JOIN $A.tmp_latest_votes T2
+        FROM $A.qtr_likes T1
+        LEFT JOIN $A.tmp_latest_likes T2
             ON (T1.tguid = T2.tguid AND T1.umail = T2.umail
                 AND T1.ulng = T2.ulng AND T1.time < T2.max_time);
 
-    INSERT INTO $A.qtr_votes_trash
+    INSERT INTO $A.qtr_likes_trash
         SELECT T1.*, NOW()
-        FROM $B.qtr_votes T1
+        FROM $B.qtr_likes T1
         INNER JOIN $A.tmp_tguid T2 ON (T1.tguid = T2.tguid)
-        LEFT JOIN $A.tmp_latest_votes T3
+        LEFT JOIN $A.tmp_latest_likes T3
             ON (T1.tguid = T3.tguid AND T1.umail = T3.umail
                 AND T1.ulng = T3.ulng AND T1.time < T3.max_time);
 "
 
-### Find any votes on B_votes that belong to translations that are
+### Find any likes on B_likes that belong to translations that are
 ### deleted on *A* (A_translations_trash) and append them to
-### A_votes_trash.
+### A_likes_trash.
 $mysql -e "
-    INSERT INTO $A.qtr_votes_trash
+    INSERT INTO $A.qtr_likes_trash
         SELECT T1.*, NOW()
-        FROM $B.qtr_votes T1
+        FROM $B.qtr_likes T1
         INNER JOIN $A.qtr_translations_trash T2
                   ON (T1.tguid = T2.tguid)
-        LEFT JOIN $A.qtr_votes_trash T3
+        LEFT JOIN $A.qtr_likes_trash T3
                   ON (T3.tguid = T1.tguid AND T3.umail = T1.umail
                       AND T3.ulng = T1.ulng)
         WHERE T3.tguid IS NULL;
@@ -94,9 +94,9 @@ $mysql -e "
                   ON (T1.tguid = T2.tguid AND T1.time = T2.time)
         WHERE T2.tguid IS NULL;
 
-    INSERT INTO $B.qtr_votes_trash
-        SELECT T1.* FROM $A.qtr_votes_trash T1
-        LEFT JOIN $B.qtr_votes_trash T2
+    INSERT INTO $B.qtr_likes_trash
+        SELECT T1.* FROM $A.qtr_likes_trash T1
+        LEFT JOIN $B.qtr_likes_trash T2
                   ON (T1.tguid = T2.tguid
                       AND T1.umail = T2.umail
                       AND T1.ulng = T2.ulng
@@ -105,7 +105,7 @@ $mysql -e "
 "
 
 
-### insert any new translations and votes that are not already there
+### insert any new translations and likes that are not already there
 ### translations suggested by users should replace those that are
 ### imported from PO files
 $mysql -e "
@@ -121,10 +121,10 @@ $mysql -e "
                   ON (T1.tguid = T2.tguid)
         WHERE T2.tguid IS NULL;
 
-    INSERT INTO $B.qtr_votes (tguid, umail, ulng, time, active)
+    INSERT INTO $B.qtr_likes (tguid, umail, ulng, time, active)
         SELECT T1.tguid, T1.umail, T1.ulng, T1.time, T1.active
-        FROM $A.qtr_votes T1
-        LEFT JOIN $B.qtr_votes T2
+        FROM $A.qtr_likes T1
+        LEFT JOIN $B.qtr_likes T2
                   ON (T1.tguid = T2.tguid
                       AND T1.umail = T2.umail
                       AND T1.ulng = T2.ulng)
@@ -133,8 +133,8 @@ $mysql -e "
 
 
 ### Remove from B_translations the records that are on
-### A_translations_trash and from B_votes the records that are on
-### B_votes_trash.
+### A_translations_trash and from B_likes the records that are on
+### B_likes_trash.
 $mysql -e "
     DELETE $B.qtr_translations
     FROM $A.qtr_translations_trash
@@ -142,24 +142,24 @@ $mysql -e "
         ON ($A.qtr_translations_trash.tguid = $B.qtr_translations.tguid
             AND $A.qtr_translations_trash.time = $B.qtr_translations.time);
 
-    DELETE $B.qtr_votes
-    FROM $A.qtr_votes_trash
-    INNER JOIN $B.qtr_votes
-        ON ( $A.qtr_votes_trash.tguid = $B.qtr_votes.tguid
-             AND $A.qtr_votes_trash.umail = $B.qtr_votes.umail
-             AND $A.qtr_votes_trash.ulng = $B.qtr_votes.ulng
-             AND $A.qtr_votes_trash.time = $B.qtr_votes.time );
+    DELETE $B.qtr_likes
+    FROM $A.qtr_likes_trash
+    INNER JOIN $B.qtr_likes
+        ON ( $A.qtr_likes_trash.tguid = $B.qtr_likes.tguid
+             AND $A.qtr_likes_trash.umail = $B.qtr_likes.umail
+             AND $A.qtr_likes_trash.ulng = $B.qtr_likes.ulng
+             AND $A.qtr_likes_trash.time = $B.qtr_likes.time );
 "
 
 
-### for translations on which votes are added or removed
-### recalculate (recount) the number of votes
+### for translations on which likes are added or removed
+### recalculate (recount) the number of likes
 $mysql -e "
     CREATE TEMPORARY TABLE $A.tmp_translations AS (
         SELECT * FROM (
-            SELECT tguid FROM $A.qtr_votes
+            SELECT tguid FROM $A.qtr_likes
             UNION
-            SELECT tguid FROM $A.qtr_votes_trash
+            SELECT tguid FROM $A.qtr_likes_trash
         ) AS T
     );
 
@@ -167,7 +167,7 @@ $mysql -e "
         SELECT T1.tguid, count(*) AS count
         FROM $B.qtr_translations T1
         INNER JOIN $A.tmp_translations T2 ON (T1.tguid = T2.tguid)
-        INNER JOIN $B.qtr_votes T3 ON (T2.tguid = T3.tguid)
+        INNER JOIN $B.qtr_likes T3 ON (T2.tguid = T3.tguid)
         GROUP BY T1.tguid
     );
 

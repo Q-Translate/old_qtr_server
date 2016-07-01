@@ -1,11 +1,5 @@
 #!/bin/bash -x
 
-### prevent robots from crawling
-cat <<EOF > $drupal_dir/robots.txt
-User-agent: *
-Disallow: /
-EOF
-
 # Protect Drupal settings from prying eyes
 drupal_settings=$drupal_dir/sites/default/settings.php
 chown root:www-data $drupal_settings
@@ -39,30 +33,6 @@ cat >> $drupal_settings << EOF
 
 EOF
 
-# set the memcache configuration
-cat >> $drupal_settings << EOF
-// Adds memcache as a cache backend
-/* comment memcache config
-\$conf['cache_backends'][] = 'profiles/qtr_server/modules/contrib/memcache/memcache.inc';
-// Makes it so that memcache is the default caching backend
-\$conf['cache_default_class'] = 'MemCacheDrupal';
-// Keep forms in persistent storage, as per discussed at the beginning
-\$conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
-// I don't see any point in keeping the module update information in Memcached
-\$conf['cache_class_cache_update'] = 'DrupalDatabaseCache';
-
-// Specify the memcache servers you wish to use and assign them to a cluster
-// Cluster = group of memcache servers, in our case, it's probably just one server per cluster.
-\$conf['memcache_servers'] = array('unix:///var/run/memcached/memcached.sock' => 'default');
-// This assigns all cache bins to the 'default' cluster from above
-\$conf['memcache_bins'] = array('cache' => 'default');
-
-// If you wanted multiple Drupal installations to share one Memcache instance use the prefix like so:
-\$conf['memcache_key_prefix'] = 'qtr_server';
-comment memcache config */
-
-EOF
-
 ### set variable qtr_client
 $drush --yes vset qtr_client "https://$qcl_domain"
 
@@ -93,10 +63,6 @@ $drush --yes features-revert qtr_hybridauth
 
 $drush --yes pm-enable qtr_permissions
 $drush --yes features-revert qtr_permissions
-
-### import the vocabulary projects
-#$drupal_dir/profiles/qtr_server/modules/custom/qtrCore/data/import/vocabulary.sh --root=$drupal_dir
-/var/www/data/import/vocabulary.sh --root=$drupal_dir
 
 ### update to the latest version of core and modules
 #$drush --yes pm-refresh

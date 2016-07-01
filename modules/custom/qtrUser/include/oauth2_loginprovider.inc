@@ -16,7 +16,6 @@ function qtrUser_oauth2_loginprovider_userprofile_alter(&$data) {
   // These fields are duplicated
   // (without 'field_' and without the deep array structure).
   unset($data['field_translation_lng']);
-  unset($data['field_projects']);
   unset($data['field_auxiliary_languages']);
 
   // Add to profile data the Q-Translate permissions of the user.

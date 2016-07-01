@@ -31,7 +31,7 @@ function qtrUser_form_hybridauth_additional_info_form_alter(&$form, &$form_state
     '#type' => 'select',
     '#title' => t('Translation Language'),
     '#description' => t('The language of translations. You will help with the translations of this language (review existing translations or submit new ones).'),
-    '#options' => qtr::languages_get_list(),
+    '#options' => qtr::lng_get_list(),
   );
 
   // $form['#validate'][] = '_qtrUser_form_hybridauth_additional_info_form_validate';
@@ -62,11 +62,5 @@ function qtrUser_hybridauth_userinfo_alter(&$userinfo, $data) {
   }
   elseif (isset($data['translation_lng'])) {
     $userinfo['translation_lng'] = $data['translation_lng'];
-  }
-
-  // Set the projects on the user profile.
-  if (isset($destination['query']['proj'])) {
-    $arr_projects = explode(',', $destination['query']['proj']);
-    $userinfo['subscribed_projects'] = $arr_projects;
   }
 }

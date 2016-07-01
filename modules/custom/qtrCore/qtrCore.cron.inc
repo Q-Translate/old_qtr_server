@@ -13,16 +13,12 @@ function qtrCore_cron_queue_info() {
     'worker callback' => 'qtrCore_send_notification_by_email',
     'time' => 240,
   );
-  $queues['export_project'] = array(
-    'worker callback' => 'qtrCore_export_project',
+  $queues['export'] = array(
+    'worker callback' => 'qtrCore_export',
     'time' => 2000,
   );
-  $queues['import_project'] = array(
-    'worker callback' => 'qtrCore_import_project',
-    'time' => 2000,
-  );
-  $queues['import_translations'] = array(
-    'worker callback' => 'qtrCore_import_translations',
+  $queues['import'] = array(
+    'worker callback' => 'qtrCore_import',
     'time' => 2000,
   );
   $queues['delete_fake_users'] = array(
@@ -55,8 +51,7 @@ function qtrCore_cron_nightly() {
   // Call cron functions.
   qtr::cron_delete_old_export_files();
   qtr::cron_cleanup_fake_users();
-  qtr::cron_send_strings_for_review();
-  qtr::cron_update_mysql_materialized_views();
+  qtr::cron_send_verses_for_review();
 }
 
 /**
@@ -67,24 +62,17 @@ function qtrCore_send_notification_by_email($params) {
 }
 
 /**
- * The callback function called from cron_queue 'export_project'.
+ * The callback function called from cron_queue 'export'.
  */
-function qtrCore_export_project($export_params) {
-  qtr::cron_export_project($export_params);
+function qtrCore_export($export_params) {
+  qtr::cron_export($export_params);
 }
 
 /**
- * The callback function called from cron_queue 'import_project'.
+ * The callback function called from cron_queue 'import'.
  */
-function qtrCore_import_project($params) {
-  qtr::cron_import_project($params);
-}
-
-/**
- * The callback function called from cron_queue 'import_translations'.
- */
-function qtrCore_import_translations($params) {
-  qtr::cron_import_translations($params);
+function qtrCore_import($params) {
+  qtr::cron_import($params);
 }
 
 /**

@@ -36,7 +36,6 @@ then
     ### create a container for production
     mkdir -p downloads uploads exports
     docker create --name=$container --hostname=$hostname --restart=always \
-        -v /data/PO_files:/var/www/PO_files \
         -v $(pwd)/downloads:/var/www/downloads \
         -v $(pwd)/uploads:/var/www/uploads \
         -v $(pwd)/exports:/var/www/exports \
@@ -57,7 +56,6 @@ else
     ### create a container for development, sharing diectories
     ### qtr_client/ and qtr_server/ between the container and the host
     docker create --name=$container --hostname=$hostname --restart=always \
-        -v /data/PO_files:/var/www/PO_files \
         -v $(pwd)/qtr_server:/var/www/qtr/profiles/qtr_server \
         -v $(pwd)/qtr_client:/var/www/qcl/profiles/qtr_client \
         $ports $image

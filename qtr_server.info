@@ -85,7 +85,6 @@ dependencies[] = advuser
 
 ;;; Performance
 dependencies[] = boost
-;dependencies[] = memcache
 
 ;--------------------
 ; Sending Emails
@@ -103,7 +102,6 @@ dependencies[] = mimemail_compress
 dependencies[] = qtrCore
 dependencies[] = qtrUser
 dependencies[] = qtrLanguages
-dependencies[] = qtrTranslationProjects
 dependencies[] = qtrServices
 
 ;dependencies[] = qtr_qtrServices

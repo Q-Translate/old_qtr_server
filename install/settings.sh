@@ -18,9 +18,7 @@ gmail_account='MyEmailAddress@gmail.com'
 gmail_passwd='gmailpassword'
 
 ### Translation languages supported by the Q-Translate Server.
-### Do not remove 'fr', because sometimes French translations
-### are used instead of template files (when they are missing).
-languages='fr de it sq'
+languages='en fr de it sq'
 
 ### Translation language of Q-Translate Client.
 translation_lng='all'
@@ -38,5 +36,5 @@ development='true'
 ### Login through ssh.
 ### Only login through private keys is allowed.
 ### See also this:
-###   http://dashohoxha.blogspot.com/2012/08/how-to-secure-ubuntu-server.html
+###   http://dashohoxha.fs.al/how-to-secure-ubuntu-server/
 sshd_port=2201

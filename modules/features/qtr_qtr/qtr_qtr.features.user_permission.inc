@@ -19,15 +19,6 @@ function qtr_qtr_user_default_permissions() {
     'module' => 'qtrUser',
   );
 
-  // Exported permission: 'qtranslate-export'.
-  $permissions['qtranslate-export'] = array(
-    'name' => 'qtranslate-export',
-    'roles' => array(
-      'translator' => 'translator',
-    ),
-    'module' => 'qtrUser',
-  );
-
   // Exported permission: 'qtranslate-flag'.
   $permissions['qtranslate-flag'] = array(
     'name' => 'qtranslate-flag',
@@ -57,17 +48,6 @@ function qtr_qtr_user_default_permissions() {
     'module' => 'qtrUser',
   );
 
-  // Exported permission: 'qtranslate-stats'.
-  $permissions['qtranslate-stats'] = array(
-    'name' => 'qtranslate-stats',
-    'roles' => array(
-      'anonymous user' => 'anonymous user',
-      'authenticated user' => 'authenticated user',
-      'moderator' => 'moderator',
-    ),
-    'module' => 'qtrUser',
-  );
-
   // Exported permission: 'qtranslate-suggest'.
   $permissions['qtranslate-suggest'] = array(
     'name' => 'qtranslate-suggest',
@@ -79,9 +59,9 @@ function qtr_qtr_user_default_permissions() {
     'module' => 'qtrUser',
   );
 
-  // Exported permission: 'qtranslate-vote'.
-  $permissions['qtranslate-vote'] = array(
-    'name' => 'qtranslate-vote',
+  // Exported permission: 'qtranslate-like'.
+  $permissions['qtranslate-like'] = array(
+    'name' => 'qtranslate-like',
     'roles' => array(
       'contributor' => 'contributor',
       'moderator' => 'moderator',

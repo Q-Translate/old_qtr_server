@@ -34,12 +34,12 @@ function _qtrServices_report() {
     ),
   ) + $access;
 
-  // Getting general statistics (number of votes and
+  // Getting general statistics (number of likes and
   // translations) for the last week, month and year.
-  $report['actions']['statistics'] = array(
-    'help' => 'General statistics (number of votes and translations) for the last week, month and year.',
+  $report['actions']['stats'] = array(
+    'help' => 'General statistics (number of likes and translations) for the last week, month and year.',
     'file' => $file,
-    'callback' => '_qtr_report_statistics',
+    'callback' => '_qtr_report_stats',
     'args' => array(
       array(
         'name' => 'params',
@@ -51,27 +51,11 @@ function _qtrServices_report() {
     ),
   ) + $access;
 
-  // Getting project details and statistics.
-  $report['actions']['project_stats'] = array(
-    'help' => 'Project details and statistics.',
+  // Getting statistics about top contributing users.
+  $report['actions']['topusers'] = array(
+    'help' => 'Statistics about top contributing users.',
     'file' => $file,
-    'callback' => '_qtr_report_project_stats',
-    'args' => array(
-      array(
-        'name' => 'params',
-        'optional' => FALSE,
-        'source' => 'data',
-        'description' => 'The parameters of the report.',
-        'type' => 'array',
-      ),
-    ),
-  ) + $access;
-
-  // Getting statistics about top contributors.
-  $report['actions']['topcontrib'] = array(
-    'help' => 'Statistics about top contributors.',
-    'file' => $file,
-    'callback' => '_qtr_report_topcontrib',
+    'callback' => '_qtr_report_topusers',
     'args' => array(
       array(
         'name' => 'params',
@@ -101,10 +85,8 @@ function _qtrServices_report() {
  *   The data of the requested report.
  *
  * @example
- *   curl -k -i \
- *     'https://dev.qtranslate.org/api/report/statistics?lng=sq'
- *   curl -k -i \
- *     'https://dev.qtranslate.org/api/report/topcontrib?lng=sq&period=week'
+ *   curl 'https://dev.qtranslate.org/api/report/stats?lng=en'
+ *   curl 'https://dev.qtranslate.org/api/report/topusers?lng=en&period=week'
  */
 function _qtr_report_retrieve($report, $params) {
   $report_function = '_qtr_report_' . $report;
@@ -115,86 +97,39 @@ function _qtr_report_retrieve($report, $params) {
 }
 
 /**
- * Getting general statistics (number of votes and
+ * Getting general statistics (number of likes and
  * translations) for the last week, month and year.
  *
  * @param $params
  *   Parameters of the report, comming from the POST request.
  *   It contains these fields (variables):
  *   - lng: language of translations
- *   - origin: (optional) origin of the project
- *   - project: (optional) name of the project
  *
  * @return
  *   Array of general stats for week, month and year.
  *
  * @example
- *   curl -k -i -H "Content-type: application/json"  \
- *        -X POST https://dev.qtranslate.org/api/report/statistics \
- *        -d '{"lng": "sq"}'
+ *   curl -H "Content-type: application/json"  \
+ *        -X POST https://dev.qtranslate.org/api/report/stats \
+ *        -d '{"lng": "en"}'
  */
-function _qtr_report_statistics($params) {
+function _qtr_report_stats($params) {
   $params += array(
     'lng' => NULL,
-    'origin' => NULL,
-    'project' => NULL,
   );
 
   // get parameters and validate them
   $lng = $params['lng'];
   if (!$lng)  $lng = 'all';
-  if (!in_array($lng, qtr::languages_get()) and $lng != 'all') {
+  if (!in_array($lng, qtr::lng_get()) and $lng != 'all') {
     return services_error('Language missing or not supported.', 406);
   }
-  $origin = $params['origin'];
-  $project = $params['project'];
 
-  return qtr::report_statistics($lng, $origin, $project);
+  return qtr::report_stats($lng);
 }
 
 /**
- * Getting project details and statistics (number of translated and untranslated
- * strings, number of votes and translations, users and contributers, etc.)
- *
- * @param $params
- *   Parameters of the report, comming from the POST request.
- *   It contains these fields (variables):
- *   - origin: origin of the project
- *   - project: name of the project
- *   - lng: language of translations
- *
- * @return
- *   Array of general stats for week, month and year.
- *
- * @example
- *   curl -k -i -H "Content-type: application/json"  \
- *        -X POST https://dev.qtranslate.org/api/report/project_stats \
- *        -d '{"origin": "LibreOffice", "project": "cui", "lng": "sq"}'
- */
-function _qtr_report_project_stats($params) {
-  $params += array(
-    'origin' => NULL,
-    'project' => NULL,
-    'lng' => NULL,
-  );
-
-  // get parameters and validate them
-  $lng = $params['lng'];
-  if (!in_array($lng, qtr::languages_get())) {
-    return services_error('Language missing or not supported.', 406);
-  }
-  $origin = $params['origin'];
-  $project = $params['project'];
-  if (!qtr::project_exists($origin, $project)) {
-    $msg = "The project '$origin/$project' does not exist.";
-    return services_error($msg, 406);
-  }
-
-  return qtr::report_project_stats($origin, $project, $lng);
-}
-
-/**
- * Getting statistics about top contributors.
+ * Getting statistics about top contributing users.
  *
  * @param $params
  *   Parameters of the report, comming from the POST request.
@@ -202,25 +137,21 @@ function _qtr_report_project_stats($params) {
  *   - lng: language of translations
  *   - period: period of report: day | week | month | year
  *   - size: number of results (top contributers), between 5 and 100
- *   - origin: (optional) origin of the project
- *   - project: (optional) name of the project
  *
  * @return
  *   Array of users, where each user is an object with these attributes:
- *   uid, name, umail, score, translations, votes
+ *   uid, name, umail, score, translations, likes
  *
  * @example
- *   curl -k -i -H "Content-type: application/json"  \
- *     -X POST https://dev.qtranslate.org/api/report/topcontrib \
- *     -d '{"lng": "sq", "period": "week", "size": 10}'
+ *   curl -H "Content-type: application/json"  \
+ *     -X POST https://dev.qtranslate.org/api/report/topusers \
+ *     -d '{"lng": "en", "period": "week", "size": 10}'
  */
-function _qtr_report_topcontrib($params) {
+function _qtr_report_topusers($params) {
   $params += array(
     'lng' => NULL,
     'period' => 'week',
     'size' => 5,
-    'origin' => NULL,
-    'project' => NULL,
   );
 
   // get parameters and validate them
@@ -234,11 +165,9 @@ function _qtr_report_topcontrib($params) {
   }
   $lng = $params['lng'];
   if (!$lng)  $lng = 'all';
-  if (!in_array($lng, qtr::languages_get()) and $lng != 'all') {
+  if (!in_array($lng, qtr::lng_get()) and $lng != 'all') {
     return services_error('Language missing or not supported.', 406);
   }
-  $origin = $params['origin'];
-  $project = $params['project'];
 
-  return qtr::report_topcontrib($period, $size, $lng, $origin, $project);
+  return qtr::report_topusers($period, $size, $lng);
 }

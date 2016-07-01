@@ -7,25 +7,18 @@
 function _qtrServices_translations() {
   $file = array('type' => 'inc', 'module' => 'qtrServices', 'name' => 'resources/translations');
 
-  // Return a string, along with its translations,
-  // votes and other details.
+  // Return a verse, along with its translations,
+  // likes and other details.
   $translations['operations']['retrieve'] = array(
-    'help' => 'Return a string, along with its translations, votes and other details.',
+    'help' => 'Return a verse, along with its translations, likes and other details.',
     'file' => $file,
     'callback' => '_qtrServices_translations_retrieve',
     'args' => array(
       array(
-        'name' => 'sguid',
+        'name' => 'selector',
         'optional' => FALSE,
         'source' => array('path' => 0),
-        'description' => 'The string (globally unique) id.',
-        'type' => 'string',
-      ),
-      array(
-        'name' => 'lng',
-        'optional' => FALSE,
-        'source' => array('param' => 'lng'),
-        'description' => 'The language of translations.',
+        'description' => 'Translation selector, in the form: chapter,verse,lng',
         'type' => 'string',
       ),
     ),
@@ -33,10 +26,10 @@ function _qtrServices_translations() {
     'access arguments' => array('access content'),
   );
 
-  // Filter strings and translations
+  // Search verses and translations
   // according to the given parameters.
   $translations['operations']['index'] = array(
-    'help' => 'Index of strings and translations.',
+    'help' => 'Search verses and translations.',
     'file' => $file,
     'callback' => '_qtrServices_translations_index',
     'args' => array(
@@ -44,7 +37,7 @@ function _qtrServices_translations() {
         'name' => 'params',
         'optional' => FALSE,
         'source' => 'param',
-        'description' => 'Filter parameters (lng, words, project, etc.)',
+        'description' => 'Filter parameters (lng, words, etc.)',
         'type' => 'array',
       ),
     ),
@@ -52,9 +45,9 @@ function _qtrServices_translations() {
     'access arguments' => array('access content'),
   );
 
-  // Search strings and translations using various filters.
+  // Search verses and translations using various filters.
   $translations['actions']['search'] = array(
-    'help' => 'Search strings and translations.',
+    'help' => 'Search verses and translations.',
     'file' => $file,
     'callback' => '_qtrServices_translations_search',
     'args' => array(
@@ -70,27 +63,9 @@ function _qtrServices_translations() {
     'access arguments' => array('access content'),
   );
 
-  // Get the sguid of a random string according to the target.
-  $translations['actions']['get_random_sguid'] = array(
-    'help' => 'Get the sguid of a random string according to the target, which can be: random|translated|untranslated.',
-    'file' => $file,
-    'callback' => '_qtrServices_translations_get_random_sguid',
-    'args' => array(
-      array(
-        'name' => 'params',
-        'optional' => FALSE,
-        'source' => 'data',
-        'description' => 'Assoc array containing the target.',
-        'type' => 'array',
-      ),
-    ),
-    'access callback' => 'user_access',
-    'access arguments' => array('access content'),
-  );
-
-  // Get a string, along with its translations, votes and other details.
+  // Get a verse, along with its translations, likes and other details.
   $translations['actions']['get'] = array(
-    'help' => 'Return a string, along with its translations, votes and other details.',
+    'help' => 'Return a verse, along with its translations, likes and other details.',
     'file' => $file,
     'callback' => '_qtrServices_translations_get',
     'args' => array(
@@ -98,7 +73,7 @@ function _qtrServices_translations() {
         'name' => 'params',
         'optional' => FALSE,
         'source' => 'data',
-        'description' => 'Parameters (sguid and lng).',
+        'description' => 'Parameters (chapter, verse and lng).',
         'type' => 'array',
       ),
     ),
@@ -106,9 +81,9 @@ function _qtrServices_translations() {
     'access arguments' => array('access content'),
   );
 
-  // Add a new translation to a source string.
+  // Add a new translation to a verse.
   $translations['actions']['add'] = array(
-    'help' => 'Add a new translation to a source string.',
+    'help' => 'Add a new translation to a verse.',
     'file' => $file,
     'callback' => '_qtrServices_translations_add',
     'args' => array(
@@ -116,7 +91,7 @@ function _qtrServices_translations() {
         'name' => 'params',
         'optional' => FALSE,
         'source' => 'data',
-        'description' => 'Translation data (sguid, lng, translation).',
+        'description' => 'Translation data (chapter, verse, lng, translation).',
         'type' => 'array',
       ),
     ),
@@ -124,22 +99,22 @@ function _qtrServices_translations() {
     'access arguments' => array('qtranslate-suggest'),
   );
 
-  // Add a vote for a translation.
-  $translations['actions']['vote'] = array(
-    'help' => 'Add a vote for a translation.',
+  // Add a like for a translation.
+  $translations['actions']['like'] = array(
+    'help' => 'Add a like for a translation.',
     'file' => $file,
-    'callback' => '_qtrServices_translations_vote',
+    'callback' => '_qtrServices_translations_like',
     'args' => array(
       array(
         'name' => 'params',
         'optional' => FALSE,
         'source' => 'data',
-        'description' => 'Translation to be voted (tguid).',
+        'description' => 'Translation that is liked (tguid).',
         'type' => 'array',
       ),
     ),
     'access callback' => 'user_access',
-    'access arguments' => array('qtranslate-vote'),
+    'access arguments' => array('qtranslate-like'),
   );
 
   // Delete a translation.
@@ -160,24 +135,6 @@ function _qtrServices_translations() {
     'access arguments' => array('qtranslate-suggest'),
   );
 
-  // Delete a vote from a translation.
-  $translations['actions']['del_vote'] = array(
-    'help' => 'Delete a vote from a translation.',
-    'file' => $file,
-    'callback' => '_qtrServices_translations_del_vote',
-    'args' => array(
-      array(
-        'name' => 'params',
-        'optional' => FALSE,
-        'source' => 'data',
-        'description' => 'Translation (tguid) to be un-voted.',
-        'type' => 'array',
-      ),
-    ),
-    'access callback' => 'user_access',
-    'access arguments' => array('qtranslate-vote'),
-  );
-
   // Submit multiple actions at once.
   $translations['actions']['submit'] = array(
     'help' => 'Submit multiple actions at once.',
@@ -193,14 +150,14 @@ function _qtrServices_translations() {
       ),
     ),
     'access callback' => 'user_access',
-    'access arguments' => array('qtranslate-vote'),
+    'access arguments' => array('qtranslate-like'),
   );
 
-  // Import translations and votes from PO files.
+  // Import translations from file.
   $translations['actions']['import'] = array(
-    'help' => 'Import translations and votes from PO files.',
+    'help' => 'Import translations from file.',
     'file' => $file,
-    'callback' => '_qtrServices_vote_import',
+    'callback' => '_qtrServices_import',
     'args' => array(
       array(
         'name' => 'params',
@@ -211,42 +168,79 @@ function _qtrServices_translations() {
       ),
     ),
     'access callback' => 'user_access',
-    'access arguments' => array('qtranslate-vote'),
+    'access arguments' => array('qtranslate-like'),
   );
 
   return $translations;
 }
 
 /**
- * Get a string, along with its translations votes and other details.
+ * Get a verse, along with its translations, likes and other details.
  *
- * @param $sguid
- *   The string (globally unique) id, calculated
- *   as: $sguid = sha1($string . $context)
- *   It can also be: random|translated|untranslated
- *
- * @param $lng
- *   The language of translations, like: 'fr', 'sq', etc.
+ * @param $selector
+ *   Translation selector, in the form: chapter,verse,lng
  *
  * @return
- *   A nested structure containing the string, its
- *   translations, votes, etc.
+ *   A nested structure containing the verse, its
+ *   translations, likes, etc.
  *
  * @example
- *   curl -k -i \
- *     'https://dev.qtranslate.org/api/translations/random?lng=sq'
+ *   curl 'https://dev.qtranslate.org/api/translations/2,3,sq'
  */
-function _qtrServices_translations_retrieve($sguid, $lng) {
-  $strings = _qtrServices_translations_get(array(
-               'sguid' => $sguid,
+function _qtrServices_translations_retrieve($selector) {
+  list($chapter, $verse, $lng) = explode(',', $selector, 3);
+  $verse = _qtrServices_translations_get(array(
+               'chapter' => $chapter,
+               'verse' => $verse,
                'lng' => $lng,
              ));
-  return $strings;
+  return $verse;
 }
 
 
 /**
- * Filter strings and translations according to the given parameters.
+ * Get a verse, along with its translations, likes and other details.
+ *
+ * @param $params
+ *   Associative array of the POST data, which contains:
+ *   - chapter
+ *       Chapter number.
+ *   - verse
+ *       Verse number.
+ *   - lng
+ *       The language of translations, like: 'en', 'fr', 'sq', etc.
+ *
+ * @return
+ *   A nested array containing the verse, its translations, likes, etc.
+ *
+ * @example
+ *   curl -H 'Content-type: application/json' \
+ *     -X POST https://qtranslate.org/api/translations/get
+ *     -d '{"chapter": "2", "verse": "3", "lng": "en"}'
+ */
+function _qtrServices_translations_get($params) {
+  $chapter = $params['chapter'];
+  $verse = $params['verse'];
+  $lng = $params['lng'];
+
+  if ($chapter < 1 or $chapter > 114)
+    return services_error('Chapter must be between 1 and 114.', 406);
+  $vid = qtr::verse_get_vid($chapter, $verse);
+  if (!$vid)
+    return services_error('The verse number is not correct.', 406);
+  if (!qtr::lng_check($lng)) {
+    return services_error('Language missing or not supported.', 406);
+  }
+
+  $verses = qtr::verse_load([$vid], $lng);
+  $verse = empty($verses) ? NULL : $verses[0];
+
+  return [ 'verse' => $verse ];
+}
+
+
+/**
+ * Filter verses and translations according to the given parameters.
  *
  * This provides the same functionality and has the same parameters
  * as the operation 'translations/search'. The only difference is that
@@ -255,15 +249,15 @@ function _qtrServices_translations_retrieve($sguid, $lng) {
  * request. Sometimes this may be more convenient.
  *
  * @param $params
- *   Parameters for filtering the strings etc.
+ *   Parameters for filtering the verses etc.
  *
  * @return
  *   Array containing search results, along with the filters
  *   and the pager info (same as for the search case).
  *
  * @example
- *   curl -k -i -H 'Accept: application/json' \
- *     'https://dev.qtranslate.org/api/translations?lng=sq&words=file'
+ *   curl -H 'Accept: application/json' \
+ *     'https://qtranslate.org/api/translations?lng=en&words=unseen'
  */
 function _qtrServices_translations_index($params) {
   return _qtrServices_translations_search($params);
@@ -271,60 +265,51 @@ function _qtrServices_translations_index($params) {
 
 
 /**
- * Search strings and translations using various filters.
+ * Search verses and translations using various filters.
  *
  * @param $params
  *   Associative array of the POST data, which contains
  *   the filter parameters. These parameters can be:
  *   - lng
  *       The language of translations.
- *   - limit
+ *   - limit (int)
  *       The number of results to be returned (min: 5, max: 50).
  *   - words
  *       Words to be searched for.
- *   - sguid
- *       If the 'words' is empty and there is a 'sguid' then the
- *       words of this string are used for searching.
+ *   - chapter (int)
+ *       Chapter to search on.
  *   - mode
  *       Search mode. Can be one of:
- *       - natural-strings       Natural search on strings (default).
+ *       - natural-verses        Natural search on verses (default).
  *       - natural-translations  Natural search on translations.
- *       - boolean-strings       Boolean search on strings.
+ *       - boolean-verses        Boolean search on verses.
  *       - boolean-translations  Boolean search on translations.
  *   - page
  *       Page of results to be displayed.
- *   - project
- *       Limit search only to this project
- *   - origin
- *       Limit search only to the projects of this origin.
  *   - only_mine (boolean)
- *       Limit search only to the strings touched (translated or voted)
+ *       Limit search only to the strings touched (translated or liked)
  *       by the current user.
  *   - translated_by
  *       Limit search by the author of translations
  *       (can be used only by admins).
- *   - voted_by
- *       Limit search by a voter (can be used only by admins).
+ *   - liked_by
+ *       Limit search by a user (can be used only by admins).
  *   - date_filter
  *       Which date to filter (used only by admins). Can be one of:
- *       - strings       Filter Strings By Date
  *       - translations  Filter Translations By Date (default)
- *       - votes         Filter Votes By Date
+ *       - likes         Filter Likes By Date
  *   - from_date
  *   - to_date
- *   - list_mode
- *       Used when listing the strings of a project.
- *       Can be one of: 'all', 'translated', 'untranslated'
  *
  * @return
  *   Array containing search results, along with the filters
  *   and the pager info. Each result is a nested structure
- *   containing the string, its translations, votes, etc.
+ *   containing the string, its translations, likes, etc.
  */
 function _qtrServices_translations_search($params) {
   // Get and check the parameter 'lng'.
   $lng = $params['lng'];
-  if (!in_array($lng, qtr::languages_get())) {
+  if (!qtr::lng_check($lng)) {
     return services_error('Language missing or not supported.', 406);
   }
 
@@ -336,7 +321,7 @@ function _qtrServices_translations_search($params) {
   // Build the filter and the query, and then get the strings.
   $filter = qtr::search_build_filter($params);
   $query = qtr::search_build_query($filter);
-  $strings = ($query===NULL ? array() : qtr::string_details($query, $lng));
+  $verses= ($query===NULL ? array() : qtr::verse_details($query, $lng));
 
   // The PagerDefault of Drupal7 defines the pager variables
   // as global variables (these variables are later used by theme_pager).
@@ -351,102 +336,24 @@ function _qtrServices_translations_search($params) {
   return array(
     'filter' => $filter,
     'pager' => $pager,
-    'strings' => $strings,
+    'verses' => $verses,
   );
 }
 
 
 /**
- * Get the sguid of a random string according to the target.
+ * Add a new translation to a verse.
  *
  * @param $params
  *   Associative array of the POST data, which contains:
- *   - target
- *       Can be one of: random|translated|untranslated
- *   - lng
- *       Code of the language (required for translated and untranslated)
- *   - scope (optional)
- *       If provided, restricts the pool of selection to the given
- *       list of project. It is a space separated list of origin/project
- *       like this: 'origin1/project1 origin2 origin1/project2'
- *
- * @return
- *   Associative array containing:
- *   - sguid
- *       ID of a random string, or the target itself
- *       if it is different from random|translated|untranslated
- */
-function _qtrServices_translations_get_random_sguid($params) {
-  $projects = NULL;
-  if (isset($params['scope'])) {
-    $projects = array();
-    $scope = preg_replace('/\s+/', ' ', trim($params['scope']));
-    $arr = explode(' ', $scope);
-    foreach ($arr as $proj) {
-      $projects[] = $proj;
-    }
-  }
-  $target = $params['target'];
-  $lng = $params['lng'];
-  $sguid = qtr::sguid_get($target, $lng, $projects);
-
-  return [ 'sguid' => $sguid ];
-}
-
-
-/**
- * Get a string, along with its translations votes and other details.
- *
- * @param $params
- *   Associative array of the POST data, which contains:
- *   - sguid
- *       The string (globally unique) id, calculated
- *       as: $sguid = sha1($string . $context)
- *       It can also be: random|translated|untranslated
- *   - lng
- *       The language of translations, like: 'fr', 'sq', etc.
- *
- * @return
- *   Associative array comtaining:
- *    - sguid
- *        A nested structure containing the string, its
- *        translations, votes, etc.
- *
- * @example
- *   curl -k -i -H 'Content-type: application/json' \
- *     -X POST https://dev.qtranslate.org/api/translations/get
- *     -d '{"lng": "sq"}'
- */
-function _qtrServices_translations_get($params) {
-  $lng = $params['lng'];
-  if (!in_array($lng, qtr::languages_get())) {
-    return services_error('Language missing or not supported.', 406);
-  }
-
-  $sguid = $params['sguid'];
-  if (in_array($sguid, ['random', 'translated', 'untranslated'])) {
-    $sguid = qtr::sguid_get($sguid, $lng);
-  }
-
-  $strings = qtr::string_load([$sguid], $lng);
-  $string = empty($strings) ? NULL : $strings[0];
-
-  return [ 'string' => $string ];
-}
-
-/**
- * Add a new translation to a source string.
- *
- * @param $params
- *   Associative array of the POST data, which contains:
- *   - sguid
- *       The string ID for which a new translation should be added.
+ *   - chapter
+ *       Chapter number.
+ *   - verse
+ *       Verse number.
  *   - lng
  *       The language (code) of the new translation.
  *   - translation
- *       The new translation as a string. If the string has plural
- *       version(s) as well, they are concatenated with NULL bytes ("\0")
- *       between them.
+ *       The new translation as a string.
  *
  * @return
  *   Associative array containing:
@@ -459,11 +366,17 @@ function _qtrServices_translations_get($params) {
  */
 function _qtrServices_translations_add($params) {
   // get parameters and validate them
-  $sguid = $params['sguid'];
+  $chapter = $params['chapter'];
+  $verse = $params['verse'];
   $translation = $params['translation'];
-  $lng = $params['lng'];
-  if (!in_array($lng, qtr::languages_get())) {
-    return services_error(t('Language missing or not supported.'), 406);
+
+  if ($chapter < 1 or $chapter > 114)
+    return services_error('Chapter must be between 1 and 114.', 406);
+  $vid = qtr::verse_get_vid($chapter, $verse);
+  if (!$vid)
+    return services_error('The verse number is not correct.', 406);
+  if (!qtr::lng_check($lng)) {
+    return services_error('Language missing or not supported.', 406);
   }
 
   // Check access permissions.
@@ -479,41 +392,10 @@ function _qtrServices_translations_add($params) {
   }
 
   // Add the translation.
-  $tguid = qtr::translation_add($sguid, $lng, $translation);
+  $tguid = qtr::translation_add($vid, $lng, $translation);
   return ['tguid' => $tguid, 'messages' => qtr::messages()];
 }
 
-
-/**
- * Add a vote for the given translation.
- *
- * @param $params
- *   Associative array of the POST data, which contains:
- *   - tguid
- *       ID of the translation
- *
- * @return
- *   Associative array containing:
- *   - vid
- *       ID of the new vote, or NULL
- *   - messages
- *       Array of notification messages; each notification message
- *       is an array of a message and a type, where type can be one of
- *       'status', 'warning', 'error'.
- */
-function _qtrServices_translations_vote($params) {
-  $tguid = $params['tguid'];
-
-  // Check access permissions.
-  if (!user_access('qtranslate-vote')) {
-    $msg = t('No rights for submitting votes!');
-    return ['vid' => NULL, 'messages' => [[$msg, 'error']]];
-  }
-
-  // Add the vote.
-  $vid = qtr::vote_add($tguid);
-  return ['vid' => $vid, 'messages' => qtr::messages()];
-}
 
 /**
  * Delete a translation.
@@ -536,8 +418,9 @@ function _qtrServices_translations_del($params) {
   return ['messages' => qtr::messages()];
 }
 
+
 /**
- * Delete a vote from the given translation.
+ * Add a like for the given translation.
  *
  * @param $params
  *   Associative array of the POST data, which contains:
@@ -546,16 +429,27 @@ function _qtrServices_translations_del($params) {
  *
  * @return
  *   Associative array containing:
+ *   - lid
+ *       ID of the new like, or NULL
  *   - messages
  *       Array of notification messages; each notification message
  *       is an array of a message and a type, where type can be one of
  *       'status', 'warning', 'error'.
  */
-function _qtrServices_translations_del_vote($params) {
+function _qtrServices_translations_like($params) {
   $tguid = $params['tguid'];
-  qtr::vote_del($tguid);
-  return ['messages' => qtr::messages()];
+
+  // Check access permissions.
+  if (!user_access('qtranslate-like')) {
+    $msg = t('No rights for submitting likes!');
+    return ['vid' => NULL, 'messages' => [[$msg, 'error']]];
+  }
+
+  // Add the like.
+  $lid = qtr::like_add($tguid);
+  return ['lid' => $lid, 'messages' => qtr::messages()];
 }
+
 
 /**
  * Submit multiple actions at once.
@@ -564,7 +458,7 @@ function _qtrServices_translations_del_vote($params) {
  *   Array of the POST data, which contains an item for each action.
  *   Each action is an associated array that contains the items:
  *   - action
- *       The action to be done (add, vote, del, del_vote)
+ *       The action to be done (add, like, del)
  *   - params
  *       Associative array of the needed parameters for this action.
  *
@@ -576,7 +470,7 @@ function _qtrServices_translations_del_vote($params) {
  *       'status', 'warning', 'error'.
  */
 function _qtrServices_translations_submit($params) {
-  $nr_votes = $nr_suggestions = $nr_deletions = 0;
+  $nr_likes = $nr_suggestions = $nr_deletions = 0;
   foreach ($params as $item) {
     $action = $item['action'];
     if (!$action) continue;
@@ -587,9 +481,9 @@ function _qtrServices_translations_submit($params) {
       qtr::messages($result['messages']);
       break;
 
-    case 'vote':
-      $result = _qtrServices_translations_vote($item['params']);
-      if ($result['vid'] != NULL)  $nr_votes++;
+    case 'like':
+      $result = _qtrServices_translations_like($item['params']);
+      if ($result['vid'] != NULL)  $nr_likes++;
       qtr::messages($result['messages']);
       break;
 
@@ -603,11 +497,6 @@ function _qtrServices_translations_submit($params) {
       }
       break;
 
-    case 'del_vote':
-      $result = _qtrServices_translations_del_vote($item['params']);
-      qtr::messages($result['messages']);
-      break;
-
     default:
       $msg = t('Action !action is not supported!', ['!action' => $action]);
       qtr::messages($msg, 'error');
@@ -619,8 +508,8 @@ function _qtrServices_translations_submit($params) {
     $msg = format_plural($nr_suggestions, '1 suggestion saved', '@count suggestions saved');
     qtr::messages($msg);
   }
-  if ($nr_votes > 0) {
-    $msg = format_plural($nr_votes, '1 vote saved', '@count votes saved');
+  if ($nr_likes > 0) {
+    $msg = format_plural($nr_likes, '1 like saved', '@count likes saved');
     qtr::messages($msg);
   }
   if ($nr_deletions > 0) {
@@ -632,7 +521,7 @@ function _qtrServices_translations_submit($params) {
 }
 
 /**
- * Bulk import of translations and votes from PO files.
+ * Import translations from file.
  *
  * @param $params
  *   Associative array of the POST data, which contains:
@@ -646,10 +535,10 @@ function _qtrServices_translations_submit($params) {
  *       is an array of a message and a type, where type can be one of
  *       'status', 'warning', 'error'.
  */
-function _qtrServices_vote_import($params) {
+function _qtrServices_import($params) {
   // Get and check the parameter 'lng'.
   $lng = $params['lng'];
-  if (!in_array($lng, qtr::languages_get())) {
+  if (!qtr::lng_check($lng)) {
     return services_error('Language missing or not supported.', 406);
   }
 
@@ -662,8 +551,8 @@ function _qtrServices_vote_import($params) {
   }
 
   // Check access permissions.
-  if (!user_access('qtranslate-vote')) {
-    $msg = t('No rights for submitting votes!');
+  if (!user_access('qtranslate-like')) {
+    $msg = t('No rights for submitting likes!');
     return ['messages' => [[$msg, 'error']]];
   }
   if (!user_access('qtranslate-suggest')) {
@@ -685,15 +574,6 @@ function _qtrServices_vote_import($params) {
   // Check for any other upload errors.
   if ($uploaded_file['error'] != 0) {
     return services_error('Error ' . $uploaded_file['error'] . 'happened during file upload.', 406);
-  }
-
-  // Check the extension of the uploaded file.
-  $extensions = 'po tar gz tgz bz2 xz 7z zip';
-  $regex = '/\.(' . preg_replace('/ +/', '|', preg_quote($extensions)) . ')$/i';
-  if (!preg_match($regex, $uploaded_file['name'])) {
-    $msg = t('Only files with the following extensions are allowed: %files-allowed.',
-           ['%files-allowed' => $extensions]);
-    return ['messages' => [[$msg, 'error']]];
   }
 
   // Move the uploaded file to 'private://' (/var/www/uploads/).
@@ -725,7 +605,7 @@ function _qtrServices_vote_import($params) {
     'fid' => $file->fid,
     'lng' => $lng,
   ];
-  qtr::queue('import_translations', array($queue_params));
+  qtr::queue('import', array($queue_params));
 
   // Return a notification message.
   $msg = t("Import of the file '!filename' is scheduled. You will be notified by email when it is done.",

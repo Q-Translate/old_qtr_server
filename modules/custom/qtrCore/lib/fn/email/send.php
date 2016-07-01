@@ -14,7 +14,7 @@ use \qtr;
  * Other required attributes of $params are $params->recipient
  * and $params->uid. The other attributes are needed to build the
  * subject and body of the message. Some common attributes are:
- *   $params->username, $params->sguid, $params->string,
+ *   $params->username, $params->vid, $params->verse,
  *   $params->translation, etc.
  */
 function email_send($params) {
@@ -52,8 +52,8 @@ function get_sender() {
  * of the notification, defined by $params->type.
  *
  * The other attributes depend on the notification type.
- * Some common attributes are: $params->uid, $params->sguid,
- * $params->username, $params->string, $params->translation, etc.
+ * Some common attributes are: $params->uid, $params->vid,
+ * $params->username, $params->verse, $params->translation, etc.
  */
 function get_subject_and_body($params) {
   $account = user_load($params->uid);
@@ -64,9 +64,9 @@ function get_subject_and_body($params) {
   module_load_include('inc', 'qtrCore', 'lib/sites');
   $client_url = qtr::utils_get_client_url($lng);
 
-  // Get the url of the string.
-  if (isset($params->sguid)) {
-    $url = $client_url . "/translations/$lng/" . $params->sguid;
+  // Get the url of the verse.
+  if (isset($params->vid)) {
+    $url = $client_url . "/translations/$lng/" . $params->vid;
   }
 
   // Include the subject and body of the message.
@@ -80,11 +80,11 @@ function get_subject_and_body($params) {
 }
 
 /**
- * From the given (possibly long) string, returns a short string
+ * From the given (possibly long) verse, returns a short verse
  * of the given length (that can be suitable for title, subject, etc.)
  */
-function cut($string, $length) {
-  $str = strip_tags(str_replace("\n", ' ', $string));
+function cut($verse, $length) {
+  $str = strip_tags(str_replace("\n", ' ', $verse));
   if (strlen($str) > $length) {
     $str = substr($str, 0, strrpos(substr($str, 0, $length - 3), ' '));
     $str .= '...';

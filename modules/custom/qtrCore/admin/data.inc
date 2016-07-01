@@ -16,7 +16,7 @@ function qtrCore_backup() {
     'data_backup' => [
       '#type' => 'fieldset',
       '#title' => t('Backup Q-Translate Data'),
-      '#description' => t('Backup users, translations and votes, etc.'),
+      '#description' => t('Backup users, translations and likes, etc.'),
 
       'submit' => [
         '#value' => t('Backup'),
@@ -28,7 +28,7 @@ function qtrCore_backup() {
     'data_restore' => [
       '#type' => 'fieldset',
       '#title' => t('Restote Q-Translate Data'),
-      '#description' => t('Restore users, translations and votes, etc.'),
+      '#description' => t('Restore users, translations and likes, etc.'),
 
       'file' => [
         '#type' => 'file',

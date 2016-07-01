@@ -1,34 +1,20 @@
 <?php
 /**
  * @file
- * RSS feed from Q-Translate.
+ * Return the latest translations in JSON format.
  */
 
-function qtrCore_latest($lng =NULL, $origin =NULL, $project =NULL) {
-
-  if (empty($lng))  $lng = 'fr';
-
-  // Get the domain of the feed in the form of 'origin/project'
-  // (or just 'origin').
-  $domain = '';
-  if ( ! empty($origin) ) {
-    $domain = $origin;
-    if ( ! empty($project) ) {
-      $domain .= '/' . $project;
-    }
-  }
-
+function qtrCore_latest($lng ='en') {
   // Get the data from cache, if possible.
-  $cid = "qtrCore_latest:$lng:$domain";
-  $cache = cache_get($cid, 'cache_qtrCore');
+  $cache = cache_get("qtrCore_latest:$lng", 'cache_qtrCore');
   if (!empty($cache) && isset($cache->data) && !empty($cache->data)) {
     $latest = $cache->data;
   }
   else {
-    // Get the latest translation from the database.
-    $latest = qtr::translation_latest($lng, $origin, $project);
+    // Get the latest translations from the database.
+    $latest = qtr::translation_latest($lng);
     // Cache them for 2 hours.
-    cache_set($cid, $latest, 'cache_qtrCore', strtotime('+2 hours'));
+    cache_set("qtrCore_latest:$lng", $latest, 'cache_qtrCore', strtotime('+2 hours'));
   }
 
   // Output latest translations in JSON format and exit.

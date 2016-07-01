@@ -18,9 +18,9 @@ require_once(dirname(__FILE__) . '/include/hybridauth.inc');
  */
 function qtrUser_permission() {
   return array(
-    'qtranslate-vote' => array(
-      'title' => t('Vote translations.'),
-      'description' => t('Can submit votes (or likes) for translation suggestions.'),
+    'qtranslate-like' => array(
+      'title' => t('Like translations.'),
+      'description' => t('Can submit likes for translation suggestions.'),
     ),
     'qtranslate-suggest' => array(
       'title' => t('Suggest new translations.'),
@@ -31,16 +31,8 @@ function qtrUser_permission() {
       'description' => t('Can flag translations as inaproppriate.'),
     ),
     'qtranslate-import' => array(
-      'title' => t('Import translation (PO) files.'),
-      'description' => t('Can import to Q-Translate new translation files (in the PO format).'),
-    ),
-    'qtranslate-export' => array(
-      'title' => t('Export translation files.'),
-      'description' => t('Can export translations from Q-Translate (either in PO format, or as diff/ediff).'),
-    ),
-    'qtranslate-stats' => array(
-      'title' => t('Statistics.'),
-      'description' => t('Can access global statistics of Q-Translate.'),
+      'title' => t('Import translations.'),
+      'description' => t('Can import to Q-Translate new translations.'),
     ),
     'qtranslate-resolve' => array(
       'title' => t('Resolve issues.'),
