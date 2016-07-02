@@ -30,7 +30,7 @@ function lng_get() {
   }
 
   if (empty($langs)) {
-    $langs = array('fr');
+    $langs = array('en');
   }
 
   return $langs;

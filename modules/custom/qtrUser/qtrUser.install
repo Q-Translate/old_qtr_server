@@ -61,7 +61,7 @@ function _qtrUser_create_userprofile_fields() {
       'bundle' => 'user',
       'label' => 'Translation Language',
       'description' => 'The language of translations. You will help with the translations of this language (review existing translations or submit new ones).',
-      //'default_value' => array(array('value' => 'fr')),
+      //'default_value' => array(array('value' => 'en')),
       'settings' => array('user_register_form' => 1),
       'widget' => array(
         'weight' => '1',

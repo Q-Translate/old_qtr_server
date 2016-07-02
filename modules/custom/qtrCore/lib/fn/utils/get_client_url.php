@@ -28,8 +28,8 @@ function utils_get_client_url($lng) {
  */
 function qtr_get_sites() {
   return [
-    'fr' => [
-      //'url' => 'https://example.org',
+    'en' => [
+      //'url' => 'https://en.qtranslate.net',
     ],
     'sq' => [
       //'url' => 'https://sq.qtranslate.net',

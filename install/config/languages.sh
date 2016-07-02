@@ -7,7 +7,7 @@ echo "
 "
 if [ -z "${languages+xxx}" -o "$languages" = '' ]
 then
-    languages='fr'
+    languages='en sq'
     read -p "Enter language codes [$languages]: " input
     languages=${input:-$languages}
 fi

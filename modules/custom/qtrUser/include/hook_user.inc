@@ -93,7 +93,7 @@ function _qtrUser_user_get_fields(&$user) {
   $lang = LANGUAGE_NONE;
 
   // field_translation_lng
-  $user->translation_lng = 'fr';
+  $user->translation_lng = 'en';
   if (isset($user->field_translation_lng[$lang][0]['value'])) {
     $user->translation_lng = $user->field_translation_lng[$lang][0]['value'];
   }
