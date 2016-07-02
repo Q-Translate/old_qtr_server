@@ -23,7 +23,7 @@ function qtr_server_install_tasks($install_state) {
 
   module_load_include('inc', 'phpmailer', 'phpmailer.admin');
   module_load_include('inc', 'qtrCore', 'includes/languages');
-  module_load_include('inc', 'qtrCore', 'qtrCore.admin');
+  module_load_include('inc', 'qtrCore', 'qtrCore/admin/core');
 
   $tasks = array(
     'qtr_server_mail_config' => array(

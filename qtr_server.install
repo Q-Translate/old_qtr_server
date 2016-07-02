@@ -11,14 +11,6 @@
  */
 function qtr_server_install() {
 
-  // Define the database of Q-Translate.
-  if (isset($GLOBALS['databases']['qtr_db']['default'])) {
-    define('QTR_DB', 'qtr_db');
-  }
-  else {
-    define('QTR_DB', 'default');
-  }
-
   include_once DRUPAL_ROOT . '/profiles/standard/standard.install';
   standard_install();
 

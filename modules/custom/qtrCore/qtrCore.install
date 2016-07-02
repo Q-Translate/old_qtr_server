@@ -29,9 +29,9 @@ function qtrCore_install() {
   qtr::import_verses("$data/quran/uthmani.xml");
 
   // Import a few English translations.
-  qtr::import_translations("$data/translations/en/pickthall.txt");
-  qtr::import_translations("$data/translations/en/shakir.txt");
-  qtr::import_translations("$data/translations/en/yusufali.txt");
+  qtr::import_translations('en', "$data/translations/en/pickthall.txt");
+  qtr::import_translations('en', "$data/translations/en/shakir.txt");
+  qtr::import_translations('en', "$data/translations/en/yusufali.txt");
 }
 
 /**
@@ -354,51 +354,6 @@ function qtrCore_schema() {
     'primary key' => array('umail', 'ulng', 'uid'),
     'indexes' => array(
       'name' => array('name'),
-    ),
-  );
-
-  // The base table for the Language entity
-  $schema['qtr_languages'] = array(
-    'description' => 'The base table for the Language entity.',
-    'fields' => array(
-      'id' => array(
-        'description' => 'Primary key of the Language entity.',
-        'type' => 'serial',
-        'size' => 'small',
-        'not null' => TRUE,
-      ),
-      'code' => array(
-        'description' => 'The code of the language (like: fr, de, etc.)',
-        'type' => 'varchar',
-        'length' => '5',
-        'not null' => TRUE,
-      ),
-      'name' => array(
-        'description' => 'Language name.',
-        'type' => 'varchar',
-        'length' => '255',
-        'not null' => TRUE,
-      ),
-      'direction' => array(
-        'description' => 'LeftToRight=0, RightToLeft=1.',
-        'type' => 'int',
-        'size' => 'tiny',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-        'default' => 0,
-      ),
-      'plurals' => array(
-        'description' => 'Number of plurals of the language.',
-        'type' => 'int',
-        'size' => 'tiny',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-        'default' => 2,
-      ),
-    ),
-    'primary key' => array('id'),
-    'unique keys' => array(
-      'code' => array('code'),
     ),
   );
 

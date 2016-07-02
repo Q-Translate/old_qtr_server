@@ -17,7 +17,7 @@ DROP TABLE IF EXISTS `qtr_languages`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `qtr_languages` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary key of the Language entity',
-  `code` varchar(5) NOT NULL COMMENT 'The code of the language (like: fr, de, etc.).',
+  `code` varchar(5) NOT NULL COMMENT 'The code of the language (like: en, fr, de, etc.).',
   `name` varchar(255) DEFAULT NULL COMMENT 'Language name.',
   `direction` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'LeftToRight=0, RightToLeft=1.',
   `plurals` tinyint(3) unsigned NOT NULL DEFAULT '2' COMMENT 'Number of plurals of the language.',
@@ -33,9 +33,9 @@ CREATE TABLE `qtr_translations` (
   `vid` smallint(6) NOT NULL,
   `lng` varchar(5) COLLATE utf8_bin NOT NULL COMMENT 'Language code (en, fr, sq_AL, etc.)',
   `translation` varchar(2500) COLLATE utf8_bin NOT NULL COMMENT 'The translation of the verse.',
-  `count` smallint(6) DEFAULT '1' COMMENT 'Count of likes received so far. This can be counted on the table Likes, but for convenience is stored here as well.',
-  `umail` varchar(250) CHARACTER SET utf8 NOT NULL COMMENT 'The email of the user that submitted this suggestion.',
-  `ulng` varchar(5) CHARACTER SET utf8 NOT NULL COMMENT 'The translation language of the user that submitted this suggestion.',
+  `count` smallint(6) DEFAULT '1' COMMENT 'Count of likes received so far. This can be counted on the table qtr_likes, but for convenience is stored here as well.',
+  `umail` varchar(250) CHARACTER SET utf8 NOT NULL COMMENT 'The email of the user that submitted this translation.',
+  `ulng` varchar(5) CHARACTER SET utf8 NOT NULL COMMENT 'The translation language of the user that suggested this translation.',
   `time` datetime DEFAULT NULL COMMENT 'Time when the translation was entered into the database.',
   `active` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'The active/deleted status of the record.',
   PRIMARY KEY (`tguid`),
@@ -43,7 +43,7 @@ CREATE TABLE `qtr_translations` (
   KEY `umail` (`umail`(20)),
   KEY `vid` (`vid`),
   FULLTEXT KEY `translation` (`translation`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Translations/suggestions of the l10n strings. For...';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Translations of the verses.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `qtr_translations_trash`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -52,10 +52,10 @@ CREATE TABLE `qtr_translations_trash` (
   `tguid` char(40) CHARACTER SET ascii NOT NULL,
   `vid` smallint(6) NOT NULL,
   `lng` varchar(5) COLLATE utf8_bin NOT NULL COMMENT 'Language code (en, fr, sq_AL, etc.)',
-  `translation` varchar(2500) COLLATE utf8_bin NOT NULL COMMENT 'The (suggested) translation of the phrase.',
-  `count` smallint(6) DEFAULT '1' COMMENT 'Count of likes received so far. This can be counted on the table Likes, but for convenience is stored here as well.',
+  `translation` varchar(2500) COLLATE utf8_bin NOT NULL COMMENT 'The translation of the verse.',
+  `count` smallint(6) DEFAULT '1' COMMENT 'Count of likes received so far. This can be counted on the table qtr_likes, but for convenience is stored here as well.',
   `umail` varchar(250) CHARACTER SET utf8 NOT NULL COMMENT 'The email of the user that submitted this suggestion.',
-  `ulng` varchar(5) CHARACTER SET utf8 NOT NULL COMMENT 'The translation language of the user that submitted this suggestion.',
+  `ulng` varchar(5) CHARACTER SET utf8 NOT NULL COMMENT 'The translation language of the user that suggested this translation.',
   `time` datetime DEFAULT NULL COMMENT 'Time when the translation was entered into the database.',
   `active` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'The active/deleted status of the record.',
   `d_umail` varchar(250) CHARACTER SET utf8 NOT NULL COMMENT 'The email of the user that deleted this translation.',
@@ -82,7 +82,7 @@ CREATE TABLE `qtr_users` (
   `config` varchar(250) DEFAULT NULL COMMENT 'Serialized configuration variables.',
   PRIMARY KEY (`umail`,`ulng`,`uid`),
   KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Users that contribute translations/suggestions/likes.';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Users that make translations/likes.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `qtr_verses`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -112,7 +112,7 @@ CREATE TABLE `qtr_likes` (
   KEY `time` (`time`),
   KEY `tguid` (`tguid`),
   KEY `umail` (`umail`(20))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Likes for each translation/suggestion.';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Likes for each translation.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `qtr_likes_trash`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -128,7 +128,6 @@ CREATE TABLE `qtr_likes_trash` (
   KEY `time` (`time`),
   KEY `tguid` (`tguid`),
   KEY `d_time` (`d_time`),
-  KEY `umail_ulng_tguid` (`umail`(20),`ulng`,`tguid`),
-  KEY `vid` (`vid`)
+  KEY `umail_ulng_tguid` (`umail`(20),`ulng`,`tguid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Likes that are deleted are saved on the trash table.';
 /*!40101 SET character_set_client = @saved_cs_client */;
