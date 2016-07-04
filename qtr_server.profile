@@ -22,8 +22,7 @@ function qtr_server_install_tasks($install_state) {
   drupal_add_css(drupal_get_path('profile', 'qtr_server') . '/qtr_server.css');
 
   module_load_include('inc', 'phpmailer', 'phpmailer.admin');
-  module_load_include('inc', 'qtrCore', 'includes/languages');
-  module_load_include('inc', 'qtrCore', 'qtrCore/admin/core');
+  module_load_include('inc', 'qtrCore', 'admin/core');
 
   $tasks = array(
     'qtr_server_mail_config' => array(
