@@ -185,7 +185,7 @@ function _qtrServices_translations() {
  *   translations, likes, etc.
  *
  * @example
- *   curl 'https://dev.qtranslate.org/api/translations/2,3,sq'
+ *   curl 'https://qtranslate.org/api/translations/2,3,en'
  */
 function _qtrServices_translations_retrieve($selector) {
   list($chapter, $verse, $lng) = explode(',', $selector, 3);
