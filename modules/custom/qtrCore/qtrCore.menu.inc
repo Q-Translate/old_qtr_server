@@ -82,5 +82,14 @@ function qtrCore_menu() {
     'access callback' => TRUE,
   );
 
+  // Return a json list of chapters and their details.
+  $items['chapters'] = array(
+    'type'            => MENU_CALLBACK,
+    'title'           => 'Return a json list of chapters and their details.',
+    'page callback'   => 'qtrCore_chapters',
+    'file'            => 'callback/chapters.inc',
+    'access callback' => TRUE,
+  );
+
   return $items;
 }
