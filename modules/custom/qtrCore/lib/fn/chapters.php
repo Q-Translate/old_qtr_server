@@ -14,5 +14,7 @@ use \qtr;
  *   Array of chapters and their details.
  */
 function chapters() {
-  return qtr::db_query('SELECT * FROM {qtr_chapters}')->fetchAll();
+  $chapters = qtr::db_query('SELECT * FROM {qtr_chapters}')->fetchAll();
+  array_unshift($chapters, NULL);
+  return $chapters;
 }
