@@ -1,5 +1,5 @@
 
-This is a Drupal installation profile for Q-Translate Server. Q-Translate is an application that helps to improve the translations of the Quran, by getting review and feedback from lots of people. For more detailed information see: http://info.qtranslate.org
+This is a Drupal installation profile for Q-Translate Server. Q-Translate is an application that helps to improve the translations of the Quran, by getting review and feedback from lots of people. http://info.qtranslate.org
 
 
 * Installation
