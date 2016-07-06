@@ -115,66 +115,6 @@ This is a Drupal installation profile for Q-Translate Server. Q-Translate is an 
   These scripts can be found on [[https://github.com/Q-Translate/qtr_server/tree/master/install/config][install/config/]].
 
 
-* Import projects
+* Import translations
 
-  There is a list of FOSS projects, like GNOME, KDE, LibreOffice,
-  etc. that can be automatically imported by scripts (there is a
-  script for each project). They can be imported like this:
-  #+BEGIN_EXAMPLE
-  docker/enter.sh
-
-  /var/www/data/get.sh
-  tail -f /var/www/data/nohup-get.out
-  less -r /var/www/data/nohup-get.out
-
-  /var/www/data/import.sh
-  tail -f /var/www/data/nohup-import.out
-  less -r /var/www/data/nohup-import.out
-  #+END_EXAMPLE
-
-  It is done from inside the Docker container. First we download all
-  of them, and then they are imported. Downloading can take some time,
-  and importing even more (many hours, and maybe days), so it is run
-  with =nohup= and the output can be checked from the log file.
-
-  We can also do it from outside the container (in case we want to
-  build outomation scripts etc.) like this:
-  #+BEGIN_EXAMPLE
-  docker/exec.sh /var/www/data/get.sh
-  docker/exec.sh tail -f /var/www/data/nohup-get.out
-
-  docker/exec.sh /var/www/data/import.sh
-  docker/exec.sh tail -f /var/www/data/nohup-import.out
-  #+END_EXAMPLE
-
-  Importing a single project can also be done from the web UI and with
-  the drush commands *qtr-project-add* and *qtr-project-import*. For
-  more details see: [[https://github.com/Q-Translate/qtr_server/blob/master/modules/custom/qtrCore/data/README.org][/var/www/data/README.org]]
-
-
-* Contacts
-
-  - Email: info@qtranslate.org
-
-  - Follow on Twitter: https://twitter.com/b_translator
-
-  - Discussion group/forum
-    + Email: /qtranslate@googlegroups.com/
-    + Web: https://groups.google.com/forum/?fromgroups&hl=en#!forum/qtranslate
-    + Google+ Community: https://plus.google.com/u/0/communities/109327047119841706609
-
-  - Chat/IRC: *#qtranslate* on *irc.freenode.net*
-
-  - Misc
-    + Homepage: http://info.qtranslate.org
-    + Wiki: https://github.com/Q-Translate/qtr_server/wiki
-    + Issues: https://github.com/Q-Translate/qtr_server/issues
-
-
-* Sites
-
-  Sites using Q-Translate:
-  - https://sq.qtranslate.net - Albanian translations.
-
-  To install and setup your site you would need some basic skills on
-  Ubuntu server administration and Drupal administration.
+  TODO
