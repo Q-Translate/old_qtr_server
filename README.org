@@ -1,18 +1,5 @@
 
-This is a Drupal installation profile for Q-Translate Server.
-
-* What is Q-Translate
-
-  The codename *Q-Translate* can be decoded like *Bee Translator*,
-  since it aims at collecting very small translation contributions
-  from a wide crowd of people and to dilute them into something
-  useful.
-
-  It can also be decoded like *Be Translator*, as an invitation to
-  anybody to give his small contribution for translating programs or
-  making their translations better.
-
-  For more detailed information see: http://info.qtranslate.org
+This is a Drupal installation profile for Q-Translate Server. Q-Translate is an application that helps to improve the translations of the Quran, by getting review and feedback from lots of people. For more detailed information see: http://info.qtranslate.org
 
 
 * Installation
