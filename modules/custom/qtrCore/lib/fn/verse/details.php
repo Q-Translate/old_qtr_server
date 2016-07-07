@@ -36,7 +36,7 @@ function verse_details($filter_query, $lng, $alternative_langs = array()) {
 
   // Get verses.
   $arr_verses = qtr::db_query(
-    'SELECT vid, verse FROM {qtr_verses} WHERE vid IN (:arr_vid)',
+    'SELECT vid, cid, nr, verse FROM {qtr_verses} WHERE vid IN (:arr_vid)',
     array(':arr_vid' => $arr_vid)
   )->fetchAllAssoc('vid');
 
