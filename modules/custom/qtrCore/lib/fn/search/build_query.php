@@ -161,8 +161,8 @@ function _filter_by_author($query, $lng, $only_mine, $translated_by, $liked_by) 
         ->condition('t.ulng', $lng)
       )
       ->condition(db_and()
-        ->condition('v.umail', $umail)
-        ->condition('v.ulng', $lng)
+        ->condition('l.umail', $umail)
+        ->condition('l.ulng', $lng)
       )
     );
     //done, ignore $translated_by and $liked_by
@@ -179,17 +179,17 @@ function _filter_by_author($query, $lng, $only_mine, $translated_by, $liked_by) 
     $args[':name'] = $translated_by;
     $t_umail = qtr::db_query($get_umail, $args)->fetchField();
   }
-  if ($liked_by == '') $v_umail = '';
+  if ($liked_by == '') $l_umail = '';
   else {
     $account = user_load_by_name($liked_by);
     $args[':ulng'] = $account->translation_lng;
     $args[':name'] = $liked_by;
-    $v_umail = qtr::db_query($get_umail, $args)->fetchField();
+    $l_umail = qtr::db_query($get_umail, $args)->fetchField();
   }
 
   //if it is the same user, then search for strings
   //translated OR liked by this user
-  if ($t_umail==$v_umail and $t_umail!='') {
+  if ($t_umail==$l_umail and $t_umail!='') {
     _join_table($query, 'likes');
     $query->condition(db_or()
       ->condition(db_and()
@@ -197,22 +197,22 @@ function _filter_by_author($query, $lng, $only_mine, $translated_by, $liked_by) 
         ->condition('t.ulng', $lng)
       )
       ->condition(db_and()
-        ->condition('v.umail', $v_umail)
-        ->condition('v.ulng', $lng)
+        ->condition('l.umail', $l_umail)
+        ->condition('l.ulng', $lng)
       )
     );
     return;
   }
 
   //if the users are different, then search for strings
-  //translated by $t_umail AND liked by $v_umail
+  //translated by $t_umail AND liked by $l_umail
   if ($t_umail != '') {
     _join_table($query, 'translations');
     $query->condition('t.umail', $t_umail)->condition('t.ulng', $lng);
   }
-  if ($v_umail != '') {
+  if ($l_umail != '') {
     _join_table($query, 'likes');
-    $query->condition('v.umail', $v_umail)->condition('v.ulng', $lng);
+    $query->condition('l.umail', $l_umail)->condition('l.ulng', $lng);
   }
 }
 
