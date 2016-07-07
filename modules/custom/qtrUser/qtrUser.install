@@ -28,7 +28,6 @@ function _qtrUser_delete_userprofile_fields() {
 
   $field_names = array(
     'field_translation_lng',
-    'field_auxiliary_languages',
   );
 
   foreach ($field_names as $field_name) {
@@ -67,28 +66,6 @@ function _qtrUser_create_userprofile_fields() {
         'weight' => '1',
         'type' => 'options_select',
         'module' => 'options',
-      ),
-    ));
-
-  // create a field and instance for 'field_auxiliary_languages'
-  field_create_field(
-    array(
-      'field_name' => 'field_auxiliary_languages',
-      'type' => 'list_text',
-      'cardinality' => 2,
-      'entity_types' => array('user'),
-    ));
-  field_create_instance(
-    array(
-      'field_name' => 'field_auxiliary_languages',
-      'entity_type' => 'user',
-      'bundle' => 'user',
-      'label' => 'Auxiliary Languages',
-      'description' => 'You may select one or two auxiliary (helping) languages, especially if you are not very familiar with English. If the translation of the string in these languages exists, it will be displayed below the original (English) string. This may help you to get a better idea about how it could be translated.',
-      //'settings' => array('user_register_form' => 1),
-      'widget' => array(
-        'weight' => '4',
-        'type' => 'options_buttons',
       ),
     ));
 }

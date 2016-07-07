@@ -26,13 +26,5 @@ function verse_load($arr_vid, $lng) {
     ->fields('v', array('vid'))
     ->condition('v.vid', $arr_vid, 'IN');
 
-  // Get alternative langs from the preferences of the user.
-  $alternative_langs = array();
-  global $user;
-  $user = user_load($user->uid);
-  if (isset($user->auxiliary_languages) and is_array($user->auxiliary_languages)) {
-    $alternative_langs = $user->auxiliary_languages;
-  }
-
-  return qtr::verse_details($query, $lng, $alternative_langs);
+  return qtr::verse_details($query, $lng);
 }

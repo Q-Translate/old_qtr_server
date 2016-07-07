@@ -84,8 +84,7 @@ function qtrUser_user_presave(&$edit, $account, $category) {
 
 
 /**
- * Get the values of the fields and put them to the attributes
- * projects, auxiliary_languages to the proper place in the structure
+ * Get the values of the fields and put them in the structure
  * of the $user.  This is called after a user account is loaded, in
  * hook_user_load().
  */
@@ -97,21 +96,11 @@ function _qtrUser_user_get_fields(&$user) {
   if (isset($user->field_translation_lng[$lang][0]['value'])) {
     $user->translation_lng = $user->field_translation_lng[$lang][0]['value'];
   }
-
-  // field_auxiliary_languages
-  $user->auxiliary_languages = array();
-  if ( isset($user->field_auxiliary_languages[$lang]) and is_array($user->field_auxiliary_languages[$lang]) ) {
-    $field_auxiliary_languages = $user->field_auxiliary_languages[$lang];
-    foreach ($field_auxiliary_languages as $language) {
-      $user->auxiliary_languages[] = $language['value'];
-    }
-  }
 }
 
 /**
- * Save the values of attributes projects, and auxiliary_languages to the proper
- * place in the structure of the $edit.  This is called before a user account is
- * saved, in hook_user_presave().
+ * Save the values of attributes in the structure of the $edit.
+ * This is called before a user account is saved, in hook_user_presave().
  */
 function _qtrUser_user_set_fields(&$edit, $account) {
 
@@ -119,12 +108,6 @@ function _qtrUser_user_set_fields(&$edit, $account) {
 
   if (isset($edit['translation_lng'])) {
     $edit['field_translation_lng'][$lang][0]['value'] = $edit['translation_lng'];
-  }
-
-  if (isset($edit['auxiliary_languages']) && is_array($edit['auxiliary_languages'])) {
-    foreach ($edit['auxiliary_languages'] as $language) {
-      $edit['field_auxiliary_languages'][$lang][]['value'] = $language;
-    }
   }
 }
 

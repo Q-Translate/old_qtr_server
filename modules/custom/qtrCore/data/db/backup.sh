@@ -41,9 +41,7 @@ table_list="
     qtr_languages
     users
     users_roles
-    field_data_field_auxiliary_languages
     field_data_field_translation_lng
-    field_revision_field_auxiliary_languages
     field_revision_field_translation_lng
     hybridauth_identity
     hybridauth_session

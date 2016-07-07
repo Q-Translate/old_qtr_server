@@ -17,18 +17,12 @@ use \qtr;
  * @param $lng
  *   Language code of the translations.
  *
- * @param $alternative_langs
- *   Array of alternative (auxiliary) language codes. These will
- *   return translations of other languages, in case that the
- *   translator is not quite familiar with English or needs some help
- *   from another language.
- *
  * @return
  *   An array of verses, translations and likes, where each verse
  *   is an associative array, with translations and likes as nested
  *   associative arrays.
  */
-function verse_details($filter_query, $lng, $alternative_langs = array()) {
+function verse_details($filter_query, $lng) {
   // Get the IDs of the verses that are returned by the filter query.
   $assoc_arr_vid = $filter_query->execute()->fetchAllAssoc('vid');
   if (empty($assoc_arr_vid))  return array();
@@ -69,36 +63,6 @@ function verse_details($filter_query, $lng, $alternative_langs = array()) {
     )->fetchAllAssoc('vid');
   }
 
-  // Get alternatives (from other languages). They are the best
-  // translations (max count) from the alternative languages.
-  if (empty($alternative_langs)) {
-    $arr_alternatives = array();
-  }
-  else {
-    $arr_alternatives = qtr::db_query(
-      'SELECT DISTINCT t.vid, t.tguid, t.lng, t.translation, t.count
-       FROM (SELECT vid, lng, MAX(count) AS max_count
-	     FROM {qtr_translations}
-	     WHERE lng IN (:arr_lng) AND vid IN (:arr_vid)
-	     GROUP BY vid, lng
-	     ) AS m
-       INNER JOIN {qtr_translations} AS t
-	     ON (m.vid = t.vid AND m.lng = t.lng AND m.max_count = t.count)
-       GROUP BY t.vid, t.lng, t.count',
-      array(
-        ':arr_lng' => $alternative_langs,
-        ':arr_vid' => $arr_vid,
-      )
-    )->fetchAllAssoc('tguid');
-  }
-
-  // Put alternatives as nested array under verses.
-  foreach ($arr_alternatives as $tguid => $alternative) {
-    $vid = $alternative->vid;
-    $lng = $alternative->lng;
-    $arr_verses[$vid]->alternatives[$lng] = $alternative->translation;
-  }
-
   // Put likes as nested arrays inside translations.
   // Likes are already ordered by time (desc).
   foreach ($arr_likes as $vid => $like) {
@@ -123,7 +87,6 @@ function verse_details($filter_query, $lng, $alternative_langs = array()) {
   $verses = array();
   foreach ($arr_vid as $vid) {
     $verse = $arr_verses[$vid];
-    if (!isset($verse->alternatives)) $verse->alternatives = array();
     if (!isset($verse->translations)) $verse->translations = array();
     $verse->translations = array_values($verse->translations);
     $verses[] = $verse;
