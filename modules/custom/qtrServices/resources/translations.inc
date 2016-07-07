@@ -18,7 +18,7 @@ function _qtrServices_translations() {
         'name' => 'selector',
         'optional' => FALSE,
         'source' => array('path' => 0),
-        'description' => 'Translation selector, in the form: chapter,verse,lng',
+        'description' => 'Translation selector, in the form: lng,chapter,verse',
         'type' => 'string',
       ),
     ),
@@ -45,6 +45,24 @@ function _qtrServices_translations() {
     'access arguments' => array('access content'),
   );
 
+  // Get a verse, along with its translations, likes and other details.
+  $translations['actions']['get'] = array(
+    'help' => 'Return a verse, along with its translations, likes and other details.',
+    'file' => $file,
+    'callback' => '_qtrServices_translations_get',
+    'args' => array(
+      array(
+        'name' => 'params',
+        'optional' => FALSE,
+        'source' => 'data',
+        'description' => 'Parameters (lng, chapter, verse).',
+        'type' => 'array',
+      ),
+    ),
+    'access callback' => 'user_access',
+    'access arguments' => array('access content'),
+  );
+
   // Search verses and translations using various filters.
   $translations['actions']['search'] = array(
     'help' => 'Search verses and translations.',
@@ -63,24 +81,6 @@ function _qtrServices_translations() {
     'access arguments' => array('access content'),
   );
 
-  // Get a verse, along with its translations, likes and other details.
-  $translations['actions']['get'] = array(
-    'help' => 'Return a verse, along with its translations, likes and other details.',
-    'file' => $file,
-    'callback' => '_qtrServices_translations_get',
-    'args' => array(
-      array(
-        'name' => 'params',
-        'optional' => FALSE,
-        'source' => 'data',
-        'description' => 'Parameters (chapter, verse and lng).',
-        'type' => 'array',
-      ),
-    ),
-    'access callback' => 'user_access',
-    'access arguments' => array('access content'),
-  );
-
   // Add a new translation to a verse.
   $translations['actions']['add'] = array(
     'help' => 'Add a new translation to a verse.',
@@ -91,7 +91,7 @@ function _qtrServices_translations() {
         'name' => 'params',
         'optional' => FALSE,
         'source' => 'data',
-        'description' => 'Translation data (chapter, verse, lng, translation).',
+        'description' => 'Translation data (lng, chapter, verse, translation).',
         'type' => 'array',
       ),
     ),
@@ -178,21 +178,21 @@ function _qtrServices_translations() {
  * Get a verse, along with its translations, likes and other details.
  *
  * @param $selector
- *   Translation selector, in the form: chapter,verse,lng
+ *   Translation selector, in the form: lng,chapter,verse
  *
  * @return
  *   A nested structure containing the verse, its
  *   translations, likes, etc.
  *
  * @example
- *   curl 'https://qtranslate.org/api/translations/2,3,en'
+ *   curl 'https://qtranslate.org/api/translations/en,2,3'
  */
 function _qtrServices_translations_retrieve($selector) {
-  list($chapter, $verse, $lng) = explode(',', $selector, 3);
+  list($lng, $chapter, $verse) = explode(',', $selector, 3);
   $verse = _qtrServices_translations_get(array(
+               'lng' => $lng,
                'chapter' => $chapter,
                'verse' => $verse,
-               'lng' => $lng,
              ));
   return $verse;
 }
@@ -203,12 +203,12 @@ function _qtrServices_translations_retrieve($selector) {
  *
  * @param $params
  *   Associative array of the POST data, which contains:
+ *   - lng
+ *       The language of translations, like: 'en', 'fr', 'sq', etc.
  *   - chapter
  *       Chapter number.
  *   - verse
  *       Verse number.
- *   - lng
- *       The language of translations, like: 'en', 'fr', 'sq', etc.
  *
  * @return
  *   A nested array containing the verse, its translations, likes, etc.
@@ -216,21 +216,21 @@ function _qtrServices_translations_retrieve($selector) {
  * @example
  *   curl -H 'Content-type: application/json' \
  *     -X POST https://qtranslate.org/api/translations/get
- *     -d '{"chapter": "2", "verse": "3", "lng": "en"}'
+ *     -d '{"lng": "en", "chapter": "2", "verse": "3"}'
  */
 function _qtrServices_translations_get($params) {
+  $lng = $params['lng'];
   $chapter = $params['chapter'];
   $verse = $params['verse'];
-  $lng = $params['lng'];
 
+  if (!qtr::lng_check($lng)) {
+    return services_error('Language missing or not supported.', 406);
+  }
   if ($chapter < 1 or $chapter > 114)
     return services_error('Chapter must be between 1 and 114.', 406);
   $vid = qtr::verse_get_vid($chapter, $verse);
   if (!$vid)
     return services_error('The verse number is not correct.', 406);
-  if (!qtr::lng_check($lng)) {
-    return services_error('Language missing or not supported.', 406);
-  }
 
   $verses = qtr::verse_load([$vid], $lng);
   $verse = empty($verses) ? NULL : $verses[0];
@@ -346,12 +346,12 @@ function _qtrServices_translations_search($params) {
  *
  * @param $params
  *   Associative array of the POST data, which contains:
+ *   - lng
+ *       The language (code) of the new translation.
  *   - chapter
  *       Chapter number.
  *   - verse
  *       Verse number.
- *   - lng
- *       The language (code) of the new translation.
  *   - translation
  *       The new translation as a string.
  *
@@ -366,18 +366,19 @@ function _qtrServices_translations_search($params) {
  */
 function _qtrServices_translations_add($params) {
   // get parameters and validate them
+  $lng = $params['lng'];
   $chapter = $params['chapter'];
   $verse = $params['verse'];
   $translation = $params['translation'];
 
+  if (!qtr::lng_check($lng)) {
+    return services_error('Language missing or not supported.', 406);
+  }
   if ($chapter < 1 or $chapter > 114)
     return services_error('Chapter must be between 1 and 114.', 406);
   $vid = qtr::verse_get_vid($chapter, $verse);
   if (!$vid)
     return services_error('The verse number is not correct.', 406);
-  if (!qtr::lng_check($lng)) {
-    return services_error('Language missing or not supported.', 406);
-  }
 
   // Check access permissions.
   if (!user_access('qtranslate-suggest')) {
