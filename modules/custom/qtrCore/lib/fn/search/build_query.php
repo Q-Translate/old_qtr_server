@@ -49,6 +49,7 @@ function search_build_query($filter) {
     ->extend('PagerDefault')->limit($filter['limit']);
   $query->addField('v', 'vid');
   $query->groupBy('v.vid');
+  $query->orderBy('v.vid');
 
   _filter_by_content($query, $filter['mode'], $filter['words']);
   _filter_by_chapter($query, $filter['chapter']);
