@@ -75,12 +75,6 @@ function language_form($form, &$form_state, $language = NULL) {
     '#default_value' => isset($language->direction) ? $language->direction : LANGUAGE_LTR,
   );
 
-  $form['plurals'] = array(
-    '#title' => t('Plurals'),
-    '#type' => 'textfield',
-    '#default_value' => isset($language->plurals) ? $language->plurals : '2',
-  );
-
   field_attach_form('language', $language, $form, $form_state);
 
   $form['submit'] = array(
@@ -138,12 +132,6 @@ function qtrLanguages_entity_property_info() {
     ),
     'schema field' => 'direction',
   );
-  $info['language']['properties']['plurals'] = array(
-    'label' => t('Plurals'),
-    'description' => t('Language plurals.'),
-    'type' => 'integer',
-    'schema field' => 'plurals',
-  );
 
   return $info;
 }
@@ -175,12 +163,6 @@ class LanguageEntityController extends EntityAPIController {
       '#type' => 'markup',
       '#markup' => t('Direction: ') . check_plain($entity->direction),
       '#prefix' => '<div class="language-direction">',
-      '#suffix' => '</div>',
-    );
-    $build['plurals'] = array(
-      '#type' => 'markup',
-      '#markup' => t('Plurals: ') . check_plain($entity->plurals),
-      '#prefix' => '<div class="language-plurals">',
       '#suffix' => '</div>',
     );
 

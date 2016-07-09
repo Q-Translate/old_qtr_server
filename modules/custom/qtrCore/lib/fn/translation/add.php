@@ -17,9 +17,7 @@ use \qtr;
  *   The language (code) of the new translation.
  *
  * @param $translation
- *   The new translation as a string. If the string has plural
- *   version(s) as well, they are concatenated with NULL bytes ("\0")
- *   between them.
+ *   The new translation as a string.
  *
  * @param $uid (optional)
  *   Id of the user that is adding the string.

@@ -36,14 +36,6 @@ function qtrLanguages_schema() {
         'not null' => TRUE,
         'default' => 0,
       ),
-      'plurals' => array(
-        'description' => 'Number of plurals of the language.',
-        'type' => 'int',
-        'size' => 'tiny',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-        'default' => 2,
-      ),
     ),
     'primary key' => array('id'),
     'unique keys' => array(
@@ -74,55 +66,46 @@ function _qtrLanguages_language_list() {
       'code' => 'en',
       'name' => 'English',
       'direction' => LANGUAGE_LTR,
-      'plurals' => 2,
     ),
     'fr' => array(
       'code' => 'fr',
       'name' => 'French',
       'direction' => LANGUAGE_LTR,
-      'plurals' => 2,
     ),
     'de' => array(
       'code' => 'de',
       'name' => 'German',
       'direction' => LANGUAGE_LTR,
-      'plurals' => 2,
     ),
     'it' => array(
       'code' => 'it',
       'name' => 'Italian',
       'direction' => LANGUAGE_LTR,
-      'plurals' => 2,
     ),
     'es' => array(
       'code' => 'es',
       'name' => 'Spanish',
       'direction' => LANGUAGE_LTR,
-      'plurals' => 2,
     ),
     'sq' => array(
       'code' => 'sq',
       'name' => 'Albanian',
       'direction' => LANGUAGE_LTR,
-      'plurals' => 2,
     ),
     'bg' => array(
       'code' => 'bg',
       'name' => 'Bulgarian',
       'direction' => LANGUAGE_LTR,
-      'plurals' => 2,
     ),
     'fi' => array(
       'code' => 'fi',
       'name' => 'Finnish',
       'direction' => LANGUAGE_LTR,
-      'plurals' => 2,
     ),
     'tr' => array(
       'code' => 'tr',
       'name' => 'Turkish',
       'direction' => LANGUAGE_LTR,
-      'plurals' => 2,
     ),
   );
 }

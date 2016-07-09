@@ -20,7 +20,6 @@ CREATE TABLE `qtr_languages` (
   `code` varchar(5) NOT NULL COMMENT 'The code of the language (like: en, fr, de, etc.).',
   `name` varchar(255) DEFAULT NULL COMMENT 'Language name.',
   `direction` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'LeftToRight=0, RightToLeft=1.',
-  `plurals` tinyint(3) unsigned NOT NULL DEFAULT '2' COMMENT 'Number of plurals of the language.',
   PRIMARY KEY (`id`),
   UNIQUE KEY `code` (`code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='The base table for the Language entity';

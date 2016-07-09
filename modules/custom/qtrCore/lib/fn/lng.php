@@ -71,7 +71,6 @@ function lng_get_details() {
         'code' => $lng,
         'name' => $all_langs[$lng]->name,
         'direction' => $all_langs[$lng]->direction,
-        'plurals' => $all_langs[$lng]->plurals,
       );
     }
     else {
@@ -79,7 +78,6 @@ function lng_get_details() {
         'code' => $lng,
         'name' => "Unknown ($lng)",
         'direction' => LANGUAGE_LTR,
-        'plurals' => 2,
       );
     }
   }
