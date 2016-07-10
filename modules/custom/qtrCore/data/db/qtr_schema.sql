@@ -12,18 +12,6 @@ CREATE TABLE `qtr_chapters` (
   KEY `tname` (`tname`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-DROP TABLE IF EXISTS `qtr_languages`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `qtr_languages` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary key of the Language entity',
-  `code` varchar(5) NOT NULL COMMENT 'The code of the language (like: en, fr, de, etc.).',
-  `name` varchar(255) DEFAULT NULL COMMENT 'Language name.',
-  `direction` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'LeftToRight=0, RightToLeft=1.',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `code` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='The base table for the Language entity';
-/*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `qtr_translations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;

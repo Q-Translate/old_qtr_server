@@ -9,7 +9,7 @@ function qtrLanguages_entity_info() {
 
   $info['language'] = array(
     'label' => t('Language'),
-    'base table' => 'qtr_languages',
+    'base table' => 'qtrLanguages',
     'entity keys' => array(
       'id' => 'id',
       'label' => 'name',

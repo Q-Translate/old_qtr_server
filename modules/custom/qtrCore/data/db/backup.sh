@@ -22,7 +22,6 @@ table_list="
     qtr_likes_trash
     qtr_users
     qtr_user_project_roles
-    qtr_languages
 "
 $mysqldump --tables $table_list >> $backup_dir/qtr_data.sql
 
@@ -38,7 +37,7 @@ $mysqldump --tables $table_list > $backup_dir/qcl.sql
 ### backup qtr tables
 mysqldump=$(drush @qtr sql-connect | sed -e 's/^mysql/mysqldump/' -e 's/--database=/--databases /')
 table_list="
-    qtr_languages
+    qtrLanguages
     users
     users_roles
     field_data_field_translation_lng

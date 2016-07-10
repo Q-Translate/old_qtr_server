@@ -7,7 +7,7 @@ function qtrLanguages_schema() {
 
   $schema = array();
 
-  $schema['qtr_languages'] = array(
+  $schema['qtrLanguages'] = array(
     'description' => 'The base table for the Language entity',
     'fields' => array(
       'id' => array(

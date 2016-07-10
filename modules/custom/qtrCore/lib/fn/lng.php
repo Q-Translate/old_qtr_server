@@ -45,7 +45,7 @@ function lng_get() {
  */
 function lng_get_list() {
   $list = array();
-  $all_langs = \db_query('SELECT * FROM {qtr_languages}')->fetchAllAssoc('code');
+  $all_langs = \db_query('SELECT * FROM {qtrLanguages}')->fetchAllAssoc('code');
   $langs = qtr::lng_get();
   foreach ($langs as $lng) {
     $list[$lng] = isset($all_langs[$lng]) ? $all_langs[$lng]->name : $lng;
@@ -63,7 +63,7 @@ function lng_get_list() {
  */
 function lng_get_details() {
   $lng_details = array();
-  $all_langs = \db_query('SELECT * FROM {qtr_languages}')->fetchAllAssoc('code');
+  $all_langs = \db_query('SELECT * FROM {qtrLanguages}')->fetchAllAssoc('code');
   $langs = qtr::lng_get();
   foreach ($langs as $lng) {
     if (isset($all_langs[$lng])) {
