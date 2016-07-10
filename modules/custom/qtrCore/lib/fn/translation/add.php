@@ -55,7 +55,7 @@ function translation_add($vid, $lng, $translation, $uid = NULL, $notify = TRUE) 
   $account = user_load($uid);
   $umail = ($uid==1 ?  $umail = '' : $account->init);
 
-  // Insert the new suggestion.
+  // Insert the new translation.
   qtr::db_insert('qtr_translations')
     ->fields(array(
         'vid' => $vid,

@@ -149,7 +149,7 @@ for the JavaScript code in this tag.
 <h2 id="orgheadline1"><span class="section-number-2">1</span> DB Schema</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-Each verse can have several translations (or suggestions) in each
+Each verse can have several translations in each
 language. Each translation can have many likes. Each like is given
 by a certain user.
 </p>
@@ -176,7 +176,7 @@ The DB tables and their fields:
 <dt>verse : varchar(2500)</dt><dd>The text of the verse.</dd>
 </dl></dd>
 
-<dt>Translations</dt><dd>Translations/suggestions of the verses.
+<dt>Translations</dt><dd>Translations of the verses.
 For each verse there can be translations for different
 languages, and more than one translation for each language.
 <dl class="org-dl">
@@ -185,34 +185,34 @@ defined as the hash: SHA1(CONCAT(translation,lng,vid))</dd>
 <dt>vid : smallint</dt><dd>Reference to the id of the l10n string that is
 translated.</dd>
 <dt>lng : varchar(5)</dt><dd>Language code (en, fr, sq_AL, etc.)</dd>
-<dt>translation : varchar(2500)</dt><dd>The (suggested) translation of
+<dt>translation : varchar(2500)</dt><dd>Translation of
 the verse.</dd>
 <dt>count : tinyint</dt><dd>Count of likes received so far. This can be
 counted on the table Likes, but for convenience is stored
 here as well.</dd>
 <dt>umail : varchar(250)</dt><dd>The email of the user that submitted
-this suggestion.</dd>
+this translation.</dd>
 <dt>ulng : varchar(5)</dt><dd>The translation language of the user that
-submitted this suggestion.</dd>
+submitted this translation.</dd>
 <dt>time : datetime</dt><dd>Time that the translation was
 entered into the database.</dd>
 <dt>active : boolean</dt><dd>The active or deleted status of the record.</dd>
 </dl></dd>
 
-<dt>Likes</dt><dd>Likes for each translation/suggestion.
+<dt>Likes</dt><dd>Likes for each translation.
 <dl class="org-dl">
 <dt>vid : serial</dt><dd>Internal numeric identifier for a like.</dd>
 <dt>tguid : char(40)</dt><dd>Reference to the id of the translation
 which is liked.</dd>
 <dt>umail : varchar(250)</dt><dd>The email of the user that submitted
-this suggestion.</dd>
+this translation.</dd>
 <dt>ulng : varchar(5)</dt><dd>The translation language of the user that
-submitted this suggestion.</dd>
+submitted this translation.</dd>
 <dt>time : datetime</dt><dd>Timestamp of the like time.</dd>
 <dt>active : boolean</dt><dd>The active or deleted status of the record.</dd>
 </dl></dd>
 
-<dt>Users</dt><dd>Users that contribute translations/suggestions/likes.
+<dt>Users</dt><dd>Users that contribute translations/likes.
 <dl class="org-dl">
 <dt>umail : varchar(250)</dt><dd>The email of the user.</dd>
 <dt>ulng : varchar(5)</dt><dd>The translation language of the user.</dd>

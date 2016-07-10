@@ -6,9 +6,9 @@
 
 * DB Schema
 
-  Each verse can have several translations (or suggestions) in each
-  language. Each translation can have many likes. Each like is given
-  by a certain user.
+  Each verse can have several translations in each language. Each
+  translation can have many likes. Each like is given by a certain
+  user.
 
   The DB tables and their fields:
 
@@ -25,7 +25,7 @@
     - nr : smallint :: Number of the verse.
     - verse : varchar(2500) :: The text of the verse.
 
-  + Translations :: Translations/suggestions of the verses.
+  + Translations :: Translations of the verses.
 	 For each verse there can be translations for different
 	 languages, and more than one translation for each language.
     - tguid : char(40) :: Globally Unique ID of the translation,
@@ -33,31 +33,30 @@
     - vid : smallint :: Reference to the id of the l10n string that is
 	 translated.
     - lng : varchar(5) :: Language code (en, fr, sq_AL, etc.)
-    - translation : varchar(2500) :: The (suggested) translation of
-	 the verse.
+    - translation : varchar(2500) :: Translation of the verse.
     - count : tinyint :: Count of likes received so far. This can be
 	 counted on the table Likes, but for convenience is stored
 	 here as well.
     - umail : varchar(250) :: The email of the user that submitted
-         this suggestion.
+         this translation.
     - ulng : varchar(5) :: The translation language of the user that
-         submitted this suggestion.
+         submitted this translation.
     - time : datetime :: Time that the translation was
 	 entered into the database.
     - active : boolean :: The active or deleted status of the record.
 
-  + Likes :: Likes for each translation/suggestion.
+  + Likes :: Likes for each translation.
     - vid : serial :: Internal numeric identifier for a like.
     - tguid : char(40) :: Reference to the id of the translation
 	 which is liked.
     - umail : varchar(250) :: The email of the user that submitted
-         this suggestion.
+         this translation.
     - ulng : varchar(5) :: The translation language of the user that
-         submitted this suggestion.
+         submitted this translation.
     - time : datetime :: Timestamp of the like time.
     - active : boolean :: The active or deleted status of the record.
 
-  + Users :: Users that contribute translations/suggestions/likes.
+  + Users :: Users that contribute translations/likes.
     - umail : varchar(250) :: The email of the user.
     - ulng : varchar(5) :: The translation language of the user.
     - uid : int :: The numeric identifier of the user.

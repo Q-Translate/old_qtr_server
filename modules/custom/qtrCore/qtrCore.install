@@ -136,8 +136,8 @@ function qtrCore_schema() {
     ),
   );
 
-  // Translations/suggestions of the l10n strings.
-  // For each l10n string there can be translations for different
+  // Translations for the verses of the Quran.
+  // For each verse there can be translations for different
   // languages, and more than one translation for each language.
   $schema['qtr_translations'] = array(
     'description' => 'Translations of verses.',
@@ -161,7 +161,7 @@ function qtrCore_schema() {
         'not null' => TRUE,
       ),
       'translation' => array(
-        'description' => 'The (suggested) translation of the phrase.',
+        'description' => 'Translation of the verse.',
         'type' => 'varchar',
         'length' => '2500',
         'not null' => TRUE,
@@ -174,13 +174,13 @@ function qtrCore_schema() {
         'default' => 1,
       ),
       'umail' => array(
-        'description' => 'The email of the user that submitted this suggestion.',
+        'description' => 'The email of the user that submitted this translation.',
         'type' => 'varchar',
         'length' => '250',
         'not null' => TRUE,
       ),
       'ulng' => array(
-        'description' => 'The translation language of the user that submitted this suggestion.',
+        'description' => 'The translation language of the user that submitted this translation.',
         'type' => 'varchar',
         'length' => '5',
         'not null' => TRUE,
@@ -238,9 +238,9 @@ function qtrCore_schema() {
   $schema['qtr_translations_trash']['indexes']['d_time'] = array('d_time');
   $schema['qtr_translations_trash']['indexes']['d_umail'] = array(array('d_umail', 10));
 
-  // Likes for each translation/suggestion.
+  // Likes for each translation.
   $schema['qtr_likes'] = array(
-    'description' => 'Likes for each translation/suggestion.',
+    'description' => 'Likes for each translation.',
     'fields' => array(
       'lid' => array(
         'description' => 'Internal numeric identifier for a like.',
@@ -254,13 +254,13 @@ function qtrCore_schema() {
         'not null' => TRUE,
       ),
       'umail' => array(
-        'description' => 'The email of the user that submitted this suggestion.',
+        'description' => 'The email of the user that submitted this translation.',
         'type' => 'varchar',
         'length' => '250',
         'not null' => TRUE,
       ),
       'ulng' => array(
-        'description' => 'The translation language of the user that submitted this suggestion.',
+        'description' => 'The translation language of the user that submitted this translation.',
         'type' => 'varchar',
         'length' => '5',
         'not null' => TRUE,
@@ -304,9 +304,9 @@ function qtrCore_schema() {
   $schema['qtr_likes_trash']['indexes']['lid'] = array('lid');
   $schema['qtr_likes_trash']['indexes']['d_time'] = array('d_time');
 
-  // Users that contribute translations/suggestions/likes.
+  // Users that make translations/likes.
   $schema['qtr_users'] = array(
-    'description' => 'Users that contribute translations/suggestions/likes.',
+    'description' => 'Users that make translations/likes.',
     'fields' => array(
       'umail' => array(
         'description' => 'The email of the user.',

@@ -64,8 +64,8 @@ function _drush_qtranslate_qtr_import_check_permissions($lng) {
   global $user;
 
   // Check user access permissions.
-  if (!user_access('qtranslate-suggest')) {
-    drush_log(t('User "!user" has no rights for contributing translations!', ['!user' => $user->name]), 'error');
+  if (!user_access('qtranslate-translate')) {
+    drush_log(t('User "!user" has no rights for suggesting translations!', ['!user' => $user->name]), 'error');
     drupal_exit();
   }
   if (!user_access('qtranslate-like')) {

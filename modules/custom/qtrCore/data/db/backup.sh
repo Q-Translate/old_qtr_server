@@ -1,5 +1,5 @@
 #!/bin/bash
-### Backup all the users, suggestions and likes.
+### Backup all the users, translations and likes.
 
 ### create the backup directory
 date=$(date +%Y%m%d)

@@ -22,7 +22,7 @@ function qtrUser_permission() {
       'title' => t('Like translations.'),
       'description' => t('Can submit likes for translation suggestions.'),
     ),
-    'qtranslate-suggest' => array(
+    'qtranslate-translate' => array(
       'title' => t('Suggest new translations.'),
       'description' => t('Can submit new translation suggestions.'),
     ),

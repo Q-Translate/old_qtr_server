@@ -48,9 +48,9 @@ function qtr_qtr_user_default_permissions() {
     'module' => 'qtrUser',
   );
 
-  // Exported permission: 'qtranslate-suggest'.
-  $permissions['qtranslate-suggest'] = array(
-    'name' => 'qtranslate-suggest',
+  // Exported permission: 'qtranslate-translate'.
+  $permissions['qtranslate-translate'] = array(
+    'name' => 'qtranslate-translate',
     'roles' => array(
       'contributor' => 'contributor',
       'moderator' => 'moderator',

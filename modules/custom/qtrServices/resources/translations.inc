@@ -96,7 +96,7 @@ function _qtrServices_translations() {
       ),
     ),
     'access callback' => 'user_access',
-    'access arguments' => array('qtranslate-suggest'),
+    'access arguments' => array('qtranslate-translate'),
   );
 
   // Add a like for a translation.
@@ -132,7 +132,7 @@ function _qtrServices_translations() {
       ),
     ),
     'access callback' => 'user_access',
-    'access arguments' => array('qtranslate-suggest'),
+    'access arguments' => array('qtranslate-translate'),
   );
 
   // Submit multiple actions at once.
@@ -381,8 +381,8 @@ function _qtrServices_translations_add($params) {
     return services_error('The verse number is not correct.', 406);
 
   // Check access permissions.
-  if (!user_access('qtranslate-suggest')) {
-    $msg = t('No rights for contributing suggestions!');
+  if (!user_access('qtranslate-translate')) {
+    $msg = t('No rights for making translations!');
     return ['tguid' => NULL, 'messages' => [[$msg, 'error']]];
   }
   // Check that the language matches the translation language of the user.
@@ -471,14 +471,14 @@ function _qtrServices_translations_like($params) {
  *       'status', 'warning', 'error'.
  */
 function _qtrServices_translations_submit($params) {
-  $nr_likes = $nr_suggestions = $nr_deletions = 0;
+  $nr_likes = $nr_translations = $nr_deletions = 0;
   foreach ($params as $item) {
     $action = $item['action'];
     if (!$action) continue;
     switch ($action) {
     case 'add':
       $result = _qtrServices_translations_add($item['params']);
-      if ($result['tguid'] != NULL)  $nr_suggestions++;
+      if ($result['tguid'] != NULL)  $nr_translations++;
       qtr::messages($result['messages']);
       break;
 
@@ -505,8 +505,8 @@ function _qtrServices_translations_submit($params) {
     }
   }
 
-  if ($nr_suggestions > 0) {
-    $msg = format_plural($nr_suggestions, '1 suggestion saved', '@count suggestions saved');
+  if ($nr_translations > 0) {
+    $msg = format_plural($nr_translations, '1 translation saved', '@count translations saved');
     qtr::messages($msg);
   }
   if ($nr_likes > 0) {
@@ -556,8 +556,8 @@ function _qtrServices_import($params) {
     $msg = t('No rights for submitting likes!');
     return ['messages' => [[$msg, 'error']]];
   }
-  if (!user_access('qtranslate-suggest')) {
-    $msg = t('No rights for submitting translations!');
+  if (!user_access('qtranslate-translate')) {
+    $msg = t('No rights for making translations!');
     return ['messages' => [[$msg, 'error']]];
   }
 

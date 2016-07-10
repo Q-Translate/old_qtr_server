@@ -41,7 +41,7 @@ CREATE TABLE `qtr_translations_trash` (
   `lng` varchar(5) COLLATE utf8_bin NOT NULL COMMENT 'Language code (en, fr, sq_AL, etc.)',
   `translation` varchar(2500) COLLATE utf8_bin NOT NULL COMMENT 'The translation of the verse.',
   `count` smallint(6) DEFAULT '1' COMMENT 'Count of likes received so far. This can be counted on the table qtr_likes, but for convenience is stored here as well.',
-  `umail` varchar(250) CHARACTER SET utf8 NOT NULL COMMENT 'The email of the user that submitted this suggestion.',
+  `umail` varchar(250) CHARACTER SET utf8 NOT NULL COMMENT 'The email of the user that submitted this translation.',
   `ulng` varchar(5) CHARACTER SET utf8 NOT NULL COMMENT 'The translation language of the user that suggested this translation.',
   `time` datetime DEFAULT NULL COMMENT 'Time when the translation was entered into the database.',
   `active` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'The active/deleted status of the record.',
