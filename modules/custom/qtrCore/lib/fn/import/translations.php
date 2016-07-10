@@ -32,6 +32,7 @@ function import_translations($lng, $file, $uid = NULL) {
   while(!feof($handle)){
     $vid++;
     $translation = fgets($handle);
+    $translation = trim($translation);
     $tguid = sha1($translation . $lng . $vid);
     qtr::db_delete('qtr_translations')
       ->condition('tguid', $tguid)
