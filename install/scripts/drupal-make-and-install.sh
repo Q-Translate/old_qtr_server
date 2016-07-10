@@ -1,5 +1,11 @@
 #!/bin/bash -x
 
+### start mysqld manually, if it is not running
+if test -z "$(ps ax | grep [m]ysqld)"
+then
+    nohup mysqld --user mysql >/dev/null 2>/dev/null &
+fi
+
 ### make sure that we have the right git branch on the make file
 makefile="$code_dir/build-qtrserver.make"
 sed -i $makefile \
@@ -43,13 +49,6 @@ mkdir -p /var/www/exports/
 chown www-data: /var/www/exports/
 mkdir -p /var/www/uploads/
 chown www-data: /var/www/uploads/
-
-### start mysqld manually, if it is not running
-if test -z "$(ps ax | grep [m]ysqld)"
-then
-    nohup mysqld --user mysql >/dev/null 2>/dev/null &
-    sleep 5  # give time mysqld to start
-fi
 
 ### settings for the database and the drupal site
 db_name=qtr
