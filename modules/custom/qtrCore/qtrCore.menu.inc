@@ -35,14 +35,12 @@ function qtrCore_menu() {
     'file'            => 'admin/data.inc',
   );
 
-  // The link that is sent to the user for downloading an exported file.
-  // The URL is of the form 'exports/filename.tgz'
-  // and the filename is passed as a parameter to the function.
-  $items['exports'] = array(
+  // Get exported translations as a text file.
+  $items['export'] = array(
     'type'            => MENU_CALLBACK,
-    'title'           => 'Download Exported File',
-    'page callback'   => 'qtrCore_get_exported_file',
-    'file'            => 'callback/exports.inc',
+    'title'           => 'Export',
+    'page callback'   => 'qtrCore_export',
+    'file'            => 'callback/export.inc',
     'access callback' => TRUE,
   );
 

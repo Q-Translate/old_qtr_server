@@ -13,10 +13,6 @@ function qtrCore_cron_queue_info() {
     'worker callback' => 'qtrCore_send_notification_by_email',
     'time' => 240,
   );
-  $queues['export'] = array(
-    'worker callback' => 'qtrCore_export',
-    'time' => 2000,
-  );
   $queues['import'] = array(
     'worker callback' => 'qtrCore_import',
     'time' => 2000,
@@ -49,7 +45,6 @@ function qtrCore_cron_nightly() {
   variable_set('qtrCore_crontime', $crontime);
 
   // Call cron functions.
-  qtr::cron_delete_old_export_files();
   qtr::cron_cleanup_fake_users();
   qtr::cron_send_verses_for_review();
 }
@@ -59,13 +54,6 @@ function qtrCore_cron_nightly() {
  */
 function qtrCore_send_notification_by_email($params) {
   qtr::email_send($params);
-}
-
-/**
- * The callback function called from cron_queue 'export'.
- */
-function qtrCore_export($export_params) {
-  qtr::cron_export($export_params);
 }
 
 /**

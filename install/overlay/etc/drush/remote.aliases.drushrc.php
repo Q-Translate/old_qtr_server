@@ -14,7 +14,7 @@ $aliases['live'] = array (
     '%profile' => 'profiles/qtr_server',
     '%data' => '/var/www/data',
     '%pofiles' => '/var/www/PO_files',
-    '%exports' => '/var/www/exports',
+    '%uploads' => '/var/www/uploads',
     '%downloads' => '/var/www/downloads',
   ),
 

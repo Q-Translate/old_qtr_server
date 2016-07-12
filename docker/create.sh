@@ -34,11 +34,10 @@ function remove_dir() {
 if [ "$dev" = 'false' ]
 then
     ### create a container for production
-    mkdir -p downloads uploads exports
+    mkdir -p downloads uploads
     docker create --name=$container --hostname=$hostname --restart=always \
         -v $(pwd)/downloads:/var/www/downloads \
         -v $(pwd)/uploads:/var/www/uploads \
-        -v $(pwd)/exports:/var/www/exports \
         -w /var/www/data $ports $image
 else
     ### remove the directories qtr_client/ and qtr_server/ if they exist

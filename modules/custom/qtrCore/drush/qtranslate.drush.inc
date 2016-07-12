@@ -43,14 +43,3 @@ function qtranslate_drush_help($section) {
       return dt("Import and export Quran translations.");
   }
 }
-
-/**
- * Check the parameter $lng.
- */
-function _qtranslate_drush_check_lng($lng = NULL) {
-  // Make sure that the given language exists.
-  if ($lng !== NULL and !in_array($lng, qtr::lng_get())) {
-    drush_log(t("The language '!lng' does not exist.", ['!lng' => "$lng"]), 'error');
-    drupal_exit();
-  }
-}

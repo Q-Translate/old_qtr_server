@@ -41,11 +41,8 @@ function drush_qtranslate_qtr_import($lng, $file) {
     drupal_exit();
   }
 
-  // Check that the given language exists.
-  _qtranslate_drush_check_lng($lng);
-
   // Check user permissions.
-  _drush_qtranslate_qtr_import_check_permissions($lng);
+  _drush_qtranslate_qtr_import_check($lng);
 
   // Check that there is such a file.
   if (!file_exists($file)) {
@@ -60,7 +57,7 @@ function drush_qtranslate_qtr_import($lng, $file) {
 /**
  * Check user permissions.
  */
-function _drush_qtranslate_qtr_import_check_permissions($lng) {
+function _drush_qtranslate_qtr_import_check($lng) {
   global $user;
 
   // Check user access permissions.
@@ -74,7 +71,7 @@ function _drush_qtranslate_qtr_import_check_permissions($lng) {
   }
 
   // Get and check the parameter 'lng'.
-  if (!in_array($lng, qtr::lng_get())) {
+  if (!qtr::lng_check($lng)) {
     drush_log(t('Language "!lng" is not supported.', array('!lng' => $lng)), 'error');
     drupal_exit();
   }

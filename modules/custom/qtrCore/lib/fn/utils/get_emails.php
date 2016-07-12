@@ -9,22 +9,22 @@ namespace QTranslate;
 /**
  * Converts a comma separated list of usernames into an array of user emails.
  *
- * May be used before calling project_export(). It checks each
- * username and appends its email to the list of emails, or adds an
- * error message if the username is not valid.
+ * May be used before calling export(). It checks each username and appends its
+ * email to the list of emails, or adds an error message if the username is not
+ * valid.
  *
- * @param $preferred_users
+ * @param $users
  *   Comma separated list of usernames. White spaces are tolerated as well.
  *
  * @return
  *   array($arr_of_user_emails, $arr_of_error_messages)
  *   Each error message is in the format: array($error_message, 'error').
  */
-function utils_get_emails($preferred_users) {
+function utils_get_emails($users) {
   $arr_emails = [];
   $error_messages = [];
 
-  $arr_names = preg_split('/\s*,\s*/', trim($preferred_users));
+  $arr_names = preg_split('/\s*,\s*/', trim($users));
   foreach ($arr_names as $username) {
     $account = user_load_by_name($username);
     if ($account) {

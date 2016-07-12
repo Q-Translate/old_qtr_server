@@ -6,16 +6,16 @@ function _qtr_export_drush_command() {
   return array(
     'description' => "Export the translations of a language.",
     'arguments' => array(
-      'lng' => 'The language of translation (de, fr, sq, en_GB, etc.)',
-      'path' => 'The directory where the translation file will be exported.',
+      'lng' => 'The language of translation (en, de, fr, sq, etc.)',
     ),
     'options' => array(
-      'export-mode' => "'most_liked' (default) or 'preferred'",
-      'preferred-users' => 'Comma separated list of the preferred users.',
-      'user' => 'The username of the user who is requesting the export.',
+      'chapter' => 'The chapter to be exported.',
+      'mode' => "'most_liked' (default) or 'preference'",
+      'users' => 'Comma separated list of the preferred users.',
+      'output' => 'The output file where the translations will be saved.',
     ),
     'examples' => array(
-      "drush qtr-export sq $(pwd)" => 'Export the most likes Albanian translations into the current directory.',
+      "drush qtr-export en --chapter=1" => 'Export the most liked English translations of the first chapter.',
     ),
     'aliases' => array('qtr-exp'),
   );
@@ -27,44 +27,61 @@ function _qtr_export_drush_command() {
 function _qtr_export_drush_help() {
   return "Export the translations of a language..
 
-The export mode 'most_liked' (which is the default one) exports the
-most liked translations.
+The export mode 'most_liked' (which is the default one) exports the translations
+with the bigest numberor likes.
 
-The export mode 'preferred' gives priority to translations that are
-liked by a certain user or a group of users. It requires an additional
-option (preferred_users) to specify the user (or a list of users)
-whose translations are preferred. If a string has no translation that
-is liked by any of the preferred users, then the most liked
-translation is exported.
+The export mode 'preference' gives priority to translations that are liked by a
+certain user or a group of users. It requires an additional option (users) to
+specify the user (or a list of users) whose translations are preferred. If a
+string has no translation that is liked by any of the preferred users, then the
+most liked translation is exported.
 ";
 }
 
 /**
  * Callback function for the command 'qtr-export'.
  */
-function drush_qtranslate_qtr_export($origin, $project, $lng, $path) {
-  // Check parameters $origin, $project, $lng.
-  _qtranslate_drush_check_params($origin, $project, $lng);
-
-  // Check the export_mode.
-  $export_mode = drush_get_option('export-mode', 'most_liked');
-  if ($export_mode != 'most_liked' and $export_mode != 'preferred') {
-    drush_log(t("Unknown export mode '!export_mode'.",
-        ['!export_mode' => $export_mode]), 'error');
+function drush_qtranslate_qtr_export($lng) {
+  // Check $lng.
+  if (!qtr::lng_check($lng)) {
+    drush_log(t("The language '!lng' does not exist.", ['!lng' => "$lng"]), 'error');
     drupal_exit();
   }
 
-  // Get the preferred users.
-  if ($export_mode == 'preferred') {
-    $preferred_users = drush_get_option('preferred-users', NULL);
-    list($arr_emails, $error_messages) = qtr::utils_get_emails($preferred_users);
+  // Get the option 'chapter'.
+  $chapter = drush_get_option('chapter', NULL);
+  if ($chapter != NULL && ($chapter < 1 || $chapter > 114)) {
+    drush_log(t("Chapter '!chapter' is out of range.", ['!chapter' => $chapter]), 'error');
+    drupal_exit();
+  }
+
+  // Get the export mode.
+  $mode = drush_get_option('mode', 'most_liked');
+  if ($mode != 'most_liked' && $mode != 'preference') {
+    drush_log(t("Unknown export mode '!mode'.", ['!mode' => $mode]), 'error');
+    drupal_exit();
+  }
+
+  // Get the preference users.
+  if ($mode == 'preference') {
+    $users = drush_get_option('users', NULL);
+    list($arr_emails, $error_messages) = qtr::utils_get_emails($users);
     if (!empty($error_messages)) {
       foreach ($error_messages as $msg)  drush_log($msg[0], $msg[1]);
       drupal_exit();
     }
   }
 
+  // Get the option output.
+  $output = drush_get_option('output');
+
   // Export the project.
-  qtr::export($lng, $path, $export_mode, $arr_emails);
-  //foreach (qtr::messages() as $msg)  drush_log($msg[0], $msg[1]);
+  $file = qtr::export($lng, $chapter, $mode, $arr_emails);
+  if ($output) {
+    shell_exec("mv $file $output");
+  }
+  else {
+    print(shell_exec("cat $file"));
+    unlink($file);
+  }
 }

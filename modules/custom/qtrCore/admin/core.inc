@@ -38,18 +38,6 @@ function qtrCore_config() {
     '#title' => t('Q-Translate Defaults'),
   );
 
-  $form['export'] = array(
-    '#type'  => 'fieldset',
-    '#title' => t('Q-Translate Export/Import'),
-  );
-
-  $form['export']['qtr_export_path'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Export path'),
-    '#default_value' => variable_get('qtr_export_path', '/var/www/exports'),
-    '#description' => t('The directory where the exported projects will be placed. Must be accessable by the web server (www-data).'),
-  );
-
   $form = system_settings_form($form);
   $form['#submit'][] = 'qtrCore_config_set_languages';
   return $form;
