@@ -29,30 +29,28 @@ function cron_import($params) {
   $account = user_load($params->uid);
   $file = file_load($params->fid);
 
-  // Create a temporary directory.
+  // Copy the file to a tmp directory.
   $tmpdir = '/tmp/' . sha1_file($file->uri);
   mkdir($tmpdir, 0700);
-
-  // Copy the file there and extract it (if it is an archive).
   file_unmanaged_copy($file->uri, $tmpdir);
-  exec("cd $tmpdir ; dtrx -q -n $file->filename 2>/dev/null");
+  $tmpfile =  $tmpdir . '/' . $file->filename;
 
-  // Import the PO files.
-  qtr::like_import($account->uid, $lng, $tmpdir);
-  $txt_messages = qtr::messages_cat(qtr::messages());
+  // Import the file.
+  qtr::import_translations($lng, $tmpfile, $account->uid);
+  //$txt_messages = qtr::messages_cat(qtr::messages());
 
   // Get the url of the client site.
   module_load_include('inc', 'qtrCore', 'includes/sites');
   $client_url = qtr::utils_get_client_url($lng);
 
-  // Notify the user that the export is done.
+  // Notify the user that the import is done.
   $params = array(
     'type' => 'notify-that-import-is-done',
     'uid' => $account->uid,
     'username' => $account->name,
     'recipient' => $account->name .' <' . $account->mail . '>',
     'filename' => $file->filename,
-    'search_url' => $client_url . url('translations/search', array(
+    'search_url' => $client_url . url('qtr/search', array(
                     'query' => array(
                       'lng' => $lng,
                       'translated_by' => $account->name,
@@ -67,7 +65,7 @@ function cron_import($params) {
   );
   qtr::queue('notifications', array($params));
 
-  // Cleanup, remove the temp dir and delete the file.
+  // Cleanup.
   exec("rm -rf $tmpdir/");
   file_delete($file, TRUE);
 

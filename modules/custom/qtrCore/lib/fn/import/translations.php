@@ -18,7 +18,7 @@ use \qtr;
  *   having each translation in a separate line.
  *
  * @param $uid
- *   Id of the user that is adding the string.
+ *   Id of the user that is importing these translations.
  */
 function import_translations($lng, $file, $uid = NULL) {
   $handle = fopen($file, 'r') or die("Error: Cannot open file: $file\n");

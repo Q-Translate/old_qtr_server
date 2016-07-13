@@ -12,6 +12,8 @@ use \qtr;
  */
 function cron_send_verses_for_review() {
 
+  return;  // do nothing for the time being
+
   // return true if we should NOT send a verse by email to the given account
   function _qtrCore_dont_send_email($account) {
     // skip admin, disabled accounts, and users that have never logged in
@@ -29,7 +31,7 @@ function cron_send_verses_for_review() {
     if (_qtrCore_dont_send_email($account))  continue;
 
     // get a random vid
-    $vid = qtr::vid_get_random($account->uid, array($project));
+    //$vid = qtr::vid_get_random($account->uid, array($project));
     if (!$vid)  continue;
 
     $message_params = array(
