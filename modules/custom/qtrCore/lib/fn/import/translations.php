@@ -20,13 +20,14 @@ use \qtr;
  * @param $uid
  *   Id of the user that is importing these translations.
  */
-function import_translations($lng, $file, $uid = NULL) {
+function import_translations($lng, $file, $uid = NULL, $notime = FALSE) {
   $handle = fopen($file, 'r') or die("Error: Cannot open file: $file\n");
 
-  // Get the email of the author of the translation.
+  // Get the email of the author of the translation, etc.
   $uid = qtr::user_check($uid);
   $account = user_load($uid);
   $umail = ($uid==1 ?  $umail = '' : $account->init);
+  $time = ($notime ? NULL : date('Y-m-d H:i:s', REQUEST_TIME));
 
   $vid = 0;
   while(!feof($handle)){
@@ -34,22 +35,21 @@ function import_translations($lng, $file, $uid = NULL) {
     $translation = fgets($handle);
     $translation = trim($translation);
     $tguid = sha1($translation . $lng . $vid);
-    qtr::db_delete('qtr_translations')
-      ->condition('tguid', $tguid)
-      ->execute();
-    qtr::db_insert('qtr_translations')
-      ->fields(array(
-          'tguid' => $tguid,
-          'vid' => $vid,
-          'lng' => $lng,
-          'translation' => $translation,
-          'count' => 0,
-          'umail' => $umail,
-          'ulng' => $lng,
-          'time' => date('Y-m-d H:i:s', REQUEST_TIME),
-        ))
-      ->execute();
-    qtr::like_add($tguid, $uid);
+    $fields = array(
+      'tguid' => $tguid,
+      'vid' => $vid,
+      'lng' => $lng,
+      'translation' => $translation,
+      'count' => 0,
+      'umail' => $umail,
+      'ulng' => $lng,
+    );
+    if ($time != NULL)  $fields['time'] = $time;
+
+    // Add a new translation and a like for it.
+    qtr::db_delete('qtr_translations')->condition('tguid', $tguid)->execute();
+    qtr::db_insert('qtr_translations')->fields($fields)->execute();
+    if ($uid > 1) qtr::like_add($tguid, $uid);
   }
   fclose($handle);
 }

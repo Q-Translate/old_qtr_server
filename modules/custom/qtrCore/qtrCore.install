@@ -29,9 +29,13 @@ function qtrCore_install() {
   qtr::import_verses("$data/quran/uthmani.xml");
 
   // Import a few English translations.
-  qtr::import_translations('en', "$data/translations/en/pickthall.txt");
-  qtr::import_translations('en', "$data/translations/en/shakir.txt");
-  qtr::import_translations('en', "$data/translations/en/yusufali.txt");
+  $lng = 'en';
+  $uid = qtr::user_create('pickthall', $lng);
+  qtr::import_translations($lng, "$data/translations/en/pickthall.txt", $uid, TRUE);
+  $uid = qtr::user_create('shakir', $lng);
+  qtr::import_translations($lng, "$data/translations/en/shakir.txt", $uid, TRUE);
+  $uid = qtr::user_create('yusufali', $lng);
+  qtr::import_translations($lng, "$data/translations/en/yusufali.txt", $uid, TRUE);
 }
 
 /**
