@@ -24,6 +24,8 @@ function user_add($username, $lng = 'en') {
     'mail' => $user_mail,
     'init' => $user_mail,
     'translation_lng' => $lng,
+    'roles' => array(4),
+    'status' => 1,
   );
   $user = user_save(null, $new_user);
   return $user->uid;
