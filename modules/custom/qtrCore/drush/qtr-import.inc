@@ -10,6 +10,9 @@ function _qtr_import_drush_command() {
       'author' => 'The author of translation',
       'file' => 'A text file that has the translation of each verse on a separate line.',
     ),
+    'options' => array(
+      'force' => 'If true, then permissions checking will be skipped.',
+    ),
     'examples' => array(
       "drush qtr-imp en pickthall \$(pwd)/pickthall.txt" => 'Import the Pickthall English translations.',
     ),
@@ -21,12 +24,7 @@ function _qtr_import_drush_command() {
  * Help text for the command 'qtr-import'.
  */
 function _qtr_import_drush_help() {
-  return dt('Import translation from a text file.
-
-The option --user is required because it declares the author of translations.
-The translation file is a text file that has the translation of each verse on a
-separate line.
-');
+  return dt('Import translation from a text file.');
 }
 
 /**
@@ -37,7 +35,10 @@ function drush_qtranslate_qtr_import($lng, $author, $file) {
   $uid = qtr::user_add($author, $lng);
 
   // Check user permissions.
-  _drush_qtranslate_qtr_import_check($uid, $lng);
+  $force = drush_get_option('force');
+  if (!$force) {
+    _drush_qtranslate_qtr_import_check($uid, $lng);
+  }
 
   // Check that there is such a file.
   if (!file_exists($file)) {
