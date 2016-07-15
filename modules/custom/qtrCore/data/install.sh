@@ -7,10 +7,12 @@ cd $(dirname $0)
 mysql=$(drush sql-connect)
 $mysql < db/qtr_schema.sql
 
-### import chapters, verses, and a few english translations
+### import chapters and verses
 data=$(pwd)
 drush eval "qtr::import_chapters('$data/quran/index.xml');"
 drush eval "qtr::import_verses('$data/quran/uthmani.xml');"
-drush eval "qtr::import_translations('en', '$data/translations/en/pickthall.txt');"
-drush eval "qtr::import_translations('en', '$data/translations/en/shakir.txt');"
-drush eval "qtr::import_translations('en', '$data/translations/en/yusufali.txt');"
+
+### add a few english translations
+drush qtr-import en pickthall  "$data/translations/en/pickthall.txt"
+drush qtr-import en shakir  "$data/translations/en/shakir.txt"
+drush qtr-import en yusufali  "$data/translations/en/yusufali.txt"

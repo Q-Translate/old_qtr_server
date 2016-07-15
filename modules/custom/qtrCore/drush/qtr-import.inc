@@ -6,14 +6,12 @@ function _qtr_import_drush_command() {
   return array(
     'description' => "Import translation from a text file.",
     'arguments' => array(
-      'lng'     => 'The language of translation (de, fr, sq, en_GB, etc.)',
+      'lng' => 'The language of translation (de, fr, sq, en_GB, etc.)',
+      'author' => 'The author of translation',
       'file' => 'A text file that has the translation of each verse on a separate line.',
     ),
-    'options' => array(
-      'user'  => 'The username of the user that has made the translations.',
-    ),
     'examples' => array(
-      "drush qtr-imp --user=pickthall en \$(pwd)/pickthall.txt" => 'Import the Pickthall English translations.',
+      "drush qtr-imp en pickthall \$(pwd)/pickthall.txt" => 'Import the Pickthall English translations.',
     ),
     'aliases' => array('qtr-imp'),
   );
@@ -34,15 +32,12 @@ separate line.
 /**
  * Callback function for the command 'qtr-import'.
  */
-function drush_qtranslate_qtr_import($lng, $file) {
-  global $user;
-  if (!$user->uid) {
-    drush_log(t('You must specify a user with the option --user.'), 'error');
-    drupal_exit();
-  }
+function drush_qtranslate_qtr_import($lng, $author, $file) {
+  // Create the user and get its id.
+  $uid = qtr::user_add($author, $lng);
 
   // Check user permissions.
-  _drush_qtranslate_qtr_import_check($lng);
+  _drush_qtranslate_qtr_import_check($uid, $lng);
 
   // Check that there is such a file.
   if (!file_exists($file)) {
@@ -51,14 +46,14 @@ function drush_qtranslate_qtr_import($lng, $file) {
   }
 
   // Import translations.
-  qtr::import_translations($lng, $file, $user->uid);
+  qtr::import_translations($lng, $file, $uid, TRUE);
 }
 
 /**
  * Check user permissions.
  */
-function _drush_qtranslate_qtr_import_check($lng) {
-  global $user;
+function _drush_qtranslate_qtr_import_check($uid, $lng) {
+  $user = user_load($uid);
 
   // Check user access permissions.
   if (!user_access('qtranslate-translate')) {
