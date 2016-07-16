@@ -30,11 +30,11 @@ function qtrCore_install() {
 
   // Import a few English translations.
   $lng = 'en';
-  $uid = qtr::user_create('pickthall', $lng);
+  $uid = qtr::user_add('pickthall', $lng);
   qtr::import_translations($lng, "$data/translations/en/pickthall.txt", $uid, TRUE);
-  $uid = qtr::user_create('shakir', $lng);
+  $uid = qtr::user_add('shakir', $lng);
   qtr::import_translations($lng, "$data/translations/en/shakir.txt", $uid, TRUE);
-  $uid = qtr::user_create('yusufali', $lng);
+  $uid = qtr::user_add('yusufali', $lng);
   qtr::import_translations($lng, "$data/translations/en/yusufali.txt", $uid, TRUE);
 }
 
