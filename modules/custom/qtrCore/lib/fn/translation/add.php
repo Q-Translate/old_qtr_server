@@ -11,7 +11,7 @@ use \qtr;
  * Add a new translation to a source string.
  *
  * @param $vid
- *   The string ID for which a new translation should be added.
+ *   The verse ID for which a new translation should be added.
  *
  * @param $lng
  *   The language (code) of the new translation.
@@ -29,6 +29,17 @@ use \qtr;
  *   ID of the new translation, or NULL if no translation was added.
  */
 function translation_add($vid, $lng, $translation, $uid = NULL, $notify = TRUE) {
+  // Get the user account.
+  $uid = qtr::user_check($uid);
+  $account = user_load($uid);
+
+  // Check that the language matches translation_lng of the user.
+  if ($lng != $account->translation_lng && $uid != 1) {
+    $msg = t('Not allowed to make translations for the language: !lng.', ['!lng' => $lng]);
+    qtr::messages($msg, 'warning');
+    return FALSE;
+  }
+
   // Don't add empty translations.
   $translation = str_replace(t('<New translation>'), '', $translation);
   if (trim($translation) == '')  {
@@ -51,8 +62,6 @@ function translation_add($vid, $lng, $translation, $uid = NULL, $notify = TRUE) 
   }
 
   // Get the email of the author of the translation.
-  $uid = qtr::user_check($uid);
-  $account = user_load($uid);
   $umail = ($uid==1 ?  $umail = '' : $account->init);
 
   // Insert the new translation.
@@ -69,29 +78,25 @@ function translation_add($vid, $lng, $translation, $uid = NULL, $notify = TRUE) 
       ))
     ->execute();
 
-  // If there is another translation for the same string, by the same user,
+  // If there is another translation for the same verse, by the same user,
   // the new translation should replace the old one. This is useful when
   // the user wants to correct the translation, but it limits the user to
-  // only one suggested translation per string.
-  // However, translators (with the 'qtranslate-import' access right)
-  // do not have this limitation and can suggest more than one translation
-  // for the same string.
-  // The same is applied for the users with admin or moderator role in the
-  // project of the string.
-  if (!user_access('qtranslate-import', $account) and $uid > 1
-    and !qtr::user_has_project_role('admin', $vid, $uid)
-    and !qtr::user_has_project_role('moderator', $vid, $uid))
-    {
-      _remove_old_translation($vid, $lng, $umail, $tguid);
-    }
+  // only one suggested translation per verse.
+  // However, translators and admins (with the access rights 'qtranslate-import'
+  // and 'qtranslate-admin') do not have this limitation and can suggest more
+  // than one translation for the same verse.
+  if ( !user_access('qtranslate-import', $account)
+    && !user_access('qtranslate-admin', $account) && $uid != 1 )
+  {
+    _remove_old_translation($vid, $lng, $umail, $tguid);
+  }
 
   // Add also a like for the new translation (but not if it is added by admin).
   if ($uid > 1) {
     qtr::like_add($tguid, $uid);
   }
 
-  // Notify previous users of this string that a new translation has been
-  // suggested. Maybe they would like to review it and change their like.
+  // Notify other users that a new translation has been suggested.
   if ($notify) {
     _notify_users_on_new_translation($vid, $lng, $tguid, $string, $translation);
   }
@@ -101,13 +106,13 @@ function translation_add($vid, $lng, $translation, $uid = NULL, $notify = TRUE) 
 
 
 /**
- * If there is another translation for the same string, by the same user,
+ * If there is another translation for the same verse, by the same user,
  * the new translation should replace the old one. This is useful when
  * the user wants to correct the translation, but it limits the user to
- * only one suggested translation per string.
+ * only one suggested translation per verse.
  *
  * @param $vid
- *   Id of the string being translated.
+ *   Id of the verse being translated.
  *
  * @param $lng
  *   Language of translation.

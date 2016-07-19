@@ -20,6 +20,23 @@ use \qtr;
  *   Id of the user that is deleting the translation.
  */
 function translation_del($tguid, $notify = TRUE, $uid = NULL) {
+  // Get the user account.
+  $uid = qtr::user_check($uid);
+  $account = user_load($uid);
+
+  // Get the language of translation.
+  $lng = qtr::db_query(
+    'SELECT lng FROM {qtr_translations} WHERE tguid = :tguid',
+    [':tguid' => $tguid]
+  )->fetchField();
+
+  // Check that the language matches translation_lng of the user.
+  if ($lng != $account->translation_lng && $uid != 1) {
+    $msg = t('Not allowed to delete translations of the language: !lng.', ['!lng' => $lng]);
+    qtr::messages($msg, 'warning');
+    return FALSE;
+  }
+
   // Before deleting, get the author, likers, verse and translation
   // (for notifications).
   $author = qtr::db_query(
@@ -51,15 +68,14 @@ function translation_del($tguid, $notify = TRUE, $uid = NULL) {
 
   // Check that the current user has the right to delete translations.
   $is_own = ($umail == $author->umail);
-  if (!$is_own and ($uid != 1)
-    and !user_access('qtranslate-resolve', $account)
-    and !qtr::user_has_project_role('admin', $vid)
-    and !qtr::user_has_project_role('moderator', $vid))
-    {
-      $msg = t('You are not allowed to delete this translation!');
-      qtr::messages($msg, 'error');
-      return;
-    }
+  if ( !$is_own && ($uid != 1)
+    && !user_access('qtranslate-resolve', $account)
+    && !user_access('qtranslate-admin', $account) )
+  {
+    $msg = t('You are not allowed to delete this translation!');
+    qtr::messages($msg, 'error');
+    return;
+  }
 
   // Copy to the trash table the translation that will be deleted.
   $query = qtr::db_select('qtr_translations', 't')
