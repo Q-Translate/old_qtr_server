@@ -52,21 +52,22 @@ function get_sender() {
  * of the notification, defined by $params->type.
  *
  * The other attributes depend on the notification type.
- * Some common attributes are: $params->uid, $params->vid,
+ * Some common attributes are:
+ * $params->uid, $params->chapter_id, $params->verse_nr,
  * $params->username, $params->verse, $params->translation, etc.
  */
 function get_subject_and_body($params) {
   $account = user_load($params->uid);
   $lng = $account->translation_lng;
-  $subject_prefix = "l10n-$lng";
+  $subject_prefix = "qtr-$lng";
 
   // Get the url of the translation site.
   module_load_include('inc', 'qtrCore', 'lib/sites');
   $client_url = qtr::utils_get_client_url($lng);
 
   // Get the url of the verse.
-  if (isset($params->vid)) {
-    $url = $client_url . "/translations/$lng/" . $params->vid;
+  if (isset($params->chapter_id) && isset($params->verse_nr)) {
+    $url = $client_url . "/qtr/$lng/$params->chapter_id/$params->verse_nr";
   }
 
   // Include the subject and body of the message.
@@ -80,11 +81,12 @@ function get_subject_and_body($params) {
 }
 
 /**
- * From the given (possibly long) verse, returns a short verse
+ * From the given (possibly long) string, returns a short string
  * of the given length (that can be suitable for title, subject, etc.)
  */
-function cut($verse, $length) {
-  $str = strip_tags(str_replace("\n", ' ', $verse));
+function cut($str, $length) {
+  $str = str_replace("\n", ' ', $str);
+  $str = strip_tags($str);
   if (strlen($str) > $length) {
     $str = substr($str, 0, strrpos(substr($str, 0, $length - 3), ' '));
     $str .= '...';

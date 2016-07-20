@@ -20,25 +20,26 @@ use \qtr;
  *   Id of the user that is deleting the translation.
  */
 function translation_del($tguid, $notify = TRUE, $uid = NULL) {
-  // Get the user account.
+  // Get the mail and lng of the user that is deleting the translation.
   $uid = qtr::user_check($uid);
   $account = user_load($uid);
+  $umail = $account->init;    // email used for registration
+  $ulng = $account->translation_lng;
 
-  // Get the language of translation.
+  // Get the language of the translation.
   $lng = qtr::db_query(
     'SELECT lng FROM {qtr_translations} WHERE tguid = :tguid',
     [':tguid' => $tguid]
   )->fetchField();
 
-  // Check that the language matches translation_lng of the user.
-  if ($lng != $account->translation_lng && $uid != 1) {
+  // Check that the language matches that of the user.
+  if ($lng != $ulng && $uid != 1) {
     $msg = t('Not allowed to delete translations of the language: !lng.', ['!lng' => $lng]);
     qtr::messages($msg, 'warning');
     return FALSE;
   }
 
-  // Before deleting, get the author, likers, verse and translation
-  // (for notifications).
+  // Get the author of the translation.
   $author = qtr::db_query(
     'SELECT u.uid, u.name, u.umail
      FROM {qtr_translations} t
@@ -46,6 +47,27 @@ function translation_del($tguid, $notify = TRUE, $uid = NULL) {
      WHERE t.tguid = :tguid',
     array(':tguid' => $tguid))
     ->fetchObject();
+
+  // Check that the current user has the right to delete translations.
+  $is_author = ($umail == $author->umail);
+  $is_admin = ($uid == 1);
+  if ($is_author || user_access('qtranslate-resolve', $account)
+    || user_access('qtranslate-admin', $account) || $is_admin)
+  {
+    _translation_del($tguid, $notify, $umail, $ulng, $author);
+  }
+  else {
+    _notify_moderators_for_wrong_translation($tguid, $lng, $uid);
+    $msg = t('You do not have permission to delete this translation. However the admins will be notified about it.');
+    qtr::messages($msg);
+  }
+}
+
+/**
+ * Delete the translation.
+ */
+function _translation_del($tguid, $notify, $umail, $ulng, $author) {
+  // Before deleting, get the likers, verse and translation (for notifications).
   $users = qtr::db_query(
     'SELECT u.uid, u.name, u.umail
      FROM {qtr_likes} l
@@ -59,23 +81,6 @@ function translation_del($tguid, $notify = TRUE, $uid = NULL) {
   )->fetchField();
   $verse = qtr::verse_get($vid);
   $translation = qtr::translation_get($tguid);
-
-  // Get the mail and lng of the user that is deleting the translation.
-  $uid = qtr::user_check($uid);
-  $account = user_load($uid);
-  $umail = $account->init;    // email used for registration
-  $ulng = $account->translation_lng;
-
-  // Check that the current user has the right to delete translations.
-  $is_own = ($umail == $author->umail);
-  if ( !$is_own && ($uid != 1)
-    && !user_access('qtranslate-resolve', $account)
-    && !user_access('qtranslate-admin', $account) )
-  {
-    $msg = t('You are not allowed to delete this translation!');
-    qtr::messages($msg, 'error');
-    return;
-  }
 
   // Copy to the trash table the translation that will be deleted.
   $query = qtr::db_select('qtr_translations', 't')
@@ -142,5 +147,49 @@ function _notify_users_on_translation_del($vid, $tguid, $verse, $translation, $a
     $notifications[] = $notification;
   }
 
+  qtr::queue('notifications', $notifications);
+}
+
+/**
+ * Notify the moderators of a language about the wrong translation.
+ */
+function _notify_moderators_for_wrong_translation($tguid, $lng, $uid) {
+
+  // Get details of the verse and the translation.
+  $vid = qtr::db_query(
+    'SELECT vid FROM {qtr_translations} WHERE tguid = :tguid',
+    [':tguid' => $tguid]
+  )->fetchField();
+  $verse = qtr::db_query(
+    'SELECT * FROM {qtr_verses} WHERE vid = :vid',
+    array(':vid' => $vid)
+  )->fetch();
+  $translation = qtr::translation_get($tguid);
+
+  // Get a list of moderators and admins of the language.
+  $uids = \db_query('SELECT uid FROM users_roles WHERE rid IN (3, 5)')->fetchCol();
+  $moderators = user_load_multiple($uids);
+
+  // Notify the moderators.
+  $notifications = array();
+  foreach ($moderators as $moderator) {
+    if ($moderator->uid == 1)  continue;
+    if ($moderator->translation_lng != $lng) continue;
+
+    $notification = array(
+      'type' => 'notify-moderators-for-wrong-translation',
+      'uid' => $moderator->uid,
+      'username' => $moderator->name,
+      'recipient' => $moderator->name . ' <' . $moderator->init . '>',
+      'author_uid' => $uid,
+      'lng' => $lng,
+      'chapter_id' => $verse->cid,
+      'verse_nr' => $verse->nr,
+      'verse' => $verse->verse,
+      'translation' => $translation,
+    );
+    $notifications[] = $notification;
+  }
+  if (empty($notifications)) return;
   qtr::queue('notifications', $notifications);
 }
