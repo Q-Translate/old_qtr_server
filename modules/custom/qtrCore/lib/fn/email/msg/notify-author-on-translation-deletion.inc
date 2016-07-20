@@ -7,7 +7,7 @@ use \qtr;
  */
 {
   $subject = "[$subject_prefix] "
-    . t('Translation deleted: !translation',
+    . t('Deleted: !translation',
       ['!translation' => cut($params->translation, 30)]);
 
   $body = array();

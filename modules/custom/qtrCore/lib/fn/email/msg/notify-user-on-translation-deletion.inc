@@ -7,12 +7,12 @@ use \qtr;
  */
 {
   $subject = "[$subject_prefix] "
-    . t('Translation deleted: !translation',
+    . t('Deleted: !translation',
       ['!translation' => cut($params->translation, 30)]);
 
   $body = array();
   $body[] = t('Greetings !username,', ['!username' => $params->username]);
-  $body[] = t("A translation that you have liked, has been deleted by a moderator.
+  $body[] = t("A translation that you have supported, has been deleted by a moderator.
 You can see the verse and the rest of translations at this link:");
   $body[] = $url;
   $body[] = t('Thanks');

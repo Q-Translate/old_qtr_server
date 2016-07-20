@@ -105,7 +105,7 @@ function _translation_del($tguid, $notify, $umail, $ulng, $author) {
   // Notify the author of a translation and its users
   // that it has been deleted.
   if ($notify) {
-    _notify_users_on_translation_del($vid, $tguid, $verse, $translation, $author, $users);
+    _notify_users_on_translation_del($vid, $ulng, $translation, $author, $users);
   }
 }
 
@@ -113,8 +113,13 @@ function _translation_del($tguid, $notify, $umail, $ulng, $author) {
  * Notify the author of a translation and its users
  * that it has been deleted.
  */
-function _notify_users_on_translation_del($vid, $tguid, $verse, $translation, $author, $users) {
+function _notify_users_on_translation_del($vid, $lng, $translation, $author, $users) {
 
+  // Get details of the verse and the translation.
+  $verse = qtr::db_query(
+    'SELECT * FROM {qtr_verses} WHERE vid = :vid',
+    array(':vid' => $vid)
+  )->fetch();
   $notifications = array();
 
   // Notify the author of the translation about the deletion.
@@ -124,8 +129,10 @@ function _notify_users_on_translation_del($vid, $tguid, $verse, $translation, $a
       'uid' => $author->uid,
       'username' => $author->name,
       'recipient' => $author->name . ' <' . $author->umail . '>',
-      'vid' => $vid,
-      'verse' => $verse,
+      'lng' => $lng,
+      'chapter_id' => $verse->cid,
+      'verse_nr' => $verse->nr,
+      'verse' => $verse->verse,
       'translation' => $translation,
     );
     $notifications[] = $notification;
@@ -140,8 +147,10 @@ function _notify_users_on_translation_del($vid, $tguid, $verse, $translation, $a
       'uid' => $user->uid,
       'username' => $user->name,
       'recipient' => $user->name . ' <' . $user->umail . '>',
-      'vid' => $vid,
-      'verse' => $verse,
+      'lng' => $lng,
+      'chapter_id' => $verse->cid,
+      'verse_nr' => $verse->nr,
+      'verse' => $verse->verse,
       'translation' => $translation,
     );
     $notifications[] = $notification;
