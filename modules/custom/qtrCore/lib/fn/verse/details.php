@@ -56,16 +56,16 @@ function verse_details($filter_query, $lng) {
       'SELECT t.tguid, l.lid, u.name, u.umail, u.ulng, u.uid, l.time
        FROM {qtr_translations} t
        JOIN {qtr_likes} l ON (l.tguid = t.tguid)
-       JOIN {qtr_users} u ON (u.umail = l.umail AND l.ulng = l.ulng)
+       JOIN {qtr_users} u ON (u.umail = l.umail AND u.ulng = l.ulng)
        WHERE t.tguid IN (:arr_tguid)
        ORDER BY l.time DESC',
       array(':arr_tguid' => $arr_tguid)
-    )->fetchAllAssoc('vid');
+    )->fetchAllAssoc('lid');
   }
 
   // Put likes as nested arrays inside translations.
   // Likes are already ordered by time (desc).
-  foreach ($arr_likes as $vid => $like) {
+  foreach ($arr_likes as $lid => $like) {
     $tguid = $like->tguid;
     $name = $like->name;
     $arr_translations[$tguid]->likes[$name] = $like;
