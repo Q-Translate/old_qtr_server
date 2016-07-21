@@ -162,7 +162,7 @@ function _get_preferred_translations($lng, $select_chapter, $users) {
     qtr::db_query_temporary(
       "SELECT vid, MAX(like_count) AS max_count
        FROM {$tmp_table_translations}
-       GROUP BY sguid"
+       GROUP BY vid"
     );
 
   // Get translations with the max count for each verse,
