@@ -12,16 +12,12 @@ use \qtr;
  */
 function cron_send_verses_for_review() {
 
-  return;  // do nothing for the time being
-
   // return true if we should NOT send a verse by email to the given account
   function _qtrCore_dont_send_email($account) {
     // skip admin, disabled accounts, and users that have never logged in
-    if ($account->uid < 2 or $account->status != 1 or $account->login == 0) {
-      return TRUE;
-    }
-
-    // otherwise send email
+    if ($account->uid < 2)     return TRUE;
+    if ($account->status != 1) return TRUE;
+    if ($account->login == 0)  return TRUE;
     return FALSE;
   }
 
@@ -31,15 +27,21 @@ function cron_send_verses_for_review() {
     if (_qtrCore_dont_send_email($account))  continue;
 
     // get a random vid
-    //$vid = qtr::vid_get_random($account->uid, array($project));
+    $vid = rand(1, 6236);
     if (!$vid)  continue;
 
+    // Get details of the verse and the translation.
+    $verse = qtr::db_query('SELECT * FROM {qtr_verses} WHERE vid = :vid', [':vid' => $vid])->fetch();
+
     $message_params = array(
-      'type' => 'string-to-be-reviewed',
+      'type' => 'verse-to-be-reviewed',
       'uid' => $account->uid,
-      'vid' => $vid,
       'username' => $account->name,
       'recipient' => $account->name .' <' . $account->mail . '>',
+      'lng' => $account->translation_lng,
+      'chapter_id' => $verse->cid,
+      'verse_nr' => $verse->nr,
+      'vid' => $vid,
     );
     $notifications[] = $message_params;
   }
