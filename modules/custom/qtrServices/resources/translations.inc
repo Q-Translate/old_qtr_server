@@ -552,12 +552,8 @@ function _qtrServices_import($params) {
   }
 
   // Check access permissions.
-  if (!user_access('qtranslate-like')) {
-    $msg = t('No rights for submitting likes!');
-    return ['messages' => [[$msg, 'error']]];
-  }
-  if (!user_access('qtranslate-translate')) {
-    $msg = t('No rights for making translations!');
+  if (!user_access('qtranslate-import') && !user_access('qtranslate-admin')) {
+    $msg = t('Only translators or admins are allowed to import.');
     return ['messages' => [[$msg, 'error']]];
   }
 
