@@ -115,7 +115,7 @@ function _translation_del($tguid, $notify, $umail, $ulng, $author) {
  */
 function _notify_users_on_translation_del($vid, $lng, $translation, $author, $users) {
 
-  // Get details of the verse and the translation.
+  // Get details of the verse.
   $verse = qtr::db_query(
     'SELECT * FROM {qtr_verses} WHERE vid = :vid',
     array(':vid' => $vid)

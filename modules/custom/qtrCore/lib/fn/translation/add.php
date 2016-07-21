@@ -98,7 +98,7 @@ function translation_add($vid, $lng, $translation, $uid = NULL, $notify = TRUE) 
 
   // Notify other users that a new translation has been suggested.
   if ($notify) {
-    _notify_users_on_new_translation($vid, $lng, $tguid, $string, $translation);
+    _notify_users_on_new_translation($vid, $lng, $tguid, $translation);
   }
 
   return $tguid;
@@ -188,25 +188,29 @@ function _remove_old_translation($vid, $lng, $umail, $tguid) {
     if ($like->user_status != 1)  continue;   // skip non-active users
 
     // Add user to the notification list.
-    $notification_list[$uid] = array(
-      'uid' => $uid,
+    $notification_list[$like->uid] = array(
+      'uid' => $like->uid,
       'name' => $like->user_name,
       'umail' => $like->umail,
     );
   }
 
-  _notify_users_on_translation_change($notification_list, $vid, $old_trans->translation, $tguid);
+  _notify_users_on_translation_change($notification_list, $vid, $lng, $old_trans->translation, $tguid);
 }
 
 /**
  * Notify the users that have liked a translation that the author has changed
  * the translation and their likes count now for the new translation.
  */
-function _notify_users_on_translation_change($users, $vid, $old_translation, $tguid) {
+function _notify_users_on_translation_change($users, $vid, $lng, $old_translation, $tguid) {
 
   if (empty($users))  return;
 
-  $verse = qtr::verse_get($vid);
+  // Get details of the verse and the translation.
+  $verse = qtr::db_query(
+    'SELECT * FROM {qtr_verses} WHERE vid = :vid',
+    array(':vid' => $vid)
+  )->fetch();
   $new_translation = qtr::translation_get($tguid);
 
   $notifications = array();
@@ -216,8 +220,10 @@ function _notify_users_on_translation_change($users, $vid, $old_translation, $tg
       'uid' => $user['uid'],
       'username' => $user['name'],
       'recipient' => $user['name'] . ' <' . $user['umail'] . '>',
-      'vid' => $vid,
-      'verse' => $verse,
+      'lng' => $lng,
+      'chapter_id' => $verse->cid,
+      'verse_nr' => $verse->nr,
+      'verse' => $verse->verse,
       'old_translation' => $old_translation,
       'new_translation' => $new_translation,
     );
@@ -228,11 +234,10 @@ function _notify_users_on_translation_change($users, $vid, $old_translation, $tg
 }
 
 /**
- * Notify the users that have liked a verse that a new translation has been
- * submitted. Maybe they would like to review it and change their preference.
+ * Notify the users that have supported a translation that a new translation has been
+ * submitted. Maybe they would like to review it and change their support.
  */
-function _notify_users_on_new_translation($vid, $lng, $tguid, $verse, $translation) {
-
+function _notify_users_on_new_translation($vid, $lng, $tguid, $translation) {
   $query = "SELECT u.umail, u.ulng, u.uid, u.name, u.status, t.translation
             FROM {qtr_translations} t
             JOIN {qtr_likes} l ON (l.tguid = t.tguid)
@@ -243,6 +248,12 @@ function _notify_users_on_new_translation($vid, $lng, $tguid, $verse, $translati
 
   if (empty($users))  return;
 
+  // Get the details of the verse.
+  $verse = qtr::db_query(
+    'SELECT * FROM {qtr_verses} WHERE vid = :vid',
+    array(':vid' => $vid)
+  )->fetch();
+
   $notifications = array();
   foreach ($users as $user) {
     $notification = array(
@@ -250,8 +261,10 @@ function _notify_users_on_new_translation($vid, $lng, $tguid, $verse, $translati
       'uid' => $user->uid,
       'username' => $user->name,
       'recipient' => $user->name . ' <' . $user->umail . '>',
-      'vid' => $vid,
-      'verse' => $verse,
+      'lng' => $lng,
+      'chapter_id' => $verse->cid,
+      'verse_nr' => $verse->nr,
+      'verse' => $verse->verse,
       'liked_translation' => $user->translation,
       'new_translation' => $translation,
     );

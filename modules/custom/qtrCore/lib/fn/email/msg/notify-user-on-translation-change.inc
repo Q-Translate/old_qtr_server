@@ -8,19 +8,19 @@ use \qtr;
  */
 {
   $subject = "[$subject_prefix] "
-    . t("Translation modified for: !verse",
-      ['!verse' => cut($params->verse, 30)]);
+    . t("Translation: !translation",
+      ['!translation' => cut($params->new_translation, 30)]);
 
   $body = array();
   $body[] = t('Greetings !username,', ['!username' => $params->username]);
   $body[] = t("The following translation has been modified by its author.
-You are being notified because you have liked for the old
-translation and your like now counts for the new version
+You are being notified because you have supported the old
+translation and your support now counts for the new version
 of the translation.
 
 If the new version of the translation is OK for you,
 then there is nothing you should do. Otherwise, you
-can change your like at this link:");
+can change your support at this link:");
   $body[] = $url;
   $body[] = t('Thanks');
 

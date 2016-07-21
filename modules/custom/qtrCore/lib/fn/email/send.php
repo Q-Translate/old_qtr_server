@@ -14,8 +14,8 @@ use \qtr;
  * Other required attributes of $params are $params->recipient
  * and $params->uid. The other attributes are needed to build the
  * subject and body of the message. Some common attributes are:
- *   $params->username, $params->vid, $params->verse,
- *   $params->translation, etc.
+ *   $params->uid, $params->lng, $params->chapter_id, $params->verse_nr,
+ *   $params->username, $params->verse, $params->translation, etc.
  */
 function email_send($params) {
   if (!$params->uid or !$params->recipient)  return;
@@ -53,7 +53,7 @@ function get_sender() {
  *
  * The other attributes depend on the notification type.
  * Some common attributes are:
- * $params->uid, $params->chapter_id, $params->verse_nr,
+ * $params->uid, $params->lng, $params->chapter_id, $params->verse_nr,
  * $params->username, $params->verse, $params->translation, etc.
  */
 function get_subject_and_body($params) {
