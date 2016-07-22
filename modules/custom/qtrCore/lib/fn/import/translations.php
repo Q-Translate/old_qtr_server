@@ -35,21 +35,40 @@ function import_translations($lng, $file, $uid = NULL, $notime = FALSE) {
     $translation = fgets($handle);
     $translation = trim($translation);
     $tguid = sha1($translation . $lng . $vid);
+
+    // Check whether such a translation exists already.
+    $exists = qtr::db_query(
+      'SELECT tguid FROM {qtr_translations} WHERE tguid = :tguid',
+      [':tguid' => $tguid]
+    )->fetchField();
+
+    // If it exists, just add a like for it.
+    if ($exists) {
+      qtr::like_add($tguid, $uid);
+      continue;
+    }
+
+    // Add a new translation.
     $fields = array(
       'tguid' => $tguid,
       'vid' => $vid,
       'lng' => $lng,
       'translation' => $translation,
-      'count' => 0,
+      'count' => 1,
       'umail' => $umail,
       'ulng' => $lng,
     );
     if ($time != NULL)  $fields['time'] = $time;
-
-    // Add a new translation and a like for it.
-    qtr::db_delete('qtr_translations')->condition('tguid', $tguid)->execute();
     qtr::db_insert('qtr_translations')->fields($fields)->execute();
-    if ($uid > 1) qtr::like_add($tguid, $uid);
+
+    // Add a like for it.
+    $fields = array(
+      'tguid' => $tguid,
+      'umail' => $umail,
+      'ulng' => $lng,
+      'time' => date('Y-m-d H:i:s', REQUEST_TIME),
+    );
+    qtr::db_insert('qtr_likes')->fields($fields)->execute();
   }
   fclose($handle);
 }
