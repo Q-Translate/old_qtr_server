@@ -28,6 +28,7 @@ function cron_import($params) {
   $lng = $params->lng;
   $account = user_load($params->uid);
   $file = file_load($params->fid);
+  $dont_save_time = !$params->is_translator;
 
   // Copy the file to a tmp directory.
   $tmpdir = '/tmp/' . sha1_file($file->uri);
@@ -36,7 +37,7 @@ function cron_import($params) {
   $tmpfile =  $tmpdir . '/' . $file->filename;
 
   // Import the file.
-  qtr::import_translations($lng, $tmpfile, $account->uid);
+  qtr::import_translations($lng, $tmpfile, $account->uid, $dont_save_time);
 
   // Get the url of the client site.
   module_load_include('inc', 'qtrCore', 'includes/sites');

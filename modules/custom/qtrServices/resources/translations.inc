@@ -528,6 +528,8 @@ function _qtrServices_translations_submit($params) {
  *   Associative array of the POST data, which contains:
  *   - lng
  *       Language of translations.
+ *   - author
+ *       Author of translations (username).
  *
  * @return
  *   Associative array containing:
@@ -543,17 +545,27 @@ function _qtrServices_import($params) {
     return services_error('Language missing or not supported.', 406);
   }
 
-  // Make sure that the current user can make
+  // Get the author of translations.
+  if (user_access('qtranslate-admin')) {
+    $author = $params['author'];
+    $uid = ( $author ?
+           qtr::user_add($author, $lng) :
+           $uid = $GLOBALS['user']->uid );
+  }
+  elseif (user_access('qtranslate-import')) {
+    $uid = $GLOBALS['user']->uid;
+  }
+  else {
+    $msg = t('Only admins and translators can import translations.');
+    return ['messages' => [[$msg, 'error']]];
+  }
+  $is_translator = ($uid == $GLOBALS['user']->uid);
+
+  // Make sure that the user can make
   // translations for the given language.
   $user = user_load($GLOBALS['user']->uid);
   if ($lng != $user->translation_lng) {
     $msg = t('No rights for contributing to language <strong>!lng</strong>.', ['!lng' => $lng]);
-    return ['messages' => [[$msg, 'error']]];
-  }
-
-  // Check access permissions.
-  if (!user_access('qtranslate-import') && !user_access('qtranslate-admin')) {
-    $msg = t('Only translators or admins are allowed to import.');
     return ['messages' => [[$msg, 'error']]];
   }
 
@@ -598,14 +610,15 @@ function _qtrServices_import($params) {
 
   // Schedule the import.
   $queue_params = [
-    'uid' => $GLOBALS['user']->uid,
+    'uid' => $uid,
     'fid' => $file->fid,
     'lng' => $lng,
+    'is_translator' => $is_translator,
   ];
   qtr::queue('import', array($queue_params));
 
   // Return a notification message.
-  $msg = t("Import of the file '!filename' is scheduled. You will be notified by email when it is done.",
+  $msg = t("Import of file '!filename' is scheduled. You will be notified by email when it is done.",
          ['!filename' => $file->filename]);
   return ['messages' => [[$msg, 'status']]];
 }

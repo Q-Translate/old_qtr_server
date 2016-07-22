@@ -16,6 +16,7 @@ function user_add($username, $lng = 'en') {
   if ($user)  return $user->uid;
 
   // Add a new user.
+  $username = str_replace(' ', '', $username);
   $site_mail = variable_get('site_mail');
   $user_mail = preg_replace('/\+.*@/', '@', $site_mail);
   $user_mail = str_replace('@', "+${username}@", $user_mail);
