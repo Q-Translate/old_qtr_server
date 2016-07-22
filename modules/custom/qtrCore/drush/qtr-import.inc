@@ -48,6 +48,7 @@ function drush_qtranslate_qtr_import($lng, $author, $file) {
 
   // Import translations.
   qtr::import_translations($lng, $file, $uid, TRUE);
+  foreach(qtr::messages() as $msg)  drush_log($msg[0], $msg[1]);
 }
 
 /**

@@ -14,4 +14,13 @@ use \qtr;
   $body[] = t("The import of the file '!filename', that you have requested, is done.",
             ['!filename' => $params->filename]);
   $body[] = t('Thanks');
+
+  if ($params->messages) {
+    $output_messages = t('Output messages:');
+    $body[] = "
+      <hr/>
+      <h4>$output_messages</h4>
+      <xmp>$params->messages</xmp>
+    ";
+  }
 }

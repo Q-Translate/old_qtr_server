@@ -42,11 +42,11 @@ function import_translations($lng, $file, $uid = NULL, $notime = FALSE) {
 
     // Check the chapter and verse numbers.
     if ($chapter_id < 1 || $chapter_id > 114) {
-      print "Chapter id $chapter_id is not between 1 and 114.\n";
+      qtr::messages(t("Chapter id !cid is not between 1 and 114.", ['!cid' => $chapter_id]), 'error');
       continue;
     }
     if ($verse_nr < 1 || $verse_nr > $chapters[$chapter_id]->verses) {
-      print "Verse number $verse_nr is not valid.\n";
+      qtr::messages(t("Verse number !nr is not valid.", ['!nr' => $verse_nr]), 'error');
       continue;
     }
 
