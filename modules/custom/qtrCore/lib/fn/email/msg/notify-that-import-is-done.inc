@@ -11,18 +11,7 @@ use \qtr;
 
   $body = array();
   $body[] = t('Greetings !username,', ['!username' => $params->username]);
-  $body[] = t("The import of the file '!filename', that you have requested,
-is done. Check out the new translations here:",
+  $body[] = t("The import of the file '!filename', that you have requested, is done.",
             ['!filename' => $params->filename]);
-  $body[] = $params->search_url;
   $body[] = t('Thanks');
-
-  if ($params->messages) {
-    $output_messages = t('Output messages:');
-    $body[] = "
-      <hr/>
-      <h4>$output_messages</h4>
-      <xmp>$params->messages</xmp>
-    ";
-  }
 }

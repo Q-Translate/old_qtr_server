@@ -37,7 +37,6 @@ function cron_import($params) {
 
   // Import the file.
   qtr::import_translations($lng, $tmpfile, $account->uid);
-  //$txt_messages = qtr::messages_cat(qtr::messages());
 
   // Get the url of the client site.
   module_load_include('inc', 'qtrCore', 'includes/sites');
@@ -50,18 +49,6 @@ function cron_import($params) {
     'username' => $account->name,
     'recipient' => $account->name .' <' . $account->mail . '>',
     'filename' => $file->filename,
-    'search_url' => $client_url . url('qtr/search', array(
-                    'query' => array(
-                      'lng' => $lng,
-                      'translated_by' => $account->name,
-                      'liked_by' => $account->name,
-                      'date_filter' => 'likes',
-                      'from_date' => date('Y-m-d H:i:s', REQUEST_TIME - 1),
-                      'to_date' => date('Y-m-d H:i:s', REQUEST_TIME + 1),
-                      'limit' => 50,
-                    )
-                  )),
-    'messages' => $txt_messages,
   );
   qtr::queue('notifications', array($params));
 

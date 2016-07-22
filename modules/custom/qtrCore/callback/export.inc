@@ -103,7 +103,7 @@ function qtrCore_export() {
   $file = qtr::export($lng, $chapter, $mode, $emails);
 
   // Send the headers.
-  $filename = ($chapter ? "export-$lng-$chapter.txt" : "export-$lng.txt");
+  $filename = ($chapter ? "quran-$lng.$chapter.txt" : "quran-$lng.txt");
   header('Content-Type: text/plain; charset=utf-8');
   header('Content-Disposition: attachment; filename="' . $filename . '"');
   header('Content-Transfer-Encoding: binary');
