@@ -79,6 +79,10 @@ function import_translations($lng, $file, $uid = NULL, $notime = FALSE) {
     if ($time != NULL)  $fields['time'] = $time;
     qtr::db_insert('qtr_translations')->fields($fields)->execute();
 
+    // Clean any previous like.
+    include_once(drupal_get_path('module', 'qtrCore') . '/lib/fn/like/del_previous.php');
+    _like_del_previous($tguid, $umail, $vid, $lng);
+
     // Add a like for it.
     $fields = array(
       'tguid' => $tguid,
