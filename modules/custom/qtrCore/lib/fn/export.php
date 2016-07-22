@@ -46,8 +46,8 @@ function export($lng, $chapter = NULL, $mode = 'most_liked', $users = NULL)
 
   // Get verses that will be exported.
   $select_chapter = ($chapter == NULL ? "1=1" : "v.cid = $chapter");
-  $get_verses = "SELECT v.vid, v.verse FROM {qtr_verses} AS v WHERE $select_chapter";
-  $verses = qtr::db_query($get_verses)->fetchAllKeyed();
+  $get_verses = "SELECT * FROM {qtr_verses} AS v WHERE $select_chapter";
+  $verses = qtr::db_query($get_verses)->fetchAllAssoc('vid');
 
   // Get translations.
   switch ($mode) {
@@ -70,7 +70,7 @@ function export($lng, $chapter = NULL, $mode = 'most_liked', $users = NULL)
           $translations[$vid] = $most_liked[$vid];
         }
         else {
-          $translations[$vid] = $verses[$vid];
+          $translations[$vid] = $verses[$vid]->verse;
         }
         break;
 
@@ -82,7 +82,7 @@ function export($lng, $chapter = NULL, $mode = 'most_liked', $users = NULL)
           $translations[$vid] = $most_liked[$vid];
         }
         else {
-          $translations[$vid] = $verses[$vid];
+          $translations[$vid] = $verses[$vid]->verse;
         }
         break;
     }
@@ -91,8 +91,12 @@ function export($lng, $chapter = NULL, $mode = 'most_liked', $users = NULL)
   // Write translations to a temporary file.
   $file = tempnam('/tmp', 'export_');
   $fp = fopen($file, 'w');
-  foreach ($translations as $vid => $translation)
-  fwrite($fp, $translation . "\n");
+  foreach ($translations as $vid => $translation) {
+    $chapter_id = $verses[$vid]->cid;
+    $verse_nr = $verses[$vid]->nr;
+    $line = $chapter_id . '|' . $verse_nr . '|' . $translation . "\n";
+    fwrite($fp, $line);
+  }
   fclose($fp);
 
   // Return the file where translations are exported.

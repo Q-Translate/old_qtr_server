@@ -29,11 +29,29 @@ function import_translations($lng, $file, $uid = NULL, $notime = FALSE) {
   $umail = ($uid==1 ?  $umail = '' : $account->init);
   $time = ($notime ? NULL : date('Y-m-d H:i:s', REQUEST_TIME));
 
-  $vid = 0;
+  // Get a list of chapters and their structure.
+  $chapters = qtr::db_query('SELECT * FROM {qtr_chapters}')->fetchAllAssoc('cid');
+
   while(!feof($handle)){
-    $vid++;
-    $translation = fgets($handle);
-    $translation = trim($translation);
+    $line = fgets($handle);
+    $line = trim($line);
+    if ($line == '')  continue;
+
+    // Get chapter id, verse nr and the translation.
+    list($chapter_id, $verse_nr, $translation) = explode('|', $line, 3);
+
+    // Check the chapter and verse numbers.
+    if ($chapter_id < 1 || $chapter_id > 114) {
+      print "Chapter id $chapter_id is not between 1 and 114.\n";
+      continue;
+    }
+    if ($verse_nr < 1 || $verse_nr > $chapters[$chapter_id]->verses) {
+      print "Verse number $verse_nr is not valid.\n";
+      continue;
+    }
+
+    // Get the verse id and translation id.
+    $vid = $chapters[$chapter_id]->start + $verse_nr;
     $tguid = sha1($translation . $lng . $vid);
 
     // Check whether such a translation exists already.
