@@ -32,10 +32,15 @@ function import_translations($lng, $file, $uid = NULL, $notime = FALSE) {
   // Get a list of chapters and their structure.
   $chapters = qtr::db_query('SELECT * FROM {qtr_chapters}')->fetchAllAssoc('cid');
 
+  $count = 0;  // used to show progress outout
   while(!feof($handle)){
     $line = fgets($handle);
     $line = trim($line);
     if ($line == '')  continue;
+
+    // Show progress output.
+    $count++;
+    if ($count % 20 == 1) print ".";
 
     // Get chapter id, verse nr and the translation.
     list($chapter_id, $verse_nr, $translation) = explode('|', $line, 3);

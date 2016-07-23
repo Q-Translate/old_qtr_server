@@ -13,7 +13,7 @@ use \qtr;
 function import_verses($file) {
   $quran = simplexml_load_file($file) or die("Error: Cannot load xml file: $file\n");
 
-  qtr::db_query('TRUNCATE qtr_verses')->execute();;
+  qtr::db_query('TRUNCATE {qtr_verses}')->execute();;
   foreach($quran->sura as $chapter) {
     foreach ($chapter->aya as $verse) {
       qtr::db_insert('qtr_verses')
