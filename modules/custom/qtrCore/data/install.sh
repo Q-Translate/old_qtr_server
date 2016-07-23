@@ -13,6 +13,7 @@ drush eval "qtr::import_chapters('$data/quran/index.xml');"
 drush eval "qtr::import_verses('$data/quran/uthmani.xml');"
 
 ### add a few english translations
-drush qtr-import en pickthall "$data/translations/en/pickthall.txt" --force
-drush qtr-import en shakir "$data/translations/en/shakir.txt" --force
-drush qtr-import en yusufali "$data/translations/en/yusufali.txt" --force
+drush qtr-import en en.pickthall "$data/translations/en.pickthall.txt" --force
+drush qtr-import en en.maududi "$data/translations/en.maududi.txt" --force
+drush qtr-import en en.sahih "$data/translations/en.sahih.txt" --force
+drush qtr-import en en.itani "$data/translations/en.itani.txt" --force
