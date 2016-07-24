@@ -40,7 +40,7 @@ cd translations/
 translations='https://github.com/Q-Translate/translations/raw/master'
 files=$(wget -qO- $translations/LIST.txt | grep "^$lng\.")
 for file in $files; do
-    echo "Get $file"
+    echo -e "\nGet    $file"
     rm -f $file
     wget -q $translations/$file
     sed -i $file -e '/#/d' -e '/^$/d'
@@ -49,3 +49,4 @@ for file in $files; do
     author=${file%.txt}
     time drush qtr-import $lng $author "$(pwd)/$file" --force
 done
+echo 'DONE'
