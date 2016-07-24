@@ -19,7 +19,7 @@ function qtr_layout_default_box() {
   $box->description = 'About Q-Translate';
   $box->options = array(
     'body' => array(
-      'value' => '<p><strong><a href="http://info.qtranslate.org" target="_blank">Q-Translate</a></strong> helps to get feedback about the translations of programs from a wide crowd of people and users. This feedback can be in terms of likes for the best translation (when there are more than one translations for the same string), or it can be a new alternative translation (for an existing translation), or it can be a new translation (for a string that is not translated yet).</p>',
+      'value' => '<p><strong><a href="http://info.qtranslate.org" target="_blank">Q-Translate</a></strong> aims to improve the translations of the Quran, by getting review and feedback from many people. This may help to double check the translations, fix any mistakes or typos, and improve the translation quality. The original text of the Quran is downloaded from <a href="http://tanzil.net/download/" target="_blank">http://tanzil.net/download/</a> and the translations from <a href="http://tanzil.net/trans/" target="_blank">http://tanzil.net/trans/</a></p>',
       'format' => 'full_html',
     ),
     'additional_classes' => '',
