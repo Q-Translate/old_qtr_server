@@ -71,6 +71,15 @@ function qtrCore_menu() {
     'access callback' => TRUE,
   );
 
+  // Return a random translation.
+  $items['tweet'] = array(
+    'type'            => MENU_CALLBACK,
+    'title'           => 'Return a random translation in a form suitable for twitter.',
+    'page callback'   => 'qtrCore_tweet',
+    'file'            => 'callback/tweet.inc',
+    'access callback' => TRUE,
+  );
+
   // Return a json list of languages and their details.
   $items['languages'] = array(
     'type'            => MENU_CALLBACK,
