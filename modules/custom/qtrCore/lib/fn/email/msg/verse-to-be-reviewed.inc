@@ -12,16 +12,16 @@ use \qtr;
     [':vid' => $params->vid]
   )->fetchField();
   $translations = qtr::db_query(
-    'SELECT translation FROM {qtr_translations} WHERE vid = :vid',
-    [':vid' => $params->vid]
+    'SELECT translation FROM {qtr_translations} WHERE vid = :vid AND lng = :lng',
+    [':vid' => $params->vid, ':lng' => $lng ]
   )->fetchCol();
 
-  $subject = "[$subject_prefix] " . t('Verse: (!chapter_id,!verse_nr)',
+  $subject = "[$subject_prefix] " . t('Verse: !chapter_id:!verse_nr',
              ['!chapter_id' => $params->chapter_id, '!verse_nr' => $params->verse_nr]);
 
   $body = array();
   $body[] = t('Greetings !username,', ['!username' => $params->username]);
-  $body[] = t('If you have time, please help to review the translation of the verse (!chapter_id,!verse_nr):',
+  $body[] = t('If you have time, please help to review the translation of the verse !chapter_id:!verse_nr',
             ['!chapter_id' => $params->chapter_id, '!verse_nr' => $params->verse_nr]);
   $body[] = $url;
   $body[] = t('Thanks');

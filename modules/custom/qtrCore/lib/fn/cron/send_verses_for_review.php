@@ -26,11 +26,8 @@ function cron_send_verses_for_review() {
   foreach ($accounts as $account) {
     if (_qtrCore_dont_send_email($account))  continue;
 
-    // get a random vid
+    // get a random verse
     $vid = rand(1, 6236);
-    if (!$vid)  continue;
-
-    // Get details of the verse and the translation.
     $verse = qtr::db_query('SELECT * FROM {qtr_verses} WHERE vid = :vid', [':vid' => $vid])->fetch();
 
     $message_params = array(
