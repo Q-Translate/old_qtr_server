@@ -5,12 +5,11 @@
  */
 
 /**
- * Callback for 'translations/rss_feed'.
+ * Callback for 'rss-feed'.
  */
 function qtrCore_rss_feed($lng = 'en') {
   // Get the feed data from cache, if possible.
-  $cid = "qtrCore_rss_feed:$lng";
-  $cache = cache_get($cid, 'cache_qtrCore');
+  $cache = cache_get("qtrCore_rss_feed:$lng", 'cache_qtrCore');
   if (!empty($cache) && isset($cache->data) && !empty($cache->data)) {
     $rss_feed = $cache->data;
     drupal_add_http_header('Content-Type', 'application/rss+xml; charset=utf-8');
@@ -21,13 +20,17 @@ function qtrCore_rss_feed($lng = 'en') {
   // Get the latest translations.
   $translations = qtr::translation_latest($lng);
 
+  // Get the url of the translation site.
+  module_load_include('inc', 'qtrCore', 'lib/sites');
+  $client_url = qtr::utils_get_client_url($lng);
+
   // Start building the RSS feed output.
   $rss_feed = '<?xml version="1.0" encoding="utf-8"?>' . "\n";
   $rss_feed .= '<rss version="2.0">';
 
   $link = url("rss-feed/$lng", array('absolute' => TRUE));
   $title = variable_get('site_name', 'Q-Translate');
-  $description = t('Latest translation suggestions on Q-Translate');
+  $description = t('Latest translations on Q-Translate');
   $ttl = 180;
   $site_mail = variable_get('site_mail');
   $site_name = variable_get('site_name');
@@ -47,20 +50,18 @@ function qtrCore_rss_feed($lng = 'en') {
     ";
 
   // Append an item for each translation.
-  foreach ($translations as $translation) {
-    extract(get_object_vars($translation));
-    $title = qtr::utils_shorten($string, 60);
-    $link = isset($_GET['url']) ?
-      $_GET['url'] . "/?lng=$lng&proj=$project#$string" :
-      url('translations', array('absolute' => TRUE)) . "/$lng/$vid";
-    $description = "<xmp>$string</xmp> -- <xmp>$translation</xmp>";
+  foreach ($translations as $trans) {
+    extract(get_object_vars($trans));
+    $title = qtr::utils_shorten($translation, 60);
+    $link = $client_url . "/qtr/$lng/$chapter_id/$verse_nr";
+    $description = "[$chapter_id:$verse_nr] $translation";
     $pub_date = date('r', strtotime($time));
     $rss_feed .= "
       <item>
         <title>$title</title>
         <link>$link</link>
         <description><![CDATA[$description]]></description>
-        <author>$umail ($name)</author>
+        <author>$usermail ($username)</author>
         <guid isPermaLink='false'>$tguid</guid>
         <pubDate>$pub_date</pubDate>
       </item>
@@ -71,7 +72,7 @@ function qtrCore_rss_feed($lng = 'en') {
   $rss_feed .= "</rss>\n";
 
   // Cache for 2 hours.
-  cache_set($cid, $rss_feed, 'cache_qtrCore', strtotime('+2 hours'));
+  cache_set("qtrCore_rss_feed:$lng", $rss_feed, 'cache_qtrCore', strtotime('+2 hours'));
 
   // Send the output.
   drupal_add_http_header('Content-Type', 'application/rss+xml; charset=utf-8');

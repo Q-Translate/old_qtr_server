@@ -16,9 +16,9 @@ use \qtr;
 function translation_latest($lng) {
 
   $get_latest_translations = "
-    SELECT c.tname, v.cid, v.vid, v.verse,
+    SELECT v.cid AS chapter_id, v.nr AS verse_nr, v.vid,
            t.lng, t.translation, t.tguid, t.time,
-           u.name, u.umail
+           u.name AS username, u.umail AS usermail
     FROM {qtr_translations} t
     LEFT JOIN {qtr_verses} v ON (v.vid = t.vid)
     LEFT JOIN {qtr_users} u ON (u.umail = t.umail AND u.ulng = t.ulng)
