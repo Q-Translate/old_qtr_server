@@ -31,14 +31,14 @@ function qtrCore_tweet($lng =NULL) {
 
   // Build the tweet.
   $i = rand(0, sizeof($translations));
-  $twitter = $translations[$i];
-  if (empty($twitter)) {
-    $twitter = t('Error: No string found!');
+  $tweet = $translations[$i];
+  if (empty($tweet)) {
+    $tweet = t('Error: No string found!');
   }
   else {
-    if (strlen($twitter) > 80) {
-      $twitter = substr($twitter, 0, strrpos(substr($twitter, 0, 80-3), ' '));
-      $twitter .= '...';
+    if (strlen($tweet) > 80) {
+      $tweet = substr($tweet, 0, strrpos(substr($tweet, 0, 80-3), ' '));
+      $tweet .= '...';
     }
   }
 
@@ -50,23 +50,23 @@ function qtrCore_tweet($lng =NULL) {
         'lng' => $lng,
         'chapter' => $cid,
         'verse' => $nr,
-        'twitter' => $twitter,
+        'tweet' => $tweet,
       ));
     exit;
   }
 
   // Append hash tags, url, etc.
-  $twitter = "[Quran $cid:$nr] $twitter #quran-$lng";
+  $tweet = "[Quran $cid:$nr] $tweet #quran-$lng";
   if (isset($_GET['url'])) {
     $url = $_GET['url'];
-    $twitter .= ' ' . $url;
+    $tweet .= ' ' . $url;
   }
   else {
     module_load_include('inc', 'qtrCore', 'includes/sites');
     $client_url = qtr::utils_get_client_url($lng);
-    $twitter .= ' ' . $client_url . "/qtr/$lng/$cid/$nr";
+    $tweet .= ' ' . $client_url . "/qtr/$lng/$cid/$nr";
   }
 
-  print $twitter;
+  print $tweet;
   exit(0);
 }
