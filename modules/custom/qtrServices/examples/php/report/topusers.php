@@ -3,16 +3,16 @@ $path = dirname(dirname(__FILE__));
 include_once($path . '/config.php');
 include_once($path . '/http_request.php');
 
-// GET api/report/topcontrib
-$url = $base_url . '/api/report/topcontrib?lng=sq&period=week';
+// GET api/report/topusers
+$url = $base_url . '/api/report/topusers?lng=en&period=week';
 $result = http_request($url);
 
-// POST api/report/topcontrib
-$url = $base_url . '/api/report/topcontrib';
+// POST api/report/topusers
+$url = $base_url . '/api/report/topusers';
 $options = array(
   'method' => 'POST',
   'data' => array(
-    'lng' => 'sq',
+    'lng' => 'en',
     'period' => 'week',
   ),
   'headers' => array(

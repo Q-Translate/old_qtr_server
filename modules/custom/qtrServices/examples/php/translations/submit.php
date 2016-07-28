@@ -12,8 +12,9 @@ $actions = array(
   array(
     'action' => 'add',
     'params' => array(
-      'vid' => 'd66b0fc286b887e9242ee1e6b777522f067f92af',
-      'lng' => 'sq',
+      'lng' => 'en',
+      'chapter' => 2,
+      'verse' => 3,
       'translation' => 'Test translation.',
     ),
   ),
@@ -26,14 +27,11 @@ $actions = array(
     'params' => array('tguid' => 'test-f58a7d1211c0cb5950d0b36b21c06cf50e6'),
   ),
   array(
-    'action' => 'del_like',
-    'params' => array('tguid' => 'test-f58a7d1211c0cb5950d0b36b21c06cf50e6'),
-  ),
-  array(
     'action' => 'add',
     'params' => array(
-      'vid' => 'd68b68585ee36d0bcda3dd3fd6eb4ebc2cdcbcbd',
-      'lng' => 'sq',
+      'lng' => 'en',
+      'chapter' => 2,
+      'verse' => 3,
       'translation' => '',
     ),
   ),

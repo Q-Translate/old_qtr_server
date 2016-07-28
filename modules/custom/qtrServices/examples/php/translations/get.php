@@ -8,20 +8,12 @@ $url = $base_url . '/api/translations/get';
 $options = array(
   'method' => 'POST',
   'data' => array(
-    'vid' => 'ed685775fa0608fa42e20b3d28454c63972f62cd',
-    'lng' => 'sq',
+    'lng' => 'en',
+    'chapter' => 2,
+    'verse' => 3,
   ),
   'headers' => array(
     'Content-type' => 'application/x-www-form-urlencoded',
   ),
 );
-$result = http_request($url, $options);
-
-$options['data']['vid'] = 'random';
-$result = http_request($url, $options);
-
-$options['data']['vid'] = 'translated';
-$result = http_request($url, $options);
-
-$options['data']['vid'] = 'untranslated';
 $result = http_request($url, $options);

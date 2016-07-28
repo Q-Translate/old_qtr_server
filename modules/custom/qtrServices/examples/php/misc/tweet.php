@@ -9,6 +9,9 @@ function link_to($url) {
 
 print "<br/><hr/><br/>\n";
 
-// Get a RSS feed of the latest translations.
-link_to('https://qtranslate.net/qtr/rss-feed/en');
-link_to('https://qtranslate.org/rss-feed/en');
+// Get a random translation.
+link_to('https://qtranslate.org/tweet/en');
+link_to('https://qtranslate.net/qtr/tweet/en');
+
+http_request('https://qtranslate.org/tweet/en',
+  ['headers' => ['Accept' => 'application/json']]);

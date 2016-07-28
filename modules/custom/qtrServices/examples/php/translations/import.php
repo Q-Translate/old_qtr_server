@@ -14,8 +14,9 @@ $ch = curl_init($url);
 curl_setopt_array($ch, array(
     CURLOPT_POST => TRUE,
     CURLOPT_POSTFIELDS => array(
-      'lng' => 'sq',
-      'file' => '@'.dirname(__FILE__).'/pingus-sq.po;filename=test-pingus-sq.po',
+      'lng' => 'en',
+      'author' => 'test-1',
+      'file' => '@'.dirname(__FILE__).'/en.test-1.txt;filename=en.test-1.txt',
     ),
     CURLOPT_HTTPHEADER => array(
       'Content-Type: multipart/form-data',
