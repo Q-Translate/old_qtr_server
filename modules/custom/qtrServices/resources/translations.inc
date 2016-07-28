@@ -18,7 +18,7 @@ function _qtrServices_translations() {
         'name' => 'selector',
         'optional' => FALSE,
         'source' => array('path' => 0),
-        'description' => 'Translation selector, in the form: lng,chapter,verse',
+        'description' => 'Translation selector, in the form lng:chapter:verse',
         'type' => 'string',
       ),
     ),
@@ -178,17 +178,17 @@ function _qtrServices_translations() {
  * Get a verse, along with its translations, likes and other details.
  *
  * @param $selector
- *   Translation selector, in the form: lng,chapter,verse
+ *   Translation selector, in the form 'lng:chapter:verse'
  *
  * @return
  *   A nested structure containing the verse, its
  *   translations, likes, etc.
  *
  * @example
- *   curl 'https://qtranslate.org/api/translations/en,2,3'
+ *   curl 'https://qtranslate.org/api/translations/en:2:3'
  */
 function _qtrServices_translations_retrieve($selector) {
-  list($lng, $chapter, $verse) = explode(',', $selector, 3);
+  list($lng, $chapter, $verse) = explode(':', $selector, 3);
   $verse = _qtrServices_translations_get(array(
                'lng' => $lng,
                'chapter' => $chapter,
