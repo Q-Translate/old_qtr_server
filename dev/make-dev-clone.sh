@@ -12,10 +12,6 @@ sed -i /etc/apache2/sites-enabled/qtr_dev.conf \
 sed -i /var/www/qtr_dev/sites/default/settings.php \
     -e '/$databases..qtr_db/,+8 s#^/*#//#'
 
-### set $base_url to http://
-sed -i /var/www/qtr_dev/sites/default/settings.php \
-    -e '/$base_url/ s#https://#http://#'
-
 ### add a test user
 drush @qtr_dev user-create user1 --password=pass1 \
       --mail='user1@qtranslate.net' > /dev/null 2>&1
