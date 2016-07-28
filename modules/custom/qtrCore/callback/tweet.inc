@@ -30,7 +30,7 @@ function qtrCore_tweet($lng =NULL) {
   )->fetchCol();
 
   // Build the tweet.
-  $i = rand(0, sizeof($translations));
+  $i = rand(0, sizeof($translations) - 1);
   $tweet = $translations[$i];
   if (empty($tweet)) {
     $tweet = t('Error: No string found!');
