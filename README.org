@@ -117,4 +117,13 @@ This is a Drupal installation profile for Q-Translate Server. Q-Translate is an 
 
 * Import translations
 
-  TODO
+  By default only a few English translations are imported, just for
+  testing. To import all the translations, call the script =import.sh=
+  for each language.
+
+  #+BEGIN_EXAMPLE
+  docker/exec.sh /var/www/data/import.sh en
+  docker/exec.sh /var/www/data/import.sh fr
+  docker/exec.sh /var/www/data/import.sh de
+  docker/exec.sh /var/www/data/import.sh it
+  #+END_EXAMPLE
