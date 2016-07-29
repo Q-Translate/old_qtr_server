@@ -44,6 +44,8 @@ function import_translations($lng, $file, $uid = NULL, $notime = FALSE) {
 
     // Get chapter id, verse nr and the translation.
     list($chapter_id, $verse_nr, $translation) = explode('|', $line, 3);
+    if (!is_numeric($chapter_id)) continue;
+    if (!is_numeric($verse_nr)) continue;
 
     // Check the chapter and verse numbers.
     if ($chapter_id < 1 || $chapter_id > 114) {

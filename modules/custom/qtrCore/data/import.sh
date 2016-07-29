@@ -43,7 +43,6 @@ for file in $files; do
     echo -e "\nGet    $file"
     rm -f $file
     wget -q $translations/$file
-    sed -i $file -e '/#/d' -e '/^$/d'
 
     echo "Import $file"
     author=${file%.txt}
