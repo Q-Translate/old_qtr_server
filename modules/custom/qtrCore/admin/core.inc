@@ -33,11 +33,6 @@ function qtrCore_config() {
     '#description'   => t('URL of the default client.'),
   );
 
-  $form['defaults'] = array(
-    '#type'  => 'fieldset',
-    '#title' => t('Q-Translate Defaults'),
-  );
-
   $form = system_settings_form($form);
   $form['#submit'][] = 'qtrCore_config_set_languages';
   return $form;
