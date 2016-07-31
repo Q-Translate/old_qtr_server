@@ -24,7 +24,7 @@ If you think he is right, you can delete it here: !url",
   $body[] = "
     <hr/>
 
-    <p style='align:right; float:right; font-size:18px;'>
+    <p style='direction:rtl; align:right; float:right; font-size:18px;'>
       <a href='$url' target='_blank'>$params->verse</a>
     </p>
 

@@ -29,7 +29,7 @@ can change your support at this link:");
   $body[] = "
     <hr/>
 
-    <p style='align:right; float:right; font-size:18px;'>
+    <p style='direction:rtl; align:right; float:right; font-size:18px;'>
       <a href='$url' target='_blank'>$params->verse</a>
     </p>
 
