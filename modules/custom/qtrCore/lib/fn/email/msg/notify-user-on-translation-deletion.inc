@@ -17,17 +17,15 @@ You can see the verse and the rest of translations at this link:");
   $body[] = $url;
   $body[] = t('Thanks');
 
-  $verse_header = t('Verse:');
   $deleted_translation = t('Deleted Translation:');
   $body[] = "
     <hr/>
 
-    <h4>$verse_header</h4>
-    <ul>
-      <li>$params->verse</li>
-    </ul>
+    <p style='align:right; float:right; font-size:18px;'>
+      <a href='$url' target='_blank'>$params->verse</a>
+    </p>
 
-    <h4>$deleted_translation</h4>
+    <h4 style='clear:both;'>$deleted_translation</h4>
     <ul>
       <li>$params->translation</li>
     </ul>

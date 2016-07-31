@@ -20,17 +20,15 @@ If you think he is right, you can delete it here: !url",
             ['!user' => "<a href='$user_url'>$user_name</a>", '!url' => $url]);
   $body[] = t('Thanks');
 
-  $verse_header = t('Verse:');
   $translation = t('Translation:');
   $body[] = "
     <hr/>
 
-    <h4>$verse_header</h4>
-    <ul>
-      <li>$params->verse</li>
-    </ul>
+    <p style='align:right; float:right; font-size:18px;'>
+      <a href='$url' target='_blank'>$params->verse</a>
+    </p>
 
-    <h4>$translation</h4>
+    <h4 style='clear:both;'>$translation</h4>
     <ul>
       <li>$params->translation</li>
     </ul>

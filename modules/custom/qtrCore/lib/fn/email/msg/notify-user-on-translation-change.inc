@@ -24,18 +24,16 @@ can change your support at this link:");
   $body[] = $url;
   $body[] = t('Thanks');
 
-  $verse = t('Verse:');
   $old_translation = t('Old Translation:');
   $new_translation = t('New Translation:');
   $body[] = "
     <hr/>
 
-    <h4>$verse:</h4>
-    <ul>
-      <li>$params->verse</li>
-    </ul>
+    <p style='align:right; float:right; font-size:18px;'>
+      <a href='$url' target='_blank'>$params->verse</a>
+    </p>
 
-    <h4>$old_translation</h4>
+    <h4 style='clear:both;'>$old_translation</h4>
     <ul>
       <li>$params->old_translation</li>
     </ul>

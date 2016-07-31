@@ -16,7 +16,7 @@ use \qtr;
     [':vid' => $params->vid, ':lng' => $lng ]
   )->fetchCol();
 
-  $subject = "[$subject_prefix] " . t('Verse: !chapter_id:!verse_nr',
+  $subject = "[$subject_prefix] " . t('Quran !chapter_id:!verse_nr',
              ['!chapter_id' => $params->chapter_id, '!verse_nr' => $params->verse_nr]);
 
   $body = array();
@@ -26,19 +26,16 @@ use \qtr;
   $body[] = $url;
   $body[] = t('Thanks');
 
-  $verse_header = t('Verse:');
   $translations_header = t('Translations:');
 
   $body[] = "
     <hr/>
 
-    <h4>$verse_header</h4>
-    <ul>
-      <li>$verse</li>
-    </ul>
+    <p style='align:right; float:right; font-size:18px;'>
+      <a href='$url' target='_blank'>$verse</a>
+    </p>
 
-    <h4>$translations_header</h4>
-    <ul>
+    <ul style='clear:both;'>
   ";
   foreach ($translations as $translation) {
     $body[] = "<li>" . $translation . "</li>\n";

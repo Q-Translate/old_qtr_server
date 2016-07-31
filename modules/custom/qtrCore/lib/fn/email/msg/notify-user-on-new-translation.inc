@@ -14,24 +14,22 @@ use \qtr;
   $body[] = t('Greetings !username,', ['!username' => $params->username]);
 
   $body[] = t("A new translation has been suggested for a verse
-that you have supported. If you think that the new
+that you have reviewed. If you think that the new
 translation is better than the one that you have
-supported, then you can change your support at this link:");
+supported, then you can support the new one at this link:");
   $body[] = $url;
   $body[] = t('Thanks');
 
-  $verse = t('Verse:');
   $liked_translation = t('Supported Translation:');
   $new_translation = t('New Translation:');
   $body[] = "
     <hr/>
 
-    <h4>$verse</h4>
-    <ul>
-      <li>$params->verse</li>
-    </ul>
+    <p style='align:right; float:right; font-size:18px;'>
+      <a href='$url' target='_blank'>$params->verse</a>
+    </p>
 
-    <h4>$liked_translation</h4>
+    <h4 style='clear:both;'>$liked_translation</h4>
     <ul>
       <li>$params->liked_translation</li>
     </ul>
