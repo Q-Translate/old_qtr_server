@@ -49,15 +49,18 @@ function search_build_query($filter) {
     ->extend('PagerDefault')->limit($filter['limit']);
   $query->addField('v', 'vid');
   $query->groupBy('v.vid');
-  $query->orderBy('v.vid');
 
   _filter_by_content($query, $filter['mode'], $filter['words']);
   _filter_by_chapter($query, $filter['chapter']);
   _filter_by_author($query, $filter['lng'], $filter['only_mine'], $filter['translated_by'], $filter['liked_by']);
   _filter_by_date($query, $filter['date_filter'], $filter['from_date'], $filter['to_date']);
 
-  //if nothing has been selected yet, then return NULL
+  // If nothing has been selected yet, then return NULL.
   if (sizeof($query->conditions()) == 1) return NULL;
+
+  // Display results in verse order (unless order by translation time has been
+  // specified above, which will take precedence).
+  $query->orderBy('v.vid');
 
   // qtr::log(_get_query_string($query), '$query');  //debug
   return $query;
