@@ -27,6 +27,7 @@ function user_add($username, $lng = 'en') {
     'translation_lng' => $lng,
     'roles' => array(4),
     'status' => 1,
+    'access' => time(),
   );
   $user = user_save(null, $new_user);
   return $user->uid;
