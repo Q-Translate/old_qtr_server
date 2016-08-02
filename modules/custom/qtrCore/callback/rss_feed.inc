@@ -52,7 +52,7 @@ function qtrCore_rss_feed($lng = 'en') {
   // Append an item for each translation.
   foreach ($translations as $trans) {
     extract(get_object_vars($trans));
-    $title = qtr::utils_shorten($translation, 60);
+    $title = "[$chapter_id:$verse_nr] " . qtr::utils_shorten($translation, 50);
     $link = $client_url . "/qtr/$lng/$chapter_id/$verse_nr";
     $description = "[$chapter_id:$verse_nr] $translation";
     $pub_date = date('r', strtotime($time));
