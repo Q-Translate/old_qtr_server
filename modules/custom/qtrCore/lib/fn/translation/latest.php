@@ -20,7 +20,7 @@ use \qtr;
  * Each of the returned translations has these fields:
  *   chapter_id, verse_nr, vid, lng, translation, tguid, time, username, usermail
  */
-function translation_latest($lng, $days = NULL, $limit = NULL) {
+function translation_latest($lng = NULL, $days = NULL, $limit = NULL) {
 
   if ($days == NULL) $days = 1;
 
@@ -32,8 +32,13 @@ function translation_latest($lng, $days = NULL, $limit = NULL) {
     LEFT JOIN {qtr_verses} v ON (v.vid = t.vid)
     LEFT JOIN {qtr_users} u ON (u.umail = t.umail AND u.ulng = t.ulng)
     LEFT JOIN {qtr_chapters} c ON (c.cid = v.cid)
-    WHERE t.umail != '' AND t.lng = :lng";
-  $args[':lng'] = $lng;
+    WHERE t.umail != ''";
+  $args = array();
+
+  if ($lng && $lng != 'all') {
+    $get_latest_translations .= " AND t.lng = :lng";
+    $args[':lng'] = $lng;
+  }
 
   if ($limit == NULL) {
     $get_latest_translations .= " AND t.time > :from_date ORDER BY t.time DESC";
@@ -44,8 +49,6 @@ function translation_latest($lng, $days = NULL, $limit = NULL) {
   }
 
   // run the query and get the translations
-  print($get_latest_translations."\n");
-  print_r($args);
   $translations = qtr::db_query($get_latest_translations, $args)->fetchAll();
 
   return $translations;
