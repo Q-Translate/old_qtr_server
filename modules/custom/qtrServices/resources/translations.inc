@@ -279,12 +279,14 @@ function _qtrServices_translations_index($params) {
  *       Words to be searched for.
  *   - chapter (int)
  *       Chapter to search on.
- *   - mode
- *       Search mode. Can be one of:
- *       - natural-verses        Natural search on verses (default).
- *       - natural-translations  Natural search on translations.
- *       - boolean-verses        Boolean search on verses.
- *       - boolean-translations  Boolean search on translations.
+ *   - type
+ *       Type of search:
+ *       - similar  Search words by similarity.
+ *       - logical  Search using logical (boolean) rules.
+ *   - what
+ *       What to search.
+ *       - translations  Search translations.
+ *       - verses        Search verses.
  *   - page
  *       Page of results to be displayed.
  *   - only_mine (boolean)

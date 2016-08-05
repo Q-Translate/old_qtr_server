@@ -50,7 +50,7 @@ function search_build_query($filter) {
   $query->addField('v', 'vid');
   $query->groupBy('v.vid');
 
-  _filter_by_content($query, $filter['mode'], $filter['words']);
+  _filter_by_content($query, $filter['type'], $filter['what'], $filter['words']);
   _filter_by_chapter($query, $filter['chapter']);
   _filter_by_author($query, $filter['lng'], $filter['only_mine'], $filter['translated_by'], $filter['liked_by']);
   _filter_by_date($query, $filter['date_filter'], $filter['from_date'], $filter['to_date']);
@@ -100,25 +100,21 @@ function _lng($lang = NULL) {
 
 /**
  * Apply to the query conditions related to the content
- * (of strings and translations). Depending on the search_mode,
- * we look either for verses/translations similar to the given phase,
- * or for verses/translations matching the given words,
+ * (of strings and translations).
  * The first parameter, $query, is an object, so it is
  * passed by reference.
  */
-function _filter_by_content($query, $search_mode, $search_words) {
+function _filter_by_content($query, $type, $what, $search_words) {
 
-  //if there are no words to be searched for, no condition can be added
+  // If there are no words to be searched for, no condition can be added.
   if (trim($search_words) == '') {
     $query->addExpression('1', 'score');
     return;
   }
 
-  //get the match condition and the score field
-  //according to the search mode
-  list($mode, $content) = explode('-', $search_mode);
-  $in_boolean_mode = ($mode=='boolean' ? ' IN BOOLEAN MODE' : '');
-  if ($content=='verses') {
+  // Get the match condition and the score field.
+  $in_boolean_mode = ($type=='logical' ? ' IN BOOLEAN MODE' : '');
+  if ($what=='verses') {
     $query->addExpression('MATCH (v.verse) AGAINST (:words)', 'score');
     $query->where(
       'MATCH (v.verse) AGAINST (:words' . $in_boolean_mode . ')',
@@ -134,7 +130,7 @@ function _filter_by_content($query, $search_mode, $search_words) {
     );
   }
 
-  //order results by the field score
+  // Order results by the field score.
   $query->orderBy('score', 'DESC');
 }
 

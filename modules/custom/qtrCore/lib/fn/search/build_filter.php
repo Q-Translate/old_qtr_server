@@ -28,18 +28,14 @@ function search_build_filter($params) {
   if ($limit > 100) $limit = 100;
   $filter['limit'] = $limit;
 
-  // Search can be done either by similarity of words (natural
-  // search), or by matching words according to a certain logic
-  // (boolean search). Search can be performed either on verses
-  // or on the translations.
-  $search_mode_options = array(
-    'natural-verses',
-    'natural-translations',
-    'boolean-verses',
-    'boolean-translations',
-  );
-  $mode = isset($params['mode']) ? $params['mode'] : '';
-  $filter['mode'] = in_array($mode, $search_mode_options) ? $mode : 'natural-translations';
+  // Search can be done either by similarity of words, or by matching words
+  // according to a certain logic.
+  $type = isset($params['type']) ? $params['type'] : '';
+  $filter['type'] = in_array($type, ['similar', 'logical']) ? $type : 'similar';
+
+  // Search can be performed either on translations or on the verses.
+  $what = isset($params['what']) ? $params['what'] : '';
+  $filter['what'] = in_array($what, ['translations', 'verses']) ? $what : 'translations';
 
   // Words to search for and chapter to search in.
   $filter['words'] = isset($params['words']) ? $params['words'] : '';
