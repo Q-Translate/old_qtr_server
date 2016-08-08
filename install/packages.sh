@@ -5,10 +5,11 @@ apt-get update
 apt-get -y upgrade
 
 ### install other needed packages
-apt-get -y install aptitude vim psmisc cron
-apt-get -y install apache2 mysql-server ssmtp translate-toolkit \
-         php5-mysql php5-gd php-db php5-dev php-pear php5-curl php-apc \
-         make ssl-cert gawk unzip wget curl diffutils phpmyadmin git ruby
+apt-get -y install aptitude vim nano psmisc cron curl
+apt-get -y install openssh-server mysql-server ssmtp \
+        phpmyadmin memcached php-memcached php-mysql \
+        php-gd php-db php-dev php-pear php-curl php-apcu \
+        make ssl-cert gawk unzip wget curl diffutils git ruby
 apt-get -y install screen logwatch
 
 ### install nodejs and less
@@ -26,10 +27,18 @@ apt-get -y install ruby-dev
 gem install t
 useradd --system --create-home twitter
 
-### install uploadprogress bar (from PECL) (requested by Drupal 7)
-pecl install uploadprogress
-mkdir -p /etc/php5/conf.d/
-echo "extension = uploadprogress.so" > /etc/php5/conf.d/uploadprogress.ini
+# install uploadprogress bar (requested by Drupal 7)
+#pecl install uploadprogress
+git clone https://git.php.net/repository/pecl/php/uploadprogress.git
+cd uploadprogress/
+phpize
+./configure
+make
+make install
+cd ..
+echo "extension = uploadprogress.so" > /etc/php/7.0/mods-available/uploadprogress.ini
+ln -s /etc/php/7.0/mods-available/uploadprogress.ini /etc/php/7.0/apache2/conf.d/
+ln -s /etc/php/7.0/mods-available/uploadprogress.ini /etc/php/7.0/fpm/conf.d/
 
 ### install drush
 wget http://files.drush.org/drush.phar

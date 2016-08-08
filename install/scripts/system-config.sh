@@ -42,8 +42,9 @@ a2enmod headers rewrite
 ln -sf /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf
 a2enconf api-examples-php downloads phpmyadmin
 
-sed -i /etc/php5/apache2/php.ini \
-    -e '/^\[PHP\]/ a apc.rfc1867 = 1'
+sed -i /etc/php/7.0/apache2/php.ini \
+    -e '/^\[PHP\]/ a apc.rfc1867 = 1' \
+    -e '/^display_errors/ c display_errors = On'
 
 if [ "$development" = 'true' ]
 then
@@ -57,14 +58,14 @@ then
 	-e '/^<IfModule/,+5 s/MaxRequestWorkers.*/MaxRequestWorkers 50/'
 fi
 
-### modify the configuration of php5
-cat <<EOF > /etc/php5/conf.d/apc.ini
-extension=apc.so
-apc.mmap_file_mask=/tmp/apc.XXXXXX
-apc.shm_size=96M
+### modify the configuration of php
+cat <<EOF > /etc/php/7.0/mods-available/apcu.ini
+extension=apcu.so
+apcu.mmap_file_mask=/tmp/apcu.XXXXXX
+apcu.shm_size=96M
 EOF
 
-sed -i /etc/php5/apache2/php.ini \
+sed -i /etc/php/7.0/apache2/php.ini \
     -e '/^;\?memory_limit/ c memory_limit = 200M' \
     -e '/^;\?max_execution_time/ c max_execution_time = 90' \
     -e '/^;\?display_errors/ c display_errors = On' \

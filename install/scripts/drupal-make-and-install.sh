@@ -42,12 +42,6 @@ cp -a qtr_server-bak/themes/contrib/ qtr_server/themes/
 ### cleanup
 rm -rf qtr_server-bak/
 
-### create the downloads and uploads dirs
-mkdir -p /var/www/downloads/
-chown www-data: /var/www/downloads/
-mkdir -p /var/www/uploads/
-chown www-data: /var/www/uploads/
-
 ### settings for the database and the drupal site
 db_name=qtr
 db_user=qtr
@@ -66,8 +60,8 @@ $mysql -e "
     GRANT ALL ON $db_name.* TO $db_user@localhost IDENTIFIED BY '$db_pass';
 "
 
-### site installation
-sed -e '/memory_limit/ c memory_limit = -1' -i /etc/php5/cli/php.ini
+### start site installation
+#sed -e '/memory_limit/ c memory_limit = -1' -i /etc/php/7.0/cli/php.ini
 cd $drupal_dir
 drush site-install --verbose --yes qtr_server \
       --db-url="mysql://$db_user:$db_pass@localhost/$db_name" \
