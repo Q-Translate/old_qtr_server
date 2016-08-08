@@ -116,7 +116,7 @@ function qtrCore_schema() {
     ),
     'primary key' => array('vid'),
     'indexes' => array(
-      'verse' => array('verse'),
+      'verse' => array(array('verse', 250)),
     ),
   );
 
@@ -188,7 +188,7 @@ function qtrCore_schema() {
       'time' => array('time'),
       'umail' => array(array('umail', 20)),
       'vid' => array('vid'),
-      'translation' => array('translation'),
+      'translation' => array(array('translation', 250)),
     ),
   );
 
