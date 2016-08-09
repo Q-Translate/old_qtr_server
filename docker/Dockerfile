@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 ENV container docker
-RUN echo -e '#!/bin/bash\n\
+RUN echo '#!/bin/bash\n\
         for service in /etc/rc3.d/S* ; do\n\
             service=$(basename $service)\n\
             service=${service:3}\n\
