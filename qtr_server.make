@@ -67,7 +67,6 @@ libraries[tinymce][download][url] = https://github.com/tinymce/tinymce/archive/4
 ;;; Security
 projects[captcha] = 1.3
 projects[recaptcha] = 2.1
-projects[honeypot] = 1.22
 projects[user_restrictions] = 1.0
 
 ;;; Features
