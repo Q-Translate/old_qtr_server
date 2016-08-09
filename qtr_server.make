@@ -66,7 +66,7 @@ libraries[tinymce][download][url] = https://github.com/tinymce/tinymce/archive/4
 
 ;;; Security
 projects[captcha] = 1.3
-projects[recaptcha] = 2.1
+projects[recaptcha] = 2.2
 projects[user_restrictions] = 1.0
 
 ;;; Features
@@ -83,7 +83,7 @@ projects[drush_language] = 1.5
 projects[delete_all] = 1.1
 projects[l10n_update] = 2.0
 projects[advuser] = 3.x-dev
-projects[google_analytics] = 2.1
+projects[google_analytics] = 2.2
 
 ;;; Performance
 projects[boost] = 1.1
