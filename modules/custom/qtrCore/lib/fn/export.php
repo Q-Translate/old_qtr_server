@@ -44,20 +44,48 @@ function export($lng, $chapter = NULL, $mode = 'most_liked', $users = NULL)
     $users = [$account->init];
   }
 
+  // Get chapters that will be exported.
+  $chapters = array();
+  if ($chapter != NULL) {
+    $chapters[] = $chapter;
+  }
+  else {
+    for ($i = 1; $i <= 114; $i++) $chapters[] = $i;
+  }
+
+  // Write exported translations to a temporary file.
+  $file = tempnam('/tmp', 'export_');
+  $fp = fopen($file, 'w');
+
+  // Export all the chapters.
+  foreach($chapters as $ch) {
+    _export_chapter($lng, $ch, $mode, $users, $fp);
+  }
+
+  // Close the file.
+  fclose($fp);
+
+  // Return the file where translations are exported.
+  return $file;
+}
+
+/**
+ * Export a single chapter.
+ */
+function _export_chapter($lng, $chapter, $mode, $users, $fp){
   // Get verses that will be exported.
-  $select_chapter = ($chapter == NULL ? "1=1" : "v.cid = $chapter");
-  $get_verses = "SELECT * FROM {qtr_verses} AS v WHERE $select_chapter";
-  $verses = qtr::db_query($get_verses)->fetchAllAssoc('vid');
+  $get_verses = "SELECT * FROM {qtr_verses} AS v WHERE v.cid = :cid";
+  $verses = qtr::db_query($get_verses, [':cid' => $chapter])->fetchAllAssoc('vid');
 
   // Get translations.
   switch ($mode) {
     case 'most_liked':
-      $most_liked = _get_most_liked_translations($lng, $select_chapter);
+      $most_liked = _get_most_liked_translations($lng, $chapter);
       break;
 
     case 'preference':
-      $preferred = _get_preferred_translations($lng, $select_chapter, $users);
-      $most_liked = _get_most_liked_translations($lng, $select_chapter);
+      $preferred = _get_preferred_translations($lng, $chapter, $users);
+      $most_liked = _get_most_liked_translations($lng, $chapter);
       break;
   }
 
@@ -88,35 +116,28 @@ function export($lng, $chapter = NULL, $mode = 'most_liked', $users = NULL)
     }
   }
 
-  // Write translations to a temporary file.
-  $file = tempnam('/tmp', 'export_');
-  $fp = fopen($file, 'w');
   foreach ($translations as $vid => $translation) {
     $chapter_id = $verses[$vid]->cid;
     $verse_nr = $verses[$vid]->nr;
     $line = $chapter_id . '|' . $verse_nr . '|' . $translation . "\n";
     fwrite($fp, $line);
   }
-  fclose($fp);
-
-  // Return the file where translations are exported.
-  return $file;
 }
 
 /**
  * Get and return an associative array of the most liked translations,
  * indexed by vid. Translations which have no likes at all are skipped.
  */
-function _get_most_liked_translations($lng, $select_chapter) {
+function _get_most_liked_translations($lng, $chapter) {
   // Create a temporary table with the maximum count for each string.
   $max_count = "
       SELECT t.vid, MAX(t.count) AS max_count
       FROM {qtr_verses} AS v
       LEFT JOIN {qtr_translations} AS t
                 ON (t.vid = v.vid AND t.lng = :lng)
-      WHERE $select_chapter
+      WHERE v.cid = :cid
       GROUP BY t.vid";
-  $args = array(':lng' => $lng);
+  $args = array(':lng' => $lng, ':cid' => $chapter);
   $tmp_table_max_count = qtr::db_query_temporary($max_count, $args);
 
   // Get the translations with the max count for each verse.
@@ -129,6 +150,7 @@ function _get_most_liked_translations($lng, $select_chapter) {
             AND  t.count = cnt.max_count
             AND  t.lng = :lng )
       GROUP BY t.vid";
+  $args = array(':lng' => $lng);
   $result = qtr::db_query($most_liked_translations, $args);
   return $result->fetchAllKeyed();
 }
@@ -139,7 +161,7 @@ function _get_most_liked_translations($lng, $select_chapter) {
  * Translations which have no likes from these users are skipped.
  * Users are identified by their emails.
  */
-function _get_preferred_translations($lng, $select_chapter, $users) {
+function _get_preferred_translations($lng, $chapter, $users) {
   if (empty($users)) return [];
 
   // Build a temporary table with translations
@@ -151,12 +173,13 @@ function _get_preferred_translations($lng, $select_chapter, $users) {
                 ON (t.vid = v.vid AND t.lng = :lng)
       LEFT JOIN {qtr_likes} AS l
                 ON (l.tguid = t.tguid)
-      WHERE $select_chapter
+      WHERE v.cid = :cid
         AND l.umail IN (:users)
       GROUP BY t.tguid
       HAVING COUNT(*) > 0";
   $args = array(
     ':lng' => $lng,
+    ':cid' => $chapter,
     ':users' => $users,
   );
   $tmp_table_translations = qtr::db_query_temporary($translations, $args);
