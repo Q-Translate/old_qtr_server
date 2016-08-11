@@ -1,5 +1,8 @@
 #!/bin/bash -x
 
+# Copy the logo file to the drupal dir.
+cp $drupal_dir/profiles/qtr_server/qtr_logo.png $qrupal_dir/logo.png
+
 # Protect Drupal settings from prying eyes
 drupal_settings=$drupal_dir/sites/default/settings.php
 chown root:www-data $drupal_settings
