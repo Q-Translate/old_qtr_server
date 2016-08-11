@@ -8,7 +8,7 @@ function qtrLanguages_entity_info() {
   $info = array();
 
   $info['language'] = array(
-    'label' => t('Language'),
+    'label' => t('QTR Language'),
     'base table' => 'qtrLanguages',
     'entity keys' => array(
       'id' => 'id',
@@ -19,7 +19,7 @@ function qtrLanguages_entity_info() {
     'access callback' => 'qtrLanguages_access_callback',
     'uri callback' => 'entity_class_uri',
     'admin ui' => array(
-      'path' => 'admin/languages',
+      'path' => 'admin/config/qtr/languages',
       'controller class' => 'EntityDefaultUIController',
     ),
     'module' => 'qtrLanguages',
