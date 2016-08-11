@@ -77,8 +77,11 @@ function _qtrCore_backup_make() {
 
   // Display any notification messages.
   if (!empty($output)) {
-    drupal_set_message(implode("<br/>\n", $output), 'error');
-    return;
+    foreach ($output as $line) {
+      if (trim($line) == '') continue;
+      if ($line == 'mysqldump: [Warning] Using a password on the command line interface can be insecure.') continue;
+      drupal_set_message($line, 'error');
+    }
   }
 
   // Get the name of the backup file.
@@ -126,8 +129,11 @@ function _qtrCore_backup_restore() {
 
   // Display any notification messages.
   if (!empty($output)) {
-    drupal_set_message(t('There was an error while restoring the backup.'), 'error');
-    drupal_set_message(implode("<br/>\n", $output), 'error');
+    foreach ($output as $line) {
+      if (trim($line) == '') continue;
+      if ($line == 'mysql: [Warning] Using a password on the command line interface can be insecure.') continue;
+      drupal_set_message($line, 'error');
+    }
   }
   else {
     drupal_set_message(t('Backup restored successfully.'));

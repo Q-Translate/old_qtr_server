@@ -12,16 +12,15 @@ sql_connect=$(drush @qtr sql-connect --database=qtr_db | sed -e 's/^mysql //' -e
 mysqldump="mysqldump $sql_connect --skip-add-drop-table --replace"
 
 ### backup translations
-$mysqldump --tables qtr_translations --where="umail != ''" \
+$mysqldump --tables qtr_translations --where="time IS NOT NULL" \
     > $backup_dir/qtr_data.sql
 
 ### backup other tables of qtr_data
 table_list="
-    qtr_likes
     qtr_translations_trash
+    qtr_likes
     qtr_likes_trash
     qtr_users
-    qtr_user_project_roles
 "
 $mysqldump --tables $table_list >> $backup_dir/qtr_data.sql
 
