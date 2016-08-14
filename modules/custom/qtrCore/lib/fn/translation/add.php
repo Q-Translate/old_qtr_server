@@ -215,6 +215,7 @@ function _notify_users_on_translation_change($users, $vid, $lng, $old_translatio
 
   $notifications = array();
   foreach ($users as $uid => $user) {
+    if (!qtr::user_send_mail($uid)) continue;
     $notification = array(
       'type' => 'notify-user-on-translation-change',
       'uid' => $user['uid'],
@@ -256,6 +257,7 @@ function _notify_users_on_new_translation($vid, $lng, $tguid, $translation) {
 
   $notifications = array();
   foreach ($users as $user) {
+    if (!qtr::user_send_mail($user->uid)) continue;
     $notification = array(
       'type' => 'notify-user-on-new-translation',
       'uid' => $user->uid,

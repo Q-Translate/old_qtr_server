@@ -45,15 +45,17 @@ function cron_import($params) {
   $client_url = qtr::utils_get_client_url($lng);
 
   // Notify the user that the import is done.
-  $params = array(
-    'type' => 'notify-that-import-is-done',
-    'uid' => $account->uid,
-    'username' => $account->name,
-    'recipient' => $account->name .' <' . $account->mail . '>',
-    'filename' => $file->filename,
-    'messages' => $txt_messages,
-  );
-  qtr::queue('notifications', array($params));
+  if (qtr::user_send_mail($account)) {
+    $params = array(
+      'type' => 'notify-that-import-is-done',
+      'uid' => $account->uid,
+      'username' => $account->name,
+      'recipient' => $account->name .' <' . $account->mail . '>',
+      'filename' => $file->filename,
+      'messages' => $txt_messages,
+    );
+    qtr::queue('notifications', array($params));
+  }
 
   // Cleanup.
   exec("rm -rf $tmpdir/");

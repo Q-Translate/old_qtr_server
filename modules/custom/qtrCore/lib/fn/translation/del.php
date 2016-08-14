@@ -123,7 +123,7 @@ function _notify_users_on_translation_del($vid, $lng, $translation, $author, $us
   $notifications = array();
 
   // Notify the author of the translation about the deletion.
-  if ($author->uid) {
+  if ($author->uid && qtr::user_send_mail($author->uid)) {
     $notification = array(
       'type' => 'notify-author-on-translation-deletion',
       'uid' => $author->uid,
@@ -140,8 +140,9 @@ function _notify_users_on_translation_del($vid, $lng, $translation, $author, $us
 
   // Notify the users that have liked the translation as well.
   foreach ($users as $user) {
-    if (!$user->uid)  continue;
+    if (!qtr::user_send_mail($user->uid))  continue;
     if ($user->name == $author->name)  continue;  // don't send a second message to the author
+
     $notification = array(
       'type' => 'notify-user-on-translation-deletion',
       'uid' => $user->uid,
@@ -182,7 +183,7 @@ function _notify_moderators_for_wrong_translation($tguid, $lng, $uid) {
   // Notify the moderators.
   $notifications = array();
   foreach ($moderators as $moderator) {
-    if ($moderator->uid == 1)  continue;
+    if (!qtr::user_send_mail($moderator->uid)) continue;
     if ($moderator->translation_lng != $lng) continue;
 
     $notification = array(

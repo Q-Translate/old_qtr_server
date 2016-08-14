@@ -11,20 +11,10 @@ use \qtr;
  * Send by email a string for review to all the active users.
  */
 function cron_send_verses_for_review() {
-
-  // return true if we should NOT send a verse by email to the given account
-  function _qtrCore_dont_send_email($account) {
-    // skip admin, disabled accounts, and users that have never logged in
-    if ($account->uid < 2)     return TRUE;
-    if ($account->status != 1) return TRUE;
-    if ($account->login == 0)  return TRUE;
-    return FALSE;
-  }
-
   $notifications = array();
   $accounts = entity_load('user');
   foreach ($accounts as $account) {
-    if (_qtrCore_dont_send_email($account))  continue;
+    if (!qtr::user_send_mail($account))  continue;
 
     // get a random verse
     $vid = rand(1, 6236);

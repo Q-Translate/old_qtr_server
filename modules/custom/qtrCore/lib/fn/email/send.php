@@ -19,6 +19,8 @@ use \qtr;
  */
 function email_send($params) {
   if (!$params->uid or !$params->recipient)  return;
+  if (!qtr::user_send_mail($params->uid))  return;
+
 
   $account = user_load($params->uid);
   // See: http://api.drupal.org/api/drupal/includes%21mail.inc/function/drupal_mail/7
