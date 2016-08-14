@@ -69,7 +69,7 @@ function import_translations($lng, $file, $uid = NULL, $notime = FALSE) {
 
     // If it exists, just add a like for it.
     if ($exists) {
-      qtr::like_add($tguid, $uid);
+      qtr::like_add($tguid, $uid, !$notime);
       continue;
     }
 
@@ -95,8 +95,8 @@ function import_translations($lng, $file, $uid = NULL, $notime = FALSE) {
       'tguid' => $tguid,
       'umail' => $umail,
       'ulng' => $lng,
-      'time' => date('Y-m-d H:i:s', REQUEST_TIME),
     );
+    if ($time != NULL)  $fields['time'] = $time;
     qtr::db_insert('qtr_likes')->fields($fields)->execute();
   }
   fclose($handle);

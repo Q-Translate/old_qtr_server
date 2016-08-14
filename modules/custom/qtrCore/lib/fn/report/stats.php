@@ -42,8 +42,7 @@ function report_stats($lng = NULL) {
   // Get the count queries.
   $sql_count_translations =
      "SELECT count(*) as cnt FROM {qtr_translations}
-      WHERE $condition
-      AND umail != ''";
+      WHERE $condition";
   $sql_count_likes =
      "SELECT count(*) as cnt FROM {qtr_likes}
       WHERE $condition";

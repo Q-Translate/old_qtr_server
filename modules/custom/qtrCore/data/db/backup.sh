@@ -15,10 +15,13 @@ mysqldump="mysqldump $sql_connect --skip-add-drop-table --replace"
 $mysqldump --tables qtr_translations --where="time IS NOT NULL" \
     > $backup_dir/qtr_data.sql
 
+### backup likes
+$mysqldump --tables qtr_likes --where="time IS NOT NULL" \
+    >> $backup_dir/qtr_data.sql
+
 ### backup other tables of qtr_data
 table_list="
     qtr_translations_trash
-    qtr_likes
     qtr_likes_trash
     qtr_users
 "

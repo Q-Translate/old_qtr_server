@@ -16,7 +16,7 @@ use \qtr;
  * @return
  *   ID of the new like, or NULL.
  */
-function like_add($tguid, $uid = NULL) {
+function like_add($tguid, $uid = NULL, $save_time = TRUE) {
   // Don't add a like for anonymous and admin users.
   $uid = qtr::user_check($uid);
   if ($uid == 1)  return NULL;
@@ -49,14 +49,13 @@ function like_add($tguid, $uid = NULL) {
   $nr = _like_del_previous($tguid, $umail, $trans->vid, $trans->lng);
 
   // Add the like.
-  $lid = qtr::db_insert('qtr_likes')
-    ->fields([
-        'tguid' => $tguid,
-        'umail' => $umail,
-        'ulng' => $ulng,
-        'time' => date('Y-m-d H:i:s', REQUEST_TIME),
-      ])
-    ->execute();
+  $fields = array(
+    'tguid' => $tguid,
+    'umail' => $umail,
+    'ulng' => $ulng,
+  );
+  if ($save_time) $fields['time'] = date('Y-m-d H:i:s', REQUEST_TIME);
+  $lid = qtr::db_insert('qtr_likes')->fields($fields)->execute();
 
   // Update like count of the translation.
   $sql = 'SELECT COUNT(*) FROM {qtr_likes} WHERE tguid = :tguid';
